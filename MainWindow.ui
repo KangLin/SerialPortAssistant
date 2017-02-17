@@ -350,6 +350,25 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTools_T">
+    <property name="title">
+     <string>Tools(&amp;T)</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionClear"/>
+    <addaction name="actionClear_Send_History"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp_H">
+    <property name="title">
+     <string>Help(&amp;H)</string>
+    </property>
+    <addaction name="actionAbout_A"/>
+   </widget>
+   <addaction name="menuTools_T"/>
+   <addaction name="menuHelp_H"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -360,6 +379,31 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open(&amp;O)</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Clear(&amp;L)</string>
+   </property>
+  </action>
+  <action name="actionClear_Send_History">
+   <property name="text">
+    <string>Clear Send History</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit(&amp;E)</string>
+   </property>
+  </action>
+  <action name="actionAbout_A">
+   <property name="text">
+    <string>About(&amp;A)</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

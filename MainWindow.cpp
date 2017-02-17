@@ -2,6 +2,8 @@
 #include "ui_MainWindow.h"
 #include "Log.h"
 #include <QMessageBox>
+#include <QTime>
+#include "Widgets/DlgAbout/DlgAbout.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -60,6 +62,13 @@ void CMainWindow::slotTimeOut()
     on_pbSend_clicked();
 }
 
+void CMainWindow::AddRecive(QString &szText)
+{
+    if(ui->cbDisplayTime->isChecked())
+        ui->teRecive->insertPlainText(QTime::currentTime().toString());
+    ui->teRecive->insertPlainText(szText);
+}
+
 void CMainWindow::slotRead()
 {
     if(!m_SerialPort.isOpen())
@@ -68,7 +77,7 @@ void CMainWindow::slotRead()
         return;
     }
 
-    ui->teRecive->append(m_SerialPort.readAll());
+    AddRecive(QString(m_SerialPort.readAll()));
 }
 
 void CMainWindow::on_pbOpen_clicked()
@@ -82,6 +91,7 @@ void CMainWindow::on_pbOpen_clicked()
             m_Timer.stop();
         m_SerialPort.close();
         ui->pbOpen->setText(tr("Open(&O)"));
+        ui->actionOpen->setText(tr("Open(&O)"));
         ui->pbSend->setEnabled(false);
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
@@ -116,6 +126,7 @@ void CMainWindow::on_pbOpen_clicked()
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
+    ui->actionOpen->setText(tr("Close(&C)"));
     ui->pbSend->setEnabled(true);
 
     if(ui->cbSendLoop->isChecked())
@@ -129,8 +140,10 @@ void CMainWindow::on_pbSend_clicked()
         LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
         return;
     }
-    
+ 
     m_SerialPort.write(ui->teSend->toPlainText().toStdString().c_str());
+    if(ui->cbDisplaySend->isChecked())
+        AddRecive(ui->teSend->toPlainText());
     
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
@@ -169,4 +182,30 @@ void CMainWindow::on_cbSendLoop_clicked()
         if(m_Timer.isActive())
             m_Timer.stop();
     }
+}
+
+void CMainWindow::on_actionClear_triggered()
+{
+    ui->teRecive->clear();
+}
+
+void CMainWindow::on_actionOpen_triggered()
+{
+    on_pbOpen_clicked();
+}
+
+void CMainWindow::on_actionExit_triggered()
+{
+    this->close();
+}
+
+void CMainWindow::on_actionClear_Send_History_triggered()
+{
+    ui->teSend->clear();
+}
+
+void CMainWindow::on_actionAbout_A_triggered()
+{
+    CDlgAbout about(this);
+    about.exec();
 }

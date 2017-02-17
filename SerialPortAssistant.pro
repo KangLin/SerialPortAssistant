@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = SerialPortAssistant
 TEMPLATE = app
 
+
 win32{
     CONFIG(debug, debug|release) {
         TARGET_PATH=$${OUT_PWD}/Debug
@@ -28,18 +29,27 @@ isEmpty(PREFIX) {
         PREFIX = $$OUT_PWD/install
     }
 }
+
+include(Version.pri)
+
+other.files = LICENSE.md Authors.txt ChangeLog.md
+other.path = $$PREFIX
+other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX
-INSTALLS = target
+INSTALLS = target other
 
 SOURCES +=\
-        MainWindow.cpp \
+    MainWindow.cpp \
     Main.cpp \
-    Log.cpp
+    Log.cpp \
+    Widgets\DlgAbout\DlgAbout.cpp
 
-HEADERS  += MainWindow.h \
-    Log.h
+HEADERS += MainWindow.h \
+    Log.h \
+    Widgets\DlgAbout\DlgAbout.h
 
-FORMS    += MainWindow.ui
+FORMS += MainWindow.ui \
+    Widgets\DlgAbout\DlgAbout.ui
 
 win32 : equals(QMAKE_HOST.os, Windows){
     INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
@@ -53,10 +63,13 @@ win32 : equals(QMAKE_HOST.os, Windows){
 }
 
 DISTFILES += \
-    README.md
+    README.md \
+    Authors.txt \
+    ChangeLog.md \
+    LICENSE.md
 
 RC_FILE = AppIcon.rc
 
 RESOURCES += \
-    resource.qrc
+    resource.qrc 
 
