@@ -25,6 +25,10 @@ private slots:
 
     void on_pbSend_clicked();
 
+    void on_cmbPort_currentIndexChanged(int index);
+    
+    void on_cmbRecent_currentIndexChanged(const QString &szText);
+    
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;

@@ -50,13 +50,11 @@ win32 : equals(QMAKE_HOST.os, Windows){
     #    INSTALL_TARGET = $${PREFIX}/$(TARGET)
     #}
 
-    #mingw{  #手机平台不需要
-    #    RABBITIM_STRIP.target = RABBITIM_STRIP
+    #mingw{  #手机平台不需�    #    RABBITIM_STRIP.target = RABBITIM_STRIP
     #    RABBITIM_STRIP.commands = "strip $$INSTALL_TARGET"
     #    INSTALLS += RABBITIM_STRIP
     #}
-    #安装qt依赖库
-    Deployment_qtlib.target = Deployment_qtlib
+    #安装qt依赖�    Deployment_qtlib.target = Deployment_qtlib
     Deployment_qtlib.path = $$system_path($${PREFIX})
     Deployment_qtlib.commands = "$$system_path($$[QT_INSTALL_BINS]/windeployqt)" \
                     --compiler-runtime \
@@ -64,3 +62,6 @@ win32 : equals(QMAKE_HOST.os, Windows){
                     "$${INSTALL_TARGET}"
     INSTALLS += Deployment_qtlib
 }
+
+RESOURCES += \
+    resource.qrc

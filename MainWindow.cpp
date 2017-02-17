@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Log.h"
+#include <QMessageBox>
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,17 +10,20 @@ CMainWindow::CMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //int i = 0;
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
-        ui->cmbPort->addItem(info.portName());
+        ui->cmbPort->addItem(info.description() + "(" + info.portName() + ")");
     }
 
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
         ui->cmbBoudRate->addItem(QString::number(baudRate));
     }
-
+    
+    ui->cmbBoudRate->setCurrentIndex(
+                ui->cmbBoudRate->findText(
+                    QString::number(m_SerialPort.baudRate())));
+    
     ui->cmbParity->addItem(tr("None"));
     ui->cmbParity->addItem(tr("Even"));
     ui->cmbParity->addItem(tr("Odd"));
@@ -91,12 +95,13 @@ void CMainWindow::on_pbOpen_clicked()
     bCheck = m_SerialPort.open(QIODevice::ReadWrite);
     if(!bCheck)
     {
-        LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s",
-                        ui->cmbPort->currentText().toStdString().c_str());
+        LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
+                        ui->cmbPort->currentText().toStdString().c_str(),
+                        m_SerialPort.error());
         return;
     }
 
-    bCheck = connect(&m_SerialPort, SIGNAL(readyRead), this, SLOT(slotRead()));
+    bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbSend->setEnabled(true);
@@ -105,5 +110,26 @@ void CMainWindow::on_pbOpen_clicked()
 void CMainWindow::on_pbSend_clicked()
 {
     m_SerialPort.write(ui->teSend->toPlainText().toStdString().c_str());
-    ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
+    if(-1 == ui->cmbRecent->findText(
+                ui->teSend->toPlainText().toStdString().c_str()))
+        ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
+}
+
+void CMainWindow::on_cmbPort_currentIndexChanged(int index)
+{
+    if(m_SerialPort.isOpen())
+    {
+        if(QMessageBox::Cancel == QMessageBox::warning(this, tr("Warning"),
+                             tr("Serial is opened, be sure cloase?"),
+                             QMessageBox::Button::Ok,
+                             QMessageBox::Button::Cancel))
+            return;
+        else
+            on_pbOpen_clicked();
+    }
+}
+
+void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
+{
+    ui->teSend->setText(szText);
 }
