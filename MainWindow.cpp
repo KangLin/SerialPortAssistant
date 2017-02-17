@@ -1,25 +1,31 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Log.h"
+#include <QMessageBox>
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
-    m_SerialPort(this)
+    m_SerialPort(this),
+    m_Timer(this)
 {
+    bool check = false;
     ui->setupUi(this);
 
-    //int i = 0;
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
-        ui->cmbPort->addItem(info.portName());
+        ui->cmbPort->addItem(info.description() + "(" + info.portName() + ")");
     }
 
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
         ui->cmbBoudRate->addItem(QString::number(baudRate));
     }
-
+    
+    ui->cmbBoudRate->setCurrentIndex(
+                ui->cmbBoudRate->findText(
+                    QString::number(m_SerialPort.baudRate())));
+    
     ui->cmbParity->addItem(tr("None"));
     ui->cmbParity->addItem(tr("Even"));
     ui->cmbParity->addItem(tr("Odd"));
@@ -39,11 +45,19 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbFlowControl->addItem(tr("SoftWare"));
 
     ui->cmbRecent->setDuplicatesEnabled(false);
+    
+    check = connect(&m_Timer, SIGNAL(timeout()), this, SLOT(slotTimeOut()));
+    Q_ASSERT(check);
 }
 
 CMainWindow::~CMainWindow()
 {
     delete ui;
+}
+
+void CMainWindow::slotTimeOut()
+{
+    on_pbSend_clicked();
 }
 
 void CMainWindow::slotRead()
@@ -64,6 +78,8 @@ void CMainWindow::on_pbOpen_clicked()
 
     if(m_SerialPort.isOpen())
     {
+        if(m_Timer.isActive())
+            m_Timer.stop();
         m_SerialPort.close();
         ui->pbOpen->setText(tr("Open(&O)"));
         ui->pbSend->setEnabled(false);
@@ -91,19 +107,66 @@ void CMainWindow::on_pbOpen_clicked()
     bCheck = m_SerialPort.open(QIODevice::ReadWrite);
     if(!bCheck)
     {
-        LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s",
-                        ui->cmbPort->currentText().toStdString().c_str());
+        LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
+                        ui->cmbPort->currentText().toStdString().c_str(),
+                        m_SerialPort.error());
         return;
     }
 
-    bCheck = connect(&m_SerialPort, SIGNAL(readyRead), this, SLOT(slotRead()));
+    bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbSend->setEnabled(true);
+
+    if(ui->cbSendLoop->isChecked())
+        m_Timer.start(ui->sbLoopTime->value());
 }
 
 void CMainWindow::on_pbSend_clicked()
 {
+    if(ui->teSend->toPlainText().isEmpty())
+    {
+        LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
+        return;
+    }
+    
     m_SerialPort.write(ui->teSend->toPlainText().toStdString().c_str());
-    ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
+    
+    if(-1 == ui->cmbRecent->findText(
+                ui->teSend->toPlainText().toStdString().c_str()))
+        ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
+}
+
+//TODO: 测试当串打开时，选取消改变是否未变  
+void CMainWindow::on_cmbPort_currentIndexChanged(int index)
+{
+    if(m_SerialPort.isOpen())
+    {
+        if(QMessageBox::Cancel == QMessageBox::warning(this, tr("Warning"),
+                             tr("Serial is opened, be sure cloase?"),
+                             QMessageBox::Button::Ok,
+                             QMessageBox::Button::Cancel))
+            return;
+        else
+            on_pbOpen_clicked();
+    }
+}
+
+void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
+{
+    ui->teSend->setText(szText);
+}
+
+void CMainWindow::on_cbSendLoop_clicked()
+{
+    if(ui->cbSendLoop->isChecked())
+    {
+        if((!m_Timer.isActive()) && m_SerialPort.isOpen())
+            m_Timer.start(ui->sbLoopTime->value());
+    }
+    else
+    {
+        if(m_Timer.isActive())
+            m_Timer.stop();
+    }
 }

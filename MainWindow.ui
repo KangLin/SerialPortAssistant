@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Serial Port Assistant</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/image/AppIcon</normaloff>:/image/AppIcon</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
@@ -242,6 +246,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="maximum">
+              <number>1000000000</number>
+             </property>
+             <property name="value">
+              <number>1000</number>
+             </property>
             </widget>
            </item>
            <item>
@@ -352,6 +362,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
