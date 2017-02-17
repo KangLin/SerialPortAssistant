@@ -6,7 +6,8 @@
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
-    m_SerialPort(this)
+    m_SerialPort(this),
+    m_Timer(this)
 {
     ui->setupUi(this);
 
@@ -43,11 +44,18 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbFlowControl->addItem(tr("SoftWare"));
 
     ui->cmbRecent->setDuplicatesEnabled(false);
+    
+    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(slotTimeOut()));
 }
 
 CMainWindow::~CMainWindow()
 {
     delete ui;
+}
+
+void CMainWindow::slotTimeOut()
+{
+    on_pbSend_clicked();
 }
 
 void CMainWindow::slotRead()
@@ -68,6 +76,7 @@ void CMainWindow::on_pbOpen_clicked()
 
     if(m_SerialPort.isOpen())
     {
+        m_Timer.stop();
         m_SerialPort.close();
         ui->pbOpen->setText(tr("Open(&O)"));
         ui->pbSend->setEnabled(false);
@@ -105,10 +114,16 @@ void CMainWindow::on_pbOpen_clicked()
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbSend->setEnabled(true);
+    m_Timer.start(ui->sbLoopTime->value());
 }
 
 void CMainWindow::on_pbSend_clicked()
 {
+    if(ui->teSend->toPlainText().isEmpty())
+    {
+        LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
+        return;
+    }
     m_SerialPort.write(ui->teSend->toPlainText().toStdString().c_str());
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
@@ -132,4 +147,15 @@ void CMainWindow::on_cmbPort_currentIndexChanged(int index)
 void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
 {
     ui->teSend->setText(szText);
+}
+
+void CMainWindow::on_cbSendLoop_clicked()
+{
+    if(!ui->cbSendLoop->isChecked())
+        m_Timer.stop();
+    else
+    {
+        if(!m_Timer.isActive() && m_SerialPort.isOpen())
+            m_Timer.start(ui->sbLoopTime->value());
+    }
 }
