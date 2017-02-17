@@ -42,7 +42,7 @@ HEADERS  += MainWindow.h \
 FORMS    += MainWindow.ui
 
 win32 : equals(QMAKE_HOST.os, Windows){
-    INSTALL_TARGET = $$system_path($${PREFIX}/$(TARGET))
+    INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
 
     Deployment_qtlib.path = $$system_path($${PREFIX})
     Deployment_qtlib.commands = "$$system_path($$[QT_INSTALL_BINS]/windeployqt)" \
