@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CMainWindow</class>
+ <widget class="QMainWindow" name="CMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>565</width>
+    <height>533</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Serial Port Assistant</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Port Settings</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Serial Port:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbPort"/>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>BaudRate:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbBoudRate">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>DataBit:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbDataBit"/>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Parity:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbParity">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>StopBit:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbStopBit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Flow Control:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbFlowControl">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Recive Settings</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QRadioButton" name="rbReciveASCII">
+             <property name="text">
+              <string>ASCII</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rbReciveHex">
+             <property name="text">
+              <string>Hex</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="cbAutoFeedLine">
+           <property name="text">
+            <string>Auto Feed Line</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="cbDisplaySend">
+           <property name="text">
+            <string>Display Send</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="cbDisplayTime">
+           <property name="text">
+            <string>Display Time</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>Send Settings</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QRadioButton" name="rbSendASCII">
+             <property name="text">
+              <string>ASCII</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rbSendHex">
+             <property name="text">
+              <string>Hex</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QCheckBox" name="cbSendLoop">
+             <property name="text">
+              <string>Loop</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="sbLoopTime">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>ms</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QTextEdit" name="teRecive">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QTextEdit" name="teSend">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pbOpen">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Open(&amp;O)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbSend">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Send(&amp;S)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cmbRecent">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>565</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
