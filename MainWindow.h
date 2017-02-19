@@ -82,6 +82,7 @@ private:
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;
+    int m_nSend, m_nRecive;
     QTimer m_Timer;
     
     QLabel m_statusInfo;

@@ -15,7 +15,7 @@ TRANSLATIONS = $$PWD/app_zh_CN.ts \
     $$PWD/app_sl.ts \
     $$PWD/app_uk.ts
 
-OTHER_FILES+=$$TRANSLATIONS
+OTHER_FILES += $$TRANSLATIONS
 
 for(file, TRANSLATIONS) {
     TRANSLATIONS_TS_FILES += $${file}

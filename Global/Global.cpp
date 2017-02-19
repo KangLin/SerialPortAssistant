@@ -14,8 +14,8 @@ CGlobal::CGlobal(QObject *parent) :
     m_szLanguage = conf.value("Global/Language",
                               QLocale::system().name()).toString();
     m_szStyleFile = conf.value(
-                "UI/StyleSheet", ":/sink/Dark").toString();
-    m_szStyleMenu = conf.value("UI/MenuStyleSheet", "Dark").toString();
+                "UI/StyleSheet", "").toString();
+    m_szStyleMenu = conf.value("UI/MenuStyleSheet", "System").toString();
     m_StatusbarVisable = conf.value("UI/Visable/Statusbar", "true").toBool();
     m_ToolbarVisable = conf.value("UI/Visable/Toolbar", "true").toBool();
 }

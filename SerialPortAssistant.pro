@@ -37,7 +37,7 @@ other.files = LICENSE.md Authors.txt ChangeLog.md
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX
-INSTALLS = target other
+INSTALLS += target other
 
 SOURCES +=\
     MainWindow.cpp \

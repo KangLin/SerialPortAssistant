@@ -17,10 +17,13 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
     m_Timer(this), 
+    m_nSend(0),
+    m_nRecive(0),
     m_ActionGroupTranslator(this),
     m_ActionGroupStyle(this)
 {
     bool check = false;
+
     ui->setupUi(this);
     
     LoadTranslate();
@@ -175,7 +178,9 @@ void CMainWindow::AddRecive(QString &szText)
     if(ui->cbDisplayTime->isChecked())
         ui->teRecive->insertPlainText(QTime::currentTime().toString() + " ");
     ui->teRecive->insertPlainText(szText);
-    m_statusRx.setText(tr("Rx: ") + szText.length() + tr(" Bytes"));
+    QTextCursor cursor = ui->teRecive->textCursor();
+    cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
+    ui->teRecive->setTextCursor(cursor);
 }
 
 void CMainWindow::slotRead()
@@ -186,7 +191,10 @@ void CMainWindow::slotRead()
         return;
     }
 
-    AddRecive(QString(m_SerialPort.readAll()));
+    QString szText(m_SerialPort.readAll());
+    AddRecive(szText);
+    m_nRecive += szText.toStdString().length();
+    m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
 }
 
 void CMainWindow::on_pbSend_clicked()
@@ -205,11 +213,10 @@ void CMainWindow::on_pbSend_clicked()
     nRet = m_SerialPort.write(szText.toStdString().c_str());
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
-        AddRecive(ui->teSend->toPlainText());
+        AddRecive(szText);
 
-    m_statusTx.setText(tr("Tx: ")
-                       + ui->teSend->toPlainText().length()
-                       + tr(" Bytes"));
+    m_nSend += ui->teSend->toPlainText().toStdString().length();
+    m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
 
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
