@@ -13,6 +13,8 @@
 #include <QMap>
 #include <QSharedPointer> 
 #include <QTranslator>
+#include <QLabel>
+#include <QLayout>
 
 namespace Ui {
 class CMainWindow;
@@ -38,8 +40,9 @@ private slots:
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
     void on_actionClear_Send_History_triggered();
-    void AddRecive(QString &szText);
     void on_actionAbout_A_triggered();
+    void on_actionToolBar_T_triggered();
+    void on_actionStatusBar_S_triggered();
     void changeEvent(QEvent *e);
     
     void InitMenu();
@@ -69,10 +72,23 @@ private:
 private slots:
     void slotActionGroupStyleTriggered(QAction* act);
     
+    void on_actionLeftBar_L_triggered();
+    
+private:
+    int InitStatusBar();
+    int InitToolBar();
+    void AddRecive(QString &szText);
+
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;
     QTimer m_Timer;
+    
+    QLabel m_statusInfo;
+    QLabel m_statusRx, m_statusTx;
+    QHBoxLayout m_statusLay;
+    QWidget m_Status;
+    
 };
 
 #endif // MAINWINDOW_H

@@ -26,7 +26,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
-     <widget class="QFrame" name="frame">
+     <widget class="QFrame" name="frmLeftBar">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -507,7 +507,16 @@
     </property>
     <addaction name="actionAbout_A"/>
    </widget>
+   <widget class="QMenu" name="menuView_V">
+    <property name="title">
+     <string>View(&amp;V)</string>
+    </property>
+    <addaction name="actionToolBar_T"/>
+    <addaction name="actionStatusBar_S"/>
+    <addaction name="actionLeftBar_L"/>
+   </widget>
    <addaction name="menuTools_T"/>
+   <addaction name="menuView_V"/>
    <addaction name="menuHelp_H"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -542,6 +551,39 @@
   <action name="actionAbout_A">
    <property name="text">
     <string>About(&amp;A)</string>
+   </property>
+  </action>
+  <action name="actionStatusBar_S">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>StatusBar(&amp;S)</string>
+   </property>
+  </action>
+  <action name="actionToolBar_T">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ToolBar(&amp;T)</string>
+   </property>
+  </action>
+  <action name="actionLeftBar_L">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>LeftBar(&amp;L)</string>
    </property>
   </action>
  </widget>

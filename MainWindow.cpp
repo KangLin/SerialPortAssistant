@@ -27,6 +27,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     LoadStyle();
     InitMenu();
     
+    InitStatusBar();
+    InitToolBar();
+
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
         ui->cmbPort->addItem(info.description() + "(" + info.portName() + ")");
@@ -69,8 +72,39 @@ CMainWindow::~CMainWindow()
 {
     ClearMenu();
     ClearTranslate();
-    
+
     delete ui;
+}
+
+int CMainWindow::InitStatusBar()
+{
+    ui->actionStatusBar_S->setChecked(
+                CGlobal::Instance()->GetStatusbarVisable());
+    statusBar()->setVisible(CGlobal::Instance()->GetStatusbarVisable());
+
+    m_statusInfo.setText(tr("Ready"));
+    m_statusRx.setText(tr("Rx: 0 Bytes"));
+    m_statusTx.setText(tr("Tx: 0 Bytes"));
+    m_statusInfo.setSizePolicy(QSizePolicy::Policy::Expanding,
+                               QSizePolicy::Policy::Preferred);
+    m_statusTx.setSizePolicy(QSizePolicy::Policy::Preferred,
+                             QSizePolicy::Policy::Preferred);
+    m_statusRx.setSizePolicy(QSizePolicy::Policy::Preferred,
+                             QSizePolicy::Policy::Preferred);
+
+    this->statusBar()->addWidget(&m_statusInfo);
+    this->statusBar()->addWidget(&m_statusRx);
+    this->statusBar()->addWidget(&m_statusTx);
+
+    return 0;
+}
+
+int CMainWindow::InitToolBar()
+{
+    ui->actionToolBar_T->setChecked(
+                CGlobal::Instance()->GetToolbarVisable());
+    ui->mainToolBar->setVisible(CGlobal::Instance()->GetToolbarVisable());
+    return 0;
 }
 
 void CMainWindow::slotTimeOut()
@@ -93,6 +127,9 @@ void CMainWindow::on_pbOpen_clicked()
         ui->pbSend->setEnabled(false);
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
+
+        m_statusInfo.setText(tr("Serail Port Close"));
+
         return;
     }
 
@@ -127,6 +164,8 @@ void CMainWindow::on_pbOpen_clicked()
     ui->actionOpen->setText(tr("Close(&C)"));
     ui->pbSend->setEnabled(true);
 
+    m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open"));
+
     if(ui->cbSendLoop->isChecked())
         m_Timer.start(ui->sbLoopTime->value());
 }
@@ -136,6 +175,7 @@ void CMainWindow::AddRecive(QString &szText)
     if(ui->cbDisplayTime->isChecked())
         ui->teRecive->insertPlainText(QTime::currentTime().toString() + " ");
     ui->teRecive->insertPlainText(szText);
+    m_statusRx.setText(tr("Rx: ") + szText.length() + tr(" Bytes"));
 }
 
 void CMainWindow::slotRead()
@@ -166,7 +206,11 @@ void CMainWindow::on_pbSend_clicked()
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
         AddRecive(ui->teSend->toPlainText());
-    
+
+    m_statusTx.setText(tr("Tx: ")
+                       + ui->teSend->toPlainText().length()
+                       + tr(" Bytes"));
+
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
         ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
@@ -494,4 +538,21 @@ void CMainWindow::changeEvent(QEvent *e)
         ui->retranslateUi(this);
         break;
     }
+}
+
+void CMainWindow::on_actionToolBar_T_triggered()
+{
+    ui->mainToolBar->setVisible(ui->actionToolBar_T->isChecked());
+    CGlobal::Instance()->SetToolbarVisable(ui->actionToolBar_T->isChecked());
+}
+
+void CMainWindow::on_actionStatusBar_S_triggered()
+{
+    this->statusBar()->setVisible(ui->actionStatusBar_S->isChecked());
+    CGlobal::Instance()->SetStatusbarVisable(ui->actionStatusBar_S->isChecked());
+}
+
+void CMainWindow::on_actionLeftBar_L_triggered()
+{
+    ui->frmLeftBar->setVisible(ui->actionLeftBar_L->isChecked());
 }
