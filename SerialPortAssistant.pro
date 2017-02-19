@@ -31,6 +31,7 @@ isEmpty(PREFIX) {
 }
 
 include(Version.pri)
+include(Resource/translations/translations.pri)
 
 other.files = LICENSE.md Authors.txt ChangeLog.md
 other.path = $$PREFIX
@@ -41,11 +42,17 @@ INSTALLS = target other
 SOURCES +=\
     MainWindow.cpp \
     Main.cpp \
-    Log.cpp \
+    Global/Log.cpp \
+    Global/GlobalDir.cpp \
+    Global/Global.cpp \
+    Common/Tool.cpp \
     Widgets\DlgAbout\DlgAbout.cpp
-
+    
 HEADERS += MainWindow.h \
-    Log.h \
+    Global/Log.h \
+    Global/GlobalDir.h \
+    Global/Global.h \
+    Common/Tool.h \
     Widgets\DlgAbout\DlgAbout.h
 
 FORMS += MainWindow.ui \
@@ -61,6 +68,19 @@ win32 : equals(QMAKE_HOST.os, Windows){
                     "$${INSTALL_TARGET}"
     INSTALLS += Deployment_qtlib
 }
+win32 {
+    msvc {
+        QMAKE_CXXFLAGS += /wd"4819"  #忽略msvc下对utf-8的警告  
+        #QMAKE_LFLAGS += -ladvapi32
+        CONFIG(debug, debug|release) {
+            QMAKE_LFLAGS += /SUBSYSTEM:WINDOWS",5.01" /NODEFAULTLIB:libcmtd
+        }else{
+            QMAKE_LFLAGS += /SUBSYSTEM:WINDOWS",5.01" /NODEFAULTLIB:libcmt
+        }
+    } else {
+        DEFINES += "_WIN32_WINNT=0x0501" #__USE_MINGW_ANSI_STDIO
+    }
+}
 
 DISTFILES += \
     README.md \
@@ -71,5 +91,5 @@ DISTFILES += \
 RC_FILE = AppIcon.rc
 
 RESOURCES += \
-    resource.qrc 
+    Resource/Resource.qrc
 

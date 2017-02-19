@@ -1,3 +1,6 @@
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #include "Log.h"
 #include <string>
 #include <stdarg.h>

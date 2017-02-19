@@ -1,3 +1,6 @@
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #include "DlgAbout.h"
 #include "ui_DlgAbout.h"
 #include "Version.h"
@@ -24,7 +27,7 @@ CDlgAbout::CDlgAbout(QWidget *parent) :
     QString szHomePage = "https://github.com/KangLin/SerialPortAssistant.git";
     ui->lbHome->setText(tr("Home page:") + "<a href=\"" + szHomePage + "\">"
                         + szHomePage + "</a>");
-    ui->lbCopyright->setText(tr(" Copyright (C) 2014 - %1 KangLin Studio").arg(
+    ui->lbCopyright->setText(tr(" Copyright (C) 2016 - %1 KangLin Studio").arg(
                                  QString::number(QDate::currentDate().year())));
     QString szFile;
 #ifdef MOBILE

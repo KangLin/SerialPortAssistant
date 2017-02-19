@@ -1,3 +1,6 @@
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #ifndef DLGABOUT_H
 #define DLGABOUT_H
 

@@ -1,19 +1,32 @@
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "Log.h"
+#include "Global/Log.h"
+#include "Global/Global.h"
+#include "Common/Tool.h"
 #include <QMessageBox>
 #include <QTime>
+#include <QFile>
+#include <QSettings>
 #include "Widgets/DlgAbout/DlgAbout.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
-    m_Timer(this)
+    m_Timer(this), 
+    m_ActionGroupTranslator(this),
+    m_ActionGroupStyle(this)
 {
     bool check = false;
     ui->setupUi(this);
-
+    
+    LoadTranslate();
+    LoadStyle();
+    InitMenu();
+    
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
         ui->cmbPort->addItem(info.description() + "(" + info.portName() + ")");
@@ -54,30 +67,15 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 CMainWindow::~CMainWindow()
 {
+    ClearMenu();
+    ClearTranslate();
+    
     delete ui;
 }
 
 void CMainWindow::slotTimeOut()
 {
     on_pbSend_clicked();
-}
-
-void CMainWindow::AddRecive(QString &szText)
-{
-    if(ui->cbDisplayTime->isChecked())
-        ui->teRecive->insertPlainText(QTime::currentTime().toString());
-    ui->teRecive->insertPlainText(szText);
-}
-
-void CMainWindow::slotRead()
-{
-    if(!m_SerialPort.isOpen())
-    {
-        LOG_MODEL_ERROR("MainWindow", "SerialPort don't open!");
-        return;
-    }
-
-    AddRecive(QString(m_SerialPort.readAll()));
 }
 
 void CMainWindow::on_pbOpen_clicked()
@@ -133,15 +131,39 @@ void CMainWindow::on_pbOpen_clicked()
         m_Timer.start(ui->sbLoopTime->value());
 }
 
+void CMainWindow::AddRecive(QString &szText)
+{
+    if(ui->cbDisplayTime->isChecked())
+        ui->teRecive->insertPlainText(QTime::currentTime().toString() + " ");
+    ui->teRecive->insertPlainText(szText);
+}
+
+void CMainWindow::slotRead()
+{
+    if(!m_SerialPort.isOpen())
+    {
+        LOG_MODEL_ERROR("MainWindow", "SerialPort don't open!");
+        return;
+    }
+
+    AddRecive(QString(m_SerialPort.readAll()));
+}
+
 void CMainWindow::on_pbSend_clicked()
 {
+    int nRet = 0;
     if(ui->teSend->toPlainText().isEmpty())
     {
         LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
         return;
     }
- 
-    m_SerialPort.write(ui->teSend->toPlainText().toStdString().c_str());
+    QString szText = ui->teSend->toPlainText();
+    if(ui->cbr->isChecked())
+        szText += "\r";
+    if(ui->cbn->isChecked())
+        szText += "\n";
+    nRet = m_SerialPort.write(szText.toStdString().c_str());
+    LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
         AddRecive(ui->teSend->toPlainText());
     
@@ -208,4 +230,268 @@ void CMainWindow::on_actionAbout_A_triggered()
 {
     CDlgAbout about(this);
     about.exec();
+}
+int CMainWindow::InitMenuTranslate()
+{
+    m_ActionTranslator["Default"] = ui->menuLanguage_A->addAction(
+                QIcon(":/icon/Language"), tr("Default"));
+    m_ActionTranslator["en"] = ui->menuLanguage_A->addAction(
+                QIcon(":/icon/English"), tr("English"));
+    m_ActionTranslator["zh_CN"] = ui->menuLanguage_A->addAction(
+                QIcon(":/icon/China"), tr("Chinese"));
+    m_ActionTranslator["zh_TW"] = ui->menuLanguage_A->addAction(
+                QIcon(":/icon/China"), tr("Chinese(TaiWan)"));
+    
+    QMap<QString, QAction*>::iterator it;
+    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
+    {
+        it.value()->setCheckable(true);
+        m_ActionGroupTranslator.addAction(it.value());
+    }
+
+    LOG_MODEL_DEBUG("MainWindow",
+                    "MainWindow::InitMenuTranslate m_ActionTranslator size:%d",
+                    m_ActionTranslator.size());
+
+    bool check = connect(&m_ActionGroupTranslator, SIGNAL(triggered(QAction*)),
+                        SLOT(slotActionGroupTranslateTriggered(QAction*)));
+    Q_ASSERT(check);
+
+    QString szLocale = CGlobal::Instance()->GetLanguage();
+    QAction* pAct = m_ActionTranslator[szLocale];
+    if(pAct)
+    {
+        LOG_MODEL_DEBUG("MainWindow",
+                        "MainWindow::InitMenuTranslate setchecked locale:%s",
+                        szLocale.toStdString().c_str());
+        pAct->setChecked(true);
+        ui->menuLanguage_A->setIcon(pAct->icon());
+        LOG_MODEL_DEBUG("MainWindow",
+                        "MainWindow::InitMenuTranslate setchecked end");
+    }
+    
+    return 0;
+}
+
+int CMainWindow::ClearMenuTranslate()
+{
+    QMap<QString, QAction*>::iterator it;
+    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
+    {
+        m_ActionGroupTranslator.removeAction(it.value());
+    }
+    m_ActionGroupTranslator.disconnect();
+    m_ActionTranslator.clear();
+    ui->menuLanguage_A->clear();    
+
+    LOG_MODEL_DEBUG("MainWindow",
+                    "MainWindow::ClearMenuTranslate m_ActionTranslator size:%d",
+                    m_ActionTranslator.size());
+    
+    return 0;
+}
+
+int CMainWindow::ClearTranslate()
+{
+    if(!m_TranslatorQt.isNull())
+    {
+        qApp->removeTranslator(m_TranslatorQt.data());
+        m_TranslatorQt.clear();
+    }
+
+    if(m_TranslatorApp.isNull())
+    {
+        qApp->removeTranslator(m_TranslatorApp.data());
+        m_TranslatorApp.clear();
+    }
+    return 0;
+}
+
+int CMainWindow::LoadTranslate(QString szLocale)
+{
+    if(szLocale.isEmpty())
+    {
+        szLocale = CGlobal::Instance()->GetLanguage();
+    }
+
+    if("Default" == szLocale)
+    {
+        szLocale = QLocale::system().name();
+    }
+
+    LOG_MODEL_DEBUG("main", "locale language:%s",
+                    szLocale.toStdString().c_str());
+
+    ClearTranslate();
+    LOG_MODEL_DEBUG("MainWindow", "Translate dir:%s",
+                    qPrintable(CGlobalDir::Instance()->GetDirTranslate()));
+
+    m_TranslatorQt = QSharedPointer<QTranslator>(new QTranslator(this));
+    m_TranslatorQt->load("qt_" + szLocale + ".qm",
+                         CGlobalDir::Instance()->GetDirTranslate());
+    qApp->installTranslator(m_TranslatorQt.data());
+
+    m_TranslatorApp = QSharedPointer<QTranslator>(new QTranslator(this));
+#ifdef ANDROID
+    m_TranslatorApp->load(":/translations/app_" + szLocale + ".qm");
+#else
+    m_TranslatorApp->load("app_" + szLocale + ".qm",
+                          CGlobalDir::Instance()->GetDirTranslate());
+#endif
+    qApp->installTranslator(m_TranslatorApp.data());
+
+    ui->retranslateUi(this);
+    return 0;
+}
+
+void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
+{
+    LOG_MODEL_DEBUG("MainWindow", "MainWindow::slotActionGroupTranslateTriggered");
+    QMap<QString, QAction*>::iterator it;
+    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
+    {
+        if(it.value() == pAct)
+        {
+            QString szLocale = it.key();
+            CGlobal::Instance()->SetLanguage(szLocale);
+            LoadTranslate(it.key());
+            pAct->setChecked(true);
+            ClearMenu();
+            InitMenu();
+            return;
+        }
+    }
+}
+
+int CMainWindow::InitMenuStyles()
+{
+    QMap<QString, QAction*>::iterator it;
+    m_ActionStyles["Custom"] = ui->menuStype_S->addAction(tr("Custom"));
+    m_ActionStyles["System"] = ui->menuStype_S->addAction(tr("System"));
+    m_ActionStyles["Blue"] = ui->menuStype_S->addAction(tr("Blue"));
+    m_ActionStyles["Dark"] = ui->menuStype_S->addAction(tr("Dark"));
+    
+    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
+    {
+        it.value()->setCheckable(true);
+        m_ActionGroupStyle.addAction(it.value());
+    }
+    bool check = connect(&m_ActionGroupStyle, SIGNAL(triggered(QAction*)),
+                         SLOT(slotActionGroupStyleTriggered(QAction*)));
+    Q_ASSERT(check);
+    QAction* pAct = m_ActionStyles[CGlobal::Instance()->GetStyleMenu()];
+    if(pAct)
+    {
+        pAct->setChecked(true);
+    }
+    return 0;
+}
+
+int CMainWindow::ClearMenuStyles()
+{
+    QMap<QString, QAction*>::iterator it;
+    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
+    {
+        m_ActionGroupStyle.removeAction(it.value());
+    }
+    m_ActionGroupStyle.disconnect();
+    m_ActionStyles.clear();
+    ui->menuStype_S->clear();
+    return 0;
+}
+
+int CMainWindow::LoadStyle()
+{
+    QString szFile = CGlobal::Instance()->GetStyle();
+    if(szFile.isEmpty())
+        qApp->setStyleSheet("");
+    else
+    {
+        QFile file(szFile);
+        if(file.open(QFile::ReadOnly))
+        {
+            QString stylesheet= file.readAll();
+            qApp->setStyleSheet(stylesheet);
+            file.close();
+        }
+        else
+        {
+            LOG_MODEL_ERROR("app", "file open file [%s] fail:%d",
+                        CGlobal::Instance()->GetStyle().toStdString().c_str(),
+                        file.error());
+        }
+    }
+    return 0;
+}
+
+int CMainWindow::OpenCustomStyleMenu()
+{
+    QString szFile;
+    QString szFilter("*.qss *.*");
+    szFile = CTool::FileDialog(this, QString(), szFilter, tr("Open File"));
+    if(szFile.isEmpty())
+        return -1;
+
+    QFile file(szFile);
+    if(file.open(QFile::ReadOnly))
+    {
+        QString stylesheet= file.readAll();
+        qApp->setStyleSheet(stylesheet);
+        file.close();
+        QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                       QSettings::IniFormat);
+        conf.setValue("UI/StyleSheet", szFile);
+        
+        CGlobal::Instance()->SetStyleMenu("Custom", szFile);
+    }
+    else
+    {
+        LOG_MODEL_ERROR("app", "file open file [%s] fail:%d", 
+                        szFile.toStdString().c_str(), file.error());
+    }
+    return 0;
+}
+
+void CMainWindow::slotActionGroupStyleTriggered(QAction* act)
+{
+    QMap<QString, QAction*>::iterator it;
+    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
+    {
+        if(it.value() == act)
+        {
+            act->setChecked(true);
+            if(it.key() == "Blue")
+                CGlobal::Instance()->SetStyleMenu("Blue", ":/sink/Blue");
+            else if(it.key() == "Dark")
+                CGlobal::Instance()->SetStyleMenu("Dark", ":/sink/Dark");
+            else if(it.key() == "Custom")
+                OpenCustomStyleMenu();
+            else
+                CGlobal::Instance()->SetStyleMenu("System", "");
+        }
+    }
+
+    LoadStyle();
+}
+
+void CMainWindow::InitMenu()
+{
+    InitMenuStyles();
+    InitMenuTranslate();
+}
+
+void CMainWindow::ClearMenu()
+{
+    ClearMenuTranslate();
+    ClearMenuStyles();
+}
+
+void CMainWindow::changeEvent(QEvent *e)
+{
+    switch(e->type())
+    {
+    case QEvent::LanguageChange:
+        ui->retranslateUi(this);
+        break;
+    }
 }

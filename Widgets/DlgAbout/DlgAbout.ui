@@ -40,7 +40,7 @@
         <enum>Qt::PlainText</enum>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../resource.qrc">:/image/AppIcon</pixmap>
+        <pixmap resource="../../Resource/Resource.qrc">:/icon/AppIcon</pixmap>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
@@ -132,7 +132,7 @@
         <enum>Qt::PlainText</enum>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../resource.qrc">:/image/AppIcon</pixmap>
+        <pixmap resource="../../Resource/Resource.qrc">:/icon/AppIcon</pixmap>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
@@ -312,7 +312,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string> Copyright (C) 2014 KangLin Studio</string>
+        <string> Copyright (C) 2016 KangLin Studio</string>
        </property>
       </widget>
      </item>
@@ -337,7 +337,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../resource.qrc"/>
+  <include location="../../Resource/Resource.qrc"/>
  </resources>
  <connections>
   <connection>

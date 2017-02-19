@@ -1,3 +1,6 @@
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #ifndef CLOG_H
 #define CLOG_H
 
