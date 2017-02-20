@@ -51,3 +51,9 @@ $MAKE -f Makefile
 echo "$MAKE install ...."
 $MAKE install
 
+cd ${SOURCE_DIR}
+if [ "${BUILD_TARGERT}" != "android" ]; then
+    cp Install/Install.nsi build_${BUILD_TARGERT}
+    "/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
+    #zip -rq RabbitGIS_${BUILD_TARGERT}${TOOLCHAIN_VERSION}_${AUTOBUILD_ARCH}_${QT_VERSION}_v${BUILD_VERSION}.zip build_${BUILD_TARGERT}/install
+fi

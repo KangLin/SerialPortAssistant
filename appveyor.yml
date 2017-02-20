@@ -158,9 +158,12 @@ build_script:
 #after_build:
 
 artifacts:
-  - path: build_$(BUILD_TARGERT)/install
+  #- path: build_$(BUILD_TARGERT)/install
+  #  name: SerialPortAssistant_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
+  #  type: zip
+    
+  - path: build_${BUILD_TARGERT}/SerialPortAssistant-Setup-*.exe
     name: SerialPortAssistant_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
-    type: zip
 
 test: off
 
