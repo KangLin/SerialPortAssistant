@@ -46,13 +46,13 @@ SetCompressor lzma
 !insertmacro MUI_LANGUAGE "SimpChinese"
 
 LangString LANG_PRODUCT_NAME ${LANG_ENGLISH} "SerialPortAssistant"
-LangString LANG_PRODUCT_NAME ${LANG_SIMPCHINESE} "串口助手"
+LangString LANG_PRODUCT_NAME ${LANG_SIMPCHINESE} "��������"
 
 LangString LANG_UNINSTALL_CONFIRM ${LANG_ENGLISH} "Thank you very much! $(^Name) has been successfully removed."
-LangString LANG_UNINSTALL_CONFIRM ${LANG_SIMPCHINESE} "非常感謝您的使用！ $(^Name) 已成功地从您的计算机中移除。"
+LangString LANG_UNINSTALL_CONFIRM ${LANG_SIMPCHINESE} "�ǳ����x����ʹ�ã� $(^Name) �ѳɹ��ش����ļ�������Ƴ���"
 
 LangString LANG_REMOVE_COMPONENT ${LANG_ENGLISH} "You sure you want to completely remove $ (^ Name), and all of its components?"
-LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "你确实要完全移除 $(^Name) ，其及所有的组件？"
+LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "��ȷʵҪ��ȫ�Ƴ� $(^Name) ���估���е������"
 
 ; MUI end ------
 
