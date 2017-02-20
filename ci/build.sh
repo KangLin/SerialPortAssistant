@@ -47,8 +47,7 @@ export PATH=${QT_ROOT}/bin:$PATH
 cd ${SOURCE_DIR}
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
-qmake ../SerialPortAssistant.pro  $PARA "CONFIG+=release"
-echo "$MAKE install ...."
+${QT_ROOT}/bin/qmake ../SerialPortAssistant.pro "CONFIG+=release"
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     MAKE=nmake
@@ -61,7 +60,7 @@ echo "$MAKE install ...."
 $MAKE install
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
-cd ${SOURCE_DIR}
-cp Install/Install.nsi build_${BUILD_TARGERT}
-"/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
+    cd ${SOURCE_DIR}
+    cp Install/Install.nsi build_${BUILD_TARGERT}
+    "/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
 fi

@@ -12,7 +12,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = SerialPortAssistant
 TEMPLATE = app
 
-
 win32{
     CONFIG(debug, debug|release) {
         TARGET_PATH=$${OUT_PWD}/Debug
