@@ -108,9 +108,7 @@ android | CONFIG(static, static|shared) {
 mytranslat.files = $$TRANSLATIONS_QM_FILES $$QT_QM
 mytranslat.path = $$PREFIX/translations
 
-wince |android {
-    DEPLOYMENT += mytranslat
-}else{
+!android {
     mytranslat.CONFIG += no_check_exist
     INSTALLS += mytranslat
 }
