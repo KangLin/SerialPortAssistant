@@ -54,7 +54,22 @@
         <translation>鸣谢</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="315"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="294"/>
+        <source>Donate</source>
+        <translation>捐赠</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="414"/>
+        <source>Free donation</source>
+        <translation>随意捐赠</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="437"/>
+        <source>Donated ￥ 20</source>
+        <translation>捐赠 ￥20</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="484"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation>版权（C） 2017 康林工作室</translation>
     </message>

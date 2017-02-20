@@ -54,7 +54,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="315"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="294"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="414"/>
+        <source>Free donation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="437"/>
+        <source>Donated ￥ 20</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="484"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation type="unfinished"></translation>
     </message>

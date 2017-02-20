@@ -1,17 +1,8 @@
 #TODO: Change version
-version: '0.0.1.{build}'
+version: '0.0.2.{build}'
 
 environment:
   matrix:
-  
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 530
-    QT_VERSION: qt5.7
-    QT_ROOT: /C/Qt/5.7/mingw53_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-    
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
@@ -110,7 +101,7 @@ test: off
 deploy:
   - provider: GitHub
     #release: SerialPortAssistant_-v$(appveyor_build_version)
-    description: 'Release SerialPortAssistant_ $(APPVEYOR_REPO_TAG_NAME) on windows'
+    description: 'Release SerialPortAssistant_$(APPVEYOR_REPO_TAG_NAME) on windows'
     #token : https://github.com/settings/tokens password encrypt: https://ci.appveyor.com/tools/encrypt
     auth_token:
       secure: xgIFN2iAfgj1gsWabdHrmFXvj0rce/ZWtKUwm3aDUNfLGu+kO/q94MYD8a46AbDL
