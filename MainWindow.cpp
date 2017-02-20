@@ -20,7 +20,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_nSend(0),
     m_nRecive(0),
     m_ActionGroupTranslator(this),
-    m_ActionGroupStyle(this)
+    m_ActionGroupStyle(this),
+    m_cmbPortIndex(-1)
 {
     bool check = false;
 
@@ -73,6 +74,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 CMainWindow::~CMainWindow()
 {
+    on_pbOpen_clicked();
     ClearMenu();
     ClearTranslate();
 
@@ -227,19 +229,26 @@ void CMainWindow::on_pbSend_clicked()
         ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
 }
 
-//TODO: 测试当串打开时，选取消改变是否未变  
 void CMainWindow::on_cmbPort_currentIndexChanged(int index)
 {
-    if(m_SerialPort.isOpen())
+    if(m_SerialPort.isOpen() && index != m_cmbPortIndex)
     {
         if(QMessageBox::Cancel == QMessageBox::warning(this, tr("Warning"),
-                             tr("Serial is opened, be sure cloase?"),
+           tr("Serial [%1] is opened, be sure cloase?").arg(
+           QSerialPortInfo::availablePorts().at(m_cmbPortIndex).description()
+                                                           + "("
+           + QSerialPortInfo::availablePorts().at(m_cmbPortIndex).portName()
+                                                           + ")"),
                              QMessageBox::Button::Ok,
                              QMessageBox::Button::Cancel))
+        {
+            ui->cmbPort->setCurrentIndex(m_cmbPortIndex);
             return;
+        }
         else
             on_pbOpen_clicked();
     }
+    m_cmbPortIndex = index;
 }
 
 void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)

@@ -191,212 +191,212 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="424"/>
-        <location filename="../../MainWindow.ui" line="533"/>
-        <location filename="../../MainWindow.cpp" line="128"/>
-        <location filename="../../MainWindow.cpp" line="129"/>
+        <location filename="../../MainWindow.ui" line="549"/>
+        <location filename="../../MainWindow.cpp" line="130"/>
+        <location filename="../../MainWindow.cpp" line="132"/>
         <source>Open(&amp;O)</source>
         <translation>打开(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="440"/>
+        <location filename="../../MainWindow.ui" line="444"/>
         <source>Send(&amp;S)</source>
         <translation>发送(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="473"/>
+        <location filename="../../MainWindow.ui" line="481"/>
         <source>Tools(&amp;T)</source>
         <translation>工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="477"/>
+        <location filename="../../MainWindow.ui" line="485"/>
         <source>Language(&amp;A)</source>
         <translation>语言(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="486"/>
+        <location filename="../../MainWindow.ui" line="494"/>
         <source>Stype(&amp;S)</source>
         <translation>样式(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="506"/>
+        <location filename="../../MainWindow.ui" line="514"/>
         <source>Help(&amp;H)</source>
         <translation>帮助(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="512"/>
+        <location filename="../../MainWindow.ui" line="520"/>
         <source>View(&amp;V)</source>
         <translation>视图(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="538"/>
+        <location filename="../../MainWindow.ui" line="558"/>
         <source>Clear(&amp;L)</source>
         <translation>清除(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="543"/>
+        <location filename="../../MainWindow.ui" line="563"/>
         <source>Clear Send History</source>
         <translation>清除发送历史</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="548"/>
+        <location filename="../../MainWindow.ui" line="572"/>
         <source>Exit(&amp;E)</source>
         <translation>退出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="553"/>
+        <location filename="../../MainWindow.ui" line="581"/>
         <source>About(&amp;A)</source>
         <translation>关于(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="564"/>
+        <location filename="../../MainWindow.ui" line="592"/>
         <source>StatusBar(&amp;S)</source>
         <translation>状态栏(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="575"/>
+        <location filename="../../MainWindow.ui" line="603"/>
         <source>ToolBar(&amp;T)</source>
         <translation>工具栏(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="586"/>
+        <location filename="../../MainWindow.ui" line="614"/>
         <source>LeftBar(&amp;L)</source>
         <translation>左栏(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="50"/>
-        <location filename="../../MainWindow.cpp" line="64"/>
+        <location filename="../../MainWindow.cpp" line="51"/>
+        <location filename="../../MainWindow.cpp" line="65"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="51"/>
+        <location filename="../../MainWindow.cpp" line="52"/>
         <source>Even</source>
         <translation>偶校验</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="52"/>
+        <location filename="../../MainWindow.cpp" line="53"/>
         <source>Odd</source>
         <translation>奇校验</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="53"/>
+        <location filename="../../MainWindow.cpp" line="54"/>
         <source>Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="54"/>
+        <location filename="../../MainWindow.cpp" line="55"/>
         <source>Mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="65"/>
+        <location filename="../../MainWindow.cpp" line="66"/>
         <source>HardWare</source>
         <translation>硬件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="66"/>
+        <location filename="../../MainWindow.cpp" line="67"/>
         <source>SoftWare</source>
         <translation>软件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="88"/>
+        <location filename="../../MainWindow.cpp" line="90"/>
         <source>Ready</source>
         <translation>预备</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="89"/>
+        <location filename="../../MainWindow.cpp" line="91"/>
         <source>Rx: 0 Bytes</source>
         <translation>接收： 0 字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="90"/>
+        <location filename="../../MainWindow.cpp" line="92"/>
         <source>Tx: 0 Bytes</source>
         <translation>发送： 0 字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="134"/>
+        <location filename="../../MainWindow.cpp" line="138"/>
         <source>Serail Port Close</source>
         <translation>串口关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="166"/>
-        <location filename="../../MainWindow.cpp" line="167"/>
+        <location filename="../../MainWindow.cpp" line="170"/>
+        <location filename="../../MainWindow.cpp" line="172"/>
         <source>Close(&amp;C)</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="170"/>
+        <location filename="../../MainWindow.cpp" line="176"/>
         <source> Open</source>
         <translation> 打开</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="197"/>
+        <location filename="../../MainWindow.cpp" line="203"/>
         <source>Rx: </source>
         <translation>接收： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="197"/>
-        <location filename="../../MainWindow.cpp" line="219"/>
+        <location filename="../../MainWindow.cpp" line="203"/>
+        <location filename="../../MainWindow.cpp" line="225"/>
         <source> Bytes</source>
         <translation>字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="219"/>
+        <location filename="../../MainWindow.cpp" line="225"/>
         <source>Tx: </source>
         <translation>发送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="231"/>
+        <location filename="../../MainWindow.cpp" line="237"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="232"/>
-        <source>Serial is opened, be sure cloase?</source>
-        <translation>串口打开，你确定要关闭？</translation>
+        <location filename="../../MainWindow.cpp" line="238"/>
+        <source>Serial [%1] is opened, be sure cloase?</source>
+        <translation>串口[%1]已打开，是否关闭它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="288"/>
+        <location filename="../../MainWindow.cpp" line="300"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="290"/>
+        <location filename="../../MainWindow.cpp" line="302"/>
         <source>English</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="292"/>
+        <location filename="../../MainWindow.cpp" line="304"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="294"/>
+        <location filename="../../MainWindow.cpp" line="306"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（台湾）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="420"/>
+        <location filename="../../MainWindow.cpp" line="432"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="421"/>
+        <location filename="../../MainWindow.cpp" line="433"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="422"/>
+        <location filename="../../MainWindow.cpp" line="434"/>
         <source>Blue</source>
         <translation>蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="423"/>
+        <location filename="../../MainWindow.cpp" line="435"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="482"/>
+        <location filename="../../MainWindow.cpp" line="494"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>

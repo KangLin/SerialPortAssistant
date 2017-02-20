@@ -27,23 +27,6 @@ class CMainWindow : public QMainWindow
 public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
-
-private slots:
-    void slotRead();
-    void slotTimeOut();
-    void on_pbOpen_clicked();
-    void on_pbSend_clicked();
-    void on_cmbPort_currentIndexChanged(int index);
-    void on_cmbRecent_currentIndexChanged(const QString &szText);
-    void on_cbSendLoop_clicked();
-    void on_actionClear_triggered();
-    void on_actionOpen_triggered();
-    void on_actionExit_triggered();
-    void on_actionClear_Send_History_triggered();
-    void on_actionAbout_A_triggered();
-    void on_actionToolBar_T_triggered();
-    void on_actionStatusBar_S_triggered();
-    void changeEvent(QEvent *e);
     
     void InitMenu();
     void ClearMenu();
@@ -71,9 +54,25 @@ private:
     int LoadStyle();
 private slots:
     void slotActionGroupStyleTriggered(QAction* act);
-    
+       
+private slots:
+    void slotRead();
+    void slotTimeOut();
+    void on_pbOpen_clicked();
+    void on_pbSend_clicked();
+    void on_cmbPort_currentIndexChanged(int index);
+    void on_cmbRecent_currentIndexChanged(const QString &szText);
+    void on_cbSendLoop_clicked();
+    void on_actionClear_triggered();
+    void on_actionOpen_triggered();
+    void on_actionExit_triggered();
+    void on_actionClear_Send_History_triggered();
+    void on_actionAbout_A_triggered();
+    void on_actionToolBar_T_triggered();
+    void on_actionStatusBar_S_triggered();
+    void changeEvent(QEvent *e);
     void on_actionLeftBar_L_triggered();
-    
+
 private:
     int InitStatusBar();
     int InitToolBar();
@@ -83,6 +82,7 @@ private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;
     int m_nSend, m_nRecive;
+    int m_cmbPortIndex;
     QTimer m_Timer;
     
     QLabel m_statusInfo;
