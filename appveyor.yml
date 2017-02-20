@@ -48,21 +48,21 @@ environment:
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
     
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 530
-    QT_VERSION: qt5.7
-    QT_ROOT: /C/Qt/5.7/mingw53_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  #- BUILD_TARGERT: windows_mingw
+  #  TOOLCHAIN_VERSION: 530
+  #  QT_VERSION: qt5.7
+  #  QT_ROOT: /C/Qt/5.7/mingw53_32
+  #  AUTOBUILD_ARCH: x86
+  #  PASSWORD:
+  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
     
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 492
-    QT_VERSION: qt5.6
-    QT_ROOT: /C/Qt/5.6/mingw49_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  #- BUILD_TARGERT: windows_mingw
+  #  TOOLCHAIN_VERSION: 492
+  #  QT_VERSION: qt5.6
+  #  QT_ROOT: /C/Qt/5.6/mingw49_32
+  #  AUTOBUILD_ARCH: x86
+  #  PASSWORD:
+  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
         
   ##### rabbitim #####
 
