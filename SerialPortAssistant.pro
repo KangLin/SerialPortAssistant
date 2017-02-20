@@ -70,7 +70,7 @@ win32 : equals(QMAKE_HOST.os, Windows){
 }
 win32 {
     msvc {
-        QMAKE_CXXFLAGS += /wd"4819"  #忽略msvc下对utf-8的警告  
+        QMAKE_CXXFLAGS += /wd"4819"  #忽略msvc下对utf-8的警� 
         #QMAKE_LFLAGS += -ladvapi32
         CONFIG(debug, debug|release) {
             QMAKE_LFLAGS += /SUBSYSTEM:WINDOWS",5.01" /NODEFAULTLIB:libcmtd
@@ -86,7 +86,9 @@ DISTFILES += \
     README.md \
     Authors.txt \
     ChangeLog.md \
-    LICENSE.md
+    LICENSE.md \
+    appveyor.yml \
+    ci/*
 
 RC_FILE = AppIcon.rc
 
