@@ -53,7 +53,7 @@ echo "$MAKE install ...."
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     MAKE=nmake
 else
-    MAKE=make
+    MAKE="make ${RABBIT_MAKE_JOB_PARA}"
 fi
 
 $MAKE -f Makefile
