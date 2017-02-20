@@ -39,33 +39,6 @@ environment:
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
-  - BUILD_TARGERT: windows_msvc
-    GENERATORS: "Visual Studio 12 2013"
-    TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.5
-    QT_ROOT: /C/Qt/5.5/msvc2013
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: windows_msvc
-    GENERATORS: "Visual Studio 12 2013"
-    TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.4
-    QT_ROOT: /C/Qt/5.4/msvc2013_opengl
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: windows_msvc
-    GENERATORS: "Visual Studio 12 2013"
-    TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.3
-    QT_ROOT: /C/Qt/5.3/msvc2013_opengl
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
   - BUILD_TARGERT: android
     QT_VERSION_DIR: 5.7
     QT_VERSION: 5.7.0
@@ -75,13 +48,6 @@ environment:
   - BUILD_TARGERT: android
     QT_VERSION_DIR: 5.6
     QT_VERSION: 5.6.1
-    RABBITIM_USE_REPOSITORIES: "FALSE"
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: android
-    QT_VERSION_DIR: 5.5
-    QT_VERSION: 5.5.1
     RABBITIM_USE_REPOSITORIES: "FALSE"
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
@@ -102,29 +68,6 @@ environment:
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 492
-    QT_VERSION: qt5.5
-    QT_ROOT: /C/Qt/5.5/mingw492_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 491
-    QT_VERSION: qt5.4
-    QT_ROOT: /C/Qt/5.4/mingw491_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 482
-    QT_VERSION: qt5.3
-    QT_ROOT: /C/Qt/5.3/mingw482_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
   ##### rabbitim #####
 
 matrix:

@@ -279,6 +279,7 @@ QImage CTool::ConvertToGray(QImage image)
 bool CTool::EnableWake(bool bWake)
 {
     static bool bSet = false;
+/*
 #ifdef ANDROID
     jboolean bPara = bWake;
     jboolean bRet = QAndroidJniObject::callStaticMethod<jboolean>(
@@ -302,6 +303,6 @@ bool CTool::EnableWake(bool bWake)
         bSet = false;
     }
     return true;
-#endif
+#endif //*/
     return false;
 }

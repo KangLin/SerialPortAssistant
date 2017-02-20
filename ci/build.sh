@@ -25,6 +25,15 @@ if [ "$BUILD_TARGERT" = "android" ]; then
     fi
     export PATH=${SOURCE_DIR}/Tools/apache-ant/bin:$JAVA_HOME:$PATH
 fi
+
+if [ "${BUILD_TARGERT}" = "unix" ]; then
+    QT_DIR=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}
+    export QT_ROOT=${QT_DIR}/${QT_VERSION_DIR}/gcc_64
+    if [ "${QT_VERSION}" = "5.2.1" ]; then
+        export QT_ROOT=${QT_DIR}/${QT_VERSION}/gcc_64
+    fi
+fi
+
 if [ "$BUILD_TARGERT" != "windows_msvc" ]; then
     RABBIT_MAKE_JOB_PARA="-j`cat /proc/cpuinfo |grep 'cpu cores' |wc -l`"  #make 同时工作进程参数
     if [ "$RABBIT_MAKE_JOB_PARA" = "-j1" ];then
@@ -33,7 +42,7 @@ if [ "$BUILD_TARGERT" != "windows_msvc" ]; then
     export RABBIT_MAKE_JOB_PARA
 fi
 
-export PATH=$PATH:${QT_ROOT}/bin
+export PATH=${QT_ROOT}/bin:$PATH
 
 cd ${SOURCE_DIR}
 mkdir -p build_${BUILD_TARGERT}
@@ -51,9 +60,8 @@ $MAKE -f Makefile
 echo "$MAKE install ...."
 $MAKE install
 
+if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
 cd ${SOURCE_DIR}
-if [ "${BUILD_TARGERT}" != "android" ]; then
-    cp Install/Install.nsi build_${BUILD_TARGERT}
-    "/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
-    #zip -rq RabbitGIS_${BUILD_TARGERT}${TOOLCHAIN_VERSION}_${AUTOBUILD_ARCH}_${QT_VERSION}_v${BUILD_VERSION}.zip build_${BUILD_TARGERT}/install
+cp Install/Install.nsi build_${BUILD_TARGERT}
+"/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
 fi

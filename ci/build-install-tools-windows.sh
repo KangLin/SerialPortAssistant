@@ -25,7 +25,7 @@ cd ${TOOLS_DIR}
 
 # Qt qt安装参见：https://github.com/benlau/qtci  
 if [ -n "${QT_VERSION}" ]; then
-    QT_DIR=C:/projects/RabbitGIS/Tools/Qt/${QT_VERSION}
+    QT_DIR=C:/projects/SerialPortAssistant/Tools/Qt/${QT_VERSION}
     if [ ! -d "${QT_DIR}" ]; then
         wget -c --no-check-certificate -nv http://download.qt.io/official_releases/qt/${QT_VERSION_DIR}/${QT_VERSION}/qt-opensource-windows-x86-android-${QT_VERSION}.exe
         bash ${SOURCE_DIR}/ci/qt-installer.sh qt-opensource-windows-x86-android-${QT_VERSION}.exe ${QT_DIR}
@@ -34,10 +34,10 @@ if [ -n "${QT_VERSION}" ]; then
 fi
 
 #下载ANT
-wget -c -nv http://www-us.apache.org/dist//ant/binaries/apache-ant-1.9.7-bin.tar.gz
-tar xzf apache-ant-1.9.7-bin.tar.gz
-rm -f apache-ant-1.9.7-bin.tar.gz
-mv apache-ant-1.9.7 apache-ant
+wget -c -nv http://apache.fayea.com//ant/binaries/apache-ant-1.10.1-bin.tar.gz
+tar xzf apache-ant-1.10.1-bin.tar.gz
+rm -f apache-ant-1.10.1-bin.tar.gz
+mv apache-ant-1.10.1 apache-ant
 
 #Download android sdk  
 if [ ! -d "${TOOLS_DIR}/android-sdk" ]; then

@@ -6,6 +6,7 @@
 
 QT       += core gui serialport
 
+!greaterThan(QT_VERSION, 5.1) : error("Qt version must greater 5.1")
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SerialPortAssistant
@@ -89,10 +90,10 @@ DISTFILES += \
     LICENSE.md \
     appveyor.yml \
     ci/* \
-    install/* 
+    install/* \
+    .travis.yml
 
 RC_FILE = AppIcon.rc
 
 RESOURCES += \
     Resource/Resource.qrc
-
