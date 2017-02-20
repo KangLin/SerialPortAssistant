@@ -36,7 +36,13 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
-        ui->cmbPort->addItem(info.description() + "(" + info.portName() + ")");
+        QString szPort;
+        szPort = info.portName();
+        if(!info.description().isEmpty())
+        {
+            szPort += "(" + info.description() + ")";
+        }
+        ui->cmbPort->addItem(szPort);
     }
 
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
@@ -162,6 +168,8 @@ void CMainWindow::on_pbOpen_clicked()
         LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
                         ui->cmbPort->currentText().toStdString().c_str(),
                         m_SerialPort.error());
+        this->m_statusInfo.setText(tr("Open serail port %1 fail.").
+                                   arg(ui->cmbPort->currentText()));
         return;
     }
 
@@ -233,12 +241,17 @@ void CMainWindow::on_cmbPort_currentIndexChanged(int index)
 {
     if(m_SerialPort.isOpen() && index != m_cmbPortIndex)
     {
+        QString szPort;
+        szPort = QSerialPortInfo::availablePorts().at(m_cmbPortIndex).portName();
+        if(!QSerialPortInfo::availablePorts().at(m_cmbPortIndex)
+                .description().isEmpty())
+        {
+            szPort += "("
+                   + QSerialPortInfo::availablePorts()
+                    .at(m_cmbPortIndex).description() + ")";
+        }
         if(QMessageBox::Cancel == QMessageBox::warning(this, tr("Warning"),
-           tr("Serial [%1] is opened, be sure cloase?").arg(
-           QSerialPortInfo::availablePorts().at(m_cmbPortIndex).description()
-                                                           + "("
-           + QSerialPortInfo::availablePorts().at(m_cmbPortIndex).portName()
-                                                           + ")"),
+           tr("Serial [%1] is opened, be sure cloase?").arg(szPort),
                              QMessageBox::Button::Ok,
                              QMessageBox::Button::Cancel))
         {
