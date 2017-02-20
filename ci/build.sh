@@ -43,7 +43,7 @@ if [ "$BUILD_TARGERT" != "windows_msvc" ]; then
 fi
 
 export PATH=${QT_ROOT}/bin:$PATH
-
+echo "PATH:$PATH"
 cd ${SOURCE_DIR}
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}

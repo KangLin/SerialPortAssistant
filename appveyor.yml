@@ -75,6 +75,7 @@ init:
   - if "%AUTOBUILD_ARCH%" == "x64" set varch=amd64
   - if "%BUILD_TARGERT%"=="windows_msvc" call "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN_VERSION%.0\VC\vcvarsall.bat" %varch%
   #- if "%BUILD_TARGERT%"=="windows_mingw" set PATH=C:\Qt\Tools\mingw%TOOLCHAIN_VERSION%_32\bin;%PATH%
+  - if "%BUILD_TARGERT%" == "windows_mingw" set MSYSTEM=MINGW32  #设置编译系统为MINGW32
   - echo NUMBER_OF_PROCESSORS=%NUMBER_OF_PROCESSORS%
   - echo PROCESSOR_IDENTIFIER=%PROCESSOR_IDENTIFIER%
   - echo QT_ROOT=%QT_ROOT%
