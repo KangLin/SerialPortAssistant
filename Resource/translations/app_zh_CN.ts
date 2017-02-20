@@ -346,57 +346,57 @@ Email:kl222@126.com</source>
         <translation>发送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="237"/>
+        <location filename="../../MainWindow.cpp" line="236"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="238"/>
+        <location filename="../../MainWindow.cpp" line="237"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation>串口[%1]已打开，是否关闭它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="300"/>
+        <location filename="../../MainWindow.cpp" line="301"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="302"/>
+        <location filename="../../MainWindow.cpp" line="303"/>
         <source>English</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="304"/>
+        <location filename="../../MainWindow.cpp" line="305"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="306"/>
+        <location filename="../../MainWindow.cpp" line="307"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（台湾）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="432"/>
+        <location filename="../../MainWindow.cpp" line="433"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="433"/>
+        <location filename="../../MainWindow.cpp" line="434"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="434"/>
+        <location filename="../../MainWindow.cpp" line="435"/>
         <source>Blue</source>
         <translation>蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="435"/>
+        <location filename="../../MainWindow.cpp" line="436"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="494"/>
+        <location filename="../../MainWindow.cpp" line="495"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>

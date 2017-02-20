@@ -341,57 +341,57 @@ Email:kl222@126.com</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="237"/>
+        <location filename="../../MainWindow.cpp" line="236"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="238"/>
+        <location filename="../../MainWindow.cpp" line="237"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="300"/>
+        <location filename="../../MainWindow.cpp" line="301"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="302"/>
+        <location filename="../../MainWindow.cpp" line="303"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="304"/>
+        <location filename="../../MainWindow.cpp" line="305"/>
         <source>Chinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="306"/>
+        <location filename="../../MainWindow.cpp" line="307"/>
         <source>Chinese(TaiWan)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="432"/>
+        <location filename="../../MainWindow.cpp" line="433"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="433"/>
+        <location filename="../../MainWindow.cpp" line="434"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="434"/>
+        <location filename="../../MainWindow.cpp" line="435"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="435"/>
+        <location filename="../../MainWindow.cpp" line="436"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="494"/>
+        <location filename="../../MainWindow.cpp" line="495"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
