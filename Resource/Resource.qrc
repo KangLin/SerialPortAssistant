@@ -9,6 +9,10 @@
         <file alias="China">png/China.png</file>
         <file alias="OpenFile">png/open-file.png</file>
         <file alias="Save">png/Save.png</file>
+        <file alias="Clear">png/Clear.png</file>
+        <file alias="Start">png/start256.png</file>
+        <file alias="Stop">png/stop-red256.png</file>
+        <file alias="Send">png/send.png</file>
     </qresource>
     <qresource prefix="/sink">
         <file alias="Blue">sink/blue.qss</file>

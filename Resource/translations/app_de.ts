@@ -55,7 +55,7 @@
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="315"/>
-        <source> Copyright (C) 2016 KangLin Studio</source>
+        <source> Copyright (C) 2017 KangLin Studio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -81,7 +81,7 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="30"/>
-        <source> Copyright (C) 2016 - %1 KangLin Studio</source>
+        <source> Copyright (C) 2017 - %1 KangLin Studio</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

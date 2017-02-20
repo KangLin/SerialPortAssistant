@@ -55,8 +55,12 @@
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="315"/>
+        <source> Copyright (C) 2017 KangLin Studio</source>
+        <translation>版权（C） 2017 康林工作室</translation>
+    </message>
+    <message>
         <source> Copyright (C) 2016 KangLin Studio</source>
-        <translation>版权（C） 2016 康林工作室</translation>
+        <translation type="vanished">版权（C） 2017 康林工作室</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="17"/>
@@ -82,8 +86,8 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="30"/>
-        <source> Copyright (C) 2016 - %1 KangLin Studio</source>
-        <translation>版权 （C) 2016 - %1 康林工作室</translation>
+        <source> Copyright (C) 2017 - %1 KangLin Studio</source>
+        <translation>版权 （C) 2017 - %1 康林工作室</translation>
     </message>
 </context>
 <context>
@@ -267,12 +271,12 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.cpp" line="51"/>
         <source>Even</source>
-        <translation type="unfinished"></translation>
+        <translation>偶校验</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="52"/>
         <source>Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>奇校验</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="53"/>

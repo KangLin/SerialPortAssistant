@@ -423,6 +423,10 @@
             <property name="text">
              <string>Open(&amp;O)</string>
             </property>
+            <property name="icon">
+             <iconset resource="Resource/Resource.qrc">
+              <normaloff>:/icon/Start</normaloff>:/icon/Start</iconset>
+            </property>
            </widget>
           </item>
           <item>
@@ -438,6 +442,10 @@
             </property>
             <property name="text">
              <string>Send(&amp;S)</string>
+            </property>
+            <property name="icon">
+             <iconset resource="Resource/Resource.qrc">
+              <normaloff>:/icon/Send</normaloff>:/icon/Send</iconset>
             </property>
            </widget>
           </item>
@@ -519,6 +527,7 @@
    <addaction name="menuView_V"/>
    <addaction name="menuHelp_H"/>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -526,14 +535,25 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionClear"/>
+   <addaction name="separator"/>
+   <addaction name="actionAbout_A"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Start</normaloff>:/icon/Start</iconset>
+   </property>
    <property name="text">
     <string>Open(&amp;O)</string>
    </property>
   </action>
   <action name="actionClear">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Clear</normaloff>:/icon/Clear</iconset>
+   </property>
    <property name="text">
     <string>Clear(&amp;L)</string>
    </property>
@@ -544,11 +564,19 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Close</normaloff>:/icon/Close</iconset>
+   </property>
    <property name="text">
     <string>Exit(&amp;E)</string>
    </property>
   </action>
   <action name="actionAbout_A">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/AppIcon</normaloff>:/icon/AppIcon</iconset>
+   </property>
    <property name="text">
     <string>About(&amp;A)</string>
    </property>

@@ -126,7 +126,9 @@ void CMainWindow::on_pbOpen_clicked()
             m_Timer.stop();
         m_SerialPort.close();
         ui->pbOpen->setText(tr("Open(&O)"));
+        ui->pbOpen->setIcon(QIcon(":/icon/Start"));
         ui->actionOpen->setText(tr("Open(&O)"));
+        ui->actionOpen->setIcon(QIcon(":/icon/Start"));
         ui->pbSend->setEnabled(false);
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
@@ -164,7 +166,9 @@ void CMainWindow::on_pbOpen_clicked()
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
+    ui->pbOpen->setIcon(QIcon(":/icon/Stop"));
     ui->actionOpen->setText(tr("Close(&C)"));
+    ui->actionOpen->setIcon(QIcon(":/icon/Stop"));
     ui->pbSend->setEnabled(true);
 
     m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open"));
