@@ -6,83 +6,84 @@
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="20"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>關於</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="110"/>
         <source>Serial Port Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>串口助手</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="150"/>
         <source>Author:KangLin</source>
-        <translation type="unfinished"></translation>
+        <translation>作者：康林</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="182"/>
         <source>Informatioin</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="194"/>
         <source>Build Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>編譯日期：</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="213"/>
         <source>Home page: https://github.com/KangLin/SerialPortAssistant.git</source>
-        <translation type="unfinished"></translation>
+        <translation>主頁：https://github.com/KangLin/SerialPortAssistant.git</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="235"/>
         <source>Version: 1.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>版本： 1.0.0.0</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="252"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>許可</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="266"/>
         <source>Change log</source>
-        <translation type="unfinished"></translation>
+        <translation>更改日誌</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="280"/>
         <source>Thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>鳴謝</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="315"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
-        <translation type="unfinished"></translation>
+        <translation>版權（C） 2017 康林工作室</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="17"/>
         <source>Version:%1.%2.%3.%4</source>
-        <translation type="unfinished"></translation>
+        <translation>版本：%1.%2.%3.%4</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="24"/>
         <source>Build date:%1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>編譯日期：%1 %2</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="25"/>
         <source>Author: KangLin
 Email:kl222@126.com</source>
-        <translation type="unfinished"></translation>
+        <translation>作者：康林
+郵件：kl222@126.com</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="28"/>
         <source>Home page:</source>
-        <translation type="unfinished"></translation>
+        <translation>主頁：</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="30"/>
         <source> Copyright (C) 2017 - %1 KangLin Studio</source>
-        <translation type="unfinished"></translation>
+        <translation>版權 （C) 2017 - %1 康林工作室</translation>
     </message>
 </context>
 <context>
@@ -90,310 +91,315 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.ui" line="20"/>
         <source>Serial Port Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>串口助手</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="46"/>
         <source>Port Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>串口設置</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="54"/>
         <source>Serial Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>串口：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="75"/>
         <source>BaudRate:</source>
-        <translation type="unfinished"></translation>
+        <translation>波特率：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="99"/>
         <source>DataBit:</source>
-        <translation type="unfinished"></translation>
+        <translation>數據位：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="120"/>
         <source>Parity:</source>
-        <translation type="unfinished"></translation>
+        <translation>校驗：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="141"/>
         <source>StopBit:</source>
-        <translation type="unfinished"></translation>
+        <translation>停止位：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="162"/>
         <source>Flow Control:</source>
-        <translation type="unfinished"></translation>
+        <translation>流控：</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="190"/>
         <source>Recive Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>接收設置</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="204"/>
         <location filename="../../MainWindow.ui" line="321"/>
         <source>ASCII</source>
-        <translation type="unfinished"></translation>
+        <translation>ASCII</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="220"/>
         <location filename="../../MainWindow.ui" line="337"/>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="272"/>
         <source>Auto Feed Line</source>
-        <translation type="unfinished"></translation>
+        <translation>自動換行</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="285"/>
         <source>r</source>
-        <translation type="unfinished"></translation>
+        <translation>r</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="301"/>
         <source>n</source>
-        <translation type="unfinished"></translation>
+        <translation>n</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="235"/>
         <source>Display Send</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示發送</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="248"/>
         <source>Display Time</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示時間</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="258"/>
         <source>Send Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>發送設置</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="354"/>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>循環</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="377"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>毫秒</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="424"/>
         <location filename="../../MainWindow.ui" line="549"/>
-        <location filename="../../MainWindow.cpp" line="130"/>
-        <location filename="../../MainWindow.cpp" line="132"/>
+        <location filename="../../MainWindow.cpp" line="136"/>
+        <location filename="../../MainWindow.cpp" line="138"/>
         <source>Open(&amp;O)</source>
-        <translation type="unfinished"></translation>
+        <translation>打開(&amp;O)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="444"/>
         <source>Send(&amp;S)</source>
-        <translation type="unfinished"></translation>
+        <translation>發送(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="481"/>
         <source>Tools(&amp;T)</source>
-        <translation type="unfinished"></translation>
+        <translation>工具(&amp;T)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="485"/>
         <source>Language(&amp;A)</source>
-        <translation type="unfinished"></translation>
+        <translation>語言(&amp;A)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="494"/>
         <source>Stype(&amp;S)</source>
-        <translation type="unfinished"></translation>
+        <translation>樣式(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="514"/>
         <source>Help(&amp;H)</source>
-        <translation type="unfinished"></translation>
+        <translation>幫助(&amp;H)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="520"/>
         <source>View(&amp;V)</source>
-        <translation type="unfinished"></translation>
+        <translation>視圖(&amp;V)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="558"/>
         <source>Clear(&amp;L)</source>
-        <translation type="unfinished"></translation>
+        <translation>清除(&amp;L)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="563"/>
         <source>Clear Send History</source>
-        <translation type="unfinished"></translation>
+        <translation>清除發送歷史</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="572"/>
         <source>Exit(&amp;E)</source>
-        <translation type="unfinished"></translation>
+        <translation>退出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="581"/>
         <source>About(&amp;A)</source>
-        <translation type="unfinished"></translation>
+        <translation>關於(&amp;A)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="592"/>
         <source>StatusBar(&amp;S)</source>
-        <translation type="unfinished"></translation>
+        <translation>狀態欄(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="603"/>
         <source>ToolBar(&amp;T)</source>
-        <translation type="unfinished"></translation>
+        <translation>工具欄(&amp;T)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="614"/>
         <source>LeftBar(&amp;L)</source>
-        <translation type="unfinished"></translation>
+        <translation>左欄(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="51"/>
-        <location filename="../../MainWindow.cpp" line="65"/>
+        <location filename="../../MainWindow.cpp" line="57"/>
+        <location filename="../../MainWindow.cpp" line="71"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>無</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="52"/>
+        <location filename="../../MainWindow.cpp" line="58"/>
         <source>Even</source>
-        <translation type="unfinished"></translation>
+        <translation>偶校驗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="53"/>
+        <location filename="../../MainWindow.cpp" line="59"/>
         <source>Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>奇校驗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="54"/>
+        <location filename="../../MainWindow.cpp" line="60"/>
         <source>Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="55"/>
+        <location filename="../../MainWindow.cpp" line="61"/>
         <source>Mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="66"/>
+        <location filename="../../MainWindow.cpp" line="72"/>
         <source>HardWare</source>
-        <translation type="unfinished"></translation>
+        <translation>硬件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="67"/>
+        <location filename="../../MainWindow.cpp" line="73"/>
         <source>SoftWare</source>
-        <translation type="unfinished"></translation>
+        <translation>軟件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="90"/>
+        <location filename="../../MainWindow.cpp" line="96"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>預備</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="91"/>
+        <location filename="../../MainWindow.cpp" line="97"/>
         <source>Rx: 0 Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>接收： 0 字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="92"/>
+        <location filename="../../MainWindow.cpp" line="98"/>
         <source>Tx: 0 Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>發送： 0 字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="138"/>
+        <location filename="../../MainWindow.cpp" line="144"/>
         <source>Serail Port Close</source>
-        <translation type="unfinished"></translation>
+        <translation>串口關閉</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="170"/>
-        <location filename="../../MainWindow.cpp" line="172"/>
+        <location filename="../../MainWindow.cpp" line="171"/>
+        <source>Open serail port %1 fail.</source>
+        <translation>打開串口[%1]失敗。</translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.cpp" line="178"/>
+        <location filename="../../MainWindow.cpp" line="180"/>
         <source>Close(&amp;C)</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="176"/>
+        <location filename="../../MainWindow.cpp" line="184"/>
         <source> Open</source>
-        <translation type="unfinished"></translation>
+        <translation> 打開</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="203"/>
+        <location filename="../../MainWindow.cpp" line="211"/>
         <source>Rx: </source>
-        <translation type="unfinished"></translation>
+        <translation>接收： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="203"/>
-        <location filename="../../MainWindow.cpp" line="225"/>
+        <location filename="../../MainWindow.cpp" line="211"/>
+        <location filename="../../MainWindow.cpp" line="233"/>
         <source> Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="225"/>
+        <location filename="../../MainWindow.cpp" line="233"/>
         <source>Tx: </source>
-        <translation type="unfinished"></translation>
+        <translation>發送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="236"/>
+        <location filename="../../MainWindow.cpp" line="253"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="237"/>
+        <location filename="../../MainWindow.cpp" line="254"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
-        <translation type="unfinished"></translation>
+        <translation>串口[%1]已打開，是否關閉它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="301"/>
+        <location filename="../../MainWindow.cpp" line="314"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>默認</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="303"/>
+        <location filename="../../MainWindow.cpp" line="316"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>英語</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="305"/>
+        <location filename="../../MainWindow.cpp" line="318"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="307"/>
+        <location filename="../../MainWindow.cpp" line="320"/>
         <source>Chinese(TaiWan)</source>
-        <translation type="unfinished"></translation>
+        <translation>中文（臺灣）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="433"/>
+        <location filename="../../MainWindow.cpp" line="446"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>自定義</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="434"/>
+        <location filename="../../MainWindow.cpp" line="447"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>系統</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="435"/>
+        <location filename="../../MainWindow.cpp" line="448"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>藍色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="436"/>
+        <location filename="../../MainWindow.cpp" line="449"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="495"/>
+        <location filename="../../MainWindow.cpp" line="508"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>打開文件</translation>
     </message>
 </context>
 <context>
@@ -401,7 +407,7 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../Common/Tool.h" line="55"/>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>打開文件</translation>
     </message>
 </context>
 </TS>

@@ -39,19 +39,6 @@ environment:
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
-  - BUILD_TARGERT: android
-    QT_VERSION_DIR: 5.7
-    QT_VERSION: 5.7.0
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  - BUILD_TARGERT: android
-    QT_VERSION_DIR: 5.6
-    QT_VERSION: 5.6.1
-    RABBITIM_USE_REPOSITORIES: "FALSE"
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
   - BUILD_TARGERT: windows_mingw
     TOOLCHAIN_VERSION: 530
     QT_VERSION: qt5.7
