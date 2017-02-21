@@ -76,7 +76,7 @@ private slots:
 private:
     int InitStatusBar();
     int InitToolBar();
-    void AddRecive(QString &szText);
+    void AddRecive(QString &szText, bool bRecive = false);
 
 private:
     Ui::CMainWindow *ui;

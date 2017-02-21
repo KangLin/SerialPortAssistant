@@ -182,16 +182,35 @@ void CMainWindow::on_pbOpen_clicked()
     ui->pbSend->setEnabled(true);
 
     m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open"));
-
+    m_statusRx.setText(tr("Rx: 0 Bytes"));
+    m_statusTx.setText(tr("Tx: 0 Bytes"));
     if(ui->cbSendLoop->isChecked())
         m_Timer.start(ui->sbLoopTime->value());
 }
 
-void CMainWindow::AddRecive(QString &szText)
+void CMainWindow::AddRecive(QString &szText, bool bRecive)
 {
+    QString szPrex;
+    
     if(ui->cbDisplayTime->isChecked())
-        ui->teRecive->insertPlainText(QTime::currentTime().toString() + " ");
+        szPrex = QTime::currentTime().toString() + " ";
+        
+    if(ui->cbDisplaySend->isChecked())
+    {
+        if(bRecive)
+            szPrex += "<- ";
+        else
+            szPrex += "-> ";
+    }
+    
+    if(!szPrex.isEmpty())
+    {
+        ui->teRecive->insertPlainText("\n");
+        ui->teRecive->insertPlainText(szPrex);
+    }
+    
     ui->teRecive->insertPlainText(szText);
+
     QTextCursor cursor = ui->teRecive->textCursor();
     cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
     ui->teRecive->setTextCursor(cursor);
@@ -206,7 +225,7 @@ void CMainWindow::slotRead()
     }
 
     QString szText(m_SerialPort.readAll());
-    AddRecive(szText);
+    AddRecive(szText, true);
     m_nRecive += szText.toStdString().length();
     m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
 }
@@ -227,7 +246,7 @@ void CMainWindow::on_pbSend_clicked()
     nRet = m_SerialPort.write(szText.toStdString().c_str());
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
-        AddRecive(szText);
+        AddRecive(szText, false);
 
     m_nSend += ui->teSend->toPlainText().toStdString().length();
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
@@ -301,6 +320,7 @@ void CMainWindow::on_actionExit_triggered()
 void CMainWindow::on_actionClear_Send_History_triggered()
 {
     ui->teSend->clear();
+    ui->cmbRecent->clear();
 }
 
 void CMainWindow::on_actionAbout_A_triggered()
