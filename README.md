@@ -1,35 +1,53 @@
-串口助手
-=======
+Serial Port Assistant
+=====================
 
-作者：康林（kl222@126.com)
---------
+Author: Kang Lin (kl222@126.com)
+--------------------------------
 
-1. ![项目位置](https://github.com/KangLin/SerialPortAssistant)
+[<img src="Resource/png/China.png" alt="Chinese" title="Chinese" width="16" height="16" />Chinese](README_ZH.md)
 
-2. 编译状态
+1. ![Project: https://github.com/KangLin/SerialPortAssistant](https://github.com/KangLin/SerialPortAssistant)  
+This project is a cross-platform serial assistant. It can run on WINDOWS, linux system.
 
-|平台|状态|
-|:---:|:------:|
-|windows、android|[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)|
-|linux|[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)|
+2. Complie status
 
-3. 多语言
-    * 中文  
-    ![中文](Docs/ui-zh.jpg)
-    * 英语  
-    ![中文](Docs/ui-en.jpg)
+    |Platform|Status|
+    |:---:|:------:|
+    |windows、android|[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)|
+    |linux|[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)|
 
-4. 多样式
+3. Multi-language
+    * Chinese  
+    ![Chinese](Docs/ui-zh.jpg)
+    * Englisth  
+    ![Englisth](Docs/ui-en.jpg)
 
-5. ![下载](https://github.com/KangLin/SerialPortAssistant/releases)
+4. Multi style
 
-6. 捐赠  
+5. ![Download](https://github.com/KangLin/SerialPortAssistant/releases)
 
-如果你用得满意，可以对本人进行捐赠
+6. Donate  
+If you are satisfied, you can donate to me
+    * qq mobile wallet: 16614119
+    * WeChat scan the following two-dimensional code to donate 20 yuan:   
+    ![WeChat collection](Resource/png/weixinpay.png "微信收款")  
+    * WeChat scan the following two-dimensional code for free donation  
+    ![Free donate](Resource/png/weixinpay.jpg "微信收款")
 
-* qq手机钱包：16614119
-* 微信扫描下面二维码进行捐赠20元：    
-![微信收款](Resource/png/weixinpay.png "微信收款")  
+7. Compile
+    - Compiled with QtCreator
+       * Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
+       * Direct compilation can generate programs
+    - Compile with the command line
+       * Build the build directory in the project root directory
+       * *qmake* build compilation project
+       * *make* install Build the program with the local toolchain
+       * The program is generated in the *install* directory
 
-* 微信扫描下面二维码进行随意捐赠  
-![随意捐赠](Resource/png/weixinpay.jpg "微信收款")
+    ```sh
+    mkdir build
+    cd build
+    qmake ../SerialPortAssistant.pro
+    make install
+    cd install  #The program is generated in the install directory
+    ```

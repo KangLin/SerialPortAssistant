@@ -1,7 +1,7 @@
 #TODO:发行版本时，需要修改下列值  
 MAJOR_VERSION_NUMBER=0       #主版本  
 MINOR_VERSION_NUMBER=0       #次版本  
-REVISION_VERSION_NUMBER=2    #修订号  
+REVISION_VERSION_NUMBER=3    #修订号  
 
 BUILD_VERSION=$$system(git rev-parse --short HEAD)
 isEmpty(BUILD_VERSION){

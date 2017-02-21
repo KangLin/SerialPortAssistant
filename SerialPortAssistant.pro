@@ -83,7 +83,7 @@ win32 {
 }
 
 DISTFILES += \
-    README.md \
+    README*.md \
     Authors.txt \
     ChangeLog.md \
     LICENSE.md \

@@ -29,47 +29,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="213"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="235"/>
         <source>Home page: https://github.com/KangLin/SerialPortAssistant.git</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="235"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="213"/>
         <source>Version: 1.0.0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="252"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="278"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="266"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="292"/>
         <source>Change log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="280"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="306"/>
         <source>Thanks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="294"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="320"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="414"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="440"/>
         <source>Free donation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="437"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="463"/>
         <source>Donated ￥ 20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="484"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="510"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation type="unfinished"></translation>
     </message>
@@ -202,8 +202,8 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.ui" line="424"/>
         <location filename="../../MainWindow.ui" line="549"/>
-        <location filename="../../MainWindow.cpp" line="136"/>
-        <location filename="../../MainWindow.cpp" line="138"/>
+        <location filename="../../MainWindow.cpp" line="155"/>
+        <location filename="../../MainWindow.cpp" line="157"/>
         <source>Open(&amp;O)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -273,145 +273,147 @@ Email:kl222@126.com</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="57"/>
-        <location filename="../../MainWindow.cpp" line="71"/>
+        <location filename="../../MainWindow.cpp" line="58"/>
+        <location filename="../../MainWindow.cpp" line="72"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="58"/>
+        <location filename="../../MainWindow.cpp" line="59"/>
         <source>Even</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="59"/>
+        <location filename="../../MainWindow.cpp" line="60"/>
         <source>Odd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="60"/>
+        <location filename="../../MainWindow.cpp" line="61"/>
         <source>Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="61"/>
+        <location filename="../../MainWindow.cpp" line="62"/>
         <source>Mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="72"/>
+        <location filename="../../MainWindow.cpp" line="73"/>
         <source>HardWare</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="73"/>
+        <location filename="../../MainWindow.cpp" line="74"/>
         <source>SoftWare</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="96"/>
+        <location filename="../../MainWindow.cpp" line="106"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="97"/>
+        <location filename="../../MainWindow.cpp" line="107"/>
+        <location filename="../../MainWindow.cpp" line="212"/>
         <source>Rx: 0 Bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="98"/>
+        <location filename="../../MainWindow.cpp" line="108"/>
+        <location filename="../../MainWindow.cpp" line="213"/>
         <source>Tx: 0 Bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="144"/>
+        <location filename="../../MainWindow.cpp" line="163"/>
         <source>Serail Port Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="171"/>
+        <location filename="../../MainWindow.cpp" line="189"/>
         <source>Open serail port %1 fail.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="178"/>
-        <location filename="../../MainWindow.cpp" line="180"/>
+        <location filename="../../MainWindow.cpp" line="197"/>
+        <location filename="../../MainWindow.cpp" line="199"/>
         <source>Close(&amp;C)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="184"/>
-        <source> Open</source>
+        <location filename="../../MainWindow.cpp" line="203"/>
+        <source> Open. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="211"/>
+        <location filename="../../MainWindow.cpp" line="266"/>
         <source>Rx: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="211"/>
-        <location filename="../../MainWindow.cpp" line="233"/>
+        <location filename="../../MainWindow.cpp" line="266"/>
+        <location filename="../../MainWindow.cpp" line="288"/>
         <source> Bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="233"/>
+        <location filename="../../MainWindow.cpp" line="288"/>
         <source>Tx: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="253"/>
+        <location filename="../../MainWindow.cpp" line="308"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="254"/>
+        <location filename="../../MainWindow.cpp" line="309"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="314"/>
+        <location filename="../../MainWindow.cpp" line="371"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="316"/>
+        <location filename="../../MainWindow.cpp" line="373"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="318"/>
+        <location filename="../../MainWindow.cpp" line="375"/>
         <source>Chinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="320"/>
+        <location filename="../../MainWindow.cpp" line="377"/>
         <source>Chinese(TaiWan)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="446"/>
+        <location filename="../../MainWindow.cpp" line="503"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="447"/>
+        <location filename="../../MainWindow.cpp" line="504"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="448"/>
+        <location filename="../../MainWindow.cpp" line="505"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="449"/>
+        <location filename="../../MainWindow.cpp" line="506"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="508"/>
+        <location filename="../../MainWindow.cpp" line="565"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
