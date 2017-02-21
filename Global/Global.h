@@ -46,6 +46,12 @@ private:
     bool m_ToolbarVisable;
 
 public:
+    bool GetLeftBarVisable();
+    int SetLeftBarVisable(bool bVisable);
+private:
+    bool m_LeftBarVisable;
+    
+public:
     QString GetLanguage();
     int SetLanguage(QString szLanguage);
 private:
@@ -58,8 +64,43 @@ public:
 private:
     QString m_szStyleFile;
     QString m_szStyleMenu;
+    
+public:
+    bool GetSendLoop();
+    int SetSendLoop(bool bLoop);
+private:
+    bool m_bSendLoop;
 
+public:
+    int GetSendLoopTime();
+    int SetSendLoopTime(int nTime);
+private:
+    int m_nSendLoopTime;
 
+public:
+    enum SEND_R_N{
+        R = 0x1,
+        N = 0x2,
+        RN = 0x3
+    };
+
+    SEND_R_N GetSendRN();
+    int SetSendRN(SEND_R_N v);
+private:
+    SEND_R_N m_SendRN;
+
+public:
+    bool GetReciveDisplayTime();
+    int SetReciveDisplayTime(bool bDisplay);
+private:
+    bool m_bReciveDisplayTime;
+    
+public:
+    bool GetReciveDisplaySend();
+    int SetReciveDisplaySend(bool bDisplay);
+private:
+    bool m_bReciveDisplaySend;
+    
 signals:
 
 public slots:

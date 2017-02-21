@@ -56,6 +56,7 @@ private slots:
     void slotActionGroupStyleTriggered(QAction* act);
        
 private slots:
+    void changeEvent(QEvent *e);
     void slotRead();
     void slotTimeOut();
     void on_pbOpen_clicked();
@@ -70,12 +71,21 @@ private slots:
     void on_actionAbout_A_triggered();
     void on_actionToolBar_T_triggered();
     void on_actionStatusBar_S_triggered();
-    void changeEvent(QEvent *e);
     void on_actionLeftBar_L_triggered();
-
+    void on_sbLoopTime_valueChanged(int v);
+    
+    void on_cbr_clicked(bool checked);
+    
+    void on_cbn_clicked(bool checked);
+    
+    void on_cbDisplaySend_clicked(bool checked);
+    
+    void on_cbDisplayTime_clicked(bool checked);
+    
 private:
     int InitStatusBar();
     int InitToolBar();
+    int InitLeftBar();
     void AddRecive(QString &szText, bool bRecive = false);
 
 private:
