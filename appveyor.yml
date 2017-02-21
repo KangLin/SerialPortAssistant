@@ -1,5 +1,5 @@
 #TODO: Change version
-version: '0.0.1.{build}'
+version: '0.0.2.{build}'
 
 environment:
   matrix:
@@ -101,7 +101,7 @@ test: off
 deploy:
   - provider: GitHub
     #release: SerialPortAssistant_-v$(appveyor_build_version)
-    description: 'Release SerialPortAssistant_ $(APPVEYOR_REPO_TAG_NAME) on windows'
+    description: 'Release SerialPortAssistant_$(APPVEYOR_REPO_TAG_NAME) on windows'
     #token : https://github.com/settings/tokens password encrypt: https://ci.appveyor.com/tools/encrypt
     auth_token:
       secure: xgIFN2iAfgj1gsWabdHrmFXvj0rce/ZWtKUwm3aDUNfLGu+kO/q94MYD8a46AbDL
