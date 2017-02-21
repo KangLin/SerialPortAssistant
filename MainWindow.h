@@ -73,14 +73,16 @@ private slots:
     void on_actionStatusBar_S_triggered();
     void on_actionLeftBar_L_triggered();
     void on_sbLoopTime_valueChanged(int v);
-    
     void on_cbr_clicked(bool checked);
-    
     void on_cbn_clicked(bool checked);
-    
     void on_cbDisplaySend_clicked(bool checked);
+    void on_cbDisplayTime_clicked(bool checked);   
+    void on_cmbBoudRate_currentTextChanged(const QString &szText);
+    void on_cmbDataBit_currentTextChanged(const QString &szText);
+    void on_cmbParity_currentIndexChanged(int index);
+    void on_cmbStopBit_currentTextChanged(const QString &szText);
     
-    void on_cbDisplayTime_clicked(bool checked);
+    void on_cmbFlowControl_currentIndexChanged(int index);
     
 private:
     int InitStatusBar();
@@ -88,7 +90,8 @@ private:
     int InitLeftBar();
     void AddRecive(QString &szText, bool bRecive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
-    
+    QString GetSerialPortSettingInfo();
+
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;

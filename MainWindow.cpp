@@ -200,12 +200,7 @@ void CMainWindow::on_pbOpen_clicked()
     ui->actionOpen->setIcon(QIcon(":/icon/Stop"));
     ui->pbSend->setEnabled(true);
 
-    SetStatusInfo(ui->cmbPort->currentText() + tr(" Open. ")
-                         + ui->cmbBoudRate->currentText() + "|"
-                         + ui->cmbDataBit->currentText() + "|"
-                         + ui->cmbParity->currentText() + "|"
-                         + ui->cmbStopBit->currentText() + "|"
-                         + ui->cmbFlowControl->currentText(),
+    SetStatusInfo(GetSerialPortSettingInfo(),
                   Qt::green);
     m_nSend = 0;
     m_nRecive = 0;    
@@ -222,6 +217,16 @@ int CMainWindow::SetStatusInfo(QString szText, QColor color)
     m_statusInfo.setPalette(pe);
     m_statusInfo.setText(szText);
     return 0;
+}
+
+QString CMainWindow::GetSerialPortSettingInfo()
+{
+    return ui->cmbPort->currentText() + tr(" Open. ")
+            + ui->cmbBoudRate->currentText() + "|"
+            + ui->cmbDataBit->currentText() + "|"
+            + ui->cmbParity->currentText() + "|"
+            + ui->cmbStopBit->currentText() + "|"
+            + ui->cmbFlowControl->currentText();
 }
 
 void CMainWindow::AddRecive(QString &szText, bool bRecive)
@@ -679,4 +684,81 @@ void CMainWindow::on_cbDisplaySend_clicked(bool checked)
 void CMainWindow::on_cbDisplayTime_clicked(bool checked)
 {
     CGlobal::Instance()->SetReciveDisplayTime(checked);
+}
+
+void CMainWindow::on_cmbBoudRate_currentTextChanged(const QString &szText)
+{
+    if(!m_SerialPort.isOpen())
+        return;
+    
+    bool bRet;
+    bRet = m_SerialPort.setBaudRate(szText.toInt());
+    if(bRet)
+        SetStatusInfo(GetSerialPortSettingInfo(),
+                  Qt::green);
+    else
+        SetStatusInfo(tr("Set baud rate fail"), Qt::red);
+}
+
+void CMainWindow::on_cmbDataBit_currentTextChanged(const QString &szText)
+{
+    if(!m_SerialPort.isOpen())
+        return;
+    bool bRet;
+    bRet = m_SerialPort.setDataBits((QSerialPort::DataBits)szText.toInt());
+    if(bRet)
+        SetStatusInfo(GetSerialPortSettingInfo(),
+                  Qt::green);
+    else
+        SetStatusInfo(tr("Set data bits fail"), Qt::red);
+}
+
+void CMainWindow::on_cmbParity_currentIndexChanged(int index)
+{
+    if(-1 == index)
+        return;
+    
+    if(!m_SerialPort.isOpen())
+        return;
+    
+    bool bRet = false;
+    if(index > 0)
+        m_SerialPort.setParity((QSerialPort::Parity)(index + 1));
+    else if(0 == index)
+        m_SerialPort.setParity(QSerialPort::NoParity); 
+    
+    if(bRet)
+        SetStatusInfo(GetSerialPortSettingInfo(),
+                  Qt::green);
+    else
+        SetStatusInfo(tr("Set parity fail"), Qt::red);
+}
+
+void CMainWindow::on_cmbStopBit_currentTextChanged(const QString &szText)
+{
+    if(!m_SerialPort.isOpen())
+        return;
+    
+    bool bRet;
+    bRet = m_SerialPort.setStopBits((QSerialPort::StopBits)szText.toInt());
+    if(bRet)
+        SetStatusInfo(GetSerialPortSettingInfo(),
+                  Qt::green);
+    else
+        SetStatusInfo(tr("Set stop bits fail"), Qt::red);
+}
+
+void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
+{
+    if(!m_SerialPort.isOpen())
+        return;
+    if(-1 == index)
+        return;
+    bool bRet;
+    bRet = m_SerialPort.setFlowControl((QSerialPort::FlowControl)index);
+    if(bRet)
+        SetStatusInfo(GetSerialPortSettingInfo(),
+                  Qt::green);
+    else
+        SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
 }
