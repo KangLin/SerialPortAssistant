@@ -103,7 +103,7 @@ int CMainWindow::InitStatusBar()
                 CGlobal::Instance()->GetStatusbarVisable());
     statusBar()->setVisible(CGlobal::Instance()->GetStatusbarVisable());
 
-    m_statusInfo.setText(tr("Ready"));
+    SetStatusInfo(tr("Ready"));
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     m_statusInfo.setSizePolicy(QSizePolicy::Policy::Expanding,
@@ -160,10 +160,7 @@ void CMainWindow::on_pbOpen_clicked()
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
 
-        QPalette pe;
-        pe.setColor(QPalette::WindowText,Qt::black);
-        m_statusInfo.setPalette(pe);
-        m_statusInfo.setText(tr("Serail Port Close"));
+        SetStatusInfo(tr("Serail Port Close"));
         return;
     }
 
@@ -189,8 +186,9 @@ void CMainWindow::on_pbOpen_clicked()
         LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
                         ui->cmbPort->currentText().toStdString().c_str(),
                         m_SerialPort.error());
-        this->m_statusInfo.setText(tr("Open serail port %1 fail.").
-                                   arg(ui->cmbPort->currentText()));
+        SetStatusInfo(tr("Open serail port %1 fail.").
+                                   arg(ui->cmbPort->currentText()),
+                      Qt::red);
         return;
     }
 
@@ -202,21 +200,28 @@ void CMainWindow::on_pbOpen_clicked()
     ui->actionOpen->setIcon(QIcon(":/icon/Stop"));
     ui->pbSend->setEnabled(true);
 
-    QPalette pe;
-    pe.setColor(QPalette::WindowText,Qt::green);
-    m_statusInfo.setPalette(pe);
-    m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open. ")
+    SetStatusInfo(ui->cmbPort->currentText() + tr(" Open. ")
                          + ui->cmbBoudRate->currentText() + "|"
                          + ui->cmbDataBit->currentText() + "|"
                          + ui->cmbParity->currentText() + "|"
                          + ui->cmbStopBit->currentText() + "|"
-                         + ui->cmbFlowControl->currentText());
+                         + ui->cmbFlowControl->currentText(),
+                  Qt::green);
     m_nSend = 0;
     m_nRecive = 0;    
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     if(ui->cbSendLoop->isChecked())
         m_Timer.start(ui->sbLoopTime->value());
+}
+
+int CMainWindow::SetStatusInfo(QString szText, QColor color)
+{
+    QPalette pe;
+    pe.setColor(QPalette::WindowText, color);
+    m_statusInfo.setPalette(pe);
+    m_statusInfo.setText(szText);
+    return 0;
 }
 
 void CMainWindow::AddRecive(QString &szText, bool bRecive)
