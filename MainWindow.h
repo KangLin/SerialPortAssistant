@@ -87,7 +87,7 @@ private:
     int InitStatusBar();
     int InitToolBar();
     int InitLeftBar();
-    void AddRecive(QString &szText, bool bRecive = false);
+    void AddRecive(const QString &szText, bool bRecive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
     QString GetSerialPortSettingInfo();
 

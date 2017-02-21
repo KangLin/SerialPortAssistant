@@ -229,7 +229,7 @@ QString CMainWindow::GetSerialPortSettingInfo()
             + ui->cmbFlowControl->currentText();
 }
 
-void CMainWindow::AddRecive(QString &szText, bool bRecive)
+void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 {
     QString szPrex;
     
@@ -250,7 +250,23 @@ void CMainWindow::AddRecive(QString &szText, bool bRecive)
         ui->teRecive->insertPlainText(szPrex);
     }
     
-    ui->teRecive->insertPlainText(szText);
+    if((ui->rbReciveASCII->isChecked() && bRecive)
+            || (ui->rbSendASCII->isChecked() && !bRecive))
+        ui->teRecive->insertPlainText(szText);
+    else
+    {
+        QString szOut;
+        int nLen = szText.toStdString().size();
+        for(int i = 0; i < nLen; i++)
+        {
+            if(i)
+                szOut += " ";
+            char buff[16] = {0};
+            sprintf(buff, "0x%X", szText.toStdString().at(i));
+            szOut += buff;
+        }
+        ui->teRecive->insertPlainText(szOut);
+    }
 
     QTextCursor cursor = ui->teRecive->textCursor();
     cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  

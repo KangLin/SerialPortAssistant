@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SerialPortAssistant"
-!define PRODUCT_VERSION "v0.0.1"
+!define PRODUCT_VERSION "v0.0.3"
 !define PRODUCT_PUBLISHER "KangLin studio"
 !define PRODUCT_WEB_SITE "https://github.com/KangLin/SerialPortAssistant"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SerialPortAssistant.exe"
@@ -46,13 +46,13 @@ SetCompressor lzma
 !insertmacro MUI_LANGUAGE "SimpChinese"
 
 LangString LANG_PRODUCT_NAME ${LANG_ENGLISH} "SerialPortAssistant"
-LangString LANG_PRODUCT_NAME ${LANG_SIMPCHINESE} "ä¸²å£åŠ©æ‰‹"
+LangString LANG_PRODUCT_NAME ${LANG_SIMPCHINESE} "´®¿ÚÖúÊÖ"
 
 LangString LANG_UNINSTALL_CONFIRM ${LANG_ENGLISH} "Thank you very much! $(^Name) has been successfully removed."
-LangString LANG_UNINSTALL_CONFIRM ${LANG_SIMPCHINESE} "éå¸¸æ„Ÿè¬æ‚¨çš„ä½¿ç”¨ï¼ $(^Name) å·²æˆåŠŸåœ°ä»æ‚¨çš„è®¡ç®—æœºä¸­ç§»é™¤ã€‚"
+LangString LANG_UNINSTALL_CONFIRM ${LANG_SIMPCHINESE} "·Ç³£¸ĞÖxÄúµÄÊ¹ÓÃ£¡ $(^Name) ÒÑ³É¹¦µØ´ÓÄúµÄ¼ÆËã»úÖĞÒÆ³ı¡£"
 
 LangString LANG_REMOVE_COMPONENT ${LANG_ENGLISH} "You sure you want to completely remove $ (^ Name), and all of its components?"
-LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "ä½ ç¡®å®è¦å®Œå…¨ç§»é™¤ $(^Name) ï¼Œå…¶åŠæ‰€æœ‰çš„ç»„ä»¶ï¼Ÿ"
+LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "ÄãÈ·ÊµÒªÍêÈ«ÒÆ³ı $(^Name) £¬Æä¼°ËùÓĞµÄ×é¼ş£¿"
 
 ; MUI end ------
 
@@ -104,9 +104,9 @@ Section "${PRODUCT_NAME}" SEC01
   File /r "install\*"
   SetShellVarContext all
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\SerialPortAssistant.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\SerialPortAssistant.exe"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\SerialPortAssistant.exe"
+  CreateShortCut "$DESKTOP\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\SerialPortAssistant.exe"
   SetShellVarContext current
   call InstallRuntime
 SectionEnd

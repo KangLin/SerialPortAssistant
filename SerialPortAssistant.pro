@@ -89,8 +89,9 @@ DISTFILES += \
     LICENSE.md \
     appveyor.yml \
     ci/* \
-    install/* \
-    .travis.yml
+    Install/* \
+    .travis.yml \
+    tag.sh
 
 RC_FILE = AppIcon.rc
 

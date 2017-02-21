@@ -4,6 +4,7 @@
   - 保存设置
   - 增加英文 README
   - 修改一些 BUG
+  - 增加tag脚本，修改版本号，Install.nsi
 
 * Version：v0.0.2
 完善界面
