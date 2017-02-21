@@ -33,6 +33,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     
     InitStatusBar();
     InitToolBar();
+    InitLeftBar();
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
@@ -74,8 +75,17 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     ui->cmbRecent->setDuplicatesEnabled(false);
     
+    ui->cbSendLoop->setChecked(CGlobal::Instance()->GetSendLoop());
+    ui->sbLoopTime->setValue(CGlobal::Instance()->GetSendLoopTime());
     check = connect(&m_Timer, SIGNAL(timeout()), this, SLOT(slotTimeOut()));
     Q_ASSERT(check);
+    
+    CGlobal::SEND_R_N v = CGlobal::Instance()->GetSendRN();
+    ui->cbr->setChecked(v & CGlobal::SEND_R_N::R);
+    ui->cbn->setChecked(v & CGlobal::SEND_R_N::N);
+    
+    ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
+    ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
 }
 
 CMainWindow::~CMainWindow()
@@ -118,6 +128,15 @@ int CMainWindow::InitToolBar()
     return 0;
 }
 
+int CMainWindow::InitLeftBar()
+{
+    bool bVisable = false;
+    bVisable = CGlobal::Instance()->GetLeftBarVisable();
+    ui->actionLeftBar_L->setChecked(bVisable);
+    ui->frmLeftBar->setVisible(bVisable);
+    return 0;
+}
+
 void CMainWindow::slotTimeOut()
 {
     on_pbSend_clicked();
@@ -141,8 +160,10 @@ void CMainWindow::on_pbOpen_clicked()
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
 
+        QPalette pe;
+        pe.setColor(QPalette::WindowText,Qt::black);
+        m_statusInfo.setPalette(pe);
         m_statusInfo.setText(tr("Serail Port Close"));
-
         return;
     }
 
@@ -181,7 +202,17 @@ void CMainWindow::on_pbOpen_clicked()
     ui->actionOpen->setIcon(QIcon(":/icon/Stop"));
     ui->pbSend->setEnabled(true);
 
-    m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open"));
+    QPalette pe;
+    pe.setColor(QPalette::WindowText,Qt::green);
+    m_statusInfo.setPalette(pe);
+    m_statusInfo.setText(ui->cmbPort->currentText() + tr(" Open. ")
+                         + ui->cmbBoudRate->currentText() + "|"
+                         + ui->cmbDataBit->currentText() + "|"
+                         + ui->cmbParity->currentText() + "|"
+                         + ui->cmbStopBit->currentText() + "|"
+                         + ui->cmbFlowControl->currentText());
+    m_nSend = 0;
+    m_nRecive = 0;    
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     if(ui->cbSendLoop->isChecked())
@@ -300,6 +331,7 @@ void CMainWindow::on_cbSendLoop_clicked()
         if(m_Timer.isActive())
             m_Timer.stop();
     }
+    CGlobal::Instance()->SetSendLoop(ui->cbSendLoop->isChecked());
 }
 
 void CMainWindow::on_actionClear_triggered()
@@ -607,5 +639,39 @@ void CMainWindow::on_actionStatusBar_S_triggered()
 
 void CMainWindow::on_actionLeftBar_L_triggered()
 {
-    ui->frmLeftBar->setVisible(ui->actionLeftBar_L->isChecked());
+    bool bVisable = false;
+    bVisable = ui->actionLeftBar_L->isChecked();
+    ui->frmLeftBar->setVisible(bVisable);
+    CGlobal::Instance()->SetLeftBarVisable(bVisable);
+}
+
+void CMainWindow::on_sbLoopTime_valueChanged(int v)
+{
+    CGlobal::Instance()->SetSendLoopTime(v);
+}
+
+void CMainWindow::on_cbr_clicked(bool checked)
+{
+    CGlobal::SEND_R_N v = CGlobal::Instance()->GetSendRN();
+    CGlobal::Instance()->SetSendRN((CGlobal::SEND_R_N)(
+                checked ? v | CGlobal::R
+                        : v & ~CGlobal::R));
+}
+
+void CMainWindow::on_cbn_clicked(bool checked)
+{
+    CGlobal::SEND_R_N v = CGlobal::Instance()->GetSendRN();
+    CGlobal::Instance()->SetSendRN((CGlobal::SEND_R_N)(
+                checked ? v | CGlobal::N
+                        : v & ~CGlobal::N));
+}
+
+void CMainWindow::on_cbDisplaySend_clicked(bool checked)
+{
+    CGlobal::Instance()->SetReciveDisplaySend(checked);
+}
+
+void CMainWindow::on_cbDisplayTime_clicked(bool checked)
+{
+    CGlobal::Instance()->SetReciveDisplayTime(checked);
 }

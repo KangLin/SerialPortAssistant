@@ -18,6 +18,12 @@ CGlobal::CGlobal(QObject *parent) :
     m_szStyleMenu = conf.value("UI/MenuStyleSheet", "System").toString();
     m_StatusbarVisable = conf.value("UI/Visable/Statusbar", "true").toBool();
     m_ToolbarVisable = conf.value("UI/Visable/Toolbar", "true").toBool();
+    m_LeftBarVisable = conf.value("UI/Visable/LeftBar", "true").toBool();
+    m_bSendLoop = conf.value("Settings/Send/Loop", "false").toBool();
+    m_nSendLoopTime = conf.value("Settings/Send/LoopTime", "1000").toInt();
+    m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", "0").toInt();
+    m_bReciveDisplayTime = conf.value("Settings/Recive/DisplayTime", "false").toBool();
+    m_bReciveDisplaySend = conf.value("Settings/Recive/DisplaySend", "false").toBool();
 }
 
 CGlobal::~CGlobal()
@@ -81,6 +87,20 @@ int CGlobal::SetToolbarVisable(bool bVisable)
     return 0;
 }
 
+bool CGlobal::GetLeftBarVisable()
+{
+    return m_LeftBarVisable;
+}
+
+int CGlobal::SetLeftBarVisable(bool bVisable)
+{
+    m_LeftBarVisable = bVisable;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("UI/Visable/LeftBar", m_LeftBarVisable);
+    return 0;
+}
+
 QString CGlobal::GetLanguage()
 {
     return m_szLanguage;
@@ -93,4 +113,74 @@ int CGlobal::SetLanguage(QString szLanguage)
                    QSettings::IniFormat);
     conf.setValue("Global/Language", m_szLanguage);
     return 0;
+}
+
+bool CGlobal::GetSendLoop()
+{
+    return m_bSendLoop;
+}
+
+int CGlobal::SetSendLoop(bool bLoop)
+{
+    m_bSendLoop = bLoop;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Send/Loop", m_bSendLoop);
+    return 0;   
+}
+
+int CGlobal::GetSendLoopTime()
+{
+    return m_nSendLoopTime;
+}
+
+int CGlobal::SetSendLoopTime(int nTime)
+{
+    m_nSendLoopTime = nTime;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Send/LoopTime", m_nSendLoopTime);
+    return 0;   
+}
+
+CGlobal::SEND_R_N CGlobal::GetSendRN()
+{
+    return m_SendRN;
+}
+
+int CGlobal::SetSendRN(SEND_R_N v)
+{
+    m_SendRN = v;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Send/SendRN", m_SendRN);
+    return 0;  
+}
+
+bool CGlobal::GetReciveDisplayTime()
+{
+    return m_bReciveDisplayTime;
+}
+
+int CGlobal::SetReciveDisplayTime(bool bDisplay)
+{
+    m_bReciveDisplayTime = bDisplay;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Recive/DisplayTime", m_bReciveDisplayTime);
+    return 0; 
+}
+
+bool CGlobal::GetReciveDisplaySend()
+{
+    return m_bReciveDisplaySend;
+}
+
+int CGlobal::SetReciveDisplaySend(bool bDisplay)
+{
+    m_bReciveDisplaySend = bDisplay;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Recive/DisplaySend", m_bReciveDisplaySend);
+    return 0; 
 }
