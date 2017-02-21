@@ -46,17 +46,17 @@ SOURCES +=\
     Global/GlobalDir.cpp \
     Global/Global.cpp \
     Common/Tool.cpp \
-    Widgets\DlgAbout\DlgAbout.cpp
+    Widgets/DlgAbout/DlgAbout.cpp
     
 HEADERS += MainWindow.h \
     Global/Log.h \
     Global/GlobalDir.h \
     Global/Global.h \
     Common/Tool.h \
-    Widgets\DlgAbout\DlgAbout.h
+    Widgets/DlgAbout/DlgAbout.h
 
 FORMS += MainWindow.ui \
-    Widgets\DlgAbout\DlgAbout.ui
+    Widgets/DlgAbout/DlgAbout.ui
 
 win32 : equals(QMAKE_HOST.os, Windows){
     INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
