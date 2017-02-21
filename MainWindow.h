@@ -81,7 +81,6 @@ private slots:
     void on_cmbDataBit_currentTextChanged(const QString &szText);
     void on_cmbParity_currentIndexChanged(int index);
     void on_cmbStopBit_currentTextChanged(const QString &szText);
-    
     void on_cmbFlowControl_currentIndexChanged(int index);
     
 private:

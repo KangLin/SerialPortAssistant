@@ -495,8 +495,9 @@ void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
             CGlobal::Instance()->SetLanguage(szLocale);
             LoadTranslate(it.key());
             pAct->setChecked(true);
-            ClearMenu();
-            InitMenu();
+            QMessageBox::information(this, tr("Close"),
+                   tr("Language changes, close the program, and please restart the program."));
+            this->close();
             return;
         }
     }
