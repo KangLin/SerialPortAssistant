@@ -1,5 +1,8 @@
 修改日志
 ------
+* Version：v0.0.4
+  - 修改安装包乱码错误（Install.nsi 必须是UTF8+[utf8 BOM]编码）
+
 * Version：v0.0.3
   - 保存设置
   - 增加英文 README
