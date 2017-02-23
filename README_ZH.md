@@ -24,7 +24,8 @@
 
 4. 多样式
 
-5. ![下载](https://github.com/KangLin/SerialPortAssistant/releases)
+5. ![发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases)  
+![最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠

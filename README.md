@@ -24,7 +24,8 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 
 4. Multi style
 
-5. ![Download](https://github.com/KangLin/SerialPortAssistant/releases)
+5. ![Release download](https://github.com/KangLin/SerialPortAssistant/releases)  
+![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 6. Donate  
 If you are satisfied, you can donate to me

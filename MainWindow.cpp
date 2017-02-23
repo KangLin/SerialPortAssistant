@@ -234,7 +234,7 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
     QString szPrex;
     
     if(ui->cbDisplayTime->isChecked())
-        szPrex = QTime::currentTime().toString() + " ";
+        szPrex = QTime::currentTime().toString("hh:mm:ss.zzz") + " ";
         
     if(ui->cbDisplaySend->isChecked())
     {
