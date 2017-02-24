@@ -86,6 +86,30 @@ CMainWindow::CMainWindow(QWidget *parent) :
     
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
+    
+    CGlobal::CODE c = CGlobal::Instance()->GetReciveDisplayCode();
+    switch(c)
+    {
+    case CGlobal::ASCII:
+        ui->rbReciveASCII->setChecked(true);
+        break;
+    case CGlobal::HEX:
+        ui->rbReciveHex->setChecked(true);
+    default:
+        break;
+    }
+
+    c = CGlobal::Instance()->GetSendDisplayCode();
+    switch(c)
+    {
+    case CGlobal::ASCII:
+        ui->rbSendASCII->setChecked(true);
+        break;
+    case CGlobal::HEX:
+        ui->rbSendHex->setChecked(true);
+    default:
+        break;
+    }
 }
 
 CMainWindow::~CMainWindow()
@@ -778,4 +802,30 @@ void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
                   Qt::green);
     else
         SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
+}
+
+void CMainWindow::on_rbReciveASCII_clicked(bool checked)
+{
+    if(checked)
+        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::ASCII);
+}
+
+void CMainWindow::on_rbReciveHex_clicked(bool checked)
+{
+    if(checked)
+        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::HEX);
+}
+
+
+
+void CMainWindow::on_rbSendHex_clicked(bool checked)
+{
+    if(checked)
+        CGlobal::Instance()->SetSendDisplayCode(CGlobal::HEX);
+}
+
+void CMainWindow::on_rbSendASCII_clicked(bool checked)
+{
+    if(checked)
+        CGlobal::Instance()->SetSendDisplayCode(CGlobal::ASCII);
 }

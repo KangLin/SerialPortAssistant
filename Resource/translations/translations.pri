@@ -1,3 +1,5 @@
+# Author: KangLin(Email:kl222@126.com)
+
 # For autocompiling qm-files.
 
 TRANSLATIONS = $$PWD/app_zh_CN.ts \

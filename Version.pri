@@ -1,3 +1,5 @@
+# Author: KangLin(Email:kl222@126.com)
+
 #TODO:发行版本时，需要修改下列值  
 MAJOR_VERSION_NUMBER=0
 MINOR_VERSION_NUMBER=0

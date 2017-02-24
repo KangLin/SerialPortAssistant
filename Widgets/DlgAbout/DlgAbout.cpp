@@ -6,6 +6,9 @@
 #include "Version.h"
 #include <QFile>
 #include <QDir>
+/*
+ * Author: KangLin(Email:kl222@126.com)
+ */
 #include <QDateTime>
 
 CDlgAbout::CDlgAbout(QWidget *parent) :

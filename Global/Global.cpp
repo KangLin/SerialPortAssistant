@@ -20,10 +20,12 @@ CGlobal::CGlobal(QObject *parent) :
     m_ToolbarVisable = conf.value("UI/Visable/Toolbar", "true").toBool();
     m_LeftBarVisable = conf.value("UI/Visable/LeftBar", "true").toBool();
     m_bSendLoop = conf.value("Settings/Send/Loop", "false").toBool();
-    m_nSendLoopTime = conf.value("Settings/Send/LoopTime", "1000").toInt();
-    m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", "0").toInt();
+    m_nSendLoopTime = conf.value("Settings/Send/LoopTime", 1000).toInt();
+    m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", 0).toInt();
     m_bReciveDisplayTime = conf.value("Settings/Recive/DisplayTime", "false").toBool();
     m_bReciveDisplaySend = conf.value("Settings/Recive/DisplaySend", "false").toBool();
+    m_ReciveDisplayCode = (CODE)conf.value("Settings/Recive/DisplayReciveCode", 0).toInt();
+    m_SendDisplayCode = (CODE)conf.value("Settings/Recive/DisplaySendCode", 0).toInt();
 }
 
 CGlobal::~CGlobal()
@@ -182,5 +184,33 @@ int CGlobal::SetReciveDisplaySend(bool bDisplay)
     QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplaySend", m_bReciveDisplaySend);
+    return 0; 
+}
+
+CGlobal::CODE CGlobal::GetReciveDisplayCode()
+{
+    return m_ReciveDisplayCode;
+}
+
+int CGlobal::SetReciveDisplayCode(CODE code)
+{
+    m_ReciveDisplayCode = code;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Recive/DisplayReciveCode", m_ReciveDisplayCode);
+    return 0; 
+}
+
+CGlobal::CODE CGlobal::GetSendDisplayCode()
+{
+    return m_SendDisplayCode;
+}
+
+int CGlobal::SetSendDisplayCode(CODE code)
+{
+    m_SendDisplayCode = code;
+    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Recive/DisplaySendCode", m_SendDisplayCode);
     return 0; 
 }

@@ -101,6 +101,22 @@ public:
 private:
     bool m_bReciveDisplaySend;
     
+public:
+    enum CODE{
+        ASCII = 0,
+        HEX = 1
+    };
+    CODE GetReciveDisplayCode();
+    int SetReciveDisplayCode(CODE code);
+private:
+    CODE m_ReciveDisplayCode;
+    
+public:
+    CODE GetSendDisplayCode();
+    int SetSendDisplayCode(CODE code);
+private:
+    CODE m_SendDisplayCode;
+
 signals:
 
 public slots:
