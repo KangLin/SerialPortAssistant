@@ -325,6 +325,11 @@ void CMainWindow::on_pbSend_clicked()
     if(ui->cbn->isChecked())
         szText += "\n";
     nRet = m_SerialPort.write(szText.toStdString().c_str());
+    if(-1 == nRet)
+    {
+        LOG_MODEL_ERROR("CMainWindows", "Write fail");
+        return;
+    }
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
         AddRecive(szText, false);
