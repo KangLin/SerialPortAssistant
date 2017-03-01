@@ -374,6 +374,11 @@ void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
     ui->teSend->setText(szText);
 }
 
+void CMainWindow::on_cmbRecent_activated(const QString &szText)
+{
+    ui->teSend->setText(szText);
+}
+
 void CMainWindow::on_cbSendLoop_clicked()
 {
     if(ui->cbSendLoop->isChecked())

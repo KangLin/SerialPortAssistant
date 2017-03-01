@@ -82,14 +82,11 @@ private slots:
     void on_cmbParity_currentIndexChanged(int index);
     void on_cmbStopBit_currentTextChanged(const QString &szText);
     void on_cmbFlowControl_currentIndexChanged(int index);
-    
     void on_rbReciveASCII_clicked(bool checked);
-    
     void on_rbReciveHex_clicked(bool checked);
-    
     void on_rbSendHex_clicked(bool checked);
-    
     void on_rbSendASCII_clicked(bool checked);
+    void on_cmbRecent_activated(const QString &szText);
     
 private:
     int InitStatusBar();
