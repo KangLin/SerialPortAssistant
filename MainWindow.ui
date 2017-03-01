@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>551</height>
+    <height>573</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -539,6 +539,8 @@
    <addaction name="actionClear"/>
    <addaction name="separator"/>
    <addaction name="actionAbout_A"/>
+   <addaction name="separator"/>
+   <addaction name="actionExit"/>
   </widget>
   <action name="actionOpen">
    <property name="icon">

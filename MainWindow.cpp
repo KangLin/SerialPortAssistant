@@ -328,6 +328,7 @@ void CMainWindow::on_pbSend_clicked()
     if(-1 == nRet)
     {
         LOG_MODEL_ERROR("CMainWindows", "Write fail");
+        on_pbOpen_clicked(); //关闭串口  
         return;
     }
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
