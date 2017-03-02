@@ -327,6 +327,7 @@ void CMainWindow::on_pbSend_clicked()
     nRet = m_SerialPort.write(szText.toStdString().c_str());
     if(-1 == nRet)
     {
+        m_statusInfo.setText(tr("Send fail"));
         LOG_MODEL_ERROR("CMainWindows", "Write fail");
         on_pbOpen_clicked(); //关闭串口  
         return;
