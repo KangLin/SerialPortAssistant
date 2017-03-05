@@ -422,6 +422,7 @@ void CMainWindow::on_actionAbout_A_triggered()
     CDlgAbout about(this);
     about.exec();
 }
+
 int CMainWindow::InitMenuTranslate()
 {
     m_ActionTranslator["Default"] = ui->menuLanguage_A->addAction(
