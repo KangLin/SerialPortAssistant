@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    Log.h
+
+Abstract:
+
+    This file contains log define.
  */
+
 #ifndef CLOG_H
 #define CLOG_H
 

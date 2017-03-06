@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    GlobalDir.cpp
+
+Abstract:
+
+    This file contains global directory implement.
  */
+
 #include "GlobalDir.h"
 #include "Log.h"
 #include <QStandardPaths>

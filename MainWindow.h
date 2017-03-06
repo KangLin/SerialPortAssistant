@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    MainWindow.h
+
+Abstract:
+
+    This file contains main windows define.
  */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

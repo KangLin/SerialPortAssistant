@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    DlgAbout.cpp
+
+Abstract:
+
+    This file contains about dialog implement.
  */
+
 #include "DlgAbout.h"
 #include "ui_DlgAbout.h"
 #include "Version.h"
