@@ -361,7 +361,7 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.cpp" line="330"/>
         <source>Send fail</source>
-        <translation >发送失败</translation>
+        <translation>发送失败</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="340"/>
@@ -379,7 +379,7 @@ Email:kl222@126.com</source>
         <translation>串口[%1]已打开，是否关闭它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="428"/>
+        <location filename="../../MainWindow.cpp" line="429"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
@@ -389,72 +389,72 @@ Email:kl222@126.com</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="432"/>
+        <location filename="../../MainWindow.cpp" line="431"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="434"/>
+        <location filename="../../MainWindow.cpp" line="432"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（台湾）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="550"/>
+        <location filename="../../MainWindow.cpp" line="558"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="551"/>
+        <location filename="../../MainWindow.cpp" line="559"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>语言改变，关闭程序，并请从重启程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="561"/>
+        <location filename="../../MainWindow.cpp" line="569"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="562"/>
+        <location filename="../../MainWindow.cpp" line="570"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="563"/>
+        <location filename="../../MainWindow.cpp" line="571"/>
         <source>Blue</source>
         <translation>蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="564"/>
+        <location filename="../../MainWindow.cpp" line="572"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="623"/>
+        <location filename="../../MainWindow.cpp" line="631"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="753"/>
+        <location filename="../../MainWindow.cpp" line="761"/>
         <source>Set baud rate fail</source>
         <translation>设置比特率失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="766"/>
+        <location filename="../../MainWindow.cpp" line="774"/>
         <source>Set data bits fail</source>
         <translation>设置数据位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="787"/>
+        <location filename="../../MainWindow.cpp" line="795"/>
         <source>Set parity fail</source>
         <translation>设置校验失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="801"/>
+        <location filename="../../MainWindow.cpp" line="809"/>
         <source>Set stop bits fail</source>
         <translation>设置停止位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="816"/>
+        <location filename="../../MainWindow.cpp" line="824"/>
         <source>Set Flow Control fail</source>
         <translation>设置流控失败</translation>
     </message>

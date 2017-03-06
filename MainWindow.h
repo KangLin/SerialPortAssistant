@@ -32,6 +32,10 @@ public:
     void ClearMenu();
     // Language menu    
 private:
+    struct _MENU{
+        QString icon;
+        QString text;
+    };
     int LoadTranslate(QString szLocale = QString());
     int ClearTranslate();
     int InitMenuTranslate();
