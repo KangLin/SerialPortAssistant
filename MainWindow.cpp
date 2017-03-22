@@ -292,13 +292,14 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
     else
     {
         QString szOut;
-        int nLen = szText.toStdString().size();
+        int nLen = szText.size();
         for(int i = 0; i < nLen; i++)
         {
             if(i)
                 szOut += " ";
             char buff[16] = {0};
-            sprintf(buff, "0x%X", szText.toStdString().at(i));
+            QChar c = szText.at(i);
+            sprintf(buff, "0x%0X", c.unicode());
             szOut += buff;
         }
         ui->teRecive->insertPlainText(szOut);

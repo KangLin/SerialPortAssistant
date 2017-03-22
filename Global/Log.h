@@ -42,7 +42,7 @@ public:
 #define LM_WARNING 2
 #define LM_ERROR 3
 
-#ifdef _DEBUG || DEBUG
+#ifdef _DEBUG
 #define LOG_ERROR(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_ERROR, "", fmt, ##__VA_ARGS__)
 #define LOG_WARNING(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_WARNING, "", fmt, ##__VA_ARGS__)
 #define LOG_DEBUG(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_DEBUG, "", fmt, ##__VA_ARGS__)
