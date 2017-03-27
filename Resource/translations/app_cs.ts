@@ -9,67 +9,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="110"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="433"/>
         <source>Serial Port Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="150"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="336"/>
         <source>Author:KangLin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="182"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="55"/>
         <source>Informatioin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="194"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="89"/>
         <source>Build Date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="213"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="67"/>
         <source>Version: 1.0.0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="235"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="108"/>
         <source>Home page: https://github.com/KangLin/SerialPortAssistant.git</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="278"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="185"/>
+        <source>WeChat scan two-dimensional code for free donation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="258"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="292"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="272"/>
         <source>Change log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="306"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="286"/>
         <source>Thanks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="320"/>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="440"/>
-        <source>Free donation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="463"/>
-        <source>Donated ￥ 20</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="510"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="311"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation type="unfinished"></translation>
     </message>

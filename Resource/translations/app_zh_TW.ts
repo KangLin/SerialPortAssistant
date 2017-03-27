@@ -9,67 +9,57 @@
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="110"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="433"/>
         <source>Serial Port Assistant</source>
         <translation>串口助手</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="150"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="336"/>
         <source>Author:KangLin</source>
         <translation>作者：康林</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="182"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="55"/>
         <source>Informatioin</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="194"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="89"/>
         <source>Build Date:</source>
         <translation>編譯日期：</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="235"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="108"/>
         <source>Home page: https://github.com/KangLin/SerialPortAssistant.git</source>
         <translation>主頁：https://github.com/KangLin/SerialPortAssistant.git</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="213"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="67"/>
         <source>Version: 1.0.0.0</source>
         <translation>版本： 1.0.0.0</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="278"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="185"/>
+        <source>WeChat scan two-dimensional code for free donation</source>
+        <translation>微信掃描二維碼進行隨意捐贈</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="258"/>
         <source>License</source>
         <translation>許可</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="292"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="272"/>
         <source>Change log</source>
         <translation>更改日誌</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="306"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="286"/>
         <source>Thanks</source>
         <translation>鳴謝</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="320"/>
-        <source>Donate</source>
-        <translation>捐贈</translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="440"/>
-        <source>Free donation</source>
-        <translation>隨意捐贈</translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="463"/>
-        <source>Donated ￥ 20</source>
-        <translation>捐贈 ￥20</translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="510"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="311"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation>版權（C） 2017 康林工作室</translation>
     </message>
@@ -361,7 +351,7 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.cpp" line="343"/>
         <source>Send fail</source>
-        <translation>發送失败</translation>
+        <translation>發送失敗</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="353"/>
