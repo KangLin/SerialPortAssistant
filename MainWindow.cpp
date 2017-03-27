@@ -286,8 +286,8 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         ui->teRecive->insertPlainText(szPrex);
     }
     
-    if((ui->rbReciveASCII->isChecked() && bRecive)
-            || (ui->rbSendASCII->isChecked() && !bRecive))
+    if((!ui->rbReciveHex->isChecked() && bRecive)
+        || (!ui->rbSendHex->isChecked() && !bRecive))
         ui->teRecive->insertPlainText(szText);
     else
     {
