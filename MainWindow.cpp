@@ -337,7 +337,14 @@ void CMainWindow::on_pbSend_clicked()
         szText += "\r";
     if(ui->cbn->isChecked())
         szText += "\n";
-    nRet = m_SerialPort.write(szText.toStdString().c_str());
+    
+    if(ui->rbSendASCII->isChecked())
+        nRet = m_SerialPort.write(szText.toStdString().c_str());
+    else if(ui->rbSendUtf8->isChecked())
+        nRet = m_SerialPort.write(szText.toUtf8());
+    else if(ui->rbSendUnicode->isChecked())
+        nRet = m_SerialPort.write((const char*)szText.utf16(),
+                                  szText.length() * sizeof(ushort));
     if(-1 == nRet)
     {
         m_statusInfo.setText(tr("Send fail"));
