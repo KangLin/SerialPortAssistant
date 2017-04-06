@@ -120,10 +120,7 @@ private:
     QTimer m_Timer;
     
     QLabel m_statusInfo;
-    QLabel m_statusRx, m_statusTx;
-    QHBoxLayout m_statusLay;
-    QWidget m_Status;
-    
+    QLabel m_statusRx, m_statusTx;    
 };
 
 #endif // MAINWINDOW_H
