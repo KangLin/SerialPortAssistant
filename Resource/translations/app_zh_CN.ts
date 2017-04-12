@@ -9,12 +9,17 @@
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="446"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="172"/>
+        <source>WeChat scan two-dimensional code for donation</source>
+        <translation>微信扫描进行捐赠</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="378"/>
         <source>Serial Port Assistant</source>
         <translation>串口助手</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="349"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="281"/>
         <source>Author:KangLin</source>
         <translation>作者：康林</translation>
     </message>
@@ -39,27 +44,22 @@
         <translation>版本： 1.0.0.0</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="198"/>
-        <source>WeChat scan two-dimensional code for free donation</source>
-        <translation>微信扫描二维码进行随意捐赠</translation>
-    </message>
-    <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="271"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="203"/>
         <source>License</source>
         <translation>许可</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="285"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="217"/>
         <source>Change log</source>
         <translation>更改日志</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="299"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="231"/>
         <source>Thanks</source>
         <translation>鸣谢</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="324"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="256"/>
         <source> Copyright (C) 2017 KangLin Studio</source>
         <translation>版权（C） 2017 康林工作室</translation>
     </message>
@@ -174,13 +174,13 @@ Email:kl222@126.com</source>
         <location filename="../../MainWindow.ui" line="198"/>
         <location filename="../../MainWindow.ui" line="333"/>
         <source>UTF-8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="205"/>
         <location filename="../../MainWindow.ui" line="340"/>
         <source>unicode</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="266"/>
@@ -294,12 +294,12 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.cpp" line="73"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="74"/>
         <source>Mark</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="85"/>
