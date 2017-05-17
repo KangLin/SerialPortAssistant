@@ -201,7 +201,7 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="424"/>
-        <location filename="../../MainWindow.ui" line="549"/>
+        <location filename="../../MainWindow.ui" line="551"/>
         <location filename="../../MainWindow.cpp" line="179"/>
         <location filename="../../MainWindow.cpp" line="181"/>
         <source>Open(&amp;O)</source>
@@ -238,37 +238,37 @@ Email:kl222@126.com</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="558"/>
+        <location filename="../../MainWindow.ui" line="560"/>
         <source>Clear(&amp;L)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="563"/>
+        <location filename="../../MainWindow.ui" line="565"/>
         <source>Clear Send History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="572"/>
+        <location filename="../../MainWindow.ui" line="574"/>
         <source>Exit(&amp;E)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="581"/>
+        <location filename="../../MainWindow.ui" line="583"/>
         <source>About(&amp;A)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="592"/>
+        <location filename="../../MainWindow.ui" line="594"/>
         <source>StatusBar(&amp;S)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="603"/>
+        <location filename="../../MainWindow.ui" line="605"/>
         <source>ToolBar(&amp;T)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="614"/>
+        <location filename="../../MainWindow.ui" line="616"/>
         <source>LeftBar(&amp;L)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -414,41 +414,51 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="562"/>
-        <source>Blue</source>
+        <source>Gradient blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="563"/>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.cpp" line="564"/>
+        <source>Gradient Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.cpp" line="565"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="622"/>
+        <location filename="../../MainWindow.cpp" line="624"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="752"/>
+        <location filename="../../MainWindow.cpp" line="758"/>
         <source>Set baud rate fail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="765"/>
+        <location filename="../../MainWindow.cpp" line="771"/>
         <source>Set data bits fail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="786"/>
+        <location filename="../../MainWindow.cpp" line="792"/>
         <source>Set parity fail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="800"/>
+        <location filename="../../MainWindow.cpp" line="806"/>
         <source>Set stop bits fail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="815"/>
+        <location filename="../../MainWindow.cpp" line="821"/>
         <source>Set Flow Control fail</source>
         <translation type="unfinished"></translation>
     </message>
