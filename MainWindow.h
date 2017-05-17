@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    MainWindow.h
+
+Abstract:
+
+    This file contains main windows define.
  */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -32,6 +44,10 @@ public:
     void ClearMenu();
     // Language menu    
 private:
+    struct _MENU{
+        QString icon;
+        QString text;
+    };
     int LoadTranslate(QString szLocale = QString());
     int ClearTranslate();
     int InitMenuTranslate();
@@ -104,10 +120,7 @@ private:
     QTimer m_Timer;
     
     QLabel m_statusInfo;
-    QLabel m_statusRx, m_statusTx;
-    QHBoxLayout m_statusLay;
-    QWidget m_Status;
-    
+    QLabel m_statusRx, m_statusTx;    
 };
 
 #endif // MAINWINDOW_H

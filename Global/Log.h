@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    Log.h
+
+Abstract:
+
+    This file contains log define.
  */
+
 #ifndef CLOG_H
 #define CLOG_H
 
@@ -30,7 +42,7 @@ public:
 #define LM_WARNING 2
 #define LM_ERROR 3
 
-#ifdef _DEBUG || DEBUG
+#ifdef _DEBUG
 #define LOG_ERROR(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_ERROR, "", fmt, ##__VA_ARGS__)
 #define LOG_WARNING(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_WARNING, "", fmt, ##__VA_ARGS__)
 #define LOG_DEBUG(fmt, ...) CLog::Instance()->Log(__FILE__, __LINE__, LM_DEBUG, "", fmt, ##__VA_ARGS__)

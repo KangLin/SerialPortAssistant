@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SerialPortAssistant"
-!define PRODUCT_VERSION "v0.0.5"
+!define PRODUCT_VERSION "v0.0.7"
 !define PRODUCT_PUBLISHER "KangLin studio"
 !define PRODUCT_WEB_SITE "https://github.com/KangLin/SerialPortAssistant"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SerialPortAssistant.exe"
@@ -13,6 +13,7 @@ SetCompressor lzma
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
+!include "x64.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -55,7 +56,6 @@ LangString LANG_REMOVE_COMPONENT ${LANG_ENGLISH} "You sure you want to completel
 LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "你确实要完全移除 $(^Name) ，其及所有的组件？"
 
 ; MUI end ------
-
 Name "$(LANG_PRODUCT_NAME) ${PRODUCT_VERSION}"
 OutFile "SerialPortAssistant-Setup-${PRODUCT_VERSION}.exe"
 InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
@@ -81,17 +81,40 @@ VSRedistInstalled:
   Delete "$INSTDIR\vcredist_x86.exe"
 FunctionEnd
 
+Function InstallVC64
+    Push $R0
+    ClearErrors
+    ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FF66E9F6-83E7-3A3E-AF14-8DE9A809A6A4}" "Version"
+    
+    ; check regist
+    IfErrors 0 VSRedistInstalled
+    Exec "$INSTDIR\vcredist_x64.exe /q"
+    StrCpy $R0 "-1"
+    
+    VSRedistInstalled:
+    ;MessageBox MB_OK  "Installed"
+    Exch $R0
+    Delete "$INSTDIR\vcredist_x64.exe"
+FunctionEnd
+
+Function InstallRuntime
+  ${If} ${RunningX64}
+    IfFileExists "$INSTDIR\vcredist_x64.exe" 0 +2
+    call InstallVC64
+    IfFileExists "$INSTDIR\vcredist_x86.exe" 0 +2
+    call InstallVC
+  ${Else}
+    IfFileExists "$INSTDIR\vcredist_x86.exe" 0 +2
+    call InstallVC
+  ${EndIf}
+FunctionEnd
+
 Function InstallFont
   StrCmp $LANGUAGE "2052" 0 +3
   ;Modify environment variable for default font to simsun.ttc
   WriteRegStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "OSGEARTH_DEFAULT_FONT" "simsun.ttc"
   ;Reflash environment variable
   SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"
-FunctionEnd
-
-Function InstallRuntime
-  IfFileExists "$INSTDIR\vcredist_x86.exe" 0 +2
-  call InstallVC
 FunctionEnd
 
 Function .onInit
@@ -150,7 +173,7 @@ FunctionEnd
 Section Uninstall
   SetShellVarContext all
   RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
-  Delete "$DESKTOP\SerialPortAssistant.lnk"
+  Delete "$DESKTOP\$(LANG_PRODUCT_NAME).lnk"
   SetOutPath "$SMPROGRAMS"
   SetShellVarContext current
   RMDir /r "$INSTDIR"

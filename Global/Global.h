@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    Global.h
+
+Abstract:
+
+    This file contains global variable define.
  */
+
 #ifndef GLOBAL_H
 #define GLOBAL_H
 

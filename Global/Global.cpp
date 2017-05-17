@@ -1,5 +1,16 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    Global.cpp
+
+Abstract:
+
+    This file contains global variable implement.
  */
 
 #include "Global.h"

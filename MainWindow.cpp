@@ -1,6 +1,18 @@
-/*
- * Author: KangLin(Email:kl222@126.com)
+/*++
+Copyright (c) Kang Lin studio, All Rights Reserved
+
+Author:
+	Kang Lin(kl222@126.com）
+
+Module Name:
+
+    MainWindow.cpp
+
+Abstract:
+
+    This file contains main windows implement.
  */
+
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Global/Log.h"
@@ -274,19 +286,20 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         ui->teRecive->insertPlainText(szPrex);
     }
     
-    if((ui->rbReciveASCII->isChecked() && bRecive)
-            || (ui->rbSendASCII->isChecked() && !bRecive))
+    if((!ui->rbReciveHex->isChecked() && bRecive)
+        || (!ui->rbSendHex->isChecked() && !bRecive))
         ui->teRecive->insertPlainText(szText);
     else
     {
         QString szOut;
-        int nLen = szText.toStdString().size();
+        int nLen = szText.size();
         for(int i = 0; i < nLen; i++)
         {
             if(i)
                 szOut += " ";
             char buff[16] = {0};
-            sprintf(buff, "0x%X", szText.toStdString().at(i));
+            QChar c = szText.at(i);
+            sprintf(buff, "0x%0X", c.unicode());
             szOut += buff;
         }
         ui->teRecive->insertPlainText(szOut);
@@ -324,9 +337,17 @@ void CMainWindow::on_pbSend_clicked()
         szText += "\r";
     if(ui->cbn->isChecked())
         szText += "\n";
-    nRet = m_SerialPort.write(szText.toStdString().c_str());
+    
+    if(ui->rbSendASCII->isChecked())
+        nRet = m_SerialPort.write(szText.toStdString().c_str());
+    else if(ui->rbSendUtf8->isChecked())
+        nRet = m_SerialPort.write(szText.toUtf8());
+    else if(ui->rbSendUnicode->isChecked())
+        nRet = m_SerialPort.write((const char*)szText.utf16(),
+                                  szText.length() * sizeof(ushort));
     if(-1 == nRet)
     {
+        m_statusInfo.setText(tr("Send fail"));
         LOG_MODEL_ERROR("CMainWindows", "Write fail");
         on_pbOpen_clicked(); //关闭串口  
         return;
@@ -421,16 +442,24 @@ void CMainWindow::on_actionAbout_A_triggered()
     CDlgAbout about(this);
     about.exec();
 }
+
 int CMainWindow::InitMenuTranslate()
 {
-    m_ActionTranslator["Default"] = ui->menuLanguage_A->addAction(
-                QIcon(":/icon/Language"), tr("Default"));
-    m_ActionTranslator["en"] = ui->menuLanguage_A->addAction(
-                QIcon(":/icon/English"), tr("English"));
-    m_ActionTranslator["zh_CN"] = ui->menuLanguage_A->addAction(
-                QIcon(":/icon/China"), tr("Chinese"));
-    m_ActionTranslator["zh_TW"] = ui->menuLanguage_A->addAction(
-                QIcon(":/icon/China"), tr("Chinese(TaiWan)"));
+    QMap<QString, _MENU> m;
+    m["Default"] = {QLocale::system().name(), tr("Default")};
+    m["en"] = {":/icon/English", tr("English")};
+    m["zh_CN"] = {":/icon/China", tr("Chinese")};
+    m["zh_TW"] = {":/icon/China", tr("Chinese(TaiWan)")};
+    m["Default"].icon = m[QLocale::system().name()].icon;
+    
+    QMap<QString, _MENU>::iterator itMenu;
+    for(itMenu = m.begin(); itMenu != m.end(); itMenu++)
+    {
+        _MENU v = itMenu.value();
+        m_ActionTranslator[itMenu.key()] =
+                ui->menuLanguage_A->addAction(
+                    QIcon(v.icon), v.text);
+    }
     
     QMap<QString, QAction*>::iterator it;
     for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
