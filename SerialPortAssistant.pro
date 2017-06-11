@@ -34,7 +34,21 @@ isEmpty(PREFIX) {
     }
 }
 
-include(Version.pri)
+isEmpty(GIT_DESCRIBE) {
+    GIT_DESCRIBE = $$system(cd $$system_path($$PWD) && git describe --tags)
+    isEmpty(GIT_VERSION) {
+        GIT_VERSION = $$GIT_DESCRIBE
+    }
+}
+isEmpty(GIT_VERSION) {
+    GIT_VERSION = $$system(cd $$system_path($$PWD) && git rev-parse HEAD)
+}
+message("GIT_VERSION:$$GIT_VERSION")
+isEmpty(GIT_VERSION){
+    error("Built without git, please add GIT_VERSION to DEFINES")
+}
+DEFINES += GIT_VERSION=\"\\\"$$quote($$GIT_VERSION)\\\"\"
+
 include(Resource/translations/translations.pri)
 
 other.files = LICENSE.md Authors.txt ChangeLog.md

@@ -45,6 +45,7 @@ fi
 export PATH=${QT_ROOT}/bin:$PATH
 echo "PATH:$PATH"
 cd ${SOURCE_DIR}
+./tag.sh
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
 ${QT_ROOT}/bin/qmake ../SerialPortAssistant.pro "CONFIG+=release"

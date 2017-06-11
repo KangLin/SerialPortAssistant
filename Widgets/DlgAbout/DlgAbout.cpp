@@ -15,7 +15,6 @@ Abstract:
 
 #include "DlgAbout.h"
 #include "ui_DlgAbout.h"
-#include "Version.h"
 #include <QFile>
 #include <QDir>
 /*
@@ -29,13 +28,7 @@ CDlgAbout::CDlgAbout(QWidget *parent) :
 {
     ui->setupUi(this);
  
-    QString szVersion(tr("Version:%1.%2.%3.%4").arg(
-                          QString::number(MAJOR_VERSION_NUMBER),
-                          QString::number(MINOR_VERSION_NUMBER),
-                          QString::number(REVISION_VERSION_NUMBER),
-                          BUILD_VERSION
-                          ));
-    ui->lbVersion->setText(szVersion);
+    ui->lbVersion->setText(GIT_VERSION);
     ui->lbDate->setText(tr("Build date:%1 %2").arg(__DATE__, __TIME__));
     ui->lbAuthor->setText(tr("Author: KangLin\nEmail:kl222@126.com"));
     ui->lbHome->setOpenExternalLinks(true);
