@@ -356,7 +356,7 @@ void CMainWindow::on_pbSend_clicked()
     if(ui->cbDisplaySend->isChecked())
         AddRecive(szText, false);
 
-    m_nSend += ui->teSend->toPlainText().toStdString().length();
+    m_nSend += nRet; //szText.length();
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
 
     if(-1 == ui->cmbRecent->findText(
