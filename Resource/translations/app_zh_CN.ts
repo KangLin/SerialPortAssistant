@@ -64,29 +64,29 @@
         <translation>版权（C） 2017 康林工作室</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="32"/>
-        <source>Version:%1.%2.%3.%4</source>
-        <translation>版本：%1.%2.%3.%4</translation>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="31"/>
+        <source>Version: </source>
+        <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="39"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="32"/>
         <source>Build date:%1 %2</source>
         <translation>编译日期：%1 %2</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="40"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="33"/>
         <source>Author: KangLin
 Email:kl222@126.com</source>
         <translation>作者：康林
 邮件：kl222@126.com</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="43"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="36"/>
         <source>Home page:</source>
         <translation>主页：</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="45"/>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.cpp" line="38"/>
         <source> Copyright (C) 2017 - %1 KangLin Studio</source>
         <translation>版权 （C) 2017 - %1 康林工作室</translation>
     </message>

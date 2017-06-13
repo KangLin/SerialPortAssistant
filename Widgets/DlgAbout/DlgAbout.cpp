@@ -28,7 +28,7 @@ CDlgAbout::CDlgAbout(QWidget *parent) :
 {
     ui->setupUi(this);
  
-    ui->lbVersion->setText(GIT_VERSION);
+    ui->lbVersion->setText(tr("Version: ") + GIT_VERSION);
     ui->lbDate->setText(tr("Build date:%1 %2").arg(__DATE__, __TIME__));
     ui->lbAuthor->setText(tr("Author: KangLin\nEmail:kl222@126.com"));
     ui->lbHome->setOpenExternalLinks(true);
