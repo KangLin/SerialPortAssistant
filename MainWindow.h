@@ -116,7 +116,7 @@ private:
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;
-    int m_nSend, m_nRecive;
+    ulong m_nSend, m_nRecive;
     int m_cmbPortIndex;
     QTimer m_Timer;
     
