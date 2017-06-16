@@ -75,6 +75,7 @@ private slots:
     void changeEvent(QEvent *e);
     void slotRead();
     void slotTimeOut();
+    void slotQTextEditMaxLength();
     void on_pbOpen_clicked();
     void on_pbSend_clicked();
     void on_cmbPort_currentIndexChanged(int index);

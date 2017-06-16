@@ -122,6 +122,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     default:
         break;
     }
+
 }
 
 CMainWindow::~CMainWindow()
@@ -265,9 +266,28 @@ QString CMainWindow::GetSerialPortSettingInfo()
             + ui->cmbFlowControl->currentText();
 }
 
+//限制QTextEdit内容的长度  
+void CMainWindow::slotQTextEditMaxLength()
+{
+    ulong maxLength = 10240000;
+    int length = ui->teRecive->toPlainText().length();
+    if(length > maxLength << 1)
+    {
+        QTextCursor cursor = ui->teRecive->textCursor();
+        cursor.movePosition(QTextCursor::Start);
+        cursor.setPosition(length - maxLength, QTextCursor::KeepAnchor);
+        cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+        cursor.removeSelectedText();
+        cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
+        //ui->teRecive->setTextCursor(cursor);
+    }
+}
+
 void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 {
     QString szPrex;
+    
+    slotQTextEditMaxLength();
     
     if(ui->cbDisplayTime->isChecked())
         szPrex = QTime::currentTime().toString("hh:mm:ss.zzz") + " ";
@@ -337,7 +357,7 @@ void CMainWindow::on_pbSend_clicked()
         szText += "\r";
     if(ui->cbn->isChecked())
         szText += "\n";
-    
+
     if(ui->rbSendASCII->isChecked())
         nRet = m_SerialPort.write(szText.toStdString().c_str());
     else if(ui->rbSendUtf8->isChecked())
@@ -356,9 +376,10 @@ void CMainWindow::on_pbSend_clicked()
     if(ui->cbDisplaySend->isChecked())
         AddRecive(szText, false);
 
-    m_nSend += nRet; //szText.length();
+    m_nSend += nRet;
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
 
+    //增加到最近发送列表中  
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
         ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
@@ -862,8 +883,6 @@ void CMainWindow::on_rbReciveHex_clicked(bool checked)
         CGlobal::Instance()->SetReciveDisplayCode(CGlobal::HEX);
 }
 
-
-
 void CMainWindow::on_rbSendHex_clicked(bool checked)
 {
     if(checked)
@@ -875,3 +894,4 @@ void CMainWindow::on_rbSendASCII_clicked(bool checked)
     if(checked)
         CGlobal::Instance()->SetSendDisplayCode(CGlobal::ASCII);
 }
+
