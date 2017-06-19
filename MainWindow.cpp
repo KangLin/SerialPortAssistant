@@ -269,7 +269,7 @@ QString CMainWindow::GetSerialPortSettingInfo()
 //限制QTextEdit内容的长度  
 void CMainWindow::slotQTextEditMaxLength()
 {
-    int maxLength = 10240000;
+    int maxLength = 1024000;
     int length = ui->teRecive->toPlainText().length();
     if(length > maxLength << 1)
     {
