@@ -203,77 +203,87 @@ Email:kl222@126.com</source>
         <translation>毫秒</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="460"/>
-        <location filename="../../MainWindow.ui" line="587"/>
-        <location filename="../../MainWindow.cpp" line="191"/>
-        <location filename="../../MainWindow.cpp" line="193"/>
+        <location filename="../../MainWindow.ui" line="463"/>
+        <location filename="../../MainWindow.ui" line="592"/>
+        <location filename="../../MainWindow.cpp" line="192"/>
+        <location filename="../../MainWindow.cpp" line="194"/>
         <source>Open(&amp;O)</source>
         <translation>打開(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="480"/>
+        <location filename="../../MainWindow.ui" line="483"/>
         <source>Send(&amp;S)</source>
         <translation>發送(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="517"/>
+        <location filename="../../MainWindow.ui" line="520"/>
         <source>Tools(&amp;T)</source>
         <translation>工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="521"/>
+        <location filename="../../MainWindow.ui" line="524"/>
         <source>Language(&amp;A)</source>
         <translation>語言(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="530"/>
+        <location filename="../../MainWindow.ui" line="533"/>
         <source>Stype(&amp;S)</source>
         <translation>樣式(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="550"/>
+        <location filename="../../MainWindow.ui" line="554"/>
         <source>Help(&amp;H)</source>
         <translation>幫助(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="556"/>
+        <location filename="../../MainWindow.ui" line="560"/>
         <source>View(&amp;V)</source>
         <translation>視圖(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="596"/>
+        <location filename="../../MainWindow.ui" line="601"/>
         <source>Clear(&amp;L)</source>
         <translation>清除(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="601"/>
+        <location filename="../../MainWindow.ui" line="606"/>
         <source>Clear Send History</source>
         <translation>清除發送歷史</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="610"/>
+        <location filename="../../MainWindow.ui" line="615"/>
         <source>Exit(&amp;E)</source>
         <translation>退出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="619"/>
+        <location filename="../../MainWindow.ui" line="624"/>
         <source>About(&amp;A)</source>
         <translation>關於(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="630"/>
+        <location filename="../../MainWindow.ui" line="635"/>
         <source>StatusBar(&amp;S)</source>
         <translation>狀態欄(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="641"/>
+        <location filename="../../MainWindow.ui" line="646"/>
         <source>ToolBar(&amp;T)</source>
         <translation>工具欄(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="652"/>
+        <location filename="../../MainWindow.ui" line="657"/>
         <source>LeftBar(&amp;L)</source>
         <translation>左欄(&amp;L)</translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.ui" line="669"/>
+        <source>Pasue(&amp;P)</source>
+        <translation>暫停</translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.ui" line="672"/>
+        <source>Pause the flow list</source>
+        <translation>暫停滾動列表</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="70"/>
@@ -312,161 +322,161 @@ Email:kl222@126.com</source>
         <translation>軟件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="142"/>
+        <location filename="../../MainWindow.cpp" line="143"/>
         <source>Ready</source>
         <translation>預備</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="143"/>
-        <location filename="../../MainWindow.cpp" line="243"/>
+        <location filename="../../MainWindow.cpp" line="144"/>
+        <location filename="../../MainWindow.cpp" line="244"/>
         <source>Rx: 0 Bytes</source>
         <translation>接收： 0 字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="144"/>
-        <location filename="../../MainWindow.cpp" line="244"/>
+        <location filename="../../MainWindow.cpp" line="145"/>
+        <location filename="../../MainWindow.cpp" line="245"/>
         <source>Tx: 0 Bytes</source>
         <translation>發送： 0 字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="199"/>
+        <location filename="../../MainWindow.cpp" line="200"/>
         <source>Serail Port Close</source>
         <translation>串口關閉</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="225"/>
+        <location filename="../../MainWindow.cpp" line="226"/>
         <source>Open serail port %1 fail.</source>
         <translation>打開串口[%1]失敗。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="233"/>
-        <location filename="../../MainWindow.cpp" line="235"/>
+        <location filename="../../MainWindow.cpp" line="234"/>
+        <location filename="../../MainWindow.cpp" line="236"/>
         <source>Close(&amp;C)</source>
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="260"/>
+        <location filename="../../MainWindow.cpp" line="261"/>
         <source> Open. </source>
         <translation>打開。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="324"/>
+        <location filename="../../MainWindow.cpp" line="347"/>
         <source>Rx: </source>
         <translation>接收： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="324"/>
-        <location filename="../../MainWindow.cpp" line="360"/>
+        <location filename="../../MainWindow.cpp" line="347"/>
+        <location filename="../../MainWindow.cpp" line="383"/>
         <source> Bytes</source>
         <translation>字節</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="350"/>
+        <location filename="../../MainWindow.cpp" line="373"/>
         <source>Send fail</source>
         <translation>發送失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="360"/>
+        <location filename="../../MainWindow.cpp" line="383"/>
         <source>Tx: </source>
         <translation>發送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="380"/>
+        <location filename="../../MainWindow.cpp" line="404"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="381"/>
+        <location filename="../../MainWindow.cpp" line="405"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation>串口[%1]已打開，是否關閉它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="449"/>
+        <location filename="../../MainWindow.cpp" line="473"/>
         <source>Default</source>
         <translation>默認</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="450"/>
+        <location filename="../../MainWindow.cpp" line="474"/>
         <source>English</source>
         <translation>英語</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="451"/>
+        <location filename="../../MainWindow.cpp" line="475"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="452"/>
+        <location filename="../../MainWindow.cpp" line="476"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（臺灣）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="578"/>
+        <location filename="../../MainWindow.cpp" line="602"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="579"/>
+        <location filename="../../MainWindow.cpp" line="603"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>語言改變，關閉程序，並請從重啟程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="589"/>
+        <location filename="../../MainWindow.cpp" line="613"/>
         <source>Custom</source>
         <translation>自定義</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="590"/>
+        <location filename="../../MainWindow.cpp" line="614"/>
         <source>System</source>
         <translation>系統</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="591"/>
+        <location filename="../../MainWindow.cpp" line="615"/>
         <source>Gradient blue</source>
         <translation>漸變藍色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="592"/>
+        <location filename="../../MainWindow.cpp" line="616"/>
         <source>Blue</source>
         <translation>藍色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="593"/>
+        <location filename="../../MainWindow.cpp" line="617"/>
         <source>Gradient Dark</source>
         <translation>漸變黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="594"/>
+        <location filename="../../MainWindow.cpp" line="618"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="653"/>
+        <location filename="../../MainWindow.cpp" line="677"/>
         <source>Open File</source>
         <translation>打開文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="787"/>
+        <location filename="../../MainWindow.cpp" line="811"/>
         <source>Set baud rate fail</source>
         <translation>設置比特率失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="800"/>
+        <location filename="../../MainWindow.cpp" line="824"/>
         <source>Set data bits fail</source>
         <translation>設置數據位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="821"/>
+        <location filename="../../MainWindow.cpp" line="845"/>
         <source>Set parity fail</source>
         <translation>設置校驗失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="835"/>
+        <location filename="../../MainWindow.cpp" line="859"/>
         <source>Set stop bits fail</source>
         <translation>設置停止位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="850"/>
+        <location filename="../../MainWindow.cpp" line="874"/>
         <source>Set Flow Control fail</source>
         <translation>設置流控失敗</translation>
     </message>
