@@ -324,10 +324,13 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         }
         ui->teRecive->insertPlainText(szOut);
     }
-
-    QTextCursor cursor = ui->teRecive->textCursor();
-    cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
-    ui->teRecive->setTextCursor(cursor);
+    
+    if(!ui->actionPasue_P->isChecked())
+    {
+        QTextCursor cursor = ui->teRecive->textCursor();
+        cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
+        ui->teRecive->setTextCursor(cursor);
+    }
 }
 
 void CMainWindow::slotRead()
@@ -895,3 +898,7 @@ void CMainWindow::on_rbSendASCII_clicked(bool checked)
         CGlobal::Instance()->SetSendDisplayCode(CGlobal::ASCII);
 }
 
+
+void CMainWindow::on_actionPasue_P_triggered()
+{
+}

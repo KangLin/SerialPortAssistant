@@ -15,6 +15,7 @@
         <file alias="Send">png/send.png</file>
         <file alias="WeiXinPay">png/weixinpay.jpg</file>
         <file alias="WeiXinPay20">png/weixinpay.png</file>
+        <file alias="Pause">png/pause.png</file>
     </qresource>
     <qresource prefix="/sink">
         <file alias="Blue">sink/blue.qss</file>

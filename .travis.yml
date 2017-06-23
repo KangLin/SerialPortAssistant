@@ -27,7 +27,7 @@ env:
     - RABBITIM_BUILD_THIRDLIBRARY="TRUE" 
 
   matrix:
-     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.9 QT_VERSION=5.9.0
+     #- BUILD_TARGERT="unix" QT_VERSION_DIR=5.9 QT_VERSION=5.9.0
      - BUILD_TARGERT="unix" QT_VERSION_DIR=5.8 QT_VERSION=5.8.0
      - BUILD_TARGERT="unix" QT_VERSION_DIR=5.7 QT_VERSION=5.7.0
      - BUILD_TARGERT="unix" QT_VERSION_DIR=5.6 QT_VERSION=5.6.0
@@ -56,13 +56,13 @@ notifications:
   on_success: never  # [always|never|change]
   on_failure: always
 
-deploy:
-  provider: releases
-  api_key: 177ce637a8ec54e66ea8693092caf35059cf95d7
-  file: 
-    - ./build_android/android-build/bin/QtApp-debug.apk
-  skip_cleanup: true
-  on:
-    condition: $TRAVIS_OS_NAME = android
-    repo: KangLin/rabbitim
-    tags: true
+#deploy:
+#  provider: releases
+#  api_key: 177ce637a8ec54e66ea8693092caf35059cf95d7
+#  file: 
+#    - ./build_android/android-build/bin/QtApp-debug.apk
+#  skip_cleanup: true
+#  on:
+#    condition: $TRAVIS_OS_NAME = android
+#    repo: KangLin/SerialPortAssistant
+#    tags: true

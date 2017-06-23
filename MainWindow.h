@@ -105,6 +105,8 @@ private slots:
     void on_rbSendASCII_clicked(bool checked);
     void on_cmbRecent_activated(const QString &szText);
     
+    void on_actionPasue_P_triggered();
+    
 private:
     int InitStatusBar();
     int InitToolBar();

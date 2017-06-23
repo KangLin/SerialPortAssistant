@@ -120,21 +120,21 @@ environment:
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 530
-    QT_VERSION: qt5.9
-    QT_ROOT: /C/Qt/5.9/mingw53_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  #- BUILD_TARGERT: windows_mingw
+  #  TOOLCHAIN_VERSION: 530
+  #  QT_VERSION: qt5.9
+  #  QT_ROOT: /C/Qt/5.9/mingw53_32
+  #  AUTOBUILD_ARCH: x86
+  #  PASSWORD:
+  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
     
-  - BUILD_TARGERT: windows_mingw
-    TOOLCHAIN_VERSION: 530
-    QT_VERSION: qt5.8
-    QT_ROOT: /C/Qt/5.8/mingw53_32
-    AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  #- BUILD_TARGERT: windows_mingw
+  #  TOOLCHAIN_VERSION: 530
+  #  QT_VERSION: qt5.8
+  #  QT_ROOT: /C/Qt/5.8/mingw53_32
+  #  AUTOBUILD_ARCH: x86
+  #  PASSWORD:
+  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   #- BUILD_TARGERT: windows_mingw
   #  TOOLCHAIN_VERSION: 492

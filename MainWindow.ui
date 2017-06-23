@@ -541,6 +541,7 @@
     <addaction name="separator"/>
     <addaction name="actionClear"/>
     <addaction name="actionClear_Send_History"/>
+    <addaction name="actionPasue_P"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
@@ -576,6 +577,7 @@
    </attribute>
    <addaction name="actionOpen"/>
    <addaction name="actionClear"/>
+   <addaction name="actionPasue_P"/>
    <addaction name="separator"/>
    <addaction name="actionAbout_A"/>
    <addaction name="separator"/>
@@ -653,6 +655,21 @@
    </property>
    <property name="text">
     <string>LeftBar(&amp;L)</string>
+   </property>
+  </action>
+  <action name="actionPasue_P">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Pause</normaloff>:/icon/Pause</iconset>
+   </property>
+   <property name="text">
+    <string>Pasue(&amp;P)</string>
+   </property>
+   <property name="toolTip">
+    <string>Pause the flow list</string>
    </property>
   </action>
  </widget>

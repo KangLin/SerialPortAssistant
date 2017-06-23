@@ -50,7 +50,7 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
 fi
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
-${QT_ROOT}/bin/qmake ../SerialPortAssistant.pro "CONFIG+=release"
+${QT_ROOT}/bin/qmake ${SOURCE_DIR}/SerialPortAssistant.pro "CONFIG+=release"
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     MAKE=nmake
