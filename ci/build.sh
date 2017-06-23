@@ -45,7 +45,9 @@ fi
 export PATH=${QT_ROOT}/bin:$PATH
 echo "PATH:$PATH"
 cd ${SOURCE_DIR}
-./tag.sh
+if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
+    ./tag.sh
+fi
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
 ${QT_ROOT}/bin/qmake ../SerialPortAssistant.pro "CONFIG+=release"

@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SerialPortAssistant"
-!define PRODUCT_VERSION "v0.0.8-3-gabd9a60"
+!define PRODUCT_VERSION "v0.0.8-7-gc5a039e"
 !define PRODUCT_PUBLISHER "KangLin studio"
 !define PRODUCT_WEB_SITE "https://github.com/KangLin/SerialPortAssistant"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SerialPortAssistant.exe"
