@@ -227,8 +227,9 @@ void CMainWindow::on_pbOpen_clicked()
         LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
                         ui->cmbPort->currentText().toStdString().c_str(),
                         m_SerialPort.error());
-        SetStatusInfo(tr("Open serail port %1 fail.").
-                                   arg(ui->cmbPort->currentText()),
+        SetStatusInfo(tr("Open serail port %1 fail. errno: %2").
+                            arg(ui->cmbPort->currentText(),
+                                QString::number(m_SerialPort.error())),
                       Qt::red);
         return;
     }
