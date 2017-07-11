@@ -204,9 +204,13 @@ void CMainWindow::on_pbOpen_clicked()
     if(QSerialPortInfo::availablePorts().isEmpty())
         return;
 
-    m_SerialPort.setPort(
-                QSerialPortInfo::availablePorts()
-                .at(ui->cmbPort->currentIndex()));
+    QSerialPortInfo info = QSerialPortInfo::availablePorts()
+            .at(ui->cmbPort->currentIndex());
+#if defined(Q_OS_WIN32)
+    m_SerialPort.setPortName("\\\\.\\" + info.portName());
+#else
+    m_SerialPort.setPort(info);
+#endif
     m_SerialPort.setBaudRate(ui->cmbBoudRate->currentText().toInt());
     index = ui->cmbParity->currentIndex();
     index == 0 ? 0 : index = index + 1;
