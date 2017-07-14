@@ -328,13 +328,13 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="144"/>
-        <location filename="../../MainWindow.cpp" line="244"/>
+        <location filename="../../MainWindow.cpp" line="249"/>
         <source>Rx: 0 Bytes</source>
         <translation>接收： 0 字节</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="145"/>
-        <location filename="../../MainWindow.cpp" line="245"/>
+        <location filename="../../MainWindow.cpp" line="250"/>
         <source>Tx: 0 Bytes</source>
         <translation>发送： 0 字节</translation>
     </message>
@@ -344,139 +344,143 @@ Email:kl222@126.com</source>
         <translation>串口关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="226"/>
         <source>Open serail port %1 fail.</source>
-        <translation>打开串口[%1]失败。</translation>
+        <translation type="vanished">打开串口[%1]失败。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="234"/>
-        <location filename="../../MainWindow.cpp" line="236"/>
+        <location filename="../../MainWindow.cpp" line="230"/>
+        <source>Open serail port %1 fail. errno: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.cpp" line="239"/>
+        <location filename="../../MainWindow.cpp" line="241"/>
         <source>Close(&amp;C)</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="261"/>
+        <location filename="../../MainWindow.cpp" line="266"/>
         <source> Open. </source>
         <translation>打开。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="347"/>
+        <location filename="../../MainWindow.cpp" line="352"/>
         <source>Rx: </source>
         <translation>接收： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="347"/>
-        <location filename="../../MainWindow.cpp" line="383"/>
+        <location filename="../../MainWindow.cpp" line="352"/>
+        <location filename="../../MainWindow.cpp" line="388"/>
         <source> Bytes</source>
         <translation>字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="373"/>
+        <location filename="../../MainWindow.cpp" line="378"/>
         <source>Send fail</source>
         <translation>发送失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="383"/>
+        <location filename="../../MainWindow.cpp" line="388"/>
         <source>Tx: </source>
         <translation>发送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="404"/>
+        <location filename="../../MainWindow.cpp" line="409"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="405"/>
+        <location filename="../../MainWindow.cpp" line="410"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation>串口[%1]已打开，是否关闭它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="473"/>
+        <location filename="../../MainWindow.cpp" line="478"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="474"/>
+        <location filename="../../MainWindow.cpp" line="479"/>
         <source>English</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="475"/>
+        <location filename="../../MainWindow.cpp" line="480"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="476"/>
+        <location filename="../../MainWindow.cpp" line="481"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（台湾）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="602"/>
+        <location filename="../../MainWindow.cpp" line="607"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="603"/>
+        <location filename="../../MainWindow.cpp" line="608"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>语言改变，关闭程序，并请从重启程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="613"/>
+        <location filename="../../MainWindow.cpp" line="618"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="614"/>
+        <location filename="../../MainWindow.cpp" line="619"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="615"/>
+        <location filename="../../MainWindow.cpp" line="620"/>
         <source>Gradient blue</source>
         <translation>渐变蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="616"/>
+        <location filename="../../MainWindow.cpp" line="621"/>
         <source>Blue</source>
         <translation>蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="617"/>
+        <location filename="../../MainWindow.cpp" line="622"/>
         <source>Gradient Dark</source>
         <translation>渐变黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="618"/>
+        <location filename="../../MainWindow.cpp" line="623"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="677"/>
+        <location filename="../../MainWindow.cpp" line="682"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="811"/>
+        <location filename="../../MainWindow.cpp" line="816"/>
         <source>Set baud rate fail</source>
         <translation>设置比特率失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="824"/>
+        <location filename="../../MainWindow.cpp" line="829"/>
         <source>Set data bits fail</source>
         <translation>设置数据位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="845"/>
+        <location filename="../../MainWindow.cpp" line="850"/>
         <source>Set parity fail</source>
         <translation>设置校验失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="859"/>
+        <location filename="../../MainWindow.cpp" line="864"/>
         <source>Set stop bits fail</source>
         <translation>设置停止位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="874"/>
+        <location filename="../../MainWindow.cpp" line="879"/>
         <source>Set Flow Control fail</source>
         <translation>设置流控失败</translation>
     </message>

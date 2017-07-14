@@ -3,14 +3,6 @@ version: 'v0.1.0.{build}'
 
 environment:
   matrix:
-  #- BUILD_TARGERT: windows_msvc
-  #  GENERATORS: "Visual Studio 15 2017"
-  #  TOOLCHAIN_VERSION: 15
-  #  QT_VERSION: qt5.9
-  #  QT_ROOT: /C/Qt/5.9/msvc2017_64
-  #  AUTOBUILD_ARCH: x64
-  #  PASSWORD:
-  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
