@@ -180,6 +180,11 @@ void CMainWindow::slotTimeOut()
     on_pbSend_clicked();
 }
 
+void CMainWindow::slotAboutToClose()
+{
+    //on_pbOpen_clicked();
+}
+
 void CMainWindow::on_pbOpen_clicked()
 {
     bool bCheck = false;
@@ -238,8 +243,10 @@ void CMainWindow::on_pbOpen_clicked()
                       Qt::red);
         return;
     }
-
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
+    Q_ASSERT(bCheck);
+    bCheck = connect(&m_SerialPort, SIGNAL(aboutToClose()),
+                     this, SLOT(slotAboutToClose()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbOpen->setIcon(QIcon(":/icon/Stop"));
