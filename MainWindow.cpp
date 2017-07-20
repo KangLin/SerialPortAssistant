@@ -79,6 +79,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbDataBit->addItem("5");
 
     ui->cmbStopBit->addItem("1");
+    ui->cmbStopBit->addItem("1.5");
     ui->cmbStopBit->addItem("2");
 
     ui->cmbFlowControl->addItem(tr("None"));
@@ -217,8 +218,12 @@ void CMainWindow::on_pbOpen_clicked()
     m_SerialPort.setParity((QSerialPort::Parity)index);
     m_SerialPort.setDataBits(
                 (QSerialPort::DataBits)ui->cmbDataBit->currentText().toInt());
-    m_SerialPort.setStopBits(
-                (QSerialPort::StopBits)ui->cmbStopBit->currentText().toInt());
+    int stopBit = 0;
+    if("1.5" == ui->cmbStopBit->currentText())
+        stopBit = 3;
+    else
+        stopBit = ui->cmbStopBit->currentText().toInt();
+    m_SerialPort.setStopBits((QSerialPort::StopBits)stopBit);
     m_SerialPort.setFlowControl(
                 (QSerialPort::FlowControl)ui->cmbFlowControl->currentIndex());
     bCheck = m_SerialPort.open(QIODevice::ReadWrite);
