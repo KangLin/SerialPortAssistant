@@ -183,7 +183,7 @@ void CMainWindow::slotTimeOut()
 void CMainWindow::slotReadChannelFinished()
 {
     bool bCheck = false;
-    if(m_SerialPort.isOpen())
+    //if(m_SerialPort.isOpen())
     {
         if(m_Timer.isActive())
             m_Timer.stop();
@@ -208,7 +208,18 @@ void CMainWindow::on_pbOpen_clicked()
     if(m_SerialPort.isOpen())
     {
         m_SerialPort.close();
-        slotReadChannelFinished();
+        if(m_Timer.isActive())
+            m_Timer.stop();
+        ui->pbOpen->setText(tr("Open(&O)"));
+        ui->pbOpen->setIcon(QIcon(":/icon/Start"));
+        ui->actionOpen->setText(tr("Open(&O)"));
+        ui->actionOpen->setIcon(QIcon(":/icon/Start"));
+        ui->pbSend->setEnabled(false);
+        bCheck = m_SerialPort.disconnect();
+        Q_ASSERT(bCheck);
+
+        SetStatusInfo(tr("Serail Port Close"));
+        
         return;
     }
 
@@ -250,9 +261,9 @@ void CMainWindow::on_pbOpen_clicked()
     }
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
-    bCheck = connect(&m_SerialPort, SIGNAL(readChannelFinished()),
+    /*bCheck = connect(&m_SerialPort, SIGNAL(readChannelFinished()),
                      this, SLOT(slotReadChannelFinished()));
-    Q_ASSERT(bCheck);
+    Q_ASSERT(bCheck);*/
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbOpen->setIcon(QIcon(":/icon/Stop"));
     ui->actionOpen->setText(tr("Close(&C)"));
