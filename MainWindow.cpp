@@ -395,7 +395,8 @@ void CMainWindow::on_pbSend_clicked()
         szText += "\n";
 
     if(ui->rbSendASCII->isChecked())
-        nRet = m_SerialPort.write(szText.toStdString().c_str());
+        nRet = m_SerialPort.write(szText.toStdString().c_str(),
+                                  szText.toStdString().size());
     else if(ui->rbSendUtf8->isChecked())
         nRet = m_SerialPort.write(szText.toUtf8());
     else if(ui->rbSendUnicode->isChecked())
