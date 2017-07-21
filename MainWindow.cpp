@@ -182,19 +182,11 @@ void CMainWindow::slotTimeOut()
 
 void CMainWindow::slotAboutToClose()
 {
-    //on_pbOpen_clicked();
-}
-
-void CMainWindow::on_pbOpen_clicked()
-{
     bool bCheck = false;
-    int index = 0;
-
     if(m_SerialPort.isOpen())
     {
         if(m_Timer.isActive())
             m_Timer.stop();
-        m_SerialPort.close();
         ui->pbOpen->setText(tr("Open(&O)"));
         ui->pbOpen->setIcon(QIcon(":/icon/Start"));
         ui->actionOpen->setText(tr("Open(&O)"));
@@ -204,6 +196,19 @@ void CMainWindow::on_pbOpen_clicked()
         Q_ASSERT(bCheck);
 
         SetStatusInfo(tr("Serail Port Close"));
+        return;
+    }
+}
+
+void CMainWindow::on_pbOpen_clicked()
+{
+    bool bCheck = false;
+    int index = 0;
+
+    if(m_SerialPort.isOpen())
+    {
+        m_SerialPort.close();
+        slotAboutToClose();
         return;
     }
 
