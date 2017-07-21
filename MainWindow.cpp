@@ -180,7 +180,7 @@ void CMainWindow::slotTimeOut()
     on_pbSend_clicked();
 }
 
-void CMainWindow::slotAboutToClose()
+void CMainWindow::slotReadChannelFinished()
 {
     bool bCheck = false;
     if(m_SerialPort.isOpen())
@@ -208,7 +208,7 @@ void CMainWindow::on_pbOpen_clicked()
     if(m_SerialPort.isOpen())
     {
         m_SerialPort.close();
-        slotAboutToClose();
+        slotReadChannelFinished();
         return;
     }
 
@@ -250,8 +250,8 @@ void CMainWindow::on_pbOpen_clicked()
     }
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
-    bCheck = connect(&m_SerialPort, SIGNAL(aboutToClose()),
-                     this, SLOT(slotAboutToClose()));
+    bCheck = connect(&m_SerialPort, SIGNAL(readChannelFinished()),
+                     this, SLOT(slotReadChannelFinished()));
     Q_ASSERT(bCheck);
     ui->pbOpen->setText(tr("Close(&C)"));
     ui->pbOpen->setIcon(QIcon(":/icon/Stop"));
