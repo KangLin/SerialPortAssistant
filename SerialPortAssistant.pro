@@ -41,7 +41,7 @@ isEmpty(GIT_DESCRIBE) {
     }
 }
 isEmpty(GIT_VERSION) {
-    GIT_VERSION = $$system(cd $$system_path($$PWD) && git rev-parse HEAD)
+    GIT_VERSION = $$system(cd $$system_path($$PWD) && git rev-parse --short HEAD)
 }
 message("GIT_VERSION:$$GIT_VERSION")
 isEmpty(GIT_VERSION){
