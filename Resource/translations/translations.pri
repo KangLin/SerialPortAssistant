@@ -1,5 +1,3 @@
-# Author: KangLin(Email:kl222@126.com)
-
 # For autocompiling qm-files.
 
 TRANSLATIONS = $$PWD/app_zh_CN.ts \
@@ -16,8 +14,6 @@ TRANSLATIONS = $$PWD/app_zh_CN.ts \
     $$PWD/app_sk.ts \
     $$PWD/app_sl.ts \
     $$PWD/app_uk.ts
-
-OTHER_FILES += $$TRANSLATIONS
 
 for(file, TRANSLATIONS) {
     TRANSLATIONS_TS_FILES += $${file}
@@ -54,26 +50,29 @@ QMAKE_EXTRA_COMPILERS += updateqm
 TRANSLATIONS_OUTPUT_PATH = $${TARGET_PATH}/translations
 mytranslations.target = mytranslations
 QT_QM = $$[QT_INSTALL_TRANSLATIONS]/qt_*.qm
-equals(QMAKE_HOST.os, Windows){#:isEmpty(QMAKE_SH){
-    TRANSLATIONS_OUTPUT_PATH = $$replace(TRANSLATIONS_OUTPUT_PATH, /, \\)
-    QT_QM = $$system_path($${QT_QM})
-    TRANSLATIONS_QM_FILES = $$replace(TRANSLATIONS_QM_FILES, /, \\)
+equals(QMAKE_HOST.os, Windows) : msvc | isEmpty(QMAKE_SH){
+        TRANSLATIONS_OUTPUT_PATH = $$system_path($${TRANSLATIONS_OUTPUT_PATH})
+        QT_QM = $$system_path($${QT_QM})
 }
 mkpath($${TRANSLATIONS_OUTPUT_PATH})
 for(file, TRANSLATIONS_QM_FILES){
+    equals(QMAKE_HOST.os, Windows) : msvc | isEmpty(QMAKE_SH){
+        file = $$system_path($${file})
+    }
     isEmpty(mytranslations_commands){
-        mytranslations_commands += $${QMAKE_COPY} $${file} \
-                               $${TRANSLATIONS_OUTPUT_PATH} 
+        mytranslations_commands += $${QMAKE_COPY} "$${file}" \
+                               "$${TRANSLATIONS_OUTPUT_PATH}"
     }
     else {
-        mytranslations_commands += && $${QMAKE_COPY} $${file} \
-                                $${TRANSLATIONS_OUTPUT_PATH} 
+        mytranslations_commands += && $${QMAKE_COPY} "$${file}" \
+                                "$${TRANSLATIONS_OUTPUT_PATH}" 
     }
 }
-mytranslations_commands += && $${QMAKE_COPY} $${QT_QM} $${TRANSLATIONS_OUTPUT_PATH}
+mytranslations_commands += && $${QMAKE_COPY} "$${QT_QM}" "$${TRANSLATIONS_OUTPUT_PATH}"
 mytranslations.commands = $$mytranslations_commands 
 
-!android{
+
+!android{  #手机平台不需要  
     QMAKE_EXTRA_TARGETS += mytranslations
     #TODO:需要调试编译前编译翻译   
     #PRE_TARGETDEPS += mytranslations
@@ -88,29 +87,13 @@ mytranslations.commands = $$mytranslations_commands
     }
 }
 
-#静态库或android下生成翻译资源文件  
-android | CONFIG(static, static|shared) {
-    TRANSLATIONS_RESOURCES_FILE = $$PWD/translations/Translations.qrc
-    #生成资源文件  
-    TRANSLATIONS_RESOURCES_CONTENT = "</qresource></RCC>"
-    FILE_CONTENT = $$cat($$TRANSLATIONS_RESOURCES_FILE) 
-    !contains(FILE_CONTENT, $$TRANSLATIONS_RESOURCES_CONTENT){
-        TRANSLATIONS_RESOURCES_CONTENT = "<RCC><qresource prefix='/translations'>"
-        for(file, TRANSLATIONS_QM_FILES) {
-            TRANSLATIONS_RESOURCES_CONTENT += "<file>$$replace(file, "$$PWD/translations/", "")</file>"
-        }
-        TRANSLATIONS_RESOURCES_CONTENT += "</qresource></RCC>"
-        write_file($$TRANSLATIONS_RESOURCES_FILE, TRANSLATIONS_RESOURCES_CONTENT, append)
-    }
-    #包含资源文件  
-    RESOURCES += $$TRANSLATIONS_RESOURCES_FILE
-}
-
-#Install resource files
+#安装资源文件  
 mytranslat.files = $$TRANSLATIONS_QM_FILES $$QT_QM
 mytranslat.path = $$PREFIX/translations
 
-!android {
+wince |android {
+    DEPLOYMENT += mytranslat
+}else{
     mytranslat.CONFIG += no_check_exist
     INSTALLS += mytranslat
 }

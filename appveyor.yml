@@ -2,12 +2,11 @@
 version: 'v0.2.0-1-g43dcec5.{build}'
 
 environment:
-  matrix:
-
+  matrix: 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.9
+    QT_VERSION: qt5.9.0
     QT_ROOT: /C/Qt/5.9/msvc2015
     AUTOBUILD_ARCH: x86
     PASSWORD:
@@ -16,7 +15,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.9
+    QT_VERSION: qt5.9.0
     QT_ROOT: /C/Qt/5.9/msvc2015_64
     AUTOBUILD_ARCH: x64
     PASSWORD:
@@ -25,7 +24,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
     TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.9
+    QT_VERSION: qt5.9.0
     QT_ROOT: /C/Qt/5.9/msvc2013_64
     AUTOBUILD_ARCH: x64 
     PASSWORD:
@@ -34,7 +33,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.8
+    QT_VERSION: qt5.8.0
     QT_ROOT: /C/Qt/5.8/msvc2015
     AUTOBUILD_ARCH: x86
     PASSWORD:
@@ -43,7 +42,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.8
+    QT_VERSION: qt5.8.0
     QT_ROOT: /C/Qt/5.8/msvc2015_64
     AUTOBUILD_ARCH: x64
     PASSWORD:
@@ -52,7 +51,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.7
+    QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2015
     AUTOBUILD_ARCH: x86
     PASSWORD:
@@ -61,7 +60,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.7
+    QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2015_64
     AUTOBUILD_ARCH: x64
     PASSWORD:
@@ -70,7 +69,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.6.1
+    QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2015
     AUTOBUILD_ARCH: x86
     PASSWORD:
@@ -79,7 +78,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
     TOOLCHAIN_VERSION: 14
-    QT_VERSION: qt5.6.1
+    QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2015_64
     AUTOBUILD_ARCH: x64
     PASSWORD:
@@ -88,7 +87,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
     TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.7
+    QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2013
     AUTOBUILD_ARCH: x86 
     PASSWORD:
@@ -97,7 +96,7 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
     TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.7
+    QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2013_64
     AUTOBUILD_ARCH: x64 
     PASSWORD:
@@ -106,35 +105,43 @@ environment:
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
     TOOLCHAIN_VERSION: 12
-    QT_VERSION: qt5.6.1
+    QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2013
     AUTOBUILD_ARCH: x86
     PASSWORD:
       secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
-  #- BUILD_TARGERT: windows_mingw
-  #  TOOLCHAIN_VERSION: 530
-  #  QT_VERSION: qt5.9
-  #  QT_ROOT: /C/Qt/5.9/mingw53_32
-  #  AUTOBUILD_ARCH: x86
-  #  PASSWORD:
-  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  - BUILD_TARGERT: windows_mingw
+    TOOLCHAIN_VERSION: 530
+    QT_VERSION: qt5.9.0
+    QT_ROOT: /C/Qt/5.9/mingw53_32
+    AUTOBUILD_ARCH: x86
+    PASSWORD:
+      secure: 2WEtOQrdty3V3g0aEVvS3Q==
     
-  #- BUILD_TARGERT: windows_mingw
-  #  TOOLCHAIN_VERSION: 530
-  #  QT_VERSION: qt5.8
-  #  QT_ROOT: /C/Qt/5.8/mingw53_32
-  #  AUTOBUILD_ARCH: x86
-  #  PASSWORD:
-  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
-
-  #- BUILD_TARGERT: windows_mingw
-  #  TOOLCHAIN_VERSION: 492
-  #  QT_VERSION: qt5.6
-  #  QT_ROOT: /C/Qt/5.6/mingw49_32
-  #  AUTOBUILD_ARCH: x86
-  #  PASSWORD:
-  #    secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  - BUILD_TARGERT: windows_mingw
+    TOOLCHAIN_VERSION: 530
+    QT_VERSION: qt5.8.0
+    QT_ROOT: /C/Qt/5.8/mingw53_32
+    AUTOBUILD_ARCH: x86
+    PASSWORD:
+      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+  
+  - BUILD_TARGERT: windows_mingw
+    TOOLCHAIN_VERSION: 530
+    QT_VERSION: qt5.7.1
+    QT_ROOT: /C/Qt/5.7/mingw53_32
+    AUTOBUILD_ARCH: x86
+    PASSWORD:
+      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+      
+  - BUILD_TARGERT: windows_mingw
+    TOOLCHAIN_VERSION: 492
+    QT_VERSION: qt5.6.2
+    QT_ROOT: /C/Qt/5.6/mingw49_32
+    AUTOBUILD_ARCH: x86
+    PASSWORD:
+      secure: 2WEtOQrdty3V3g0aEVvS3Q==
  
   ##### rabbitim #####
 
@@ -192,6 +199,6 @@ deploy:
     on:
       BUILD_TARGERT: windows_msvc
       TOOLCHAIN_VERSION: 14
-      QT_VERSION: qt5.7
+      QT_VERSION: qt5.7.1
       AUTOBUILD_ARCH: x86
       appveyor_repo_tag: true        # deploy on tag push only

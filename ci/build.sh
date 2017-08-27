@@ -34,8 +34,13 @@ if [ "$BUILD_TARGERT" != "windows_msvc" ]; then
     if [ "$RABBIT_MAKE_JOB_PARA" = "-j1" ];then
         RABBIT_MAKE_JOB_PARA="-j2"
     fi
-    export RABBIT_MAKE_JOB_PARA
 fi
+
+if [ "$BUILD_TARGERT" = "windows_mingw" \
+    -a -n "$APPVEYOR" ]; then
+    export PATH=/C/Qt/Tools/mingw${TOOLCHAIN_VERSION}_32/bin:$PATH    
+fi
+export PKG_CONFIG=/c/msys64/mingw32/bin/pkg-config.exe
 
 export PATH=${QT_ROOT}/bin:$PATH
 echo "PATH:$PATH"
@@ -47,11 +52,19 @@ mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
 ${QT_ROOT}/bin/qmake ${SOURCE_DIR}/SerialPortAssistant.pro "CONFIG+=release"
 
-if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
-    MAKE=nmake
-else
-    MAKE="make ${RABBIT_MAKE_JOB_PARA}"
-fi
+case ${BUILD_TARGERT} in
+    windows_msvc)
+        MAKE=nmake
+        ;;
+    windows_mingw)
+        if [ "${RABBIT_BUILD_HOST}"="windows" ]; then
+            MAKE="mingw32-make ${RABBIT_MAKE_JOB_PARA}"
+        fi
+        ;;
+    *)
+        MAKE="make ${RABBIT_MAKE_JOB_PARA}"
+        ;;
+esac
 
 $MAKE -f Makefile
 echo "$MAKE install ...."
