@@ -33,7 +33,7 @@ if [ -n "${QT_VERSION}" ]; then
     fi
 fi
 
-#下载ANT
+#下载ANT 
 wget -c -nv http://apache.fayea.com//ant/binaries/apache-ant-1.10.1-bin.tar.gz
 tar xzf apache-ant-1.10.1-bin.tar.gz
 rm -f apache-ant-1.10.1-bin.tar.gz

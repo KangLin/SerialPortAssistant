@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.2.0-1-g43dcec5.{build}'
+version: 'v0.2.0-5-g66405df.{build}'
 
 environment:
   matrix: 
@@ -9,8 +9,6 @@ environment:
     QT_VERSION: qt5.9.1
     QT_ROOT: /C/Qt/5.9.1/msvc2015
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -18,17 +16,13 @@ environment:
     QT_VERSION: qt5.9.1
     QT_ROOT: /C/Qt/5.9.1/msvc2015_64
     AUTOBUILD_ARCH: x64
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
    
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
     TOOLCHAIN_VERSION: 12
     QT_VERSION: qt5.9.1
     QT_ROOT: /C/Qt/5.9.1/msvc2013_64
-    AUTOBUILD_ARCH: x64 
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
+    AUTOBUILD_ARCH: x64
     
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -36,8 +30,6 @@ environment:
     QT_VERSION: qt5.8.0
     QT_ROOT: /C/Qt/5.8/msvc2015
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -45,8 +37,6 @@ environment:
     QT_VERSION: qt5.8.0
     QT_ROOT: /C/Qt/5.8/msvc2015_64
     AUTOBUILD_ARCH: x64
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -54,8 +44,6 @@ environment:
     QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2015
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -63,8 +51,6 @@ environment:
     QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2015_64
     AUTOBUILD_ARCH: x64
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -72,8 +58,6 @@ environment:
     QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2015
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 14 2015"
@@ -81,8 +65,6 @@ environment:
     QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2015_64
     AUTOBUILD_ARCH: x64
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
@@ -90,8 +72,6 @@ environment:
     QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2013
     AUTOBUILD_ARCH: x86 
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
@@ -99,8 +79,6 @@ environment:
     QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/msvc2013_64
     AUTOBUILD_ARCH: x64 
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_msvc
     GENERATORS: "Visual Studio 12 2013"
@@ -108,42 +86,30 @@ environment:
     QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/msvc2013
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
 
   - BUILD_TARGERT: windows_mingw
     TOOLCHAIN_VERSION: 530
     QT_VERSION: qt5.9.0
     QT_ROOT: /C/Qt/5.9/mingw53_32
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
     
   - BUILD_TARGERT: windows_mingw
     TOOLCHAIN_VERSION: 530
     QT_VERSION: qt5.8.0
     QT_ROOT: /C/Qt/5.8/mingw53_32
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
   
   - BUILD_TARGERT: windows_mingw
     TOOLCHAIN_VERSION: 530
     QT_VERSION: qt5.7.1
     QT_ROOT: /C/Qt/5.7/mingw53_32
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
       
   - BUILD_TARGERT: windows_mingw
     TOOLCHAIN_VERSION: 492
     QT_VERSION: qt5.6.2
     QT_ROOT: /C/Qt/5.6/mingw49_32
     AUTOBUILD_ARCH: x86
-    PASSWORD:
-      secure: 2WEtOQrdty3V3g0aEVvS3Q==
- 
-  ##### rabbitim #####
 
 matrix:
   fast_finish: false
@@ -159,11 +125,8 @@ init:
   - echo PROCESSOR_IDENTIFIER=%PROCESSOR_IDENTIFIER%
   - echo QT_ROOT=%QT_ROOT%
   - del C:\msys64\usr\bin\link.exe
-  
+
 install:
-  #- C:\msys64\usr\bin\pacman.exe -Syu --noconfirm
-  #- C:\msys64\autorebase.bat
-  #- C:\msys64\usr\bin\pacman.exe -S --noconfirm nasm yasm unzip curl zip expect
   - C:\msys64\autorebase.bat
 
 before_build:
@@ -174,15 +137,10 @@ build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - C:\msys64\usr\bin\bash.exe %APPVEYOR_BUILD_FOLDER%\ci\build.sh
 
-#after_build:
-
 artifacts:
-  #- path: build_$(BUILD_TARGERT)/install
-  #  name: SerialPortAssistant_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
-  #  type: zip
-    
   - path: build_${BUILD_TARGERT}/SerialPortAssistant-Setup-*.exe
-    name: SerialPortAssistant_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
+    #name: SerialPortAssistant_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
+    type: zip
 
 test: off
 
