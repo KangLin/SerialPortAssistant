@@ -1,5 +1,9 @@
 修改日志
 ------
+
+* Version：v0.3.0
+  - 修改自动化编译
+  
 * Version：v0.2.0
   - 自动ci上传改为qt5.7，因为qt5.8后不再支持windowsxp
 
