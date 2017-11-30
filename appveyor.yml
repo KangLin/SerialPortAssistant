@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.2.0-9-ga49529b.{build}'
+version: 'v0.2.0-7-g2d1ed6b.{build}'
 
 environment:
   matrix: 
