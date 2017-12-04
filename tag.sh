@@ -14,7 +14,6 @@ if [ -n "$1" ]; then
         exit 0
     fi
     git tag -a $1 -m "Release $1"
-    ./tag.sh
 fi
 
 VERSION=`git describe --tags`
