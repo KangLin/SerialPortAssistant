@@ -22,6 +22,7 @@ Abstract:
 #include <QTime>
 #include <QFile>
 #include <QSettings>
+#include <QFileDevice>
 #include "Widgets/DlgAbout/DlgAbout.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
@@ -935,4 +936,20 @@ void CMainWindow::on_rbSendASCII_clicked(bool checked)
 
 void CMainWindow::on_actionPasue_P_triggered()
 {
+}
+
+void CMainWindow::on_actionLoad_File_F_triggered()
+{
+    QString szFile = QFileDialog::getOpenFileName(this, tr("Load File"));
+    if(szFile.isEmpty())
+        return;
+    
+    QFile f(szFile);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    
+    QByteArray r = f.readAll();
+    ui->teSend->setText(QString(r));
+    
+    f.close();
 }

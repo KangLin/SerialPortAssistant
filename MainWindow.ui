@@ -539,6 +539,8 @@
     </widget>
     <addaction name="actionOpen"/>
     <addaction name="separator"/>
+    <addaction name="actionLoad_File_F"/>
+    <addaction name="separator"/>
     <addaction name="actionClear"/>
     <addaction name="actionClear_Send_History"/>
     <addaction name="actionPasue_P"/>
@@ -548,6 +550,7 @@
     <addaction name="menuStype_S"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp_H">
     <property name="title">
@@ -670,6 +673,15 @@
    </property>
    <property name="toolTip">
     <string>Pause the flow list</string>
+   </property>
+  </action>
+  <action name="actionLoad_File_F">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/OpenFile</normaloff>:/icon/OpenFile</iconset>
+   </property>
+   <property name="text">
+    <string>Load File(&amp;F)</string>
    </property>
   </action>
  </widget>

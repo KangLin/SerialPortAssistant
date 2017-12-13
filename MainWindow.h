@@ -108,6 +108,8 @@ private slots:
     
     void on_actionPasue_P_triggered();
     
+    void on_actionLoad_File_F_triggered();
+    
 private:
     int InitStatusBar();
     int InitToolBar();
