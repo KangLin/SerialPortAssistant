@@ -121,12 +121,12 @@ private:
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;
-    ulong m_nSend, m_nRecive;
+    ulong m_nSend, m_nRecive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
     
     QLabel m_statusInfo;
-    QLabel m_statusRx, m_statusTx;    
+    QLabel m_statusRx, m_statusTx, m_statusDrop;    
 };
 
 #endif // MAINWINDOW_H

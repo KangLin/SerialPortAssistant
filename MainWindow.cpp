@@ -23,6 +23,7 @@ Abstract:
 #include <QFile>
 #include <QSettings>
 #include <QFileDevice>
+#include <QStandardPaths>
 #include "Widgets/DlgAbout/DlgAbout.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
@@ -32,12 +33,15 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_Timer(this), 
     m_nSend(0),
     m_nRecive(0),
+    m_nDrop(0),
     m_ActionGroupTranslator(this),
     m_ActionGroupStyle(this),
     m_cmbPortIndex(-1)
 {
     bool check = false;
 
+    CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
+                                   QStandardPaths::DataLocation));
     ui->setupUi(this);
     
     LoadTranslate();
@@ -145,17 +149,21 @@ int CMainWindow::InitStatusBar()
     SetStatusInfo(tr("Ready"));
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
+    m_statusDrop.setText(tr("Drop: 0 Bytes"));
     m_statusInfo.setSizePolicy(QSizePolicy::Policy::Expanding,
                                QSizePolicy::Policy::Preferred);
     m_statusTx.setSizePolicy(QSizePolicy::Policy::Preferred,
                              QSizePolicy::Policy::Preferred);
     m_statusRx.setSizePolicy(QSizePolicy::Policy::Preferred,
                              QSizePolicy::Policy::Preferred);
+    m_statusDrop.setSizePolicy(QSizePolicy::Policy::Preferred,
+                             QSizePolicy::Policy::Preferred);
 
     this->statusBar()->addWidget(&m_statusInfo);
     this->statusBar()->addWidget(&m_statusRx);
     this->statusBar()->addWidget(&m_statusTx);
-
+    this->statusBar()->addWidget(&m_statusDrop);
+    
     return 0;
 }
 
@@ -274,9 +282,11 @@ void CMainWindow::on_pbOpen_clicked()
     SetStatusInfo(GetSerialPortSettingInfo(),
                   Qt::green);
     m_nSend = 0;
-    m_nRecive = 0;    
+    m_nRecive = 0;
+    m_nDrop = 0;
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
+    m_statusDrop.setText(tr("Drop: 0 Bytes"));
     if(ui->cbSendLoop->isChecked())
         m_Timer.start(ui->sbLoopTime->value());
 }
@@ -416,7 +426,12 @@ void CMainWindow::on_pbSend_clicked()
 
     m_nSend += nRet;
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
-
+    if(szText.length() != nRet)
+    {   
+        m_nDrop += (szText.length() - nRet);
+        m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
+    }
+    
     //增加到最近发送列表中  
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))

@@ -545,6 +545,8 @@
     <addaction name="actionClear_Send_History"/>
     <addaction name="actionPasue_P"/>
     <addaction name="separator"/>
+    <addaction name="actionOpen_Log_G"/>
+    <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
     <addaction name="menuStype_S"/>
@@ -578,6 +580,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionLoad_File_F"/>
    <addaction name="actionOpen"/>
    <addaction name="actionClear"/>
    <addaction name="actionPasue_P"/>
@@ -682,6 +685,15 @@
    </property>
    <property name="text">
     <string>Load File(&amp;F)</string>
+   </property>
+  </action>
+  <action name="actionOpen_Log_G">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Log</normaloff>:/icon/Log</iconset>
+   </property>
+   <property name="text">
+    <string>Open Log(&amp;G)</string>
    </property>
   </action>
  </widget>
