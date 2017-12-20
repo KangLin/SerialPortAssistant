@@ -83,8 +83,16 @@ int CLog::Log(const char *pszFile, int nLine, int nLevel,
     if(!m_szFile.isEmpty())
     {
         QFile f(m_szFile);
-        if (!f.open(QIODevice::ReadWrite | QIODevice::Append | QIODevice::Text))
-            return -1;
+        if (!f.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
+        {
+            qDebug() << "open file fail: "
+                     << m_szFile
+                     << "["
+                     << f.error()
+                     << "]"
+                     << f.errorString();
+            return 0;
+        }
         QTextStream out(&f);  
         out << szTemp << endl;
         f.close();

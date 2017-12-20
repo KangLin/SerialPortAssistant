@@ -21,6 +21,7 @@ Abstract:
 #include <QMessageBox>
 #include <QTime>
 #include <QFile>
+#include <QDir>
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
@@ -39,13 +40,19 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_cmbPortIndex(-1)
 {
     bool check = false;
-
+    QDir d;
+    if(!d.exists(QStandardPaths::writableLocation(
+                      QStandardPaths::DataLocation)))
+        d.mkdir(QStandardPaths::writableLocation(
+                  QStandardPaths::DataLocation));
     CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
-                                   QStandardPaths::DataLocation));
+                                   QStandardPaths::DataLocation)
+                               + QDir::separator() + "SerialAssistant.log");
     ui->setupUi(this);
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
                                   QStandardPaths::TempLocation)
                               + QDir::separator() + "SerialAssistantRecive.txt");
+    
     LoadTranslate();
     LoadStyle();
     InitMenu();
