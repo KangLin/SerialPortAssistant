@@ -55,7 +55,9 @@ other.files = LICENSE.md Authors.txt ChangeLog.md
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX
-INSTALLS += target other
+install.files = Install/Install.nsi
+install.path = $$OUT_PWD
+INSTALLS += target other install
 
 SOURCES +=\
     MainWindow.cpp \
