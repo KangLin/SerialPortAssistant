@@ -1008,3 +1008,8 @@ void CMainWindow::on_pbBrowse_clicked()
     QString szFile = QFileDialog::getOpenFileName(this);
     ui->leSaveToFile->setText(szFile);
 }
+
+void CMainWindow::on_actionOpen_Log_G_triggered()
+{
+    CLog::Instance()->OpneFile();
+}

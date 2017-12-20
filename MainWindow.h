@@ -105,12 +105,10 @@ private slots:
     void on_rbSendHex_clicked(bool checked);
     void on_rbSendASCII_clicked(bool checked);
     void on_cmbRecent_activated(const QString &szText);
-    
     void on_actionPasue_P_triggered();
-    
     void on_actionLoad_File_F_triggered();
-    
     void on_pbBrowse_clicked();
+    void on_actionOpen_Log_G_triggered();
     
 private:
     int InitStatusBar();
