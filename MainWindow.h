@@ -124,6 +124,7 @@ private:
     ulong m_nSend, m_nRecive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
+    int m_nLoopNumber;
     
     QLabel m_statusInfo;
     QLabel m_statusRx, m_statusTx, m_statusDrop;    

@@ -30,7 +30,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
-    m_Timer(this), 
+    m_Timer(this),
     m_nSend(0),
     m_nRecive(0),
     m_nDrop(0),
@@ -94,6 +94,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbRecent->setDuplicatesEnabled(false);
     
     ui->cbSendLoop->setChecked(CGlobal::Instance()->GetSendLoop());
+    m_nLoopNumber = ui->sbLoopNumber->value();
     ui->sbLoopTime->setValue(CGlobal::Instance()->GetSendLoopTime());
     check = connect(&m_Timer, SIGNAL(timeout()), this, SLOT(slotTimeOut()));
     Q_ASSERT(check);
@@ -187,6 +188,13 @@ int CMainWindow::InitLeftBar()
 void CMainWindow::slotTimeOut()
 {
     on_pbSend_clicked();
+    if(m_nLoopNumber > 0)
+        m_nLoopNumber--;
+    if(0 == m_nLoopNumber)
+    {
+        ui->cbSendLoop->setChecked(false);
+        m_Timer.stop();
+    }
 }
 
 void CMainWindow::slotReadChannelFinished()
@@ -288,7 +296,10 @@ void CMainWindow::on_pbOpen_clicked()
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     m_statusDrop.setText(tr("Drop: 0 Bytes"));
     if(ui->cbSendLoop->isChecked())
+    {
+        m_nLoopNumber = ui->sbLoopNumber->value();   
         m_Timer.start(ui->sbLoopTime->value());
+    }
 }
 
 int CMainWindow::SetStatusInfo(QString szText, QColor color)
@@ -313,7 +324,7 @@ QString CMainWindow::GetSerialPortSettingInfo()
 //限制QTextEdit内容的长度  
 void CMainWindow::slotQTextEditMaxLength()
 {
-    int maxLength = 1024000;
+    int maxLength = 102400;
     int length = ui->teRecive->toPlainText().length();
     if(length > maxLength << 1)
     {
@@ -324,14 +335,13 @@ void CMainWindow::slotQTextEditMaxLength()
         cursor.removeSelectedText();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
         //ui->teRecive->setTextCursor(cursor);
+        LOG_MODEL_DEBUG("MainWindow", "slotQTextEditMaxLength");
     }
 }
 
 void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 {
     QString szPrex;
-    
-    slotQTextEditMaxLength();
     
     if(ui->cbDisplayTime->isChecked())
         szPrex = QTime::currentTime().toString("hh:mm:ss.zzz") + " ";
@@ -369,6 +379,7 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         ui->teRecive->insertPlainText(szOut);
     }
     
+    slotQTextEditMaxLength();
     if(!ui->actionPasue_P->isChecked())
     {
         QTextCursor cursor = ui->teRecive->textCursor();
@@ -480,7 +491,10 @@ void CMainWindow::on_cbSendLoop_clicked()
     if(ui->cbSendLoop->isChecked())
     {
         if((!m_Timer.isActive()) && m_SerialPort.isOpen())
+        {
+            m_nLoopNumber = ui->sbLoopNumber->value();
             m_Timer.start(ui->sbLoopTime->value());
+        }
     }
     else
     {
