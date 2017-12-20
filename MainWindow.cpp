@@ -46,7 +46,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
         d.mkdir(QStandardPaths::writableLocation(
                   QStandardPaths::DataLocation));
     CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
-                                   QStandardPaths::DataLocation)
+                                   QStandardPaths::TempLocation)
                                + QDir::separator() + "SerialAssistant.log");
     ui->setupUi(this);
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
