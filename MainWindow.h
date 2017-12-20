@@ -110,6 +110,8 @@ private slots:
     
     void on_actionLoad_File_F_triggered();
     
+    void on_pbBrowse_clicked();
+    
 private:
     int InitStatusBar();
     int InitToolBar();

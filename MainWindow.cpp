@@ -43,7 +43,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
                                    QStandardPaths::DataLocation));
     ui->setupUi(this);
-    
+    ui->leSaveToFile->setText(QStandardPaths::writableLocation(
+                                  QStandardPaths::TempLocation)
+                              + QDir::separator() + "SerialAssistantRecive.txt");
     LoadTranslate();
     LoadStyle();
     InitMenu();
@@ -396,7 +398,18 @@ void CMainWindow::slotRead()
         return;
     }
 
-    QString szText(m_SerialPort.readAll());
+    QByteArray d = m_SerialPort.readAll();
+    QString szText(d);
+    if(ui->cbSaveToFile->isChecked())
+    {
+        QFile f(ui->leSaveToFile->text());
+        if(f.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            f.write(d);
+            f.close();
+        }
+    }
+    
     AddRecive(szText, true);
     m_nRecive += szText.toStdString().length();
     m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
@@ -981,4 +994,10 @@ void CMainWindow::on_actionLoad_File_F_triggered()
     ui->teSend->setText(QString(r));
     
     f.close();
+}
+
+void CMainWindow::on_pbBrowse_clicked()
+{
+    QString szFile = QFileDialog::getOpenFileName(this);
+    ui->leSaveToFile->setText(szFile);
 }
