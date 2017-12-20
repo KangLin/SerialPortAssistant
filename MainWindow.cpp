@@ -403,7 +403,7 @@ void CMainWindow::slotRead()
     if(ui->cbSaveToFile->isChecked())
     {
         QFile f(ui->leSaveToFile->text());
-        if(f.open(QIODevice::WriteOnly | QIODevice::Text))
+        if(f.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
         {
             f.write(d);
             f.close();
