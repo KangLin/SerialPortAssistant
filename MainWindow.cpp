@@ -40,11 +40,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_cmbPortIndex(-1)
 {
     bool check = false;
-    QDir d;
+    /*QDir d;
     if(!d.exists(QStandardPaths::writableLocation(
                       QStandardPaths::DataLocation)))
         d.mkdir(QStandardPaths::writableLocation(
-                  QStandardPaths::DataLocation));
+                  QStandardPaths::DataLocation));*/
     CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
                                    QStandardPaths::TempLocation)
                                + QDir::separator() + "SerialAssistant.log");
@@ -447,7 +447,9 @@ void CMainWindow::on_pbSend_clicked()
     if(-1 == nRet)
     {
         m_statusInfo.setText(tr("Send fail"));
-        LOG_MODEL_ERROR("CMainWindows", "Write fail");
+        LOG_MODEL_ERROR("CMainWindows", "Write fail [%d]：%s",
+                        m_SerialPort.error(),
+                        m_SerialPort.errorString().toStdString().c_str());
         on_pbOpen_clicked(); //关闭串口  
         return;
     }
