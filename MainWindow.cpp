@@ -35,6 +35,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_nSend(0),
     m_nRecive(0),
     m_nDrop(0),
+    m_nTransmissions(0),
     m_ActionGroupTranslator(this),
     m_ActionGroupStyle(this),
     m_cmbPortIndex(-1)
@@ -296,17 +297,18 @@ void CMainWindow::on_pbOpen_clicked()
     ui->actionOpen->setIcon(QIcon(":/icon/Stop"));
     ui->pbSend->setEnabled(true);
 
-    SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+    SetStatusInfo(GetSerialPortSettingInfo(), Qt::green);
     m_nSend = 0;
     m_nRecive = 0;
     m_nDrop = 0;
+    m_nTransmissions = 0;
     m_statusRx.setText(tr("Rx: 0 Bytes"));
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     m_statusDrop.setText(tr("Drop: 0 Bytes"));
+    ui->lbTransmissions->setText(QString::number(m_nTransmissions));
     if(ui->cbSendLoop->isChecked())
     {
-        m_nLoopNumber = ui->sbLoopNumber->value();   
+        m_nLoopNumber = ui->sbLoopNumber->value();
         m_Timer.start(ui->sbLoopTime->value());
     }
 }
@@ -456,7 +458,9 @@ void CMainWindow::on_pbSend_clicked()
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
     if(ui->cbDisplaySend->isChecked())
         AddRecive(szText, false);
-
+    
+    m_nTransmissions++;
+    ui->lbTransmissions->setText(QString::number(m_nTransmissions));
     m_nSend += nRet;
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
     if(szText.length() != nRet)
