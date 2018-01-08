@@ -418,9 +418,10 @@ void CMainWindow::slotRead()
             f.close();
         }
     }
-    
-    AddRecive(szText, true);
     m_nRecive += szText.toStdString().length();
+    //显示接收  
+    AddRecive(szText, true);
+    
     m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
 }
 
@@ -456,9 +457,7 @@ void CMainWindow::on_pbSend_clicked()
         return;
     }
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
-    if(ui->cbDisplaySend->isChecked())
-        AddRecive(szText, false);
-    
+
     m_nTransmissions++;
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
     m_nSend += nRet;
@@ -468,6 +467,10 @@ void CMainWindow::on_pbSend_clicked()
         m_nDrop += (szText.length() - nRet);
         m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
     }
+    
+    //显示发送  
+    if(ui->cbDisplaySend->isChecked())
+        AddRecive(szText, false);
     
     //增加到最近发送列表中  
     if(-1 == ui->cmbRecent->findText(
