@@ -408,6 +408,8 @@ void CMainWindow::slotRead()
     }
 
     QByteArray d = m_SerialPort.readAll();
+    if(d.isEmpty())
+        return;
     QString szText(d);
     if(ui->cbSaveToFile->isChecked())
     {
@@ -418,7 +420,7 @@ void CMainWindow::slotRead()
             f.close();
         }
     }
-    m_nRecive += szText.toStdString().length();
+    m_nRecive += d.length();
     //显示接收  
     AddRecive(szText, true);
     
