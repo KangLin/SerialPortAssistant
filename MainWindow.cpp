@@ -409,7 +409,10 @@ void CMainWindow::slotRead()
 
     QByteArray d = m_SerialPort.readAll();
     if(d.isEmpty())
+    {
+        LOG_MODEL_ERROR("MainWindows", "read data fail");   
         return;
+    }
     QString szText(d);
     if(ui->cbSaveToFile->isChecked())
     {
