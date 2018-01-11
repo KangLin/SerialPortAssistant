@@ -413,6 +413,8 @@ void CMainWindow::slotRead()
         LOG_MODEL_ERROR("MainWindows", "read data fail");   
         return;
     }
+    m_nRecive += d.length();
+    
     QString szText(d);
     if(ui->cbSaveToFile->isChecked())
     {
@@ -423,7 +425,7 @@ void CMainWindow::slotRead()
             f.close();
         }
     }
-    m_nRecive += d.length();
+    
     //显示接收  
     AddRecive(szText, true);
     
