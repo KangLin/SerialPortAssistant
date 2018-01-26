@@ -35,7 +35,7 @@ isEmpty(PREFIX) {
 }
 
 isEmpty(BUILD_VERSION) {
-    GIT=$$(GIT)
+    isEmpty(GIT) : GIT=$$(GIT)
     isEmpty(GIT) : GIT=git
     isEmpty(GIT_DESCRIBE) {
         GIT_DESCRIBE = $$system(cd $$system_path($$PWD) && $$GIT describe --tags)
@@ -48,7 +48,7 @@ isEmpty(BUILD_VERSION) {
     }
     
     isEmpty(BUILD_VERSION){
-        error("Built without git, please add BUILD_VERSION to DEFINES or add git path to environment GIT")
+        error("Built without git, please add BUILD_VERSION to DEFINES or add git path to environment variable GIT")
     }
 }
 message("BUILD_VERSION:$$BUILD_VERSION")

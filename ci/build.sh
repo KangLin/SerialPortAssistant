@@ -40,10 +40,20 @@ if [ "$BUILD_TARGERT" = "windows_mingw" \
     -a -n "$APPVEYOR" ]; then
     export PATH=/C/Qt/Tools/mingw${TOOLCHAIN_VERSION}_32/bin:$PATH    
 fi
-export PKG_CONFIG=/c/msys64/mingw32/bin/pkg-config.exe
+TARGET_OS=`uname -s`
+case $TARGET_OS in
+    MINGW* | CYGWIN* | MSYS*)
+        export PKG_CONFIG=/c/msys64/mingw32/bin/pkg-config.exe
+        ;;
+    Linux* | Unix*)
+    ;;
+    *)
+    ;;
+esac
 
 export PATH=${QT_ROOT}/bin:$PATH
 echo "PATH:$PATH"
+echo "PKG_CONFIG:$PKG_CONFIG"
 cd ${SOURCE_DIR}
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     ./tag.sh
