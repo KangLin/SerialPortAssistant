@@ -29,12 +29,12 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 
 6. Donate  
 If you are satisfied, you can donate to me
-    * qq mobile wallet: 16614119
-    * WeChat scan the following two-dimensional code to donate 20 yuan:   
-    ![WeChat collection](Resource/png/weixinpay.png "微信收款")  
     * WeChat scan the following two-dimensional code for free donation  
-    ![Free donate](Resource/png/weixinpay.jpg "微信收款")
-
+    ![Alipay contribute( More than ￥20 )](Resource/png/zhifubao.png  "Alipay contribute( More than ￥20 )")
+    ![WeChat payment( More than ￥20 )](Resource/png/weixinpay.png "WeChat payment( More than ￥20 )")
+    * Scan the following two-dimensional code to donate 20 yuan:  
+    ![Alipay contribute](Resource/png/zhifubao20.png  "Alipay contribute")
+    ![WeChat payment](Resource/png/weixinpay20.png "WeChat payment")
 7. Compile
     - Compiled with QtCreator
        * Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator

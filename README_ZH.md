@@ -29,11 +29,12 @@
 
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠
-    * qq手机钱包：16614119
-    * 微信扫描下面二维码进行捐赠20元：  
-    ![微信收款](Resource/png/weixinpay.png "微信收款")  
-    * 微信扫描下面二维码进行随意捐赠  
-    ![随意捐赠](Resource/png/weixinpay.jpg "微信收款")
+    * 扫描下面二维码进行任意金额捐赠  
+    ![支付宝(大于 ￥20 )](Resource/png/zhifubao.png  "支付宝( 大于 ￥20 )")
+    ![微信( 大于 ￥20 )](Resource/png/weixinpay.png "微信( 大于 ￥20 )")
+    * 扫描下面二维码捐赠￥20  
+    ![支付宝（￥20）](Resource/png/zhifubao20.png  "支付宝捐赠")
+    ![微信捐赠](Resource/png/weixinpay20.png "微信捐赠")
 
 7. 编译
     - 用 QtCreator 编译
