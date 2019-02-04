@@ -13,7 +13,6 @@
         <file alias="Start">png/start256.png</file>
         <file alias="Stop">png/stop-red256.png</file>
         <file alias="Send">png/send.png</file>
-        <file alias="WeiXinPay">png/weixinpay.jpg</file>
         <file alias="WeiXinPay20">png/weixinpay.png</file>
         <file alias="Pause">png/pause.png</file>
         <file alias="Log">png/log.png</file>
