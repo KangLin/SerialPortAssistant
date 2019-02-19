@@ -9,11 +9,6 @@
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="122"/>
-        <source>WeChat scan two-dimensional code for donation</source>
-        <translation>微信扫描进行捐赠</translation>
-    </message>
-    <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="404"/>
         <source>Serial Port Assistant</source>
         <translation>串口助手</translation>
@@ -37,6 +32,11 @@
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="193"/>
         <source>Home page: https://github.com/KangLin/SerialPortAssistant.git</source>
         <translation>主页：https://github.com/KangLin/SerialPortAssistant.git</translation>
+    </message>
+    <message>
+        <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="122"/>
+        <source>Scan two-dimensional code for donation</source>
+        <translation>扫描二维码进行捐赠</translation>
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="171"/>

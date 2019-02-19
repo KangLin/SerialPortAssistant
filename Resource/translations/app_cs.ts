@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../../Widgets/DlgAbout/DlgAbout.ui" line="122"/>
-        <source>WeChat scan two-dimensional code for donation</source>
+        <source>Scan two-dimensional code for donation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
