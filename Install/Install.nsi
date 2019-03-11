@@ -7,12 +7,12 @@
 !define PRODUCT_WEB_SITE "https://github.com/KangLin/${PRODUCT_NAME}"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
-!define PRODUCT_UNINST_ROOT_KEY "HKLM"
+!define PRODUCT_UNINST_ROOT_KEY "HKCU"
 
 SetCompressor lzma
 
 ; MUI 1.67 compatible ------
-!include "MUI.nsh"
+!include "MUI2.nsh"
 !include "x64.nsh"
 
 ; MUI Settings
@@ -60,8 +60,11 @@ LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "你确实要完全移除 $
 Name "$(LANG_PRODUCT_NAME)-${PRODUCT_VERSION}"
 Caption "$(LANG_PRODUCT_NAME)-${PRODUCT_VERSION}"
 OutFile "${PRODUCT_NAME}-Setup-${PRODUCT_VERSION}.exe"
-InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
-InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
+;InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
+InstallDir "$LOCALAPPDATA\${PRODUCT_NAME}"
+;InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
+InstallDirRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" ""
+
 ShowInstDetails show
 ShowUnInstDetails show
 #RequestExecutionLevel user
@@ -111,6 +114,12 @@ Function InstallRuntime
   ${EndIf}
 FunctionEnd
 
+Function DirectoryPermissionErrorBox
+ StrCpy $1 "${LANG_DIRECTORY_PERMISSION}"
+     MessageBox MB_ICONSTOP $1 
+       Abort
+FunctionEnd
+
 Var UNINSTALL_PROG
 Var OLD_PATH
 Function .onInit  
@@ -131,28 +140,31 @@ FunctionEnd
 
 Section "${PRODUCT_NAME}" SEC01
   SetOutPath "$INSTDIR"
+  IfFileExists "$INSTDIR\*.*" +2 0
+  call DirectoryPermissionErrorBox
   SetOverwrite ifnewer
   File /r "install\*"
-  SetShellVarContext all
+  ;SetShellVarContext all
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
   CreateShortCut "$DESKTOP\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
-  SetShellVarContext current
+  ;SetShellVarContext current
   call InstallRuntime
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  SetShellVarContext all
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  ;SetShellVarContext all
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  SetShellVarContext current
+  ;SetShellVarContext current
 SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_NAME}.exe"
+  ;WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_APP_NAME}.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_APP_NAME}.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "Path" "$INSTDIR\"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\${PRODUCT_NAME}.exe"
@@ -178,15 +190,17 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-  SetShellVarContext all
+  ;SetShellVarContext all
   RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
   Delete "$DESKTOP\$(LANG_PRODUCT_NAME).lnk"
   SetOutPath "$SMPROGRAMS"
-  SetShellVarContext current
+  ;SetShellVarContext current
   RMDir /r "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  ;DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}"
+  
   SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"
   SetAutoClose true
 SectionEnd

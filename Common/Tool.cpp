@@ -290,6 +290,7 @@ QImage CTool::ConvertToGray(QImage image)
 
 bool CTool::EnableWake(bool bWake)
 {
+    Q_UNUSED(bWake);
     static bool bSet = false;
 /*
 #ifdef ANDROID
