@@ -31,9 +31,15 @@ function function_common()
     if [ -n "${QT_VERSION}" ]; then
         QT_DIR=`pwd`/Qt/${QT_VERSION}
         if [ ! -d "${QT_DIR}" ]; then
-            wget -c --no-check-certificate -nv http://download.qt.io/official_releases/qt/${QT_VERSION_DIR}/${QT_VERSION}/qt-opensource-linux-x64-android-${QT_VERSION}.run
-            bash ${SOURCE_DIR}/ci/qt-installer.sh qt-opensource-linux-x64-android-${QT_VERSION}.run ${QT_DIR}
-            rm qt-opensource-linux-x64-android-${QT_VERSION}.run
+            if [ "${QT_VERSION}" = "5.6.3" ]; then
+                wget -c --no-check-certificate -nv http://download.qt.io/official_releases/qt/${QT_VERSION_DIR}/${QT_VERSION}/qt-opensource-linux-x64-android-${QT_VERSION}.run
+                bash ${SOURCE_DIR}/ci/qt-installer.sh qt-opensource-linux-x64-android-${QT_VERSION}.run ${QT_DIR}
+                rm qt-opensource-linux-x64-android-${QT_VERSION}.run
+            else
+                wget -c --no-check-certificate -nv http://download.qt.io/official_releases/qt/${QT_VERSION_DIR}/${QT_VERSION}/qt-opensource-linux-x64-${QT_VERSION}.run
+                bash ${SOURCE_DIR}/ci/qt-installer.sh qt-opensource-linux-x64-${QT_VERSION}.run ${QT_DIR}
+                rm qt-opensource-linux-x64-${QT_VERSION}.run
+            fi
         fi
     fi
 }

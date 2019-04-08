@@ -27,14 +27,13 @@ env:
     - RABBITIM_BUILD_THIRDLIBRARY="TRUE" 
 
   matrix:
-     #- BUILD_TARGERT="unix" QT_VERSION_DIR=5.9 QT_VERSION=5.9.0
-     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.8 QT_VERSION=5.8.0
-     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.7 QT_VERSION=5.7.0
-     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.6 QT_VERSION=5.6.0
+     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.12 QT_VERSION=5.12.2
+     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.9 QT_VERSION=5.9.7
+     - BUILD_TARGERT="unix" QT_VERSION_DIR=5.6 QT_VERSION=5.6.3
 
-     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.8 QT_VERSION=5.8.0
-     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.7 QT_VERSION=5.7.0
-     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.6 QT_VERSION=5.6.0
+     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.12 QT_VERSION=5.12.2
+     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.8 QT_VERSION=5.9.7
+     #- BUILD_TARGERT="android" QT_VERSION_DIR=5.6 QT_VERSION=5.6.3
 
 before_install:
   - echo "TRAVIS_OS_NAME=${TRAVIS_OS_NAME}"
@@ -43,7 +42,7 @@ before_install:
   - mkdir ${SOURCE_DIR}/Tools
   
 install:
-  - bash ci/build-install-tools.sh > /dev/null
+  - bash ci/build-install-tools.sh #> /dev/null
 
 before_script:
   - cd ${SOURCE_DIR}
