@@ -14,19 +14,13 @@ if [ "$BUILD_TARGERT" = "android" ]; then
     if [ -z "$APPVEYOR" ]; then
         export JAVA_HOME="/C/Program Files (x86)/Java/jdk1.8.0"
     fi
-    export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION_DIR}/android_armv7
-    if [ "${QT_VERSION}" = "5.2.1" ]; then
-        export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/android_armv7
-    fi
+    export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
     export PATH=${SOURCE_DIR}/Tools/apache-ant/bin:$JAVA_HOME:$PATH
 fi
 
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     QT_DIR=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}
-    export QT_ROOT=${QT_DIR}/${QT_VERSION_DIR}/gcc_64
-    if [ "${QT_VERSION}" = "5.2.1" ]; then
-        export QT_ROOT=${QT_DIR}/${QT_VERSION}/gcc_64
-    fi
+    export QT_ROOT=${QT_DIR}/${QT_VERSION}/gcc_64
 fi
 
 if [ "$BUILD_TARGERT" != "windows_msvc" ]; then
