@@ -26,7 +26,10 @@ Abstract:
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
+#ifdef RABBITCOMMON
 #include "DlgAbout/DlgAbout.h"
+#include "FrmUpdater/FrmUpdater.h"
+#endif
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -54,6 +57,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
                                   QStandardPaths::TempLocation)
                               + QDir::separator() + "SerialAssistantRecive.txt");
+    
+    CFrmUpdater updater;
+    ui->actionUpdate_U->setIcon(updater.windowIcon());
     
     LoadTranslate();
     LoadStyle();
@@ -1127,5 +1133,12 @@ void CMainWindow::on_actionOpen_Log_G_triggered()
 
 void CMainWindow::on_actionUpdate_U_triggered()
 {
-
+#ifdef RABBITCOMMON
+    CFrmUpdater *pUpdater = new CFrmUpdater();
+    #if defined (Q_OS_ANDROID)
+        pUpdater->showMaximized();
+    #else
+        pUpdater->show();
+    #endif
+#endif
 }

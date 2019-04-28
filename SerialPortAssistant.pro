@@ -85,6 +85,22 @@ HEADERS += $$PWD/MainWindow.h \
 
 FORMS += $$PWD/MainWindow.ui
 
+DISTFILES += \
+    README*.md \
+    Authors.txt \
+    ChangeLog.md \
+    LICENSE.md \
+    appveyor.yml \
+    ci/* \
+    Install/* \
+    .travis.yml \
+    tag.sh
+
+RC_FILE = AppIcon.rc
+
+RESOURCES += \
+    Resource/Resource.qrc
+
 win32 : equals(QMAKE_HOST.os, Windows){
     INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
 
@@ -109,22 +125,6 @@ win32 {
         DEFINES += "_WIN32_WINNT=0x0501" #__USE_MINGW_ANSI_STDIO
     }
 }
-
-DISTFILES += \
-    README*.md \
-    Authors.txt \
-    ChangeLog.md \
-    LICENSE.md \
-    appveyor.yml \
-    ci/* \
-    Install/* \
-    .travis.yml \
-    tag.sh
-
-RC_FILE = AppIcon.rc
-
-RESOURCES += \
-    Resource/Resource.qrc
 
 isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
 !isEmpty(RabbitCommon_DIR): exists("$${RabbitCommon_DIR}/Src/RabbitCommon.pri"){

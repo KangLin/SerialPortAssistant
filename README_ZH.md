@@ -36,9 +36,17 @@
     ![支付宝（￥20）](Resource/png/zhifubao20.png  "支付宝捐赠")
     ![微信捐赠](Resource/png/weixinpay20.png "微信捐赠")
 
-7. 编译
+7. 依赖
+  RabbitCommon: https://github.com/KangLin/RabbitCommon
+  
+  ```
+  git clon https://github.com/KangLin/RabbitCommon.git
+  ```
+
+8. 编译
     - 用 QtCreator 编译
       * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
+      * 设置参数 RabbitCommon_DIR
       * 直接编译就可以生成程序
     - 用命令行编译
       * 在项目根目录下建立 build 目录
@@ -49,7 +57,7 @@
     ```sh
     mkdir build
     cd build
-    qmake ../SerialPortAssistant.pro
+    qmake ../SerialPortAssistant.pro RabbitCommon_DIR=
     make install
     cd install #进入生成的程序目录
     ```
