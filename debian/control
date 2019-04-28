@@ -1,0 +1,15 @@
+Source: serialportassistant
+Section: main
+Priority: optional
+Maintainer: Kang Lin <kl222@126.com>
+Build-Depends: debhelper (>= 6)
+Standards-Version:"v0.0.3-29-g4d13458"
+Homepage: https://github.com/KangLin/SerialPortAssistant
+Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/SerialPortAssistant.git
+
+Package: serialportassistant
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SerialPort Assistant 

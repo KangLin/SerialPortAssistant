@@ -69,6 +69,14 @@ install.path = $$OUT_PWD
 install.CONFIG += directory no_check_exist 
 INSTALLS += target other install
 
+!android : unix {
+    DESKTOP_FILE.target = DESKTOP_FILE
+    DESKTOP_FILE.files = $$PWD/../debian/SerialPortAssistant.desktop
+    DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications
+    DESKTOP_FILE.CONFIG += directory no_check_exist
+    INSTALLS += DESKTOP_FILE
+}
+
 SOURCES +=\
     $$PWD/MainWindow.cpp \
     $$PWD/Main.cpp \
@@ -85,7 +93,7 @@ HEADERS += $$PWD/MainWindow.h \
 
 FORMS += $$PWD/MainWindow.ui
 
-DISTFILES += \
+OTHER_FILES += \
     Authors.md \
     License.md \
     README*.md \
@@ -94,7 +102,9 @@ DISTFILES += \
     ci/* \
     Install/* \
     .travis.yml \
-    tag.sh
+    tag.sh \
+    debian/* \
+    build_debpackage.sh
 
 RC_FILE = AppIcon.rc
 

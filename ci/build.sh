@@ -69,25 +69,52 @@ case ${BUILD_TARGERT} in
         ;;
 esac
 
-${QT_ROOT}/bin/qmake ${SOURCE_DIR}/SerialPortAssistant.pro "CONFIG+=release"
-$MAKE -f Makefile
-echo "$MAKE install ...."
-$MAKE install
+if [ "${BUILD_TARGERT}" = "unix" ]; then
+    cd $SOURCE_DIR
+    ./build_debpackage.sh ${QT_ROOT}/lib/cmake/Qt5
+    exit 0
+fi
+
+
+if [ "ON" = "${STATIC}" ]; then
+    CONFIG_PARA="CONFIG*=static"
+fi
+if [ "${BUILD_TARGERT}" = "android" ]; then
+    ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
+         "CONFIG+=release" ${CONFIG_PARA}
+            
+    $MAKE
+    $MAKE install INSTALL_ROOT=`pwd`/android-build
+    ${QT_ROOT}/bin/androiddeployqt \
+          --input `pwd`/App/android-SerialPortAssistant.so-deployment-settings.json \
+          --output `pwd`/android-build \ 
+          --android-platform ${ANDROID_API} \
+          --gradle --verbose
+          #--jdk ${JAVA_HOME}
+else
+    ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
+         "CONFIG+=release" ${CONFIG_PARA}\
+         PREFIX=`pwd`/install 
+                
+    $MAKE
+    echo "$MAKE install ...."
+    $MAKE install
+fi
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
-    cd ${SOURCE_DIR}
-    cp Install/Install.nsi build_${BUILD_TARGERT}
+    #cd ${SOURCE_DIR}
+    #cp Install/Install.nsi build_${BUILD_TARGERT}
 
     if [ "${AUTOBUILD_ARCH}" = "x86" ]; then
-        cp /C/OpenSSL-Win32/bin/libeay32.dll build_${BUILD_TARGERT}/install
-        cp /C/OpenSSL-Win32/bin/ssleay32.dll build_${BUILD_TARGERT}/install
+        cp /C/OpenSSL-Win32/bin/libeay32.dll install/bin
+        cp /C/OpenSSL-Win32/bin/ssleay32.dll install/bin
     elif [ "${AUTOBUILD_ARCH}" = "x64" ]; then
-        cp /C/OpenSSL-Win64/bin/libeay32.dll build_${BUILD_TARGERT}/install
-        cp /C/OpenSSL-Win64/bin/ssleay32.dll build_${BUILD_TARGERT}/install
+        cp /C/OpenSSL-Win64/bin/libeay32.dll install/bin
+        cp /C/OpenSSL-Win64/bin/ssleay32.dll install/bin
     fi
-
-	if [ -z "${STATIC}" ]; then
-    	"/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
+    
+    if [ -z "${STATIC}" ]; then
+        "/C/Program Files (x86)/NSIS/makensis.exe" "Install.nsi"
         MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
         echo "MD5:${MD5}"
         build_${BUILD_TARGERT}/install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5}
