@@ -446,9 +446,9 @@ void CMainWindow::slotRead()
 
 bool CMainWindow::CheckHexChar(QChar c)
 {
-    if(!((c >= "a" && c <= "f")
-         || (c >= "A" && c <= "F")
-         || (c >= "0" && c <= "9")
+    if(!((c >= 'a' && c <= 'f')
+         || (c >= 'A' && c <= 'F')
+         || (c >= '0' && c <= '9')
          || 0x20 == c.toLatin1()))
     {
         QString szErr;
