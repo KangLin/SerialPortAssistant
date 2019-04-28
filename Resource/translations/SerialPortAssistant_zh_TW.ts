@@ -1,6 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja_JP">
+<TS version="2.1" language="zh_TW">
+<context>
+    <name>CDlgAbout</name>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="20"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="30"/>
+        <source>Author:KangLin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="62"/>
+        <source>Informatioin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="87"/>
+        <source>Version: 1.0.0.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="109"/>
+        <source>Build Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="128"/>
+        <source>Home page: https://github.com/KangLin/Tasks.git</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="223"/>
+        <source>Donation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="247"/>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="261"/>
+        <source>Change log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="275"/>
+        <source>Thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="414"/>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="472"/>
+        <source> Copyright (C) 2018 KangLin Studio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="479"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="50"/>
+        <source>Author: KangLin
+Email:kl222@126.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="52"/>
+        <source>KangLin Studio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="68"/>
+        <source> Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="68"/>
+        <source> Arch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="69"/>
+        <source>Build date:%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="73"/>
+        <source>Home page:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="75"/>
+        <source> Copyright (C) 2018 - %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CFrmUpdater</name>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="14"/>
+        <source>Updater</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="73"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="105"/>
+        <source>New version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="121"/>
+        <source>New architecture:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="141"/>
+        <source>Current version：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="157"/>
+        <source>Current architecture：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="171"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="488"/>
+        <source>There is laster version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="191"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="205"/>
+        <source>Every time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="221"/>
+        <source>Every date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="238"/>
+        <source>Every week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="251"/>
+        <source>Every Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="284"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="174"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="549"/>
+        <source>OK(&amp;O)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="297"/>
+        <source>Close(&amp;C)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="166"/>
+        <source>Being download xml file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="180"/>
+        <source>Being download update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="184"/>
+        <source>Being install update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="213"/>
+        <source>Current archecture: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="221"/>
+        <source>Current version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="344"/>
+        <source>Download network error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="363"/>
+        <source>Download fail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="442"/>
+        <source>Parse file %1 fail. It isn&apos;t xml file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="493"/>
+        <source>New version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="495"/>
+        <source>New architecture: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="501"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="515"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="528"/>
+        <source>System is different</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="508"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="521"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="535"/>
+        <source>Architecture is different</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="541"/>
+        <source>There is a new version, is it updated?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="558"/>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="559"/>
+        <source>Download ......</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="568"/>
+        <source>Being install update ......</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="573"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="582"/>
+        <source>Download file fail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="589"/>
+        <source>Md5sum is different. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="590"/>
+        <source>Download file md5sum: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="592"/>
+        <source>md5sum in Update.xml:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="618"/>
+        <source>Execute install program error.%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="624"/>
+        <source>The installer has started, Please close the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="727"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="728"/>
+        <source>Is updating, be sure to close?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="871"/>
+        <source>Package version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="876"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="881"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="887"/>
+        <source>Operating system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="892"/>
+        <source>Platform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="897"/>
+        <source>Architecture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="902"/>
+        <source>MD5 checksum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="906"/>
+        <source>Package download url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="911"/>
+        <source>Min update version</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>CMainWindow</name>
     <message>
@@ -118,6 +468,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../MainWindow.ui" line="452"/>
+        <source>Loop number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.ui" line="465"/>
+        <source>-1: unlimited loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../MainWindow.ui" line="481"/>
         <source>Transmissions:</source>
         <translation type="unfinished"></translation>
@@ -140,21 +500,6 @@
     <message>
         <location filename="../../MainWindow.ui" line="531"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../MainWindow.ui" line="823"/>
-        <source>Update(&amp;U)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../MainWindow.ui" line="452"/>
-        <source>Loop number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../MainWindow.ui" line="465"/>
-        <source>-1: unlimited loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -250,6 +595,11 @@
     <message>
         <location filename="../../MainWindow.ui" line="818"/>
         <source>Open Log(&amp;G)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../MainWindow.ui" line="823"/>
+        <source>Update(&amp;U)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -26,7 +26,7 @@ Abstract:
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
-#include "Widgets/DlgAbout/DlgAbout.h"
+#include "DlgAbout/DlgAbout.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -649,8 +649,17 @@ void CMainWindow::on_actionClear_Send_History_triggered()
 
 void CMainWindow::on_actionAbout_A_triggered()
 {
+#ifdef RABBITCOMMON
     CDlgAbout about(this);
-    about.exec();
+    //about.m_AppIcon = QPixmap(":/image/Calendar");
+    about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
+    #if defined (Q_OS_ANDROID)
+        about.showMaximized();
+        about.exec();
+    #else
+        about.exec();
+    #endif
+#endif
 }
 
 int CMainWindow::InitMenuTranslate()
@@ -1114,4 +1123,9 @@ void CMainWindow::on_pbBrowse_clicked()
 void CMainWindow::on_actionOpen_Log_G_triggered()
 {
     CLog::Instance()->OpneFile();
+}
+
+void CMainWindow::on_actionUpdate_U_triggered()
+{
+
 }

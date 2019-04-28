@@ -70,23 +70,20 @@ install.CONFIG += directory no_check_exist
 INSTALLS += target other install
 
 SOURCES +=\
-    MainWindow.cpp \
-    Main.cpp \
-    Global/Log.cpp \
-    Global/GlobalDir.cpp \
-    Global/Global.cpp \
-    Common/Tool.cpp \
-    Widgets/DlgAbout/DlgAbout.cpp
+    $$PWD/MainWindow.cpp \
+    $$PWD/Main.cpp \
+    $$PWD/Global/Log.cpp \
+    $$PWD/Global/GlobalDir.cpp \
+    $$PWD/Global/Global.cpp \
+    $$PWD/Common/Tool.cpp 
     
-HEADERS += MainWindow.h \
-    Global/Log.h \
-    Global/GlobalDir.h \
-    Global/Global.h \
-    Common/Tool.h \
-    Widgets/DlgAbout/DlgAbout.h
+HEADERS += $$PWD/MainWindow.h \
+    $$PWD/Global/Log.h \
+    $$PWD/Global/GlobalDir.h \
+    $$PWD/Global/Global.h \
+    $$PWD/Common/Tool.h 
 
-FORMS += MainWindow.ui \
-    Widgets/DlgAbout/DlgAbout.ui
+FORMS += $$PWD/MainWindow.ui
 
 win32 : equals(QMAKE_HOST.os, Windows){
     INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
@@ -101,6 +98,7 @@ win32 : equals(QMAKE_HOST.os, Windows){
 win32 {
     msvc {
         QMAKE_CXXFLAGS += /wd"4819"  
+        QMAKE_CXXFLAGS += "/utf-8"
         #QMAKE_LFLAGS += -ladvapi32
         CONFIG(debug, debug|release) {
             QMAKE_LFLAGS += /SUBSYSTEM:WINDOWS",5.01" /NODEFAULTLIB:libcmtd
@@ -127,3 +125,14 @@ RC_FILE = AppIcon.rc
 
 RESOURCES += \
     Resource/Resource.qrc
+
+isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
+!isEmpty(RabbitCommon_DIR): exists("$${RabbitCommon_DIR}/Src/RabbitCommon.pri"){
+    DEFINES += RABBITCOMMON
+    include("$${RabbitCommon_DIR}/Src/RabbitCommon.pri")
+} else{
+    message("RabbitCommon_DIR:$$RabbitCommon_DIR")
+    message("1. Please download RabbitCommon source code from https://github.com/KangLin/RabbitCommon ag:")
+    message("   git clone https://github.com/KangLin/RabbitCommon.git")
+    error  ("2. Then set value RabbitCommon_DIR to download root dirctory")
+}

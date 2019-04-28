@@ -15,10 +15,27 @@ Abstract:
 
 #include "MainWindow.h"
 #include <QApplication>
+#ifdef RABBITCOMMON
+    #include "RabbitCommonTools.h"
+    #include "FrmUpdater/FrmUpdater.h"
+#endif
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    
+#ifdef RABBITCOMMON
+    CRabbitCommonTools::Instance()->Init();
+#endif
+    
+    a.setApplicationName("SerialPortAssistant");
+    a.setApplicationDisplayName(QObject::tr("SerialPort Assistant"));
+    
+#ifdef RABBITCOMMON 
+    CFrmUpdater *pUpdate = new CFrmUpdater(); 
+    if(!pUpdate->GenerateUpdateXml()) 
+        return 0; 
+#endif
     CMainWindow w;
     w.show();
 

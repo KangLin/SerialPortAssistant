@@ -680,6 +680,7 @@
      <string>Help(&amp;H)</string>
     </property>
     <addaction name="actionAbout_A"/>
+    <addaction name="actionUpdate_U"/>
    </widget>
    <widget class="QMenu" name="menuView_V">
     <property name="title">
@@ -815,6 +816,11 @@
    </property>
    <property name="text">
     <string>Open Log(&amp;G)</string>
+   </property>
+  </action>
+  <action name="actionUpdate_U">
+   <property name="text">
+    <string>Update(&amp;U)</string>
    </property>
   </action>
  </widget>

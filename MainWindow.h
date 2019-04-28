@@ -109,6 +109,7 @@ private slots:
     void on_actionLoad_File_F_triggered();
     void on_pbBrowse_clicked();
     void on_actionOpen_Log_G_triggered();
+    void on_actionUpdate_U_triggered();
     
 private:
     int InitStatusBar();
@@ -128,7 +129,7 @@ private:
     QTimer m_Timer;
     int m_nLoopNumber;
     int m_nTransmissions; //已发送次数  
-    
+        
     QLabel m_statusInfo;
     QLabel m_statusRx, m_statusTx, m_statusDrop;    
 };
