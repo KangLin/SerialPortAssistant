@@ -22,6 +22,7 @@ Abstract:
 #include <QTime>
 #include <QFile>
 #include <QDir>
+#include <QtDebug>
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
@@ -30,15 +31,15 @@ Abstract:
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
-    m_SerialPort(this),
-    m_Timer(this),
-    m_nSend(0),
-    m_nRecive(0),
-    m_nDrop(0),
-    m_nTransmissions(0),
     m_ActionGroupTranslator(this),
     m_ActionGroupStyle(this),
-    m_cmbPortIndex(-1)
+    m_SerialPort(this),
+    m_nSend(0),    
+    m_nRecive(0),
+    m_nDrop(0),
+    m_cmbPortIndex(-1),
+    m_Timer(this),    
+    m_nTransmissions(0)
 {
     bool check = false;
     /*QDir d;
@@ -116,6 +117,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
     
+    ui->rbReciverUtf8->setVisible(false);
+    ui->rbRecvieUnicode->setVisible(false);
     CGlobal::CODE c = CGlobal::Instance()->GetReciveDisplayCode();
     switch(c)
     {
@@ -124,10 +127,13 @@ CMainWindow::CMainWindow(QWidget *parent) :
         break;
     case CGlobal::HEX:
         ui->rbReciveHex->setChecked(true);
+        break;
     default:
         break;
     }
 
+    ui->rbSendUtf8->setVisible(false);
+    ui->rbSendUnicode->setVisible(false);
     c = CGlobal::Instance()->GetSendDisplayCode();
     switch(c)
     {
@@ -136,6 +142,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
         break;
     case CGlobal::HEX:
         ui->rbSendHex->setChecked(true);
+        break;
     default:
         break;
     }
@@ -277,13 +284,12 @@ void CMainWindow::on_pbOpen_clicked()
     bCheck = m_SerialPort.open(QIODevice::ReadWrite);
     if(!bCheck)
     {
-        LOG_MODEL_ERROR("MainWindows", "Serial Port open fail: %s[%d]",
-                        ui->cmbPort->currentText().toStdString().c_str(),
-                        m_SerialPort.error());
-        SetStatusInfo(tr("Open serail port %1 fail. errno: %2").
-                            arg(ui->cmbPort->currentText(),
-                                QString::number(m_SerialPort.error())),
-                      Qt::red);
+        QString szError;
+        szError = tr("Open serail port %1 fail errNo[%2]: %3").
+                arg(ui->cmbPort->currentText(),
+                    QString::number(m_SerialPort.error()), m_SerialPort.errorString());
+        LOG_MODEL_ERROR("MainWindows", szError.toStdString().c_str());
+        SetStatusInfo(szError, Qt::red);
         return;
     }
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
@@ -371,25 +377,8 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         ui->teRecive->insertPlainText(szPrex);
     }
     
-    if((!ui->rbReciveHex->isChecked() && bRecive)
-        || (!ui->rbSendHex->isChecked() && !bRecive))
-        ui->teRecive->insertPlainText(szText);
-    else
-    {
-        QString szOut;
-        int nLen = szText.size();
-        for(int i = 0; i < nLen; i++)
-        {
-            if(i)
-                szOut += " ";
-            char buff[16] = {0};
-            QChar c = szText.at(i);
-            sprintf(buff, "0x%0X", c.unicode());
-            szOut += buff;
-        }
-        ui->teRecive->insertPlainText(szOut);
-    }
-    
+    ui->teRecive->insertPlainText(szText);
+   
     slotQTextEditMaxLength();
     if(!ui->actionPasue_P->isChecked())
     {
@@ -414,8 +403,8 @@ void CMainWindow::slotRead()
         return;
     }
     m_nRecive += d.length();
+    qDebug() << "slotRead: length:" << d.size() <<  d;
     
-    QString szText(d);
     if(ui->cbSaveToFile->isChecked())
     {
         QFile f(ui->leSaveToFile->text());
@@ -426,10 +415,94 @@ void CMainWindow::slotRead()
         }
     }
     
+    QString szText;
+    if(ui->rbReciveASCII->isChecked())
+        szText = QString::fromStdString(d.toStdString());
+    else if(ui->rbReciverUtf8->isChecked())
+        szText = QString::fromUtf8(d, d.size());
+    else if(ui->rbSendUnicode->isChecked())
+        szText = QString::fromUtf16((const char16_t *)d.data(), d.size());
+    else if(ui->rbReciveHex->isChecked())
+    {
+        QString szOut;
+        int nLen = d.size();
+        for(int i = 0; i < nLen; i++)
+        {
+            if(i)
+                szOut += " ";
+            char buff[16] = {0};
+            unsigned char c = d.at(i);
+            sprintf(buff, "0x%X", c);
+            szOut += buff;
+        }
+        szText = szOut;
+    }
+    
     //显示接收  
     AddRecive(szText, true);
     
     m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
+}
+
+bool CMainWindow::CheckHexChar(QChar c)
+{
+    if(!((c >= "a" && c <= "f")
+         || (c >= "A" && c <= "F")
+         || (c >= "0" && c <= "9")
+         || 0x20 == c.toLatin1()))
+    {
+        QString szErr;
+        szErr = "Invalid symbol: ";
+        szErr += c;
+        LOG_MODEL_ERROR("CMainWindow", szErr.toStdString().c_str());
+        m_statusInfo.setText(szErr);
+        return false;
+    }
+    return true;
+}
+
+int CMainWindow::SendHexChar(QString szText, int &nLength)
+{
+    QByteArray out;
+    QString szInput;
+    
+    int nLen = szText.length();
+    unsigned char outBin = 0;
+    bool isFirst = true;
+    for (int i = 0; i < nLen; i++)
+    {
+        QChar c = szText.at(i);
+        bool check = CheckHexChar(c);
+        if(!check)
+            return -1;
+    
+        if(QChar(0x20) == c)
+            continue;
+        
+        if(c >= 'a' && c <= 'f')
+            c = c.toUpper();
+        
+        if(isFirst)
+        {
+            //处理第前4位
+            if(c >= 'A' && c <= 'F')
+                outBin = (c.toLatin1() - 'A' + 10) << 4;
+            else
+                outBin = (c.toLatin1() & ~0x30) << 4;
+            isFirst = false;
+        } else {
+            //处理后4位, 并组合起来
+            if(c >= 'A' && c <= 'F')
+                outBin |= (c.toLatin1() - 'A' + 10);
+            else
+                outBin |= (c.toLatin1() & ~0x30);
+            out.append(outBin);
+            isFirst = true;
+        }
+    }
+    qDebug() << "CMainWindow::SetHexChar: length: " << out.size() << out;
+    nLength = out.size();
+    return m_SerialPort.write(out, out.size());
 }
 
 void CMainWindow::on_pbSend_clicked()
@@ -446,15 +519,28 @@ void CMainWindow::on_pbSend_clicked()
     if(ui->cbn->isChecked())
         szText += "\n";
 
+    int nSendLength = szText.size();
     if(ui->rbSendASCII->isChecked())
-        nRet = m_SerialPort.write(szText.toStdString().c_str(),
-                                  szText.toStdString().size());
+    {
+        nSendLength = szText.toStdString().size();
+        nRet = m_SerialPort.write(szText.toStdString().c_str(), nSendLength);
+    }
     else if(ui->rbSendUtf8->isChecked())
-        nRet = m_SerialPort.write(szText.toUtf8());
+    {
+        nSendLength = szText.toUtf8().size();
+        nRet = m_SerialPort.write(szText.toUtf8(), nSendLength);
+    }
     else if(ui->rbSendUnicode->isChecked())
+    {
+        nSendLength = szText.length() * sizeof(ushort);
         nRet = m_SerialPort.write((const char*)szText.utf16(),
-                                  szText.length() * sizeof(ushort));
-    if(-1 == nRet)
+                                  nSendLength);
+    }
+    else if(ui->rbSendHex->isChecked())
+    {
+        nRet = SendHexChar(szText, nSendLength);
+    }
+    if(0 > nRet)
     {
         m_statusInfo.setText(tr("Send fail"));
         LOG_MODEL_ERROR("CMainWindows", "Write fail [%d]：%s",
@@ -471,7 +557,7 @@ void CMainWindow::on_pbSend_clicked()
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
     if(szText.length() != nRet)
     {   
-        m_nDrop += (szText.length() - nRet);
+        m_nDrop += (nSendLength - nRet);
         m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
     }
     

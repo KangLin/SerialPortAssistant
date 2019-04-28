@@ -117,7 +117,9 @@ private:
     void AddRecive(const QString &szText, bool bRecive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
     QString GetSerialPortSettingInfo();
-
+    bool CheckHexChar(QChar c);
+    int SendHexChar(QString szText, int &nLength);
+    
 private:
     Ui::CMainWindow *ui;
     QSerialPort m_SerialPort;

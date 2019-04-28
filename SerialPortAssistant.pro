@@ -48,8 +48,11 @@ isEmpty(BUILD_VERSION) {
     }
     
     isEmpty(BUILD_VERSION){
-        error("Built without git, please add BUILD_VERSION to DEFINES or add git path to environment variable GIT or qmake parameter GIT")
+        warning("Built without git, please add BUILD_VERSION to DEFINES or add git path to environment variable GIT or qmake parameter GIT")
     }
+}
+isEmpty(BUILD_VERSION){
+    BUILD_VERSION="v0.3.2"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 
