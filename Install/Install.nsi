@@ -36,7 +36,7 @@ SetCompressor lzma
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!define MUI_FINISHPAGE_RUN "$INSTDIR\${PRODUCT_NAME}.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\bin\${PRODUCT_NAME}.exe"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -77,13 +77,13 @@ Function InstallVC
 
    ; check regist
    IfErrors 0 VSRedistInstalled
-   Exec "$INSTDIR\vcredist_x86.exe /q"
+   Exec "$INSTDIR\bin\vcredist_x86.exe /q"
    StrCpy $R0 "-1"
 
 VSRedistInstalled:
   ;MessageBox MB_OK  "Installed"
   Exch $R0
-  Delete "$INSTDIR\vcredist_x86.exe"
+  Delete "$INSTDIR\bin\vcredist_x86.exe"
 FunctionEnd
 
 Function InstallVC64
@@ -93,25 +93,20 @@ Function InstallVC64
     
     ; check regist
     IfErrors 0 VSRedistInstalled
-    Exec "$INSTDIR\vcredist_x64.exe /q"
+    Exec "$INSTDIR\bin\vcredist_x64.exe /q"
     StrCpy $R0 "-1"
     
     VSRedistInstalled:
     ;MessageBox MB_OK  "Installed"
     Exch $R0
-    Delete "$INSTDIR\vcredist_x64.exe"
+    Delete "$INSTDIR\bin\vcredist_x64.exe"
 FunctionEnd
 
 Function InstallRuntime
-  ${If} ${RunningX64}
-    IfFileExists "$INSTDIR\vcredist_x64.exe" 0 +2
+    IfFileExists "$INSTDIR\bin\vcredist_x64.exe" 0 +2
     call InstallVC64
-    IfFileExists "$INSTDIR\vcredist_x86.exe" 0 +2
+    IfFileExists "$INSTDIR\bin\vcredist_x86.exe" 0 +2
     call InstallVC
-  ${Else}
-    IfFileExists "$INSTDIR\vcredist_x86.exe" 0 +2
-    call InstallVC
-  ${EndIf}
 FunctionEnd
 
 Function DirectoryPermissionErrorBox
@@ -145,15 +140,17 @@ Section "${PRODUCT_NAME}" SEC01
   SetOverwrite ifnewer
   File /r "install\*"
   ;SetShellVarContext all
-  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$DESKTOP\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+  
   ;SetShellVarContext current
   call InstallRuntime
 SectionEnd
 
 Section -AdditionalIcons
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\bin\${PRODUCT_NAME}.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$DESKTOP\$(LANG_PRODUCT_NAME).lnk" "$INSTDIR\bin\${PRODUCT_NAME}.exe"
+ 
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
   ;SetShellVarContext all
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
@@ -162,12 +159,12 @@ SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  ;WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_APP_NAME}.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_APP_NAME}.exe"
+  ;WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\bin\${PRODUCT_APP_NAME}.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\bin\${PRODUCT_NAME}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" "Path" "$INSTDIR\"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\${PRODUCT_NAME}.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\bin\${PRODUCT_NAME}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"

@@ -35,9 +35,18 @@ If you are satisfied, you can donate to me
     * Scan the following two-dimensional code to donate 20 yuan:  
     ![Alipay contribute](Resource/png/zhifubao20.png  "Alipay contribute")
     ![WeChat payment](Resource/png/weixinpay20.png "WeChat payment")
-7. Compile
+    
+7. Dependence
+  RabbitCommon: https://github.com/KangLin/RabbitCommon
+  
+  ```
+  git clon https://github.com/KangLin/RabbitCommon.git
+  ```
+  
+8. Compile
     - Compiled with QtCreator
        * Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
+       * Set the parameter RabbitCommon_DIR
        * Direct compilation can generate programs
     - Compile with the command line
        * Build the build directory in the project root directory

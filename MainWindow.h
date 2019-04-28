@@ -109,6 +109,7 @@ private slots:
     void on_actionLoad_File_F_triggered();
     void on_pbBrowse_clicked();
     void on_actionOpen_Log_G_triggered();
+    void on_actionUpdate_U_triggered();
     
 private:
     int InitStatusBar();
@@ -122,6 +123,7 @@ private:
     
 private:
     Ui::CMainWindow *ui;
+
     QSerialPort m_SerialPort;
     ulong m_nSend, m_nRecive, m_nDrop;
     int m_cmbPortIndex;

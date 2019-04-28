@@ -26,7 +26,10 @@ Abstract:
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
-#include "Widgets/DlgAbout/DlgAbout.h"
+#ifdef RABBITCOMMON
+#include "DlgAbout/DlgAbout.h"
+#include "FrmUpdater/FrmUpdater.h"
+#endif
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -54,6 +57,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
                                   QStandardPaths::TempLocation)
                               + QDir::separator() + "SerialAssistantRecive.txt");
+    
+    CFrmUpdater updater;
+    ui->actionUpdate_U->setIcon(updater.windowIcon());
     
     LoadTranslate();
     LoadStyle();
@@ -649,8 +655,17 @@ void CMainWindow::on_actionClear_Send_History_triggered()
 
 void CMainWindow::on_actionAbout_A_triggered()
 {
+#ifdef RABBITCOMMON
     CDlgAbout about(this);
-    about.exec();
+    //about.m_AppIcon = QPixmap(":/image/Calendar");
+    about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
+    #if defined (Q_OS_ANDROID)
+        about.showMaximized();
+        about.exec();
+    #else
+        about.exec();
+    #endif
+#endif
 }
 
 int CMainWindow::InitMenuTranslate()
@@ -1114,4 +1129,16 @@ void CMainWindow::on_pbBrowse_clicked()
 void CMainWindow::on_actionOpen_Log_G_triggered()
 {
     CLog::Instance()->OpneFile();
+}
+
+void CMainWindow::on_actionUpdate_U_triggered()
+{
+#ifdef RABBITCOMMON
+    CFrmUpdater *pUpdater = new CFrmUpdater();
+    #if defined (Q_OS_ANDROID)
+        pUpdater->showMaximized();
+    #else
+        pUpdater->show();
+    #endif
+#endif
 }
