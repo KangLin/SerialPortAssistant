@@ -13,12 +13,13 @@ Abstract:
     This file contains main implement.
  */
 
-#include "MainWindow.h"
-#include <QApplication>
 #ifdef RABBITCOMMON
     #include "RabbitCommonTools.h"
     #include "FrmUpdater/FrmUpdater.h"
 #endif
+#include "MainWindow.h"
+#include <QApplication>
+#include <QDir>
 
 int main(int argc, char *argv[])
 {

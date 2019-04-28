@@ -60,10 +60,10 @@ DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
 include(pri/Translations.pri)
 
-other.files = LICENSE.md Authors.txt ChangeLog.md
+other.files = License.md Authors.md ChangeLog.md
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
-target.path = $$PREFIX
+target.path = $$PREFIX/bin
 install.files = Install/Install.nsi
 install.path = $$OUT_PWD
 install.CONFIG += directory no_check_exist 
@@ -86,10 +86,10 @@ HEADERS += $$PWD/MainWindow.h \
 FORMS += $$PWD/MainWindow.ui
 
 DISTFILES += \
+    Authors.md \
+    License.md \
     README*.md \
-    Authors.txt \
     ChangeLog.md \
-    LICENSE.md \
     appveyor.yml \
     ci/* \
     Install/* \
@@ -102,9 +102,9 @@ RESOURCES += \
     Resource/Resource.qrc
 
 win32 : equals(QMAKE_HOST.os, Windows){
-    INSTALL_TARGET = $$system_path($${PREFIX}/$$(TARGET))
+    INSTALL_TARGET = $$system_path($${PREFIX}/bin/$$(TARGET))
 
-    Deployment_qtlib.path = $$system_path($${PREFIX})
+    Deployment_qtlib.path = $$system_path($${PREFIX}/bin)
     Deployment_qtlib.commands = "$$system_path($$[QT_INSTALL_BINS]/windeployqt)" \
                     --compiler-runtime \
                     --verbose 7 \

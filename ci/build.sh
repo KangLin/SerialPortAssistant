@@ -11,7 +11,7 @@ cd ${SOURCE_DIR}
 if [ "$BUILD_TARGERT" = "android" ]; then
     export ANDROID_SDK_ROOT=${SOURCE_DIR}/Tools/android-sdk
     export ANDROID_NDK_ROOT=${SOURCE_DIR}/Tools/android-ndk
-    if [ -z "$APPVEYOR" ]; then
+    if [ -n "$APPVEYOR" ]; then
         export JAVA_HOME="/C/Program Files (x86)/Java/jdk1.8.0"
     fi
     export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
@@ -32,7 +32,7 @@ fi
 
 if [ "$BUILD_TARGERT" = "windows_mingw" \
     -a -n "$APPVEYOR" ]; then
-    export PATH=/C/Qt/Tools/mingw${TOOLCHAIN_VERSION}_32/bin:$PATH    
+    export PATH=/C/Qt/Tools/mingw${TOOLCHAIN_VERSION}/bin:$PATH
 fi
 TARGET_OS=`uname -s`
 case $TARGET_OS in
@@ -54,7 +54,6 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
 fi
 mkdir -p build_${BUILD_TARGERT}
 cd build_${BUILD_TARGERT}
-${QT_ROOT}/bin/qmake ${SOURCE_DIR}/SerialPortAssistant.pro "CONFIG+=release"
 
 case ${BUILD_TARGERT} in
     windows_msvc)
@@ -70,6 +69,7 @@ case ${BUILD_TARGERT} in
         ;;
 esac
 
+${QT_ROOT}/bin/qmake ${SOURCE_DIR}/SerialPortAssistant.pro "CONFIG+=release"
 $MAKE -f Makefile
 echo "$MAKE install ...."
 $MAKE install
@@ -77,5 +77,21 @@ $MAKE install
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     cd ${SOURCE_DIR}
     cp Install/Install.nsi build_${BUILD_TARGERT}
-    "/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
+
+    if [ "${AUTOBUILD_ARCH}" = "x86" ]; then
+        cp /C/OpenSSL-Win32/bin/libeay32.dll build_${BUILD_TARGERT}/install
+        cp /C/OpenSSL-Win32/bin/ssleay32.dll build_${BUILD_TARGERT}/install
+    elif [ "${AUTOBUILD_ARCH}" = "x64" ]; then
+        cp /C/OpenSSL-Win64/bin/libeay32.dll build_${BUILD_TARGERT}/install
+        cp /C/OpenSSL-Win64/bin/ssleay32.dll build_${BUILD_TARGERT}/install
+    fi
+
+	if [ -z "${STATIC}" ]; then
+    	"/C/Program Files (x86)/NSIS/makensis.exe" "build_${BUILD_TARGERT}/Install.nsi"
+        MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
+        echo "MD5:${MD5}"
+        build_${BUILD_TARGERT}/install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5}
+        
+        cat update_windows.xml
+	fi
 fi
