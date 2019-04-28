@@ -23,7 +23,16 @@ Abstract:
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    
+     QString szPre;    
+     #if defined(Q_OS_ANDROID) || _DEBUG
+         szPre = ":/Translations";
+     #else
+         szPre = qApp->applicationDirPath() + QDir::separator() + ".." + QDir::separator() + "translations";
+     #endif
+     QTranslator translator;
+     translator.load(szPre + "/SerialPortAssistant_" + QLocale::system().name() + ".qm");
+     qApp->installTranslator(&translator);
+
 #ifdef RABBITCOMMON
     CRabbitCommonTools::Instance()->Init();
 #endif

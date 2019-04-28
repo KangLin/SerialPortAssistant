@@ -58,7 +58,7 @@ message("BUILD_VERSION:$$BUILD_VERSION")
 
 DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
-include(Resource/translations/translations.pri)
+include(pri/Translations.pri)
 
 other.files = LICENSE.md Authors.txt ChangeLog.md
 other.path = $$PREFIX
