@@ -58,8 +58,6 @@ message("BUILD_VERSION:$$BUILD_VERSION")
 
 DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
-include(pri/Translations.pri)
-
 other.files = License.md Authors.md ChangeLog.md
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
@@ -146,3 +144,5 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
     message("   git clone https://github.com/KangLin/RabbitCommon.git")
     error  ("2. Then set value RabbitCommon_DIR to download root dirctory")
 }
+
+include(pri/Translations.pri)
