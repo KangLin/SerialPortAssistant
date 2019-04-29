@@ -71,7 +71,7 @@ esac
 
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
-    ./build_debpackage.sh ${QT_ROOT}/lib/cmake/Qt5
+    bash build_debpackage.sh ${QT_ROOT}/lib/cmake/Qt5
     exit 0
 fi
 
@@ -102,9 +102,7 @@ else
 fi
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
-    #cd ${SOURCE_DIR}
-    #cp Install/Install.nsi build_${BUILD_TARGERT}
-
+    
     if [ "${AUTOBUILD_ARCH}" = "x86" ]; then
         cp /C/OpenSSL-Win32/bin/libeay32.dll install/bin
         cp /C/OpenSSL-Win32/bin/ssleay32.dll install/bin
@@ -117,7 +115,7 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
         "/C/Program Files (x86)/NSIS/makensis.exe" "Install.nsi"
         MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
         echo "MD5:${MD5}"
-        build_${BUILD_TARGERT}/install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5}
+        install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5}
         
         cat update_windows.xml
 	fi
