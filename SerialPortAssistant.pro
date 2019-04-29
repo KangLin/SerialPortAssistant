@@ -52,7 +52,7 @@ isEmpty(BUILD_VERSION) {
     }
 }
 isEmpty(BUILD_VERSION){
-    BUILD_VERSION="v0.3.3"
+    BUILD_VERSION="v0.3.3-2-gc941749"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 

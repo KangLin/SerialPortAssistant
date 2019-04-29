@@ -3,7 +3,7 @@ Section: main
 Priority: optional
 Maintainer: Kang Lin <kl222@126.com>
 Build-Depends: debhelper (>= 6)
-Standards-Version:"v0.0.3-29-g4d13458"
+Standards-Version:"v0.3.3-2-gc941749"
 Homepage: https://github.com/KangLin/SerialPortAssistant
 Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
 #Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/SerialPortAssistant.git
