@@ -124,7 +124,7 @@ artifacts:
   - path: build_${BUILD_TARGERT}/SerialPortAssistant-Setup-*.exe
     #name: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
     type: zip
-  - path: update_windows.xml
+  - path: build_${BUILD_TARGERT}/update_windows.xml
 
 test: off
 
