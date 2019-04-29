@@ -1,3 +1,4 @@
+.qmake.stash
 Translations.qrc
 Plugin/PluginStatic.cpp
 Plugin/PluginStatic.pri

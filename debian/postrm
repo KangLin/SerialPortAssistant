@@ -1,5 +1,5 @@
 #!/bin/sh
-# postrm script for lunarcalendar
+# postrm script for serialportassistant
 #
 # see: dh_installdeb(1)
 

@@ -58,7 +58,9 @@ message("BUILD_VERSION:$$BUILD_VERSION")
 
 DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
-other.files = License.md Authors.md ChangeLog.md
+include(pri/Translations.pri)
+
+other.files = License.md Authors.md ChangeLog.md AppIcon.ico
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX/bin
@@ -69,7 +71,7 @@ INSTALLS += target other install
 
 !android : unix {
     DESKTOP_FILE.target = DESKTOP_FILE
-    DESKTOP_FILE.files = $$PWD/../debian/SerialPortAssistant.desktop
+    DESKTOP_FILE.files = $$PWD/debian/SerialPortAssistant.desktop
     DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications
     DESKTOP_FILE.CONFIG += directory no_check_exist
     INSTALLS += DESKTOP_FILE
@@ -135,6 +137,7 @@ win32 {
 }
 
 isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
+isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../RabbitCommon
 !isEmpty(RabbitCommon_DIR): exists("$${RabbitCommon_DIR}/Src/RabbitCommon.pri"){
     DEFINES += RABBITCOMMON
     include("$${RabbitCommon_DIR}/Src/RabbitCommon.pri")
@@ -145,4 +148,3 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
     error  ("2. Then set value RabbitCommon_DIR to download root dirctory")
 }
 
-include(pri/Translations.pri)
