@@ -657,7 +657,7 @@ void CMainWindow::on_actionAbout_A_triggered()
 {
 #ifdef RABBITCOMMON
     CDlgAbout about(this);
-    //about.m_AppIcon = QPixmap(":/image/Calendar");
+    about.m_AppIcon = QPixmap(":/icon/AppIcon");
     about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
     #if defined (Q_OS_ANDROID)
         about.showMaximized();
