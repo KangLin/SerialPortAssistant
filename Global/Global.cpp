@@ -20,7 +20,7 @@ Abstract:
 CGlobal::CGlobal(QObject *parent) :
     QObject(parent)
 {
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     m_szLanguage = conf.value("Global/Language",
                               QLocale::system().name()).toString();
@@ -65,7 +65,7 @@ int CGlobal::SetStyleMenu(QString szMenu, QString szFile)
 {
     m_szStyleMenu = szMenu;
     m_szStyleFile = szFile;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/MenuStyleSheet", szMenu);
     conf.setValue("UI/StyleSheet", szFile);
@@ -80,7 +80,7 @@ bool CGlobal::GetStatusbarVisable()
 int CGlobal::SetStatusbarVisable(bool bVisable)
 {
     m_StatusbarVisable = bVisable;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/Visable/Statusbar", m_StatusbarVisable);
     return 0;
@@ -94,7 +94,7 @@ bool CGlobal::GetToolbarVisable()
 int CGlobal::SetToolbarVisable(bool bVisable)
 {
     m_ToolbarVisable = bVisable;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/Visable/Toolbar", m_ToolbarVisable);
     return 0;
@@ -108,7 +108,7 @@ bool CGlobal::GetLeftBarVisable()
 int CGlobal::SetLeftBarVisable(bool bVisable)
 {
     m_LeftBarVisable = bVisable;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/Visable/LeftBar", m_LeftBarVisable);
     return 0;
@@ -122,7 +122,7 @@ QString CGlobal::GetLanguage()
 int CGlobal::SetLanguage(QString szLanguage)
 {
     m_szLanguage = szLanguage;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Global/Language", m_szLanguage);
     return 0;
@@ -136,7 +136,7 @@ bool CGlobal::GetSendLoop()
 int CGlobal::SetSendLoop(bool bLoop)
 {
     m_bSendLoop = bLoop;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Send/Loop", m_bSendLoop);
     return 0;   
@@ -150,7 +150,7 @@ int CGlobal::GetSendLoopTime()
 int CGlobal::SetSendLoopTime(int nTime)
 {
     m_nSendLoopTime = nTime;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Send/LoopTime", m_nSendLoopTime);
     return 0;   
@@ -164,7 +164,7 @@ CGlobal::SEND_R_N CGlobal::GetSendRN()
 int CGlobal::SetSendRN(SEND_R_N v)
 {
     m_SendRN = v;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Send/SendRN", m_SendRN);
     return 0;  
@@ -178,7 +178,7 @@ bool CGlobal::GetReciveDisplayTime()
 int CGlobal::SetReciveDisplayTime(bool bDisplay)
 {
     m_bReciveDisplayTime = bDisplay;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplayTime", m_bReciveDisplayTime);
     return 0; 
@@ -192,7 +192,7 @@ bool CGlobal::GetReciveDisplaySend()
 int CGlobal::SetReciveDisplaySend(bool bDisplay)
 {
     m_bReciveDisplaySend = bDisplay;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplaySend", m_bReciveDisplaySend);
     return 0; 
@@ -206,7 +206,7 @@ CGlobal::CODE CGlobal::GetReciveDisplayCode()
 int CGlobal::SetReciveDisplayCode(CODE code)
 {
     m_ReciveDisplayCode = code;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplayReciveCode", m_ReciveDisplayCode);
     return 0; 
@@ -220,7 +220,7 @@ CGlobal::CODE CGlobal::GetSendDisplayCode()
 int CGlobal::SetSendDisplayCode(CODE code)
 {
     m_SendDisplayCode = code;
-    QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+    QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplaySendCode", m_SendDisplayCode);
     return 0; 

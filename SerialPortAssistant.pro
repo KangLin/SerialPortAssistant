@@ -81,13 +81,11 @@ SOURCES +=\
     $$PWD/MainWindow.cpp \
     $$PWD/Main.cpp \
     $$PWD/Global/Log.cpp \
-    $$PWD/Global/GlobalDir.cpp \
     $$PWD/Global/Global.cpp \
     $$PWD/Common/Tool.cpp 
     
 HEADERS += $$PWD/MainWindow.h \
     $$PWD/Global/Log.h \
-    $$PWD/Global/GlobalDir.h \
     $$PWD/Global/Global.h \
     $$PWD/Common/Tool.h 
 

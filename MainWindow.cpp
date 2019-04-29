@@ -26,9 +26,11 @@ Abstract:
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
+
 #ifdef RABBITCOMMON
-#include "DlgAbout/DlgAbout.h"
-#include "FrmUpdater/FrmUpdater.h"
+    #include "DlgAbout/DlgAbout.h"
+    #include "FrmUpdater/FrmUpdater.h"
+    #include "RabbitCommonGlobalDir.h"
 #endif
 
 CMainWindow::CMainWindow(QWidget *parent) :
@@ -768,20 +770,19 @@ int CMainWindow::LoadTranslate(QString szLocale)
 
     ClearTranslate();
     LOG_MODEL_DEBUG("MainWindow", "Translate dir:%s",
-                    qPrintable(CGlobalDir::Instance()->GetDirTranslate()));
+          qPrintable(CRabbitCommonGlobalDir::Instance()->GetDirTranslations()));
 
     m_TranslatorQt = QSharedPointer<QTranslator>(new QTranslator(this));
     m_TranslatorQt->load("qt_" + szLocale + ".qm",
-                         CGlobalDir::Instance()->GetDirTranslate());
+                         CRabbitCommonGlobalDir::Instance()->GetDirApplication()
+                         + QDir::separator() + "translations");
     qApp->installTranslator(m_TranslatorQt.data());
 
     m_TranslatorApp = QSharedPointer<QTranslator>(new QTranslator(this));
-#ifdef ANDROID
-    m_TranslatorApp->load(":/translations/app_" + szLocale + ".qm");
-#else
-    m_TranslatorApp->load("app_" + szLocale + ".qm",
-                          CGlobalDir::Instance()->GetDirTranslate());
-#endif
+
+    m_TranslatorApp->load("SerialPortAssistant_" + szLocale + ".qm",
+                        CRabbitCommonGlobalDir::Instance()->GetDirTranslations()
+                          );
     qApp->installTranslator(m_TranslatorApp.data());
 
     ui->retranslateUi(this);
@@ -885,7 +886,7 @@ int CMainWindow::OpenCustomStyleMenu()
         QString stylesheet= file.readAll();
         qApp->setStyleSheet(stylesheet);
         file.close();
-        QSettings conf(CGlobalDir::Instance()->GetApplicationConfigureFile(),
+        QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
                        QSettings::IniFormat);
         conf.setValue("UI/StyleSheet", szFile);
         
