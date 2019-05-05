@@ -1,5 +1,12 @@
 修改日志
 ------
+* Version: 1.0.0
+  - 正式发行版本
+  - 串口助手基本功能完成
+
+* Version: v0.3.4
+  - 使用RabbitCommon库中的GlobalDir
+
 * Version: v0.3.3
   - 修改发送编码BUG
   - 增加在线更新
