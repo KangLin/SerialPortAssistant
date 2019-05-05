@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <UPDATE>
-    <VERSION>v0.3.2-39-g9549995</VERSION>
-    <TIME>2019-04-29 05:19:57</TIME>
-    <INFO>SerialPort Assistant v0.3.2-39-g9549995</INFO>
+    <VERSION>v0.3.4</VERSION>
+    <TIME>2019-05-05 01:39:27</TIME>
+    <INFO>SerialPort Assistant v0.3.4</INFO>
     <FORCE>0</FORCE>
     <SYSTEM>Windows</SYSTEM>
-    <PLATFORM>v0.3.2-39-g9549995</PLATFORM>
+    <PLATFORM>v0.3.4</PLATFORM>
     <ARCHITECTURE>x86</ARCHITECTURE>
-    <MD5SUM>9bd2b87dd8d5cdf5709c8d3c4ddc1314</MD5SUM>
-    <URL>https://ci.appveyor.com/api/buildjobs/jj29j5s41nm3qmii/artifacts/build_windows_msvc%2FSerialPortAssistant-Setup-v0.3.2-39-g9549995.exe</URL>
+    <MD5SUM>b0eee6e105988f0aab57299b2416eca2</MD5SUM>
+    <URL>https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.4/SerialPortAssistant-Setup-v0.3.4.exe</URL>
     <MIN_UPDATE_VERSION>v0.0.1</MIN_UPDATE_VERSION>
 </UPDATE>
