@@ -2,6 +2,361 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>CDlgAbout</name>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="20"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="30"/>
+        <source>Author:KangLin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="62"/>
+        <source>Informatioin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="87"/>
+        <source>Version: 1.0.0.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="109"/>
+        <source>Build Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="128"/>
+        <source>Home page: https://github.com/KangLin/Tasks.git</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="223"/>
+        <source>Donation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="247"/>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="261"/>
+        <source>Change log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="275"/>
+        <source>Thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="414"/>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="472"/>
+        <source> Copyright (C) 2018 KangLin Studio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.ui" line="479"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="50"/>
+        <source>Author: KangLin
+Email:kl222@126.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="52"/>
+        <source>KangLin Studio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="68"/>
+        <source> Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="68"/>
+        <source> Arch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="69"/>
+        <source>Build date:%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="73"/>
+        <source>Home page:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/DlgAbout/DlgAbout.cpp" line="75"/>
+        <source> Copyright (C) 2018 - %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CFrmUpdater</name>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="14"/>
+        <source>Updater</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="73"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="105"/>
+        <source>New version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="121"/>
+        <source>New architecture:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="141"/>
+        <source>Current version：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="157"/>
+        <source>Current architecture：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="171"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="495"/>
+        <source>There is laster version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="191"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="205"/>
+        <source>Every time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="221"/>
+        <source>Every date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="238"/>
+        <source>Every week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="251"/>
+        <source>Every Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="284"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="175"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="556"/>
+        <source>OK(&amp;O)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.ui" line="297"/>
+        <source>Close(&amp;C)</source>
+        <translation type="unfinished">关闭(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="167"/>
+        <source>Being download xml file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="181"/>
+        <source>Being download update file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="185"/>
+        <source>Being install update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="214"/>
+        <source>Current archecture: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="222"/>
+        <source>Current version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="342"/>
+        <source>: downloading %1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="349"/>
+        <source>Download network error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="368"/>
+        <source>Download fail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="449"/>
+        <source>Parse file %1 fail. It isn&apos;t xml file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="500"/>
+        <source>New version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="502"/>
+        <source>New architecture: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="508"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="522"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="535"/>
+        <source>System is different</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="515"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="528"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="542"/>
+        <source>Architecture is different</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="548"/>
+        <source>There is a new version, is it updated?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="565"/>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="566"/>
+        <source>Download ......</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="577"/>
+        <source>Being install update ......</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="582"/>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="591"/>
+        <source>Download file fail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="598"/>
+        <source>Md5sum is different. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="599"/>
+        <source>Download file md5sum: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="601"/>
+        <source>md5sum in Update.xml:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="627"/>
+        <source>Execute install program error.%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="633"/>
+        <source>The installer has started, Please close the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="740"/>
+        <source>Close</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="741"/>
+        <source>Is updating, be sure to close?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="884"/>
+        <source>Package version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="889"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="894"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="900"/>
+        <source>Operating system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="905"/>
+        <source>Platform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="910"/>
+        <source>Architecture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="915"/>
+        <source>MD5 checksum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="919"/>
+        <source>Package download url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../RabbitCommon/Src/FrmUpdater/FrmUpdater.cpp" line="924"/>
+        <source>Min update version</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CMainWindow</name>
     <message>
         <location filename="../../MainWindow.ui" line="20"/>
@@ -155,10 +510,10 @@
     <message>
         <location filename="../../MainWindow.ui" line="584"/>
         <location filename="../../MainWindow.ui" line="720"/>
-        <location filename="../../MainWindow.cpp" line="230"/>
         <location filename="../../MainWindow.cpp" line="232"/>
-        <location filename="../../MainWindow.cpp" line="253"/>
+        <location filename="../../MainWindow.cpp" line="234"/>
         <location filename="../../MainWindow.cpp" line="255"/>
+        <location filename="../../MainWindow.cpp" line="257"/>
         <source>Open(&amp;O)</source>
         <translation>打开(&amp;O)</translation>
     </message>
@@ -253,215 +608,215 @@
         <translation>更新(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="92"/>
-        <location filename="../../MainWindow.cpp" line="107"/>
+        <location filename="../../MainWindow.cpp" line="94"/>
+        <location filename="../../MainWindow.cpp" line="109"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="93"/>
+        <location filename="../../MainWindow.cpp" line="95"/>
         <source>Even</source>
         <translation>偶校验</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="94"/>
+        <location filename="../../MainWindow.cpp" line="96"/>
         <source>Odd</source>
         <translation>奇校验</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="95"/>
+        <location filename="../../MainWindow.cpp" line="97"/>
         <source>Space</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="96"/>
+        <location filename="../../MainWindow.cpp" line="98"/>
         <source>Mark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="108"/>
+        <location filename="../../MainWindow.cpp" line="110"/>
         <source>HardWare</source>
         <translation>硬件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="109"/>
+        <location filename="../../MainWindow.cpp" line="111"/>
         <source>SoftWare</source>
         <translation>软件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="173"/>
+        <location filename="../../MainWindow.cpp" line="175"/>
         <source>Ready</source>
         <translation>预备</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="174"/>
-        <location filename="../../MainWindow.cpp" line="317"/>
+        <location filename="../../MainWindow.cpp" line="176"/>
+        <location filename="../../MainWindow.cpp" line="319"/>
         <source>Rx: 0 Bytes</source>
         <translation>接收： 0 字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="175"/>
-        <location filename="../../MainWindow.cpp" line="318"/>
+        <location filename="../../MainWindow.cpp" line="177"/>
+        <location filename="../../MainWindow.cpp" line="320"/>
         <source>Tx: 0 Bytes</source>
         <translation>发送： 0 字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="176"/>
-        <location filename="../../MainWindow.cpp" line="319"/>
+        <location filename="../../MainWindow.cpp" line="178"/>
+        <location filename="../../MainWindow.cpp" line="321"/>
         <source>Drop: 0 Bytes</source>
         <translation>丢包： 0 字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="238"/>
-        <location filename="../../MainWindow.cpp" line="261"/>
+        <location filename="../../MainWindow.cpp" line="240"/>
+        <location filename="../../MainWindow.cpp" line="263"/>
         <source>Serail Port Close</source>
         <translation>串口关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="294"/>
+        <location filename="../../MainWindow.cpp" line="296"/>
         <source>Open serail port %1 fail errNo[%2]: %3</source>
         <translation>打开串口[%1]失败。错误号[%2]: %3</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="306"/>
         <location filename="../../MainWindow.cpp" line="308"/>
+        <location filename="../../MainWindow.cpp" line="310"/>
         <source>Close(&amp;C)</source>
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="339"/>
+        <location filename="../../MainWindow.cpp" line="341"/>
         <source> Open. </source>
         <translation>打开。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="450"/>
+        <location filename="../../MainWindow.cpp" line="452"/>
         <source>Rx: </source>
         <translation>接收： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="450"/>
-        <location filename="../../MainWindow.cpp" line="563"/>
-        <location filename="../../MainWindow.cpp" line="567"/>
+        <location filename="../../MainWindow.cpp" line="452"/>
+        <location filename="../../MainWindow.cpp" line="565"/>
+        <location filename="../../MainWindow.cpp" line="569"/>
         <source> Bytes</source>
         <translation>字节</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="551"/>
+        <location filename="../../MainWindow.cpp" line="553"/>
         <source>Send fail</source>
         <translation>发送失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="563"/>
+        <location filename="../../MainWindow.cpp" line="565"/>
         <source>Tx: </source>
         <translation>发送： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="567"/>
+        <location filename="../../MainWindow.cpp" line="569"/>
         <source>Drop: </source>
         <translation>丢包： </translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="593"/>
+        <location filename="../../MainWindow.cpp" line="595"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="594"/>
+        <location filename="../../MainWindow.cpp" line="596"/>
         <source>Serial [%1] is opened, be sure cloase?</source>
         <translation>串口[%1]已打开，是否关闭它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="674"/>
+        <location filename="../../MainWindow.cpp" line="676"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="675"/>
+        <location filename="../../MainWindow.cpp" line="677"/>
         <source>English</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="676"/>
+        <location filename="../../MainWindow.cpp" line="678"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="677"/>
+        <location filename="../../MainWindow.cpp" line="679"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（台湾）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="803"/>
+        <location filename="../../MainWindow.cpp" line="804"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="804"/>
+        <location filename="../../MainWindow.cpp" line="805"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>语言改变，关闭程序，并请从重启程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="814"/>
+        <location filename="../../MainWindow.cpp" line="815"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="815"/>
+        <location filename="../../MainWindow.cpp" line="816"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="816"/>
+        <location filename="../../MainWindow.cpp" line="817"/>
         <source>Gradient blue</source>
         <translation>渐变蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="817"/>
+        <location filename="../../MainWindow.cpp" line="818"/>
         <source>Blue</source>
         <translation>蓝色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="818"/>
+        <location filename="../../MainWindow.cpp" line="819"/>
         <source>Gradient Dark</source>
         <translation>渐变黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="819"/>
+        <location filename="../../MainWindow.cpp" line="820"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="878"/>
+        <location filename="../../MainWindow.cpp" line="879"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1012"/>
+        <location filename="../../MainWindow.cpp" line="1013"/>
         <source>Set baud rate fail</source>
         <translation>设置比特率失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1025"/>
+        <location filename="../../MainWindow.cpp" line="1026"/>
         <source>Set data bits fail</source>
         <translation>设置数据位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1046"/>
+        <location filename="../../MainWindow.cpp" line="1047"/>
         <source>Set parity fail</source>
         <translation>设置校验失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1060"/>
+        <location filename="../../MainWindow.cpp" line="1061"/>
         <source>Set stop bits fail</source>
         <translation>设置停止位失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1075"/>
+        <location filename="../../MainWindow.cpp" line="1076"/>
         <source>Set Flow Control fail</source>
         <translation>设置流控失败</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1109"/>
+        <location filename="../../MainWindow.cpp" line="1110"/>
         <source>Load File</source>
         <translation>加载文件</translation>
     </message>
@@ -477,7 +832,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Main.cpp" line="41"/>
+        <location filename="../../Main.cpp" line="39"/>
         <source>SerialPort Assistant</source>
         <translation>串口助手</translation>
     </message>
