@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.3.4.{build}'
+version: 'continuous.{build}'
 
 environment:
   matrix: 
@@ -136,7 +136,7 @@ deploy:
     #token : https://github.com/settings/tokens 
     #password encrypt: https://ci.appveyor.com/tools/encrypt
     auth_token:
-      secure: b5bkllAsIUCbPKXnCNgG9/8NkLcIXgMzWJmK7oUX5lBb36BNpk/jDoi5kb1EmuP8
+      secure: MgBGASPDSdnmdh6R7VNGGNnALxirQXw8PBdLYzuWN/FsJas6b1P73EaCny7OdLS0 
     #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(AUTOBUILD_ARCH)_$(QT_VERSION)_$(appveyor_build_version)
     #draft: true
     #prerelease: true

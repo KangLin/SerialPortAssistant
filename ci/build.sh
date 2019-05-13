@@ -72,6 +72,18 @@ esac
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT}/lib/cmake/Qt5
+    #if [ "$TRAVIS_TAG" != "" ]; then
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib
+        wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+        chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+        export VERSION="continuous"
+        ./linuxdeployqt-continuous-x86_64.AppImage debian/serialportassistant/opt/SerialPortAssistant/share/applications/*.desktop \
+            -qmake=${QT_ROOT}/bin/qmake -appimage 
+
+        wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+        #bash upload.sh ../serialportassistant_*_amd64.deb
+        bash upload.sh SerialPort*.AppImage*
+    #fi
     exit 0
 fi
 

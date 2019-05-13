@@ -90,6 +90,10 @@ function function_unix()
     sudo apt-get update -y -qq
     sudo apt-get install fakeroot -y -qq
     sudo apt-get install debhelper -y -qq
+    if [ -z "${QT_VERSION}" ]; then
+        sudo apt-get install -y -qq qt5-default qttools5-dev-tools qtbase5-dev qttools5-dev
+    fi
+
     function_common
 
     cd ${SOURCE_DIR}

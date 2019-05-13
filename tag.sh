@@ -27,6 +27,8 @@ APPVERYOR_VERSION="version: '${VERSION}.{build}'"
 sed -i "s/^version: '.*{build}'/${APPVERYOR_VERSION}/g" ${SOURCE_DIR}/appveyor.yml
 sed -i "s/^\    BUILD_VERSION=.*/\    BUILD_VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/SerialPortAssistant.pro
 sed -i "s/^\Standards-Version:.*/\Standards-Version:\"${VERSION}\"/g" ${SOURCE_DIR}/debian/control
+sed -i "s/^\        export VERSION=.*/\        export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/ci/build.sh
+sed -i "s/^\    export VERSION=.*/\    export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
 if [ -n "$1" ]; then
     git add .

@@ -52,7 +52,7 @@ isEmpty(BUILD_VERSION) {
     }
 }
 isEmpty(BUILD_VERSION){
-    BUILD_VERSION="v0.3.4"
+    BUILD_VERSION="continuous"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 
@@ -60,7 +60,7 @@ DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
 include(pri/Translations.pri)
 
-other.files = License.md Authors.md ChangeLog.md AppIcon.ico
+other.files = License.md Authors.md ChangeLog.md AppIcon.ico Resource/png/AppIcon.png
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX/bin
