@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # See debhelper(7) (uncomment to enable)
 # output every command that modifies files on the build system.
-#export DH_VERBOSE = 1
+# export DH_VERBOSE = 1
 
 # see FEATURE AREAS in dpkg-buildflags(1)
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
@@ -20,7 +20,7 @@
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )
 override_dh_auto_configure:
-	$(Qt5_DIR)/../../../bin/qmake PREFIX=/opt/SerialPortAssistant
+	$(QT_ROOT)/bin/qmake PREFIX=/opt/SerialPortAssistant
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -l`pwd`/debian/serialportassistant/opt/serialportassistant/bin 

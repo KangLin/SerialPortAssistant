@@ -1,5 +1,5 @@
 #!/bin/sh
-# prerm script for lunarcalendar
+# prerm script for serialportassistant
 #
 # see: dh_installdeb(1)
 

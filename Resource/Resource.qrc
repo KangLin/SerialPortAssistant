@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/icon">
-        <file alias="AppIcon">png/AppIcon.png</file>
         <file alias="Language">png/Language.jpg</file>
         <file alias="English">png/English.png</file>
         <file alias="Setting">png/settings16x16.png</file>
@@ -18,6 +17,7 @@
         <file alias="Log">png/log.png</file>
         <file alias="Contribute">png/Contribute.png</file>
         <file alias="Contribute20">png/Contribute20.png</file>
+        <file alias="AppIcon">png/SerialPortAssistant.png</file>
     </qresource>
     <qresource prefix="/sink">
         <file alias="Blue">sink/blue.qss</file>

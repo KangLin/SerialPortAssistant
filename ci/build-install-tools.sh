@@ -28,7 +28,7 @@ function function_common()
     fi
     
     # Qt qt安装参见：https://github.com/benlau/qtci  
-    if [ -n "${QT_VERSION}" ]; then
+    if [ "$BUILD_DOWNLOAD" = "TRUE" ]; then
         QT_DIR=`pwd`/Qt/${QT_VERSION}
         if [ ! -d "${QT_DIR}" ]; then
             if [ "${QT_VERSION}" = "5.6.3" ]; then
@@ -73,7 +73,7 @@ function function_android()
         mv android-sdk-linux android-sdk
         rm android-sdk_r24.4.1-linux.tgz 
         (sleep 5 ; while true ; do sleep 1 ; printf 'y\r\n' ; done ) \
-        | android-sdk/tools/android update sdk -u -t tool,android-18,android-24,extra,platform,platform-tools,build-tools-25.0.2
+        | android-sdk/tools/android update sdk -u -t tool,android-18,android-24,extra,platform,platform-tools,build-tools-25.2.5
     fi
 
     sudo apt-get install ant -qq -y
@@ -86,12 +86,23 @@ function function_unix()
 {
     #汇编工具yasm
     #function_install_yasm
-    
+
+    if [ "$BUILD_DOWNLOAD" != "TRUE"  ]; then
+        #See: https://launchpad.net/~beineri
+        sudo add-apt-repository ppa:beineri/opt-qt${QT_VERSION}-`lsb_release -c|awk '{print $2}'` -y
+    fi
+
     sudo apt-get update -y -qq
-    sudo apt-get install fakeroot -y -qq
-    sudo apt-get install debhelper -y -qq
-    if [ -z "${QT_VERSION}" ]; then
-        sudo apt-get install -y -qq qt5-default qttools5-dev-tools qtbase5-dev qttools5-dev
+    #sudo apt-get upgrade -y -qq
+    sudo apt-get install debhelper fakeroot -y -qq
+    sudo apt-get install -y -qq libglu1-mesa-dev
+
+    if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
+        sudo apt-get install -y -qq qt${QT_VERSION_DIR}base qt${QT_VERSION_DIR}tools \
+            qt${QT_VERSION_DIR}serialport
+        
+        sed -i "s/export QT_VERSION=/export QT_VERSION=${QT_VERSION}/g" ${SOURCE_DIR}/debian/preinst
+        sed -i "s/qt59/qt${QT_VERSION_DIR}/g" ${SOURCE_DIR}/debian/postinst
     fi
 
     function_common

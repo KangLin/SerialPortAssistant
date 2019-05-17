@@ -425,7 +425,11 @@ void CMainWindow::slotRead()
     
     QString szText;
     if(ui->rbReciveASCII->isChecked())
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 3))
         szText = QString::fromStdString(d.toStdString());
+#else
+        szText = d;
+#endif
     else if(ui->rbReciverUtf8->isChecked())
         szText = QString::fromUtf8(d, d.size());
     else if(ui->rbSendUnicode->isChecked())

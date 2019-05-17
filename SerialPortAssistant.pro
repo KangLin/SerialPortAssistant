@@ -6,7 +6,7 @@
 
 QT       += core gui serialport
 
-!greaterThan(QT_VERSION, 5.1) : error("Qt version must greater 5.1")
+versionAtMost(QT_VERSION, 5.6) : error("Qt version must greater 5.6")
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SerialPortAssistant
@@ -26,6 +26,7 @@ win32{
     TARGET_PATH=$$OUT_PWD
 }
 
+isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
 isEmpty(PREFIX) {
     android {
        PREFIX = /.
@@ -52,7 +53,7 @@ isEmpty(BUILD_VERSION) {
     }
 }
 isEmpty(BUILD_VERSION){
-    BUILD_VERSION="continuous"
+    BUILD_VERSION="0.3.5"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 
@@ -60,7 +61,8 @@ DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
 
 include(pri/Translations.pri)
 
-other.files = License.md Authors.md ChangeLog.md AppIcon.ico Resource/png/AppIcon.png
+other.files = License.md Authors.md ChangeLog.md 
+win32: other.files *= AppIcon.ico
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist 
 target.path = $$PREFIX/bin
@@ -69,12 +71,18 @@ install.path = $$OUT_PWD
 install.CONFIG += directory no_check_exist 
 INSTALLS += target other install
 
-!android : unix {
+!android : !macx : unix {
+    # install icons
+    icon128.target = icon128
+    icon128.files = Resource/png/SerialPortAssistant.png
+    icon128.path = $${PREFIX}/share/pixmaps
+    icon128.CONFIG = directory no_check_exist
+
     DESKTOP_FILE.target = DESKTOP_FILE
     DESKTOP_FILE.files = $$PWD/debian/SerialPortAssistant.desktop
     DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications
     DESKTOP_FILE.CONFIG += directory no_check_exist
-    INSTALLS += DESKTOP_FILE
+    INSTALLS += DESKTOP_FILE icon128
 }
 
 SOURCES +=\

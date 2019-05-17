@@ -1,6 +1,6 @@
 修改日志
 ------
-* Version: v0.3.5
+* Version: 0.3.5
   - 增加 LINUX 分发
 
 * Version: v0.3.4

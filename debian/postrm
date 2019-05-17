@@ -22,6 +22,7 @@ set -e
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
         rm -fr /usr/share/applications/SerialPortAssistant.desktop
+        rm -fr /usr/share/pixmaps/SerialPortAssistant.png
         rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
     ;;
 

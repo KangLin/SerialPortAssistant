@@ -23,8 +23,15 @@ case "$1" in
         if [ ! -f /usr/share/applications/SerialPortAssistant.desktop ]; then
             ln -s /opt/SerialPortAssistant/share/applications/SerialPortAssistant.desktop /usr/share/applications/SerialPortAssistant.desktop
         fi
+        if [ ! -f /usr/share/pixmaps/SerialPortAssistant.png ]; then
+            if [ ! -d /usr/share/pixmaps ]; then
+                mkdir -p /usr/share/pixmaps
+            fi
+            ln -s /opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/SerialPortAssistant.png
+        fi
         echo "/opt/SerialPortAssistant/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
-        echo "/opt/SerialPortAssistant/bin" > /etc/ld.so.conf.d/SerialPortAssistant.conf
+        echo "/opt/SerialPortAssistant/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
+        echo "/opt/qt59/lib" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
         ldconfig
     ;;
 
