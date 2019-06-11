@@ -32,6 +32,7 @@ sed -i "s/export VERSION=.*/export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.trav
 sed -i "s/^\Standards-Version:.*/\Standards-Version:\"${VERSION}\"/g" ${SOURCE_DIR}/debian/control
 sed -i "s/serialportassistant (.*) stable; urgency=medium/serialportassistant (${VERSION}) stable; urgency=medium/g" ${SOURCE_DIR}/debian/changelog
 sed -i "s/[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
+sed -i "s/[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/Update/update.xml
 
 if [ -n "$1" ]; then
     git add .
