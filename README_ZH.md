@@ -27,6 +27,20 @@
 5. ![发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases)  
 ![最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
+- windows
+    + [SerialPortAssistant-Setup-0.3.5.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/SerialPortAssistant-Setup-0.3.5.exe)
+
+- linux
+    + [SerialPort_Assistant-0.3.5-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/SerialPort_Assistant-0.3.5-x86_64.AppImage)
+
+            sudo chmod a+x SerialPort_Assistant-0.3.5-x86_64.AppImage
+            ./SerialPort_Assistant-0.3.5-x86_64.AppImage
+
+- ubuntu
+    + [serialportassistant_0.3.5_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/serialportassistant_0.3.5_amd64.deb)
+
+            sudo dpkg -i serialportassistant_0.3.5_amd64.deb
+
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠
     * 扫描下面二维码进行任意金额捐赠  

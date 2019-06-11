@@ -27,6 +27,20 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 5. ![Release download](https://github.com/KangLin/SerialPortAssistant/releases)  
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
+- windows
+    + [SerialPortAssistant-Setup-0.3.5.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/SerialPortAssistant-Setup-0.3.5.exe)
+
+- linux
+    + [SerialPort_Assistant-0.3.5-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/SerialPort_Assistant-0.3.5-x86_64.AppImage)
+
+            sudo chmod a+x SerialPort_Assistant-0.3.5-x86_64.AppImage
+            ./SerialPort_Assistant-0.3.5-x86_64.AppImage
+
+- ubuntu
+    + [serialportassistant_0.3.5_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/serialportassistant_0.3.5_amd64.deb)
+
+            sudo dpkg -i serialportassistant_0.3.5_amd64.deb
+
 6. Donate  
 If you are satisfied, you can donate to me
     * WeChat scan the following two-dimensional code for free donation  
