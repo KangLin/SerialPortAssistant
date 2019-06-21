@@ -12,11 +12,8 @@
         <file alias="Start">png/start256.png</file>
         <file alias="Stop">png/stop-red256.png</file>
         <file alias="Send">png/send.png</file>
-        <file alias="WeiXinPay20">png/weixinpay.png</file>
         <file alias="Pause">png/pause.png</file>
         <file alias="Log">png/log.png</file>
-        <file alias="Contribute">png/Contribute.png</file>
-        <file alias="Contribute20">png/Contribute20.png</file>
         <file alias="AppIcon">png/SerialPortAssistant.png</file>
     </qresource>
     <qresource prefix="/sink">

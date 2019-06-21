@@ -42,13 +42,13 @@
             sudo dpkg -i serialportassistant_0.3.6_amd64.deb
 
 6. 捐赠  
-如果你用得满意，可以对本人进行捐赠
-    * 扫描下面二维码进行任意金额捐赠  
-    ![支付宝(大于 ￥20 )](Resource/png/zhifubao.png  "支付宝( 大于 ￥20 )")
-    ![微信( 大于 ￥20 )](Resource/png/weixinpay.png "微信( 大于 ￥20 )")
-    * 扫描下面二维码捐赠￥20  
-    ![支付宝（￥20）](Resource/png/zhifubao20.png  "支付宝捐赠")
-    ![微信捐赠](Resource/png/weixinpay20.png "微信捐赠")
+如果你用得满意，可以对本人进行捐赠  
+
+- 捐赠(大于￥20)：  
+![捐赠( 大于 ￥20 )](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "捐赠(大于￥20)")
+
+- 捐赠￥20  
+![捐赠￥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "捐赠￥20")
 
 7. 依赖
   RabbitCommon: https://github.com/KangLin/RabbitCommon

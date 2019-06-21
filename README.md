@@ -43,12 +43,12 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 
 6. Donate  
 If you are satisfied, you can donate to me
-    * WeChat scan the following two-dimensional code for free donation  
-    ![Alipay contribute( More than ￥20 )](Resource/png/zhifubao.png  "Alipay contribute( More than ￥20 )")
-    ![WeChat payment( More than ￥20 )](Resource/png/weixinpay.png "WeChat payment( More than ￥20 )")
-    * Scan the following two-dimensional code to donate 20 yuan:  
-    ![Alipay contribute](Resource/png/zhifubao20.png  "Alipay contribute")
-    ![WeChat payment](Resource/png/weixinpay20.png "WeChat payment")
+
+- Donation (greater than ¥20):  
+![donation (greater than ¥20)](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation (greater than ¥20)")
+
+- Donate ¥20  
+![donation ¥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "donation ¥20")
     
 7. Dependence
   RabbitCommon: https://github.com/KangLin/RabbitCommon
