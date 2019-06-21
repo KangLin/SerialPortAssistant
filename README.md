@@ -28,18 +28,18 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-0.3.6.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.6/SerialPortAssistant-Setup-0.3.6.exe)
+    + [SerialPortAssistant-Setup-0.3.7.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/SerialPortAssistant-Setup-0.3.7.exe)
 
 - linux
-    + [SerialPort_Assistant-0.3.6-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.6/SerialPort_Assistant-0.3.6-x86_64.AppImage)
+    + [SerialPort_Assistant-0.3.7-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/SerialPort_Assistant-0.3.7-x86_64.AppImage)
 
-            sudo chmod a+x SerialPort_Assistant-0.3.6-x86_64.AppImage
-            ./SerialPort_Assistant-0.3.6-x86_64.AppImage
+            sudo chmod a+x SerialPort_Assistant-0.3.7-x86_64.AppImage
+            ./SerialPort_Assistant-0.3.7-x86_64.AppImage
 
 - ubuntu
-    + [serialportassistant_0.3.6_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.6/serialportassistant_0.3.6_amd64.deb)
+    + [serialportassistant_0.3.7_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/serialportassistant_0.3.7_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.3.6_amd64.deb
+            sudo dpkg -i serialportassistant_0.3.7_amd64.deb
 
 6. Donate  
 If you are satisfied, you can donate to me
