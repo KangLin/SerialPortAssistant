@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <UPDATE>
-    <VERSION>v0.3.4</VERSION>
-    <TIME>2019-05-05 01:39:27</TIME>
-    <INFO>SerialPort Assistant v0.3.4</INFO>
+    <VERSION>0.3.5</VERSION>
+    <TIME>2019-05-27 06:46:50</TIME>
+    <INFO>SerialPort Assistant 0.3.5</INFO>
     <FORCE>0</FORCE>
     <SYSTEM>Windows</SYSTEM>
-    <PLATFORM>v0.3.4</PLATFORM>
+    <PLATFORM>0.3.5</PLATFORM>
     <ARCHITECTURE>x86</ARCHITECTURE>
-    <MD5SUM>b0eee6e105988f0aab57299b2416eca2</MD5SUM>
-    <URL>https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.4/SerialPortAssistant-Setup-v0.3.4.exe</URL>
-    <MIN_UPDATE_VERSION>v0.0.1</MIN_UPDATE_VERSION>
+    <MD5SUM>a03066e4d6779b2c9efb57ef4c905321</MD5SUM>
+    <URL>https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.5/SerialPortAssistant-Setup-0.3.5.exe</URL>
+    <MIN_UPDATE_VERSION>0.0.1</MIN_UPDATE_VERSION>
 </UPDATE>

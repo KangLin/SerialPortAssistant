@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<UPDATE>
+    <VERSION>0.3.6</VERSION>
+    <TIME>2019-06-11 07:37:18</TIME>
+    <INFO>SerialPort Assistant 0.3.6</INFO>
+    <FORCE>0</FORCE>
+    <SYSTEM>Linux</SYSTEM>
+    <PLATFORM>x86_64</PLATFORM>
+    <ARCHITECTURE>x86</ARCHITECTURE>
+    <MD5SUM>ed217556eb8af3b78127f559c51b67b8</MD5SUM>
+    <URL>https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.6/serialportassistant_0.3.6_amd64.deb</URL>
+    <MIN_UPDATE_VERSION>0.0.1</MIN_UPDATE_VERSION>
+</UPDATE>
