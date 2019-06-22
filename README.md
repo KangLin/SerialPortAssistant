@@ -28,18 +28,18 @@ This project is a cross-platform serial assistant. It can run on WINDOWS, linux 
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.3.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPortAssistant-Setup-v0.3.8.exe)
+    + [SerialPortAssistant-Setup-v0.3.5.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.5/SerialPortAssistant-Setup-v0.3.5.exe)
 
 - linux
-    + [SerialPort_Assistant-v0.3.8-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPort_Assistant-v0.3.8-x86_64.AppImage)
+    + [SerialPort_Assistant-v0.3.5-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.5/SerialPort_Assistant-v0.3.5-x86_64.AppImage)
 
-            sudo chmod a+x SerialPort_Assistant-v0.3.8-x86_64.AppImage
-            ./SerialPort_Assistant-v0.3.8-x86_64.AppImage
+            sudo chmod a+x SerialPort_Assistant-v0.3.5-x86_64.AppImage
+            ./SerialPort_Assistant-v0.3.5-x86_64.AppImage
 
 - ubuntu
-    + [serialportassistant_0.3.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/serialportassistant_0.3.8_amd64.deb)
+    + [serialportassistant_0.3.5_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.5/serialportassistant_0.3.5_amd64.deb)
 
-            sudo dpkg -i serialportassistant_v0.3.8_amd64.deb
+            sudo dpkg -i serialportassistant_v0.3.5_amd64.deb
 
 6. Donate  
 If you are satisfied, you can donate to me

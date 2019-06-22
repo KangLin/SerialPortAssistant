@@ -34,7 +34,7 @@ sed -i "s/<VERSION>.*</<VERSION>${VERSION}</g" ${SOURCE_DIR}/Update/update.xml
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
 sed -i "s/[0-9]\+\.[0-9]\+\.[0-9]\+/${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
-sed -i "s/serialportassistant (.*)/serialportassistant (${VERSION})/g" ${SOURCE_DIR}/debian/changelog
+sed -i "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
 
 if [ -n "$1" ]; then
     git add .
