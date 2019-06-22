@@ -88,21 +88,20 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
         #cd debian/serialportassistant/opt/SerialPortAssistant
     else
         bash build_debpackage.sh ${QT_ROOT} `pwd`/../RabbitCommon
-        
+
         if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION_DIR}" = "512" ]; then
             MD5=`md5sum ../serialportassistant_*_amd64.deb|awk '{print $1}'`
             echo "MD5:${MD5}"
             ./debian/serialportassistant/opt/SerialPortAssistant/bin/SerialPortAssistant \
                 -f "`pwd`/update_linux.xml" \
-                --md5 ${MD5} #\
-                #--url https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/serialportassistant_${VERSION}_amd64.deb
+                --md5 ${MD5}
             
             export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"
             #export UPLOADTOOL_PR_BODY=
             wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
             bash upload.sh ../serialportassistant_*_amd64.deb update_linux.xml
         fi
-        
+
     fi
     if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION_DIR}" = "512" ]; then
         cd debian/serialportassistant/opt/SerialPortAssistant
@@ -110,7 +109,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib
         wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
         chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-                export VERSION="0.3.7"
+                export VERSION="v0.3.8"
         ./linuxdeployqt-continuous-x86_64.AppImage share/applications/*.desktop \
             -qmake=${QT_ROOT}/bin/qmake -appimage
 

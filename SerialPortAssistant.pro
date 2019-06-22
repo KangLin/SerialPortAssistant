@@ -53,7 +53,7 @@ isEmpty(BUILD_VERSION) {
     }
 }
 isEmpty(BUILD_VERSION){
-    BUILD_VERSION="0.3.7"
+    BUILD_VERSION="v0.3.8"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 
@@ -110,6 +110,7 @@ OTHER_FILES += \
     .travis.yml \
     tag.sh \
     debian/* \
+    Update/* \
     build_debpackage.sh
 
 RC_FILE = AppIcon.rc

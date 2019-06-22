@@ -28,18 +28,18 @@
 ![最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-0.3.7.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/SerialPortAssistant-Setup-0.3.7.exe)
+    + [SerialPortAssistant-Setup-v0.3.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPortAssistant-Setup-v0.3.8.exe)
 
 - linux
-    + [SerialPort_Assistant-0.3.7-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/SerialPort_Assistant-0.3.7-x86_64.AppImage)
+    + [SerialPort_Assistant-v0.3.8-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPort_Assistant-v0.3.8-x86_64.AppImage)
 
-            sudo chmod a+x SerialPort_Assistant-0.3.7-x86_64.AppImage
-            ./SerialPort_Assistant-0.3.7-x86_64.AppImage
+            sudo chmod a+x SerialPort_Assistant-v0.3.8-x86_64.AppImage
+            ./SerialPort_Assistant-v0.3.8-x86_64.AppImage
 
 - ubuntu
-    + [serialportassistant_0.3.7_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/0.3.7/serialportassistant_0.3.7_amd64.deb)
+    + [serialportassistant_0.3.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/serialportassistant_0.3.8_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.3.7_amd64.deb
+            sudo dpkg -i serialportassistant_v0.3.8_amd64.deb
 
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠  
