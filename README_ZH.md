@@ -28,18 +28,31 @@
 ![最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.3.6.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.6/SerialPortAssistant-Setup-v0.3.6.exe)
+    + [SerialPortAssistant-Setup-v0.3.7.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.7/SerialPortAssistant-Setup-v0.3.7.exe)
 
 - linux
-    + [SerialPort_Assistant-v0.3.6-x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.6/SerialPort_Assistant-v0.3.6-x86_64.AppImage)
-
-            sudo chmod a+x SerialPort_Assistant-v0.3.6-x86_64.AppImage
-            ./SerialPort_Assistant-v0.3.6-x86_64.AppImage
+    + [SerialPortAssistant_v0.3.7.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.7/SerialPortAssistant_v0.3.7.tar.gz)  
+        AppImage格式的执行程序，可直接运行在linux系统，详见：https://appimage.org/  
+        使用:    
+        1. 解压。复制 SerialPortAssistant_v0.3.7.tar.gz 到安装目录，然后解压：
+    
+                  mkdir SerialPortAssistant
+                  cd SerialPortAssistant
+                  cp $DOWNLOAD/SerialPortAssistant_v0.3.7.tar.gz .
+                  tar xvfz SerialPortAssistant_v0.3.7.tar.gz
+    
+        2. install
+    
+                  ./install.sh install
+    
+        3. If you want to uninstall
+    
+                  ./install.sh remove
 
 - ubuntu
-    + [serialportassistant_0.3.6_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.6/serialportassistant_0.3.6_amd64.deb)
+    + [serialportassistant_0.3.7_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.7/serialportassistant_0.3.7_amd64.deb)
 
-            sudo dpkg -i serialportassistant_v0.3.6_amd64.deb
+            sudo dpkg -i serialportassistant_0.3.7_amd64.deb
 
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠  

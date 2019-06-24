@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 SOURCE_DIR=`pwd`
 
 if [ -n "$1" ]; then
