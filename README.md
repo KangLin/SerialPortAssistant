@@ -4,10 +4,15 @@ Serial Port Assistant
 Author: Kang Lin (kl222@126.com)
 --------------------------------
 
-[<img src="Resource/png/China.png" alt="Chinese" title="Chinese" width="16" height="16" />Chinese](README_ZH.md)
+[<img src="Resource/png/China.png" alt="Chinese" title="Chinese" width="16" height="16" />Chinese](README_zh_CN.md)
 
 1. ![Project: https://github.com/KangLin/SerialPortAssistant](https://github.com/KangLin/SerialPortAssistant)  
-This project is a cross-platform serial assistant. It can run on WINDOWS, linux system.
+This project is a cross-platform serial assistant. It can run on:
+    - [x] WINDOWS
+    - [x] linux
+    - [x] mac  
+        Mac os, I don't have the corresponding equipment,
+        please compile and test the user with the corresponding equipment.
 
 2. Complie status
 

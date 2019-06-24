@@ -7,7 +7,11 @@
 [<img src="Resource/png/English.png" alt="English" title="English" width="16" height="16" />英语](README.md)
 
 1. ![项目位置:https://github.com/KangLin/SerialPortAssistant](https://github.com/KangLin/SerialPortAssistant)  
-本项目是一个跨平台的串口助手。它能运行在WINDOWS、linux系统上。
+本项目是一个跨平台的串口助手。它能运行在:
+    - [x] WINDOWS
+    - [x] linux
+    - [x] mac  
+        本人没有mac设备，请有些设备的同学自行编译和测试
 
 2. 编译状态
 
