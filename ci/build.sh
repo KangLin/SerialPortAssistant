@@ -104,7 +104,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
         SerialPortAssistant-x86_64.AppImage \
         install.sh share
     
-    #Create update_linux.xml
+    #Create update_linux_appimage.xml
     MD5=`md5sum SerialPortAssistant_${VERSION}.tar.gz|awk '{print $1}'`
     echo "MD5:${MD5}"
     ./SerialPortAssistant-x86_64.AppImage \
