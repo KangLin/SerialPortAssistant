@@ -1,5 +1,8 @@
 修改日志
 ------
+* Version: v0.3.8
+  - 修改 tar 打包内容
+  
 * Version: v0.3.7
   - 增加 update_linux_appimage.xml
   

@@ -81,28 +81,22 @@ if [ "ON" = "${STATIC}" ]; then
     CONFIG_PARA="CONFIG*=static"
 fi
 
-export VERSION="v0.3.7"
+export VERSION="v0.3.8"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT} `pwd`/../RabbitCommon
         
-    cd debian/serialportassistant/opt/SerialPortAssistant
+    cd debian/serialportassistant/opt
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/bin:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib
-    
-    #Create update_linux.xml
-    MD5=`md5sum $SOURCE_DIR/../serialportassistant_*_amd64.deb|awk '{print $1}'`
-    echo "MD5:${MD5}"
-    ./bin/SerialPortAssistant \
-            -f "`pwd`/update_linux.xml" \
-            --md5 ${MD5}
-    cat update_linux.xml
     
     wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
     chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-    ./linuxdeployqt-continuous-x86_64.AppImage share/applications/*.desktop \
+    ./linuxdeployqt-continuous-x86_64.AppImage SerialPortAssistant/share/applications/*.desktop \
             -qmake=${QT_ROOT}/bin/qmake -appimage
 
+    cd SerialPortAssistant
     # Create appimage install package
+    cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
     cp $SOURCE_DIR/Install/install.sh .
     ln -s SerialPort_Assistant-${VERSION}-x86_64.AppImage SerialPortAssistant-x86_64.AppImage
     tar -czf SerialPortAssistant_${VERSION}.tar.gz \
@@ -118,6 +112,14 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
             --md5 ${MD5} \
             --url "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/SerialPortAssistant_${VERSION}.tar.gz"
     cat update_linux_appimage.xml
+    
+    #Create update_linux.xml
+    MD5=`md5sum $SOURCE_DIR/../serialportassistant_*_amd64.deb|awk '{print $1}'`
+    echo "MD5:${MD5}"
+    ./bin/SerialPortAssistant \
+            -f "`pwd`/update_linux.xml" \
+            --md5 ${MD5}
+    cat update_linux.xml
     
     if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION_DIR}" = "512" ]; then
         export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"

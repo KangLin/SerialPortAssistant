@@ -34,7 +34,7 @@ before_install:
   - sudo Xvfb :99 -ac &
   - export DISPLAY=:99.0
   - mkdir ${SOURCE_DIR}/Tools
-  - export VERSION="v0.3.7"
+  - export VERSION="v0.3.8"
 
 install:
   - cd ${SOURCE_DIR}
@@ -59,7 +59,7 @@ after_script:
   #- |
     #wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
     #chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-    #export VERSION="v0.3.7"
+    #export VERSION="v0.3.8"
     #./linuxdeployqt-continuous-x86_64.AppImage debian/serialportassistant/opt/SerialPortAssistant/share/applications/*.desktop -appimage
 
     #wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
