@@ -33,18 +33,18 @@ This project is a cross-platform serial assistant. It can run on:
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.3.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPortAssistant-Setup-v0.3.8.exe)
+    + [SerialPortAssistant-Setup-v0.3.9.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.9/SerialPortAssistant-Setup-v0.3.9.exe)
 
 - linux
-    + [SerialPortAssistant_v0.3.8.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/SerialPortAssistant_v0.3.8.tar.gz)  
+    + [SerialPortAssistant_v0.3.9.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.9/SerialPortAssistant_v0.3.9.tar.gz)  
         The AppImage format executable can be run directly on the Linux system, see: https://appimage.org/  
         Usage:    
-        1. Decompress. Copy SerialPortAssistant_v0.3.8.tar.gz to install directory, then decompress it:
+        1. Decompress. Copy SerialPortAssistant_v0.3.9.tar.gz to install directory, then decompress it:
     
                   mkdir SerialPortAssistant
                   cd SerialPortAssistant
-                  cp $DOWNLOAD/SerialPortAssistant_v0.3.8.tar.gz .
-                  tar xvfz SerialPortAssistant_v0.3.8.tar.gz
+                  cp $DOWNLOAD/SerialPortAssistant_v0.3.9.tar.gz .
+                  tar xvfz SerialPortAssistant_v0.3.9.tar.gz
     
         2. install
     
@@ -54,9 +54,9 @@ This project is a cross-platform serial assistant. It can run on:
     
                   ./install.sh remove
 - ubuntu
-    + [serialportassistant_0.3.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.8/serialportassistant_0.3.8_amd64.deb)
+    + [serialportassistant_0.3.9_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.3.9/serialportassistant_0.3.9_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.3.8_amd64.deb
+            sudo dpkg -i serialportassistant_0.3.9_amd64.deb
 
 6. Donate  
 If you are satisfied, you can donate to me
