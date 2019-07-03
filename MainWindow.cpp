@@ -30,7 +30,7 @@ Abstract:
 #ifdef RABBITCOMMON
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
-    #include "RabbitCommonGlobalDir.h"
+    #include "RabbitCommonDir.h"
 #endif
 
 CMainWindow::CMainWindow(QWidget *parent) :
@@ -774,18 +774,18 @@ int CMainWindow::LoadTranslate(QString szLocale)
 
     ClearTranslate();
     LOG_MODEL_DEBUG("MainWindow", "Translate dir:%s",
-          qPrintable(CRabbitCommonGlobalDir::Instance()->GetDirTranslations()));
+          qPrintable(RabbitCommon::CDir::Instance()->GetDirTranslations()));
 
     m_TranslatorQt = QSharedPointer<QTranslator>(new QTranslator(this));
     m_TranslatorQt->load("qt_" + szLocale + ".qm",
-                         CRabbitCommonGlobalDir::Instance()->GetDirApplication()
+                         RabbitCommon::CDir::Instance()->GetDirApplication()
                          + QDir::separator() + "translations");
     qApp->installTranslator(m_TranslatorQt.data());
 
     m_TranslatorApp = QSharedPointer<QTranslator>(new QTranslator(this));
 
     m_TranslatorApp->load("SerialPortAssistant_" + szLocale + ".qm",
-                        CRabbitCommonGlobalDir::Instance()->GetDirTranslations()
+                        RabbitCommon::CDir::Instance()->GetDirTranslations()
                           );
     qApp->installTranslator(m_TranslatorApp.data());
 
@@ -890,7 +890,7 @@ int CMainWindow::OpenCustomStyleMenu()
         QString stylesheet= file.readAll();
         qApp->setStyleSheet(stylesheet);
         file.close();
-        QSettings conf(CRabbitCommonGlobalDir::Instance()->GetFileUserConfigure(),
+        QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                        QSettings::IniFormat);
         conf.setValue("UI/StyleSheet", szFile);
         

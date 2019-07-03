@@ -16,7 +16,7 @@ Abstract:
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include "RabbitCommonGlobalDir.h"
+#include "RabbitCommonDir.h"
 #include "Log.h"
 #include <QObject>
 

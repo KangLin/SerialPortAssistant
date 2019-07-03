@@ -16,7 +16,7 @@ Abstract:
 #ifdef RABBITCOMMON
     #include "RabbitCommonTools.h"
     #include "FrmUpdater/FrmUpdater.h"
-    #include "RabbitCommonGlobalDir.h"
+    #include "RabbitCommonDir.h"
 #endif
 #include "MainWindow.h"
 #include <QApplication>
@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QTranslator translator;
-    translator.load(CRabbitCommonGlobalDir::Instance()->GetDirTranslations()
+    translator.load(RabbitCommon::CDir::Instance()->GetDirTranslations()
                + "/SerialPortAssistant_" + QLocale::system().name() + ".qm");
     qApp->installTranslator(&translator);
 
 #ifdef RABBITCOMMON
-    CRabbitCommonTools::Instance()->Init();
+    RabbitCommon::CTools::Instance()->Init();
 #endif
     
     a.setApplicationName("SerialPortAssistant");
