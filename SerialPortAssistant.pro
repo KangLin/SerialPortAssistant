@@ -58,6 +58,11 @@ isEmpty(BUILD_VERSION){
 message("BUILD_VERSION:$$BUILD_VERSION")
 
 DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
+VERSION=$$replace(BUILD_VERSION, v,)
+win32{
+    VERSION=$$split(VERSION, -)
+    VERSION=$$first(VERSION)
+}
 
 include(pri/Translations.pri)
 
