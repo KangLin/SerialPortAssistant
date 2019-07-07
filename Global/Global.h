@@ -102,26 +102,26 @@ private:
     SEND_R_N m_SendRN;
 
 public:
-    bool GetReciveDisplayTime();
-    int SetReciveDisplayTime(bool bDisplay);
+    bool GetReceiveDisplayTime();
+    int SetReceiveDisplayTime(bool bDisplay);
 private:
-    bool m_bReciveDisplayTime;
+    bool m_bReceiveDisplayTime;
     
 public:
-    bool GetReciveDisplaySend();
-    int SetReciveDisplaySend(bool bDisplay);
+    bool GetReceiveDisplaySend();
+    int SetReceiveDisplaySend(bool bDisplay);
 private:
-    bool m_bReciveDisplaySend;
+    bool m_bReceiveDisplaySend;
     
 public:
     enum CODE{
         ASCII = 0,
         HEX = 1
     };
-    CODE GetReciveDisplayCode();
-    int SetReciveDisplayCode(CODE code);
+    CODE GetReceiveDisplayCode();
+    int SetReceiveDisplayCode(CODE code);
 private:
-    CODE m_ReciveDisplayCode;
+    CODE m_ReceiveDisplayCode;
     
 public:
     CODE GetSendDisplayCode();

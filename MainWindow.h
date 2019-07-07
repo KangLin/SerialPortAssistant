@@ -100,12 +100,12 @@ private slots:
     void on_cmbParity_currentIndexChanged(int index);
     void on_cmbStopBit_currentTextChanged(const QString &szText);
     void on_cmbFlowControl_currentIndexChanged(int index);
-    void on_rbReciveASCII_clicked(bool checked);
-    void on_rbReciveHex_clicked(bool checked);
+    void on_rbReceiveASCII_clicked(bool checked);
+    void on_rbReceiveHex_clicked(bool checked);
     void on_rbSendHex_clicked(bool checked);
     void on_rbSendASCII_clicked(bool checked);
     void on_cmbRecent_activated(const QString &szText);
-    void on_actionPasue_P_triggered();
+    void on_actionPause_P_triggered();
     void on_actionLoad_File_F_triggered();
     void on_pbBrowse_clicked();
     void on_actionOpen_Log_G_triggered();
@@ -115,7 +115,7 @@ private:
     int InitStatusBar();
     int InitToolBar();
     int InitLeftBar();
-    void AddRecive(const QString &szText, bool bRecive = false);
+    void AddReceive(const QString &szText, bool bReceive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
     QString GetSerialPortSettingInfo();
     bool CheckHexChar(QChar c);
@@ -125,7 +125,7 @@ private:
     Ui::CMainWindow *ui;
 
     QSerialPort m_SerialPort;
-    ulong m_nSend, m_nRecive, m_nDrop;
+    ulong m_nSend, m_nReceive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
     int m_nLoopNumber;

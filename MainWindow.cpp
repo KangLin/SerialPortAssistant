@@ -40,7 +40,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_ActionGroupStyle(this),
     m_SerialPort(this),
     m_nSend(0),    
-    m_nRecive(0),
+    m_nReceive(0),
     m_nDrop(0),
     m_cmbPortIndex(-1),
     m_Timer(this),    
@@ -58,7 +58,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
                                   QStandardPaths::TempLocation)
-                              + QDir::separator() + "SerialAssistantRecive.txt");
+                              + QDir::separator() + "SerialAssistantReceive.txt");
     
     CFrmUpdater updater;
     ui->actionUpdate_U->setIcon(updater.windowIcon());
@@ -122,19 +122,19 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cbr->setChecked(v & CGlobal::SEND_R_N::R);
     ui->cbn->setChecked(v & CGlobal::SEND_R_N::N);
     
-    ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
-    ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
+    ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReceiveDisplaySend());
+    ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReceiveDisplayTime());
     
-    ui->rbReciverUtf8->setVisible(false);
+    ui->rbReceiverUtf8->setVisible(false);
     ui->rbRecvieUnicode->setVisible(false);
-    CGlobal::CODE c = CGlobal::Instance()->GetReciveDisplayCode();
+    CGlobal::CODE c = CGlobal::Instance()->GetReceiveDisplayCode();
     switch(c)
     {
     case CGlobal::ASCII:
-        ui->rbReciveASCII->setChecked(true);
+        ui->rbReceiveASCII->setChecked(true);
         break;
     case CGlobal::HEX:
-        ui->rbReciveHex->setChecked(true);
+        ui->rbReceiveHex->setChecked(true);
         break;
     default:
         break;
@@ -237,7 +237,7 @@ void CMainWindow::slotReadChannelFinished()
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
 
-        SetStatusInfo(tr("Serail Port Close"));
+        SetStatusInfo(tr("Serial Port Close"));
         return;
     }
 }
@@ -260,7 +260,7 @@ void CMainWindow::on_pbOpen_clicked()
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
 
-        SetStatusInfo(tr("Serail Port Close"));
+        SetStatusInfo(tr("Serial Port Close"));
         
         return;
     }
@@ -293,7 +293,7 @@ void CMainWindow::on_pbOpen_clicked()
     if(!bCheck)
     {
         QString szError;
-        szError = tr("Open serail port %1 fail errNo[%2]: %3").
+        szError = tr("Open serial port %1 fail errNo[%2]: %3").
                 arg(ui->cmbPort->currentText(),
                     QString::number(m_SerialPort.error()), m_SerialPort.errorString());
         LOG_MODEL_ERROR("MainWindows", szError.toStdString().c_str());
@@ -313,7 +313,7 @@ void CMainWindow::on_pbOpen_clicked()
 
     SetStatusInfo(GetSerialPortSettingInfo(), Qt::green);
     m_nSend = 0;
-    m_nRecive = 0;
+    m_nReceive = 0;
     m_nDrop = 0;
     m_nTransmissions = 0;
     m_statusRx.setText(tr("Rx: 0 Bytes"));
@@ -350,21 +350,21 @@ QString CMainWindow::GetSerialPortSettingInfo()
 void CMainWindow::slotQTextEditMaxLength()
 {
     int maxLength = 102400;
-    int length = ui->teRecive->toPlainText().length();
+    int length = ui->teReceive->toPlainText().length();
     if(length > maxLength << 1)
     {
-        QTextCursor cursor = ui->teRecive->textCursor();
+        QTextCursor cursor = ui->teReceive->textCursor();
         cursor.movePosition(QTextCursor::Start);
         cursor.setPosition(length - maxLength, QTextCursor::KeepAnchor);
         cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
         cursor.removeSelectedText();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
-        //ui->teRecive->setTextCursor(cursor);
+        //ui->teReceive->setTextCursor(cursor);
         LOG_MODEL_DEBUG("MainWindow", "slotQTextEditMaxLength");
     }
 }
 
-void CMainWindow::AddRecive(const QString &szText, bool bRecive)
+void CMainWindow::AddReceive(const QString &szText, bool bReceive)
 {
     QString szPrex;
     
@@ -373,7 +373,7 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         
     if(ui->cbDisplaySend->isChecked())
     {
-        if(bRecive)
+        if(bReceive)
             szPrex += "<- ";
         else
             szPrex += "-> ";
@@ -381,18 +381,18 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
     
     if(!szPrex.isEmpty())
     {
-        ui->teRecive->insertPlainText("\n");
-        ui->teRecive->insertPlainText(szPrex);
+        ui->teReceive->insertPlainText("\n");
+        ui->teReceive->insertPlainText(szPrex);
     }
     
-    ui->teRecive->insertPlainText(szText);
+    ui->teReceive->insertPlainText(szText);
    
     slotQTextEditMaxLength();
-    if(!ui->actionPasue_P->isChecked())
+    if(!ui->actionPause_P->isChecked())
     {
-        QTextCursor cursor = ui->teRecive->textCursor();
+        QTextCursor cursor = ui->teReceive->textCursor();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
-        ui->teRecive->setTextCursor(cursor);
+        ui->teReceive->setTextCursor(cursor);
     }
 }
 
@@ -410,7 +410,7 @@ void CMainWindow::slotRead()
         LOG_MODEL_ERROR("MainWindows", "read data fail");   
         return;
     }
-    m_nRecive += d.length();
+    m_nReceive += d.length();
     qDebug() << "slotRead: length:" << d.size() <<  d;
     
     if(ui->cbSaveToFile->isChecked())
@@ -424,17 +424,17 @@ void CMainWindow::slotRead()
     }
     
     QString szText;
-    if(ui->rbReciveASCII->isChecked())
+    if(ui->rbReceiveASCII->isChecked())
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 3))
         szText = QString::fromStdString(d.toStdString());
 #else
         szText = d;
 #endif
-    else if(ui->rbReciverUtf8->isChecked())
+    else if(ui->rbReceiverUtf8->isChecked())
         szText = QString::fromUtf8(d, d.size());
     else if(ui->rbSendUnicode->isChecked())
         szText = QString::fromUtf16((const char16_t *)d.data(), d.size());
-    else if(ui->rbReciveHex->isChecked())
+    else if(ui->rbReceiveHex->isChecked())
     {
         QString szOut;
         int nLen = d.size();
@@ -451,9 +451,9 @@ void CMainWindow::slotRead()
     }
     
     //显示接收  
-    AddRecive(szText, true);
+    AddReceive(szText, true);
     
-    m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
+    m_statusRx.setText(tr("Rx: ") + QString::number(m_nReceive) + tr(" Bytes"));
 }
 
 bool CMainWindow::CheckHexChar(QChar c)
@@ -575,7 +575,7 @@ void CMainWindow::on_pbSend_clicked()
     
     //显示发送  
     if(ui->cbDisplaySend->isChecked())
-        AddRecive(szText, false);
+        AddReceive(szText, false);
     
     //增加到最近发送列表中  
     if(-1 == ui->cmbRecent->findText(
@@ -640,7 +640,7 @@ void CMainWindow::on_cbSendLoop_clicked()
 
 void CMainWindow::on_actionClear_triggered()
 {
-    ui->teRecive->clear();
+    ui->teReceive->clear();
 }
 
 void CMainWindow::on_actionOpen_triggered()
@@ -816,12 +816,12 @@ void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
 int CMainWindow::InitMenuStyles()
 {
     QMap<QString, QAction*>::iterator it;
-    m_ActionStyles["Custom"] = ui->menuStype_S->addAction(tr("Custom"));
-    m_ActionStyles["System"] = ui->menuStype_S->addAction(tr("System"));
-    m_ActionStyles["Gradient blue"] = ui->menuStype_S->addAction(tr("Gradient blue"));
-    m_ActionStyles["Blue"] = ui->menuStype_S->addAction(tr("Blue"));
-    m_ActionStyles["Gradient Dark"] = ui->menuStype_S->addAction(tr("Gradient Dark"));
-    m_ActionStyles["Dark"] = ui->menuStype_S->addAction(tr("Dark"));
+    m_ActionStyles["Custom"] = ui->menuStyle_S->addAction(tr("Custom"));
+    m_ActionStyles["System"] = ui->menuStyle_S->addAction(tr("System"));
+    m_ActionStyles["Gradient blue"] = ui->menuStyle_S->addAction(tr("Gradient blue"));
+    m_ActionStyles["Blue"] = ui->menuStyle_S->addAction(tr("Blue"));
+    m_ActionStyles["Gradient Dark"] = ui->menuStyle_S->addAction(tr("Gradient Dark"));
+    m_ActionStyles["Dark"] = ui->menuStyle_S->addAction(tr("Dark"));
     
     for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
     {
@@ -848,7 +848,7 @@ int CMainWindow::ClearMenuStyles()
     }
     m_ActionGroupStyle.disconnect();
     m_ActionStyles.clear();
-    ui->menuStype_S->clear();
+    ui->menuStyle_S->clear();
     return 0;
 }
 
@@ -995,12 +995,12 @@ void CMainWindow::on_cbn_clicked(bool checked)
 
 void CMainWindow::on_cbDisplaySend_clicked(bool checked)
 {
-    CGlobal::Instance()->SetReciveDisplaySend(checked);
+    CGlobal::Instance()->SetReceiveDisplaySend(checked);
 }
 
 void CMainWindow::on_cbDisplayTime_clicked(bool checked)
 {
-    CGlobal::Instance()->SetReciveDisplayTime(checked);
+    CGlobal::Instance()->SetReceiveDisplayTime(checked);
 }
 
 void CMainWindow::on_cmbBoudRate_currentTextChanged(const QString &szText)
@@ -1080,16 +1080,16 @@ void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
         SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
 }
 
-void CMainWindow::on_rbReciveASCII_clicked(bool checked)
+void CMainWindow::on_rbReceiveASCII_clicked(bool checked)
 {
     if(checked)
-        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::ASCII);
+        CGlobal::Instance()->SetReceiveDisplayCode(CGlobal::ASCII);
 }
 
-void CMainWindow::on_rbReciveHex_clicked(bool checked)
+void CMainWindow::on_rbReceiveHex_clicked(bool checked)
 {
     if(checked)
-        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::HEX);
+        CGlobal::Instance()->SetReceiveDisplayCode(CGlobal::HEX);
 }
 
 void CMainWindow::on_rbSendHex_clicked(bool checked)
@@ -1105,7 +1105,7 @@ void CMainWindow::on_rbSendASCII_clicked(bool checked)
 }
 
 
-void CMainWindow::on_actionPasue_P_triggered()
+void CMainWindow::on_actionPause_P_triggered()
 {
 }
 

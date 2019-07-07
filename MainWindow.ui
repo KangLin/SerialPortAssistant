@@ -187,13 +187,13 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Recive Settings</string>
+          <string>Receive Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
-             <widget class="QRadioButton" name="rbReciverUtf8">
+             <widget class="QRadioButton" name="rbReceiverUtf8">
               <property name="text">
                <string>UTF-8</string>
               </property>
@@ -211,7 +211,7 @@
           <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QRadioButton" name="rbReciveASCII">
+             <widget class="QRadioButton" name="rbReceiveASCII">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -227,7 +227,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbReciveHex">
+             <widget class="QRadioButton" name="rbReceiveHex">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -546,7 +546,7 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QTextEdit" name="teRecive">
+       <widget class="QTextEdit" name="teReceive">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -649,13 +649,13 @@
        <normaloff>:/icon/Language</normaloff>:/icon/Language</iconset>
      </property>
     </widget>
-    <widget class="QMenu" name="menuStype_S">
+    <widget class="QMenu" name="menuStyle_S">
      <property name="title">
-      <string>Stype(&amp;S)</string>
+      <string>Style(&amp;S)</string>
      </property>
      <property name="icon">
       <iconset resource="Resource/Resource.qrc">
-       <normaloff>:/icon/Stype</normaloff>:/icon/Stype</iconset>
+       <normaloff>:/icon/Style</normaloff>:/icon/Style</iconset>
      </property>
     </widget>
     <addaction name="actionOpen"/>
@@ -664,13 +664,13 @@
     <addaction name="separator"/>
     <addaction name="actionClear"/>
     <addaction name="actionClear_Send_History"/>
-    <addaction name="actionPasue_P"/>
+    <addaction name="actionPause_P"/>
     <addaction name="separator"/>
     <addaction name="actionOpen_Log_G"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
-    <addaction name="menuStype_S"/>
+    <addaction name="menuStyle_S"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
     <addaction name="separator"/>
@@ -705,7 +705,7 @@
    <addaction name="actionLoad_File_F"/>
    <addaction name="actionOpen"/>
    <addaction name="actionClear"/>
-   <addaction name="actionPasue_P"/>
+   <addaction name="actionPause_P"/>
    <addaction name="separator"/>
    <addaction name="actionAbout_A"/>
    <addaction name="separator"/>
@@ -785,7 +785,7 @@
     <string>LeftBar(&amp;L)</string>
    </property>
   </action>
-  <action name="actionPasue_P">
+  <action name="actionPause_P">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -794,7 +794,7 @@
      <normaloff>:/icon/Pause</normaloff>:/icon/Pause</iconset>
    </property>
    <property name="text">
-    <string>Pasue(&amp;P)</string>
+    <string>Pause(&amp;P)</string>
    </property>
    <property name="toolTip">
     <string>Pause the flow list</string>

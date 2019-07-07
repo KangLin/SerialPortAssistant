@@ -400,7 +400,7 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="190"/>
-        <source>Recive Settings</source>
+        <source>Receive Settings</source>
         <translation>接收设置</translation>
     </message>
     <message>
@@ -534,7 +534,7 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="654"/>
-        <source>Stype(&amp;S)</source>
+        <source>Style(&amp;S)</source>
         <translation>样式(&amp;S)</translation>
     </message>
     <message>
@@ -584,7 +584,7 @@ Email:kl222@126.com</source>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="797"/>
-        <source>Pasue(&amp;P)</source>
+        <source>Pause(&amp;P)</source>
         <translation>暂停</translation>
     </message>
     <message>
@@ -669,12 +669,12 @@ Email:kl222@126.com</source>
     <message>
         <location filename="../../MainWindow.cpp" line="240"/>
         <location filename="../../MainWindow.cpp" line="263"/>
-        <source>Serail Port Close</source>
+        <source>Serial Port Close</source>
         <translation>串口关闭</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="296"/>
-        <source>Open serail port %1 fail errNo[%2]: %3</source>
+        <source>Open serial port %1 fail errNo[%2]: %3</source>
         <translation>打开串口[%1]失败。错误号[%2]: %3</translation>
     </message>
     <message>
