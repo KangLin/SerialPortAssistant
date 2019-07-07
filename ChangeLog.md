@@ -1,5 +1,12 @@
 修改日志
 ------
+* Version: v0.4.1
+  － 使用 RabbitCommon v1.0.0
+  - 使用 RabbitCommon 翻译
+  
+* Version: v0.4.0
+  - 修改 Install.sh
+  
 * Version: v0.3.9
   - 只做 linux 下安装更新测试
   

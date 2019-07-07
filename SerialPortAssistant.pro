@@ -53,7 +53,7 @@ isEmpty(BUILD_VERSION) {
     }
 }
 isEmpty(BUILD_VERSION){
-    BUILD_VERSION="v0.4.0"
+    BUILD_VERSION="v0.4.1"
 }
 message("BUILD_VERSION:$$BUILD_VERSION")
 
@@ -63,8 +63,6 @@ win32{
     VERSION=$$split(VERSION, -)
     VERSION=$$first(VERSION)
 }
-
-include(pri/Translations.pri)
 
 other.files = License.md Authors.md ChangeLog.md 
 win32: other.files *= AppIcon.ico
@@ -160,3 +158,4 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../RabbitCommon
     error  ("2. Then set value RabbitCommon_DIR to download root dirctory")
 }
 
+include($${RabbitCommon_DIR}/pri/Translations.pri)
