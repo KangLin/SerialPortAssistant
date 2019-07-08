@@ -95,7 +95,7 @@ function function_unix()
     sudo apt-get update -y -qq
     #sudo apt-get upgrade -y -qq
     sudo apt-get install debhelper fakeroot -y -qq
-    sudo apt-get install -y -qq libglu1-mesa-dev
+    sudo apt-get install -y -qq libglu1-mesa-dev libxkbcommon-x11-dev
 
     if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base qt${QT_VERSION_DIR}tools \
