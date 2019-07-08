@@ -67,12 +67,19 @@ win32{
 other.files = License.md Authors.md ChangeLog.md 
 win32: other.files *= AppIcon.ico
 other.path = $$PREFIX
-other.CONFIG += directory no_check_exist 
+other.CONFIG += directory no_check_exist
 target.path = $$PREFIX/bin
-install.files = Install/Install.nsi
-install.path = $$OUT_PWD
-install.CONFIG += directory no_check_exist 
-INSTALLS += target other install
+INSTALLS += target other 
+
+install_win.files = Install/Install.nsi
+install_win.path = $$OUT_PWD
+install_win.CONFIG += directory no_check_exist 
+win32:  INSTALLS += install_win
+
+install_unix.files = Install/install.sh
+install_unix.path = $$PREFIX
+install_unix.CONFIG += directory no_check_exist 
+unix: !android: INSTALLS += install_unix
 
 !android : !macx : unix {
     # install icons
