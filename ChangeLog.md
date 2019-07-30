@@ -1,5 +1,13 @@
 修改日志
 ------
+* Version: v0.4.3
+  - 修改工程文件，RabbitCommon以库工程方式加入到主工程文件中
+  - 增加刷新串口工具。详见：Issues #3
+  
+* Version: v0.4.2
+  - 修改 linux CI 依赖库错误
+  - 修改 install 文件
+  
 * Version: v0.4.1
   － 使用 RabbitCommon v1.0.0
   - 使用 RabbitCommon 翻译
