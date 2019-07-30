@@ -163,8 +163,8 @@ int CMainWindow::RefreshSerialPorts()
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
         QString szPort;
-        //szPort = info.portName();
-        szPort = info.systemLocation();
+        szPort = info.portName();
+        //szPort = info.systemLocation();
         if(!info.description().isEmpty())
         {
             szPort += "(" + info.description() + ")";
