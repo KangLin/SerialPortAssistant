@@ -94,7 +94,7 @@ private slots:
     void on_cbr_clicked(bool checked);
     void on_cbn_clicked(bool checked);
     void on_cbDisplaySend_clicked(bool checked);
-    void on_cbDisplayTime_clicked(bool checked);   
+    void on_cbDisplayTime_clicked(bool checked);
     void on_cmbBoudRate_currentTextChanged(const QString &szText);
     void on_cmbDataBit_currentTextChanged(const QString &szText);
     void on_cmbParity_currentIndexChanged(int index);
@@ -109,7 +109,8 @@ private slots:
     void on_actionLoad_File_F_triggered();
     void on_pbBrowse_clicked();
     void on_actionOpen_Log_G_triggered();
-    void on_actionUpdate_U_triggered();
+    void on_actionUpdate_U_triggered();    
+    void on_actionRefresh_R_triggered();
     
 private:
     int InitStatusBar();
@@ -120,6 +121,7 @@ private:
     QString GetSerialPortSettingInfo();
     bool CheckHexChar(QChar c);
     int SendHexChar(QString szText, int &nLength);
+    int RefreshSerialPorts();
     
 private:
     Ui::CMainWindow *ui;

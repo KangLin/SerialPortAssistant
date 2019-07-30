@@ -71,16 +71,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitToolBar();
     InitLeftBar();
 
-    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
-    {
-        QString szPort;
-        szPort = info.portName();
-        if(!info.description().isEmpty())
-        {
-            szPort += "(" + info.description() + ")";
-        }
-        ui->cmbPort->addItem(szPort);
-    }
+    RefreshSerialPorts();
 
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
@@ -164,6 +155,23 @@ CMainWindow::~CMainWindow()
     ClearTranslate();
 
     delete ui;
+}
+
+int CMainWindow::RefreshSerialPorts()
+{
+    ui->cmbPort->clear();
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+    {
+        QString szPort;
+        //szPort = info.portName();
+        szPort = info.systemLocation();
+        if(!info.description().isEmpty())
+        {
+            szPort += "(" + info.description() + ")";
+        }
+        ui->cmbPort->addItem(szPort);
+    }
+    return 0;
 }
 
 int CMainWindow::InitStatusBar()
@@ -261,7 +269,7 @@ void CMainWindow::on_pbOpen_clicked()
         Q_ASSERT(bCheck);
 
         SetStatusInfo(tr("Serail Port Close"));
-        
+        ui->actionRefresh_R->setVisible(true);
         return;
     }
 
@@ -325,6 +333,8 @@ void CMainWindow::on_pbOpen_clicked()
         m_nLoopNumber = ui->sbLoopNumber->value();
         m_Timer.start(ui->sbLoopTime->value());
     }
+    
+    ui->actionRefresh_R->setVisible(false);
 }
 
 int CMainWindow::SetStatusInfo(QString szText, QColor color)
@@ -1146,4 +1156,9 @@ void CMainWindow::on_actionUpdate_U_triggered()
         pUpdater->show();
     #endif
 #endif
+}
+
+void CMainWindow::on_actionRefresh_R_triggered()
+{
+    RefreshSerialPorts();
 }

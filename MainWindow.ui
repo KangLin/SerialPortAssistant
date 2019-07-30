@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>703</height>
+    <height>782</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -659,6 +659,7 @@
      </property>
     </widget>
     <addaction name="actionOpen"/>
+    <addaction name="actionRefresh_R"/>
     <addaction name="separator"/>
     <addaction name="actionLoad_File_F"/>
     <addaction name="separator"/>
@@ -703,6 +704,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionLoad_File_F"/>
+   <addaction name="actionRefresh_R"/>
    <addaction name="actionOpen"/>
    <addaction name="actionClear"/>
    <addaction name="actionPasue_P"/>
@@ -821,6 +823,24 @@
   <action name="actionUpdate_U">
    <property name="text">
     <string>Update(&amp;U)</string>
+   </property>
+  </action>
+  <action name="actionRefresh_R">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Refresh</normaloff>:/icon/Refresh</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh(&amp;R)</string>
+   </property>
+   <property name="toolTip">
+    <string>Refresh serial ports</string>
+   </property>
+   <property name="statusTip">
+    <string>Refresh serial ports</string>
+   </property>
+   <property name="whatsThis">
+    <string>Refresh serial ports</string>
    </property>
   </action>
  </widget>

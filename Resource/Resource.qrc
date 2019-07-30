@@ -15,6 +15,7 @@
         <file alias="Pause">png/pause.png</file>
         <file alias="Log">png/log.png</file>
         <file alias="AppIcon">png/SerialPortAssistant.png</file>
+        <file alias="Refresh">png/refresh.png</file>
     </qresource>
     <qresource prefix="/sink">
         <file alias="Blue">sink/blue.qss</file>
