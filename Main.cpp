@@ -26,24 +26,23 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QTranslator translator;
-    translator.load(RabbitCommon::CDir::Instance()->GetDirTranslations()
-               + "/SerialPortAssistant_" + QLocale::system().name() + ".qm");
-    qApp->installTranslator(&translator);
-
 #ifdef RABBITCOMMON
     RabbitCommon::CTools::Instance()->Init();
 #endif
+    CMainWindow w;
     
     a.setApplicationName("SerialPortAssistant");
     a.setApplicationDisplayName(QObject::tr("SerialPort Assistant"));
-    
+#ifdef BUILD_VERSION
+    a.setApplicationVersion(BUILD_VERSION);
+#endif
+
 #ifdef RABBITCOMMON 
     CFrmUpdater *pUpdate = new CFrmUpdater(); 
     if(!pUpdate->GenerateUpdateXml()) 
         return 0; 
 #endif
-    CMainWindow w;
+    
     w.show();
 
     return a.exec();
