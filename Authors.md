@@ -1,6 +1,6 @@
-康林(QQ:16614119 email:kl222@126.com)
+Kang Lin (QQ:16614119 email:kl222@126.com)
 
-第三方库：
+The third project:
 
 Qt (LGPL v2.1)
 http://qt.io/
