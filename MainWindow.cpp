@@ -828,9 +828,9 @@ int CMainWindow::InitMenuStyles()
     QMap<QString, QAction*>::iterator it;
     m_ActionStyles["Custom"] = ui->menuStype_S->addAction(tr("Custom"));
     m_ActionStyles["System"] = ui->menuStype_S->addAction(tr("System"));
-    m_ActionStyles["Gradient blue"] = ui->menuStype_S->addAction(tr("Gradient blue"));
-    m_ActionStyles["Blue"] = ui->menuStype_S->addAction(tr("Blue"));
-    m_ActionStyles["Gradient Dark"] = ui->menuStype_S->addAction(tr("Gradient Dark"));
+//    m_ActionStyles["Gradient blue"] = ui->menuStype_S->addAction(tr("Gradient blue"));
+//    m_ActionStyles["Blue"] = ui->menuStype_S->addAction(tr("Blue"));
+//    m_ActionStyles["Gradient Dark"] = ui->menuStype_S->addAction(tr("Gradient Dark"));
     m_ActionStyles["Dark"] = ui->menuStype_S->addAction(tr("Dark"));
     
     for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)

@@ -66,7 +66,8 @@ win32{
     VERSION=$$first(VERSION)
 }
 
-other.files = License.md Authors.md ChangeLog.md 
+other.files = License.md Authors.md Authors_zh_CN.md \
+    ChangeLog.md ChangeLog_zh_CN.md
 win32: other.files *= AppIcon.ico
 other.path = $$PREFIX
 other.CONFIG += directory no_check_exist
@@ -113,9 +114,11 @@ FORMS += $$PWD/MainWindow.ui
 
 OTHER_FILES += \
     Authors.md \
+    Authors_zh_CN.md \
     License.md \
     README*.md \
     ChangeLog.md \
+    ChangeLog_zh_CN.md \
     appveyor.yml \
     ci/* \
     Install/* \
