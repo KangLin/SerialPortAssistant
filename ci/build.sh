@@ -14,7 +14,17 @@ if [ "$BUILD_TARGERT" = "android" ]; then
     if [ -n "$APPVEYOR" ]; then
         export JAVA_HOME="/C/Program Files (x86)/Java/jdk1.8.0"
     fi
-    export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
+    if [ "$TRAVIS" = "true" ]; then
+        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    fi
+    case $BUILD_ARCH in
+        arm*)
+            export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
+            ;;
+        x86)
+        export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
+        ;;
+    esac
     export PATH=${SOURCE_DIR}/Tools/apache-ant/bin:$JAVA_HOME:$PATH
 fi
 
@@ -84,10 +94,10 @@ fi
 export VERSION="v0.4.3"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
-    bash build_debpackage.sh ${QT_ROOT} `pwd`/../RabbitCommon
+    bash build_debpackage.sh ${QT_ROOT}
         
     cd debian/serialportassistant/opt
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/bin:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib
     
     wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
     chmod a+x linuxdeployqt-continuous-x86_64.AppImage
