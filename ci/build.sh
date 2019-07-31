@@ -91,7 +91,7 @@ if [ "ON" = "${STATIC}" ]; then
     CONFIG_PARA="CONFIG*=static"
 fi
 
-export VERSION="v0.4.3"
+export VERSION="v0.4.4"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT}

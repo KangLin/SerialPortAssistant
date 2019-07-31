@@ -1,6 +1,9 @@
 Modify log
 ----------
-
++ Version: v0.4.4
+    Modify ci BUG
+    Modify style
+    
 + Version: v0.4.3
     Modify the project file, RabbitCommon is added to the main project file in library project mode.
     Increase the refresh serial port tool. See: Issues #3
