@@ -21,16 +21,23 @@ Abstract:
 #include "MainWindow.h"
 #include <QApplication>
 #include <QDir>
+#include "Global/Global.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
 #ifdef RABBITCOMMON
-    RabbitCommon::CTools::Instance()->Init();
+    QString szLocale = CGlobal::Instance()->GetLanguage();
+    if("Default" == szLocale)
+    {
+        szLocale = QLocale::system().name();
+    }
+    RabbitCommon::CTools::Instance()->Init(szLocale);
 #endif
+
     CMainWindow w;
-    
+
     a.setApplicationName("SerialPortAssistant");
     a.setApplicationDisplayName(QObject::tr("SerialPort Assistant"));
 #ifdef BUILD_VERSION
@@ -42,7 +49,7 @@ int main(int argc, char *argv[])
     if(!pUpdate->GenerateUpdateXml()) 
         return 0; 
 #endif
-    
+
     w.show();
 
     return a.exec();

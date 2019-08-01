@@ -1,5 +1,8 @@
 修改日志
 ------
++ Version: v0.4.4
+  - 修改 RabbitCommon 语言 BUG
+  
 * Version: v0.4.4
   - 修改 CI 错误
   - 修改样式
