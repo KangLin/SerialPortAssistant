@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport network xml
 
 versionAtMost(QT_VERSION, 5.6) : error("Qt version must greater 5.6")
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

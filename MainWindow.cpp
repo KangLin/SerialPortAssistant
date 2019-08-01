@@ -691,7 +691,8 @@ int CMainWindow::InitMenuTranslate()
     m["en"] = {":/icon/English", tr("English")};
     m["zh_CN"] = {":/icon/China", tr("Chinese")};
     m["zh_TW"] = {":/icon/China", tr("Chinese(TaiWan)")};
-    m["Default"].icon = m[QLocale::system().name()].icon;
+    if(m.end() != m.find(QLocale::system().name()))
+        m["Default"].icon = m[QLocale::system().name()].icon;
     
     QMap<QString, _MENU>::iterator itMenu;
     for(itMenu = m.begin(); itMenu != m.end(); itMenu++)

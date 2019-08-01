@@ -91,7 +91,7 @@ if [ "ON" = "${STATIC}" ]; then
     CONFIG_PARA="CONFIG*=static"
 fi
 
-export VERSION="v0.4.5"
+export VERSION="v0.4.6"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT}
@@ -99,11 +99,12 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd debian/serialportassistant/opt
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib
     
-    wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-    ./linuxdeployqt-continuous-x86_64.AppImage SerialPortAssistant/share/applications/*.desktop \
+    #wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
+    wget -c -nv https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage -O linuxdeployqt.AppImage
+    chmod a+x linuxdeployqt.AppImage
+    ./linuxdeployqt.AppImage SerialPortAssistant/share/applications/*.desktop \
             -qmake=${QT_ROOT}/bin/qmake -appimage
-
+    
     cd SerialPortAssistant
     # Create appimage install package
     cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
