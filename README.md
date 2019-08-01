@@ -33,30 +33,31 @@ This project is a cross-platform serial assistant. It can run on:
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.4.4.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.4/SerialPortAssistant-Setup-v0.4.4.exe)
+    + [SerialPortAssistant-Setup-v0.4.5.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.5/SerialPortAssistant-Setup-v0.4.5.exe)
 
 - linux
-    + [SerialPortAssistant_v0.4.4.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.4/SerialPortAssistant_v0.4.4.tar.gz)  
+    + [SerialPortAssistant_v0.4.5.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.5/SerialPortAssistant_v0.4.5.tar.gz)  
         The AppImage format executable can be run directly on the Linux system, see: https://appimage.org/  
         Usage:    
-        1. Decompress. Copy SerialPortAssistant_v0.4.4.tar.gz to install directory, then decompress it:
+        1. Decompress. Copy SerialPortAssistant_v0.4.5.tar.gz to install directory, then decompress it:
     
-                  mkdir SerialPortAssistant
+                  sudo mkdir /opt/SerialPortAssistant
                   cd SerialPortAssistant
-                  cp $DOWNLOAD/SerialPortAssistant_v0.4.4.tar.gz .
-                  tar xvfz SerialPortAssistant_v0.4.4.tar.gz
+                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.5/SerialPortAssistant_v0.4.5.tar.gz
+                  sudo tar xvfz SerialPortAssistant_v0.4.5.tar.gz
     
         2. install
     
-                  ./install.sh install
+                  sudo ./install.sh install
     
         3. If you want to uninstall
     
-                  ./install.sh remove
-- ubuntu
-    + [serialportassistant_0.4.4_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.4/serialportassistant_0.4.4_amd64.deb)
+                  sudo ./install.sh remove
 
-            sudo dpkg -i serialportassistant_0.4.4_amd64.deb
+- ubuntu
+    + [serialportassistant_0.4.5_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.4.5/serialportassistant_0.4.5_amd64.deb)
+
+            sudo dpkg -i serialportassistant_0.4.5_amd64.deb
 
 6. Donate  
 If you are satisfied, you can donate to me

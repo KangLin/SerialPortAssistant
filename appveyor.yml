@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.4.4.{build}'
+version: 'v0.4.5.{build}'
 
 environment:
   matrix: 

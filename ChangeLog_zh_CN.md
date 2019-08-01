@@ -1,6 +1,6 @@
 修改日志
 ------
-+ Version: v0.4.4
++ Version: v0.4.5
   - 修改 RabbitCommon 语言 BUG
   
 * Version: v0.4.4

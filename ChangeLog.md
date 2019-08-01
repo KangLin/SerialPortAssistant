@@ -1,6 +1,6 @@
 Modify log
 ----------
-+ Version: v0.4.4
++ Version: v0.4.5
   - Modify language BUG
     
 + Version: v0.4.4
