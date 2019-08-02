@@ -15,7 +15,8 @@ Modify log
   - Modify linux CI dependency library error
   - Modify the install file
 
-+ Version: v0.4.1 - Using RabbitCommon v1.0.0
++ Version: v0.4.1 
+  - Using RabbitCommon v1.0.0
   - Use RabbitCommon to translate
 
 + Version: v0.4.0
@@ -106,7 +107,7 @@ Modify log
   - Add tag script, modify version number, Install.nsi
 
 + Version: v0.0.2
-  - Perfect interface
+  - Perfect user interface
 
 + Version:0.0.1
   - Complete basic serial port function

@@ -16,7 +16,7 @@
   - 修改 install 文件
   
 * Version: v0.4.1
-  － 使用 RabbitCommon v1.0.0
+  - 使用 RabbitCommon v1.0.0
   - 使用 RabbitCommon 翻译
   
 * Version: v0.4.0
