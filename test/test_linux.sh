@@ -33,7 +33,7 @@ if [ ! -f /usr/share/pixmaps/${PROJECT_NAME}.png ]; then
     EXIT_CODE=$[EXIT_CODE+1]
 fi
 
-if [ ! -f /etc/ld.so.conf.d/Tasks.conf ]; then
+if [ ! -f /etc/ld.so.conf.d/${PROJECT_NAME}.conf ]; then
 	echo "There are not /etc/ld.so.conf.d/${PROJECT_NAME}.conf"
 	EXIT_CODE=$[EXIT_CODE+1]
 fi
