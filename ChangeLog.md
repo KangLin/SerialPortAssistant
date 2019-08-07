@@ -1,5 +1,8 @@
 Modify log
 ----------
++ Version: v0.4.7
+  - Modify pro file
+
 + Version: v0.4.6
   - Modify ci appimage
 
