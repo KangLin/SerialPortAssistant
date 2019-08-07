@@ -2,6 +2,9 @@
 #下载工具  
 
 set -e
+SOURCE_DIR="`pwd`"
+echo $SOURCE_DIR
+TOOLS_DIR=${SOURCE_DIR}/Tools
 
 function function_install_yasm()
 {
@@ -95,7 +98,12 @@ function function_unix()
     sudo apt-get update -y -qq
     #sudo apt-get upgrade -y -qq
     sudo apt-get install debhelper fakeroot -y -qq
-    sudo apt-get install -y -qq libglu1-mesa-dev libxkbcommon-x11-dev
+    sudo apt-get install -y -qq libglu1-mesa-dev \
+        libxkbcommon-x11-dev \
+        libpulse-mainloop-glib0 \
+        libgstreamer0.10-dev \
+        libgstreamer-plugins-base0.10-dev \
+        gstreamer1.0-pulseaudio
 
     if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base qt${QT_VERSION_DIR}tools \
@@ -123,9 +131,6 @@ function function_mingw()
     function_common
     cd ${SOURCE_DIR}
 }
-
-SOURCE_DIR="`pwd`"
-echo $SOURCE_DIR
 
 case ${BUILD_TARGERT} in
     android)

@@ -102,12 +102,14 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     #wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
     wget -c -nv https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage -O linuxdeployqt.AppImage
     chmod a+x linuxdeployqt.AppImage
-    ./linuxdeployqt.AppImage SerialPortAssistant/share/applications/*.desktop \
+    cd SerialPortAssistant
+
+    ../linuxdeployqt.AppImage share/applications/*.desktop \
             -qmake=${QT_ROOT}/bin/qmake -appimage
     
-    cd SerialPortAssistant
+
     # Create appimage install package
-    cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
+    #cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
     cp $SOURCE_DIR/Install/install.sh .
     ln -s SerialPort_Assistant-${VERSION}-x86_64.AppImage SerialPortAssistant-x86_64.AppImage
     tar -czf SerialPortAssistant_${VERSION}.tar.gz \
