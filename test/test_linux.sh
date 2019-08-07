@@ -1,7 +1,7 @@
 #!/bin/bash
 
 EXIT_CODE=0
-PROJECT_NAME="Tasks"
+PROJECT_NAME="SerialPortAssistant"
 
 if [ -n "$1" ]; then
     echo "$PROJECT_NAME"

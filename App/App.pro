@@ -12,20 +12,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = SerialPortAssistant
 TEMPLATE = app
 
-isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/bin
+isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/../bin
 
 CONFIG(debug, debug|release) {
     DEFINES += _DEBUG
-}
-
-win32{
-    CONFIG(debug, debug|release) {
-        TARGET_PATH=$${OUT_PWD}/Debug
-    } else {
-        TARGET_PATH=$${OUT_PWD}/Release
-    }
-}else{
-    TARGET_PATH=$$OUT_PWD
 }
 
 isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
@@ -66,37 +56,8 @@ win32{
     VERSION=$$first(VERSION)
 }
 
-other.files = License.md Authors.md Authors_zh_CN.md \
-    ChangeLog.md ChangeLog_zh_CN.md
-win32: other.files *= AppIcon.ico
-other.path = $$PREFIX
-other.CONFIG += directory no_check_exist
 target.path = $$PREFIX/bin
-INSTALLS += target other 
-
-install_win.files = Install/Install.nsi
-install_win.path = $$OUT_PWD
-install_win.CONFIG += directory no_check_exist 
-win32:  INSTALLS += install_win
-
-install_unix.files = Install/install.sh
-install_unix.path = $$PREFIX
-install_unix.CONFIG += directory no_check_exist 
-unix: !android: INSTALLS += install_unix
-
-!android : !macx : unix {
-    # install icons
-    icon128.target = icon128
-    icon128.files = Resource/png/SerialPortAssistant.png
-    icon128.path = $${PREFIX}/share/pixmaps
-    icon128.CONFIG = directory no_check_exist
-
-    DESKTOP_FILE.target = DESKTOP_FILE
-    DESKTOP_FILE.files = $$PWD/debian/SerialPortAssistant.desktop
-    DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications
-    DESKTOP_FILE.CONFIG += directory no_check_exist
-    INSTALLS += DESKTOP_FILE icon128
-}
+INSTALLS += target 
 
 SOURCES +=\
     $$PWD/MainWindow.cpp \
@@ -111,22 +72,6 @@ HEADERS += $$PWD/MainWindow.h \
     $$PWD/Common/Tool.h 
 
 FORMS += $$PWD/MainWindow.ui
-
-OTHER_FILES += \
-    Authors.md \
-    Authors_zh_CN.md \
-    License.md \
-    README*.md \
-    ChangeLog.md \
-    ChangeLog_zh_CN.md \
-    appveyor.yml \
-    ci/* \
-    Install/* \
-    .travis.yml \
-    tag.sh \
-    debian/* \
-    Update/* \
-    build_debpackage.sh
 
 RC_FILE = AppIcon.rc
 
@@ -159,7 +104,7 @@ win32 {
 }
 
 isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
-isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../RabbitCommon
+isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
 !isEmpty(RabbitCommon_DIR): exists("$${RabbitCommon_DIR}/Src/Src.pro"){
     CONFIG(static): DEFINES *= RABBITCOMMON_STATIC_DEFINE LUNARCALENDAR_STATIC_DEFINE
     DEFINES += RABBITCOMMON
