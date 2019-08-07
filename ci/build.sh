@@ -95,7 +95,9 @@ export VERSION="v0.4.6"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT}
-        
+    sudo dpkg -i ../serialportassistant_*_amd64.deb
+    $SOURCE_DIR/test/test_linux.sh
+
     cd debian/serialportassistant/opt
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib
     
