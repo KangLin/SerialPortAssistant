@@ -1,5 +1,8 @@
 Modify log
 ----------
++ Version: v0.4.6
+  - Modify ci appimage
+
 + Version: v0.4.5
   - Modify language BUG
     
