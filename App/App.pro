@@ -23,7 +23,7 @@ isEmpty(PREFIX) {
     android {
        PREFIX = /.
     } else {
-        PREFIX = $$OUT_PWD/install
+        PREFIX = $$OUT_PWD/../install
     }
 }
 
@@ -56,8 +56,11 @@ win32{
     VERSION=$$first(VERSION)
 }
 
+icon.files = SerialPortAssistant.ico
+icon.path = $$PREFIX
+icon.CONFIG += directory no_check_exist 
 target.path = $$PREFIX/bin
-INSTALLS += target 
+INSTALLS += target icon
 
 SOURCES +=\
     $$PWD/MainWindow.cpp \
@@ -74,14 +77,15 @@ HEADERS += $$PWD/MainWindow.h \
 FORMS += $$PWD/MainWindow.ui
 
 RC_FILE = AppIcon.rc
+win32: OTHER_FILES += $$RC_FILE
 
 RESOURCES += \
     Resource/Resource.qrc
 
 win32 : equals(QMAKE_HOST.os, Windows){
-    INSTALL_TARGET = $$system_path($${PREFIX}/bin/$$(TARGET))
-
-    Deployment_qtlib.path = $$system_path($${PREFIX}/bin)
+    INSTALL_TARGET = $$system_path($${DESTDIR}/$(TARGET))
+    Deployment_qtlib.files = $$system_path($${DESTDIR}/)
+    Deployment_qtlib.path = $$system_path($${PREFIX})
     Deployment_qtlib.commands = "$$system_path($$[QT_INSTALL_BINS]/windeployqt)" \
                     --compiler-runtime \
                     --verbose 7 \

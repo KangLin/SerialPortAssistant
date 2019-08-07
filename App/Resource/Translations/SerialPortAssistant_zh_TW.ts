@@ -9,152 +9,152 @@
         <translation>串口助手</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="46"/>
+        <location filename="../../MainWindow.ui" line="52"/>
         <source>Port Settings</source>
         <translation>串口設置</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="54"/>
+        <location filename="../../MainWindow.ui" line="60"/>
         <source>Serial Port:</source>
         <translation>串口：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="75"/>
+        <location filename="../../MainWindow.ui" line="81"/>
         <source>BaudRate:</source>
         <translation>波特率：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="99"/>
+        <location filename="../../MainWindow.ui" line="105"/>
         <source>DataBit:</source>
         <translation>數據位：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="120"/>
+        <location filename="../../MainWindow.ui" line="126"/>
         <source>Parity:</source>
         <translation>校驗：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="141"/>
+        <location filename="../../MainWindow.ui" line="147"/>
         <source>StopBit:</source>
         <translation>停止位：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="162"/>
+        <location filename="../../MainWindow.ui" line="168"/>
         <source>Flow Control:</source>
         <translation>流控：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="190"/>
+        <location filename="../../MainWindow.ui" line="226"/>
         <source>Recive Settings</source>
         <translation>接收設置</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="222"/>
-        <location filename="../../MainWindow.ui" line="413"/>
+        <location filename="../../MainWindow.ui" line="298"/>
+        <location filename="../../MainWindow.ui" line="419"/>
         <source>ASCII</source>
         <translation>ASCII</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="238"/>
-        <location filename="../../MainWindow.ui" line="429"/>
+        <location filename="../../MainWindow.ui" line="314"/>
+        <location filename="../../MainWindow.ui" line="435"/>
         <source>Hex</source>
         <translation>Hex</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="334"/>
+        <location filename="../../MainWindow.ui" line="340"/>
         <source>Auto Feed Line</source>
         <translation>自動換行</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="347"/>
+        <location filename="../../MainWindow.ui" line="353"/>
         <source>r</source>
         <translation>r</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="363"/>
+        <location filename="../../MainWindow.ui" line="369"/>
         <source>n</source>
         <translation>n</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="255"/>
+        <location filename="../../MainWindow.ui" line="198"/>
         <source>Display Send</source>
         <translation>顯示發送</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="198"/>
-        <location filename="../../MainWindow.ui" line="383"/>
+        <location filename="../../MainWindow.ui" line="234"/>
+        <location filename="../../MainWindow.ui" line="389"/>
         <source>UTF-8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="205"/>
-        <location filename="../../MainWindow.ui" line="396"/>
+        <location filename="../../MainWindow.ui" line="241"/>
+        <location filename="../../MainWindow.ui" line="402"/>
         <source>unicode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="268"/>
+        <location filename="../../MainWindow.ui" line="211"/>
         <source>Display Time</source>
         <translation>顯示時間</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="320"/>
+        <location filename="../../MainWindow.ui" line="326"/>
         <source>Send Settings</source>
         <translation>發送設置</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="444"/>
+        <location filename="../../MainWindow.ui" line="450"/>
         <source>Loop</source>
         <translation>循環</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="531"/>
+        <location filename="../../MainWindow.ui" line="537"/>
         <source>ms</source>
         <translation>毫秒</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="452"/>
+        <location filename="../../MainWindow.ui" line="458"/>
         <source>Loop number:</source>
         <translation>循環次數:</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="285"/>
+        <location filename="../../MainWindow.ui" line="258"/>
         <source>Save to file:</source>
         <translation>保存到文件:</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="308"/>
+        <location filename="../../MainWindow.ui" line="281"/>
         <source>Browse(&amp;B)</source>
         <translation>瀏覽(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="465"/>
+        <location filename="../../MainWindow.ui" line="471"/>
         <source>-1: unlimited loop</source>
         <translation>-1: 無限制循環</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="481"/>
+        <location filename="../../MainWindow.ui" line="487"/>
         <source>Transmissions:</source>
         <translation>已發送次數：</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="488"/>
+        <location filename="../../MainWindow.ui" line="494"/>
         <source>Transmissions</source>
         <translation>已發送次數</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="491"/>
+        <location filename="../../MainWindow.ui" line="497"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="508"/>
+        <location filename="../../MainWindow.ui" line="514"/>
         <source> Loop interval:</source>
         <translation>循環間隔:</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="584"/>
-        <location filename="../../MainWindow.ui" line="722"/>
+        <location filename="../../MainWindow.ui" line="590"/>
+        <location filename="../../MainWindow.ui" line="728"/>
         <location filename="../../MainWindow.cpp" line="240"/>
         <location filename="../../MainWindow.cpp" line="242"/>
         <location filename="../../MainWindow.cpp" line="263"/>
@@ -163,104 +163,104 @@
         <translation>打開(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="604"/>
+        <location filename="../../MainWindow.ui" line="610"/>
         <source>Send(&amp;S)</source>
         <translation>發送(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="641"/>
+        <location filename="../../MainWindow.ui" line="647"/>
         <source>Tools(&amp;T)</source>
         <translation>工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="645"/>
+        <location filename="../../MainWindow.ui" line="651"/>
         <source>Language(&amp;A)</source>
         <translation>語言(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="654"/>
+        <location filename="../../MainWindow.ui" line="660"/>
         <source>Stype(&amp;S)</source>
         <translation>樣式(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="681"/>
+        <location filename="../../MainWindow.ui" line="687"/>
         <source>Help(&amp;H)</source>
         <translation>幫助(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="688"/>
+        <location filename="../../MainWindow.ui" line="694"/>
         <source>View(&amp;V)</source>
         <translation>視圖(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="731"/>
+        <location filename="../../MainWindow.ui" line="737"/>
         <source>Clear(&amp;L)</source>
         <translation>清除(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="736"/>
+        <location filename="../../MainWindow.ui" line="742"/>
         <source>Clear Send History</source>
         <translation>清除發送歷史</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="745"/>
+        <location filename="../../MainWindow.ui" line="751"/>
         <source>Exit(&amp;E)</source>
         <translation>退出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="754"/>
+        <location filename="../../MainWindow.ui" line="760"/>
         <source>About(&amp;A)</source>
         <translation>關於(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="765"/>
+        <location filename="../../MainWindow.ui" line="771"/>
         <source>StatusBar(&amp;S)</source>
         <translation>狀態欄(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="776"/>
+        <location filename="../../MainWindow.ui" line="782"/>
         <source>ToolBar(&amp;T)</source>
         <translation>工具欄(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="787"/>
+        <location filename="../../MainWindow.ui" line="793"/>
         <source>LeftBar(&amp;L)</source>
         <translation>左欄(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="799"/>
+        <location filename="../../MainWindow.ui" line="805"/>
         <source>Pasue(&amp;P)</source>
         <translation>暫停</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="802"/>
+        <location filename="../../MainWindow.ui" line="808"/>
         <source>Pause the flow list</source>
         <translation>暫停滾動列表</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="811"/>
+        <location filename="../../MainWindow.ui" line="817"/>
         <source>Load File(&amp;F)</source>
         <translation>加載文件(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="820"/>
+        <location filename="../../MainWindow.ui" line="826"/>
         <source>Open Log(&amp;G)</source>
         <translation>打開日誌(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="825"/>
+        <location filename="../../MainWindow.ui" line="831"/>
         <source>Update(&amp;U)</source>
         <translation>更新(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="834"/>
+        <location filename="../../MainWindow.ui" line="840"/>
         <source>Refresh(&amp;R)</source>
         <translation>刷新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.ui" line="837"/>
-        <location filename="../../MainWindow.ui" line="840"/>
         <location filename="../../MainWindow.ui" line="843"/>
+        <location filename="../../MainWindow.ui" line="846"/>
+        <location filename="../../MainWindow.ui" line="849"/>
         <source>Refresh serial ports</source>
         <translation>刷新串口</translation>
     </message>
@@ -403,77 +403,74 @@
         <translation>中文（臺灣）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="818"/>
+        <location filename="../../MainWindow.cpp" line="819"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="819"/>
+        <location filename="../../MainWindow.cpp" line="820"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>語言改變，關閉程序，並請從重啟程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="829"/>
+        <location filename="../../MainWindow.cpp" line="830"/>
         <source>Custom</source>
         <translation>自定義</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="830"/>
+        <location filename="../../MainWindow.cpp" line="831"/>
         <source>System</source>
         <translation>系統</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="831"/>
         <source>Gradient blue</source>
-        <translation>漸變藍色</translation>
+        <translation type="vanished">漸變藍色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="832"/>
         <source>Blue</source>
-        <translation>藍色</translation>
+        <translation type="vanished">藍色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="833"/>
         <source>Gradient Dark</source>
-        <translation>漸變黑色</translation>
+        <translation type="vanished">漸變黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="834"/>
+        <location filename="../../MainWindow.cpp" line="835"/>
         <source>Dark</source>
         <translation>黑色</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="893"/>
+        <location filename="../../MainWindow.cpp" line="894"/>
         <source>Open File</source>
         <translation>打開文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1027"/>
+        <location filename="../../MainWindow.cpp" line="1028"/>
         <source>Set baud rate fail</source>
         <translation>設置比特率失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1040"/>
+        <location filename="../../MainWindow.cpp" line="1041"/>
         <source>Set data bits fail</source>
         <translation>設置數據位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1061"/>
+        <location filename="../../MainWindow.cpp" line="1062"/>
         <source>Set parity fail</source>
         <translation>設置校驗失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1075"/>
+        <location filename="../../MainWindow.cpp" line="1076"/>
         <source>Set stop bits fail</source>
         <translation>設置停止位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1090"/>
+        <location filename="../../MainWindow.cpp" line="1091"/>
         <source>Set Flow Control fail</source>
         <translation>設置流控失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1124"/>
+        <location filename="../../MainWindow.cpp" line="1125"/>
         <source>Load File</source>
         <translation>加載文件</translation>
     </message>
@@ -489,7 +486,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Main.cpp" line="35"/>
+        <location filename="../../Main.cpp" line="42"/>
         <source>SerialPort Assistant</source>
         <translation>串口助手</translation>
     </message>
