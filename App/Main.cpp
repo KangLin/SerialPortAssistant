@@ -26,7 +26,8 @@ Abstract:
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    a.setApplicationName("SerialPortAssistant");
+    
 #ifdef RABBITCOMMON
     QString szLocale = CGlobal::Instance()->GetLanguage();
     if("Default" == szLocale)
@@ -37,8 +38,7 @@ int main(int argc, char *argv[])
 #endif
 
     CMainWindow w;
-
-    a.setApplicationName("SerialPortAssistant");
+    
     a.setApplicationDisplayName(QObject::tr("SerialPort Assistant"));
 #ifdef BUILD_VERSION
     a.setApplicationVersion(BUILD_VERSION);

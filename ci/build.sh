@@ -87,21 +87,18 @@ case ${BUILD_TARGERT} in
         ;;
 esac
 
-if [ "ON" = "${STATIC}" ]; then
-    CONFIG_PARA="CONFIG*=static"
-fi
-
-export VERSION="v0.4.7"
+export VERSION="v0.4.8"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     bash build_debpackage.sh ${QT_ROOT}
     sudo dpkg -i ../serialportassistant_*_amd64.deb
-    $SOURCE_DIR/test/test_linux.sh
+    echo "test ......"
+    ./test/test_linux.sh
+
+    #export LD_LIBRARY_PATH=`pwd`/debian/serialportassistant/opt/SerialPortAssistant/bin:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib:${QT_ROOT}/bin:${QT_ROOT}/lib
 
     cd debian/serialportassistant/opt
-    export LD_LIBRARY_PATH=`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib:${QT_ROOT}/bin:${QT_ROOT}/lib
     
-    #wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
     URL_LINUXDEPLOYQT=https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
     wget -c -nv ${URL_LINUXDEPLOYQT} -O linuxdeployqt.AppImage
     chmod a+x linuxdeployqt.AppImage
@@ -109,7 +106,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd SerialPortAssistant
 
     ../linuxdeployqt.AppImage share/applications/*.desktop \
-            -qmake=${QT_ROOT}/bin/qmake -appimage
+            -qmake=${QT_ROOT}/bin/qmake -appimage -verbose
 
     # Create appimage install package
     #cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
@@ -145,6 +142,10 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
         bash upload.sh SerialPortAssistant_${VERSION}.tar.gz update_linux_appimage.xml
     fi
     exit 0
+fi
+
+if [ "ON" = "${STATIC}" ]; then
+    CONFIG_PARA="CONFIG*=static"
 fi
 
 if [ "${BUILD_TARGERT}" = "android" ]; then
