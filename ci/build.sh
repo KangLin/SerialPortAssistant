@@ -99,16 +99,17 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     $SOURCE_DIR/test/test_linux.sh
 
     cd debian/serialportassistant/opt
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${QT_ROOT}/bin:${QT_ROOT}/lib:`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib
+    export LD_LIBRARY_PATH=`pwd`/SerialPortAssistant/bin:`pwd`/SerialPortAssistant/lib:${QT_ROOT}/bin:${QT_ROOT}/lib
     
     #wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
-    wget -c -nv https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage -O linuxdeployqt.AppImage
+    URL_LINUXDEPLOYQT=https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+    wget -c -nv ${URL_LINUXDEPLOYQT} -O linuxdeployqt.AppImage
     chmod a+x linuxdeployqt.AppImage
+
     cd SerialPortAssistant
 
     ../linuxdeployqt.AppImage share/applications/*.desktop \
             -qmake=${QT_ROOT}/bin/qmake -appimage
-    
 
     # Create appimage install package
     #cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
@@ -119,7 +120,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
         SerialPortAssistant-x86_64.AppImage \
         install.sh share
     
-    #Create update_linux_appimage.xml
+    echo "Create update_linux_appimage.xml"
     MD5=`md5sum SerialPortAssistant_${VERSION}.tar.gz|awk '{print $1}'`
     echo "MD5:${MD5}"
     ./SerialPortAssistant-x86_64.AppImage \
@@ -128,7 +129,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
             --url "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/SerialPortAssistant_${VERSION}.tar.gz"
     cat update_linux_appimage.xml
     
-    #Create update_linux.xml
+    echo "Create update_linux.xml"
     MD5=`md5sum $SOURCE_DIR/../serialportassistant_*_amd64.deb|awk '{print $1}'`
     echo "MD5:${MD5}"
     ./bin/SerialPortAssistant \
