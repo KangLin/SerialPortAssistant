@@ -68,7 +68,8 @@
 ![捐赠￥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "捐赠￥20")
 
 7. 依赖
-  RabbitCommon: https://github.com/KangLin/RabbitCommon
+  - [Qt (LGPL v2.1)](http://qt.io/)
+  - RabbitCommon: https://github.com/KangLin/RabbitCommon
   
   ```
   git clon https://github.com/KangLin/RabbitCommon.git

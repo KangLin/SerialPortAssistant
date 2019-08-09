@@ -68,8 +68,10 @@ If you are satisfied, you can donate to me
 - Donate ¥20  
 ![donation ¥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "donation ¥20")
     
-7. Dependence
-  RabbitCommon: https://github.com/KangLin/RabbitCommon
+7. Dependence  
+
+  + [Qt (LGPL v2.1)](http://qt.io/)
+  + RabbitCommon: https://github.com/KangLin/RabbitCommon
   
   ```
   git clon https://github.com/KangLin/RabbitCommon.git
