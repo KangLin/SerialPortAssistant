@@ -1,5 +1,8 @@
 Modify log
 ----------
++ Version: v0.5.0
+  - Modify donation
+
 + Version: v0.4.9
   - Modify documents
   
