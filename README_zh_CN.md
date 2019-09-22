@@ -61,11 +61,7 @@
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠  
 
-- 捐赠(大于￥20)：  
-![捐赠( 大于 ￥20 )](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "捐赠(大于￥20)")
-
-- 捐赠￥20  
-![捐赠￥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "捐赠￥20")
+![捐赠](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png)
 
 7. 依赖
   - [Qt (LGPL v2.1)](http://qt.io/)

@@ -60,14 +60,10 @@ This project is a cross-platform serial assistant. It can run on:
             sudo dpkg -i serialportassistant_0.4.8_amd64.deb
 
 6. Donate  
-If you are satisfied, you can donate to me
+If you are satisfied, you can donate to me  
+ 
+![donation](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation")
 
-- Donation (greater than ¥20):  
-![donation (greater than ¥20)](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation (greater than ¥20)")
-
-- Donate ¥20  
-![donation ¥20](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute20.png "donation ¥20")
-    
 7. Dependence  
 
   + [Qt (LGPL v2.1)](http://qt.io/)
