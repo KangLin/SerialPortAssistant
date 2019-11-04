@@ -51,15 +51,22 @@ function install_android()
 {
     cd ${SOURCE_DIR}/Tools
     if [ ! -d "`pwd`/android-sdk" ]; then
+        ANDROID_STUDIO_VERSION=191.5900203
+        wget -c -nv https://dl.google.com/dl/android/studio/ide-zips/3.5.1.0/android-studio-ide-${ANDROID_STUDIO_VERSION}-linux.tar.gz
+        tar xzf android-studio-ide-${ANDROID_STUDIO_VERSION}-linux.tar.gz
+        export JAVA_HOME=`pwd`/android-studio/jre
+        export PATH=${JAVA_HOME}/bin:$PATH
         wget -c -nv https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
         mkdir android-sdk
         cd android-sdk
         cp ../sdk-tools-linux-4333796.zip .
-        unzip sdk-tools-linux-4333796.zip
+        unzip -q sdk-tools-linux-4333796.zip
         echo "Install sdk and ndk ......"
-        ./tools/bin/sdkmanager "platform-tools" "build-tools" "platforms;${ANDROID_API}" "ndk-bundle"
+        cd tools
+        (sleep 5 ; while true ; do sleep 1 ; printf 'y\r\n' ; done ) \
+        | ./bin/sdkmanager "platform-tools" "build-tools;28.0.3" "platforms;${ANDROID_API}" "ndk-bundle"
         if [ ! -d ${SOURCE_DIR}/Tools/android-ndk ]; then
-            ln -s ${SOURCE_DIR}/Tools/android-sdk/ndk ${SOURCE_DIR}/Tools/android-ndk
+            ln -s ${SOURCE_DIR}/Tools/android-sdk/ndk-bundle ${SOURCE_DIR}/Tools/android-ndk
         fi
     fi
 }
@@ -70,7 +77,7 @@ function install_android_sdk_and_ndk()
     
     #下载android ndk  
     if [ ! -d "`pwd`/android-ndk" ]; then
-        if [ "$QT_VERSION_DIR" = "5.9" ]; then
+        if [ "$QT_VERSION_DIR" = "5.8" ]; then
             wget -c -nv http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
             chmod u+x android-ndk-r10e-linux-x86_64.bin
             ./android-ndk-r10e-linux-x86_64.bin > /dev/null
@@ -95,7 +102,7 @@ function install_android_sdk_and_ndk()
         mv android-sdk-linux android-sdk
         rm android-sdk_${SDK_VERSION}-linux.tgz 
         (sleep 5 ; while true ; do sleep 1 ; printf 'y\r\n' ; done ) \
-        | android-sdk/tools/android update sdk -u #-t tool,android-18,android-24,extra,platform,platform-tools,build-tools-28.0.3
+        | android-sdk/tools/android update sdk -u -t tool,${ANDROID_API},extra,platform,platform-tools,build-tools-28.0.3,build-tools-28.0.2
     fi
 }
 
@@ -103,6 +110,8 @@ function function_android()
 {
     cd ${SOURCE_DIR}/Tools
     
+    sudo apt-get update -y -qq
+    #sudo apt-get install -qq -y openjdk-11-jdk
     # install oracle jdk
     #sudo add-apt-repository ppa:linuxuprising/java -y
     #sudo apt update
@@ -110,7 +119,7 @@ function function_android()
     
     #sudo apt install oracle-java11-set-default -qq -y
 
-    install_android_sdk_and_ndk
+    install_android
     
     sudo apt-get install ant -qq -y
     sudo apt-get install libicu-dev -qq -y
@@ -126,7 +135,7 @@ function function_unix()
 
     if [ "$BUILD_DOWNLOAD" != "TRUE"  ]; then
         #See: https://launchpad.net/~beineri
-        sudo add-apt-repository ppa:beineri/opt-qt${QT_VERSION}-`lsb_release -c|awk '{print $2}'` -y
+        sudo add-apt-repository ppa:beineri/opt-qt-${QT_VERSION}-`lsb_release -c|awk '{print $2}'` -y
     fi
 
     sudo apt-get update -y -qq
@@ -134,10 +143,13 @@ function function_unix()
     sudo apt-get install -y -qq libglu1-mesa-dev \
         libxkbcommon-x11-dev \
         libpulse-mainloop-glib0 \
-        libgstreamer0.10-dev \
-        libgstreamer-plugins-base0.10-dev \
+        libgstreamer1.0-dev \
+        libgstreamer-plugins-base1.0-dev \
         gstreamer1.0-pulseaudio \
-        libmysql-cil-dev libmysql-cil-dev libmysql-ocaml-dev libmysql++-dev libmysqld-dev libmysqlcppconn-dev
+        libmysql-cil-dev libmysql-cil-dev libmysql-ocaml-dev \
+        libmysql++-dev libmysqld-dev libmysqlcppconn-dev \
+        libmysqlclient-dev \
+        libodbc1 
 
     if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base \
