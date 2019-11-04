@@ -91,7 +91,7 @@ case ${BUILD_TARGERT} in
         ;;
 esac
 
-export VERSION="v0.4.8"
+export VERSION="v0.5.0"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     if [ "${BUILD_DOWNLOAD}" != "TRUE" ]; then

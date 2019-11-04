@@ -1,5 +1,14 @@
 Modify log
 ----------
++ Version: v0.5.0
+  - Modify donation
+
++ Version: v0.4.9
+  - Modify documents
+  
++ Version: v0.4.8
+  - Modify build
+  
 + Version: v0.4.7
   - Modify pro file
 
