@@ -154,7 +154,7 @@ function function_unix()
     if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base \
             qt${QT_VERSION_DIR}tools \
-            qt${QT_VERSION_DIR}multimedia
+            qt${QT_VERSION_DIR}serialport
         sed -i "s/export QT_VERSION=/export QT_VERSION=${QT_VERSION}/g" ${SOURCE_DIR}/debian/preinst
         sed -i "s/qt59/qt${QT_VERSION_DIR}/g" ${SOURCE_DIR}/debian/postinst
     fi

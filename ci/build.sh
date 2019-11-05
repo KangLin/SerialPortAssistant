@@ -24,8 +24,8 @@ if [ "$BUILD_TARGERT" = "android" ]; then
             export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
             ;;
         x86)
-        export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
-        ;;
+            export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
+            ;;
     esac
     export PATH=${SOURCE_DIR}/Tools/apache-ant/bin:$JAVA_HOME:$PATH
     export ANDROID_SDK=${ANDROID_SDK_ROOT}
@@ -144,7 +144,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
             --md5 ${MD5}
     cat update_linux.xml
     
-    if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION_DIR}" = "512" ]; then
+    if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION}" = "5.12.3" ]; then
         export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"
         #export UPLOADTOOL_PR_BODY=
         wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
