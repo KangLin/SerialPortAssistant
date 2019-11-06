@@ -59,10 +59,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
                                   QStandardPaths::TempLocation)
                               + QDir::separator() + "SerialAssistantRecive.txt");
-    
+#ifdef RABBITCOMMON 
     CFrmUpdater updater;
     ui->actionUpdate_U->setIcon(updater.windowIcon());
-    
+#endif
+
     LoadTranslate();
     LoadStyle();
     InitMenu();
@@ -673,7 +674,7 @@ void CMainWindow::on_actionAbout_A_triggered()
 {
 #ifdef RABBITCOMMON
     CDlgAbout about(this);
-    about.m_AppIcon = QPixmap(":/icon/AppIcon");
+    about.m_AppIcon = QImage(":/icon/AppIcon");
     about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
     #if defined (Q_OS_ANDROID)
         about.showMaximized();
@@ -1151,6 +1152,7 @@ void CMainWindow::on_actionUpdate_U_triggered()
 {
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater();
+    pUpdater->SetTitle(QImage(":/icon/AppIcon"));
     #if defined (Q_OS_ANDROID)
         pUpdater->showMaximized();
     #else

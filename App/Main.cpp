@@ -45,8 +45,9 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef RABBITCOMMON 
-    CFrmUpdater *pUpdate = new CFrmUpdater(); 
-    if(!pUpdate->GenerateUpdateXml()) 
+    CFrmUpdater *pUpdater = new CFrmUpdater(); 
+    pUpdater->SetTitle(QImage(":/icon/AppIcon"));
+    if(!pUpdater->GenerateUpdateXml()) 
         return 0; 
 #endif
 
