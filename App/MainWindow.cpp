@@ -478,7 +478,8 @@ bool CMainWindow::CheckHexChar(QChar c)
         szErr = "Invalid symbol: ";
         szErr += c;
         LOG_MODEL_ERROR("CMainWindow", szErr.toStdString().c_str());
-        m_statusInfo.setText(szErr);
+        //m_statusInfo.setText(szErr);
+        SetStatusInfo(szErr, Qt::red);
         return false;
     }
     return true;
@@ -565,7 +566,8 @@ void CMainWindow::on_pbSend_clicked()
     }
     if(0 > nRet)
     {
-        m_statusInfo.setText(tr("Send fail"));
+        //m_statusInfo.setText(tr("Send fail"));
+        SetStatusInfo(tr("Send fail"), Qt::red);
         LOG_MODEL_ERROR("CMainWindows", "Write fail [%d]：%s",
                         m_SerialPort.error(),
                         m_SerialPort.errorString().toStdString().c_str());

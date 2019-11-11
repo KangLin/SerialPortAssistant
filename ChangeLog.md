@@ -1,5 +1,9 @@
 Modify log
 ----------
++ Version: v0.5.1
+  - Modify ci
+  - Update RabbitCommon interface
+
 + Version: v0.5.0
   - Modify donation
 
