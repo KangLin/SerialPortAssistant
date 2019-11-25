@@ -121,11 +121,12 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     # Create appimage install package
     #cp ../SerialPort_Assistant-${VERSION}-x86_64.AppImage .
     cp $SOURCE_DIR/Install/install.sh .
+    cp $RabbitCommon_DIR/Install/install1.sh .
     ln -s SerialPort_Assistant-${VERSION}-x86_64.AppImage SerialPortAssistant-x86_64.AppImage
     tar -czf SerialPortAssistant_${VERSION}.tar.gz \
         SerialPort_Assistant-${VERSION}-x86_64.AppImage \
         SerialPortAssistant-x86_64.AppImage \
-        install.sh share
+        install.sh install1.sh share
     
     echo "Create update_linux_appimage.xml"
     MD5=`md5sum SerialPortAssistant_${VERSION}.tar.gz|awk '{print $1}'`
@@ -133,6 +134,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     ./SerialPortAssistant-x86_64.AppImage \
             -f "`pwd`/update_linux_appimage.xml" \
             --md5 ${MD5} \
+            -m "v0.5.1" \
             --url "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/SerialPortAssistant_${VERSION}.tar.gz"
     cat update_linux_appimage.xml
     
@@ -141,7 +143,8 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     echo "MD5:${MD5}"
     ./bin/SerialPortAssistant \
             -f "`pwd`/update_linux.xml" \
-            --md5 ${MD5}
+            --md5 ${MD5} \
+            -m "v0.5.1"
     cat update_linux.xml
     
     if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION}" = "5.12.3" ]; then
@@ -194,7 +197,7 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
         "/C/Program Files (x86)/NSIS/makensis.exe" "Install.nsi"
         MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
         echo "MD5:${MD5}"
-        install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5}
+        install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5} -m "v0.5.1"
         
         cat update_windows.xml
 	fi
