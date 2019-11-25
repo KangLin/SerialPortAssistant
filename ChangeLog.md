@@ -3,6 +3,7 @@ Modify log
 + Version: v0.5.1
   - Modify ci
   - Update RabbitCommon interface
+  - Modify updater
 
 + Version: v0.5.0
   - Modify donation
