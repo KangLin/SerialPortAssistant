@@ -24,8 +24,8 @@ if [ "$BUILD_TARGERT" = "android" ]; then
             export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
             ;;
         x86)
-            export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
-            ;;
+        export QT_ROOT=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
+        ;;
     esac
     export PATH=${SOURCE_DIR}/Tools/apache-ant/bin:$JAVA_HOME:$PATH
     export ANDROID_SDK=${ANDROID_SDK_ROOT}
@@ -33,7 +33,7 @@ if [ "$BUILD_TARGERT" = "android" ]; then
 fi
 
 if [ "${BUILD_TARGERT}" = "unix" ]; then
-    if [ "$BUILD_DOWNLOAD" = "TRUE" ]; then
+    if [ "$DOWNLOAD_QT" = "TRUE" ]; then
         QT_DIR=${SOURCE_DIR}/Tools/Qt/${QT_VERSION}
         export QT_ROOT=${QT_DIR}/${QT_VERSION}/gcc_64
     else
@@ -60,6 +60,13 @@ TARGET_OS=`uname -s`
 case $TARGET_OS in
     MINGW* | CYGWIN* | MSYS*)
         export PKG_CONFIG=/c/msys64/mingw32/bin/pkg-config.exe
+        if [ "$BUILD_TARGERT" = "android" ]; then
+            ANDROID_NDK_HOST=windows-x86_64
+            if [ ! -d $ANDROID_NDK/prebuilt/${ANDROID_NDK_HOST} ]; then
+                ANDROID_NDK_HOST=windows
+            fi
+            CONFIG_PARA="${CONFIG_PARA} -DCMAKE_MAKE_PROGRAM=make" #${ANDROID_NDK}/prebuilt/${ANDROID_NDK_HOST}/bin/make.exe"
+        fi
         ;;
     Linux* | Unix*)
     ;;
@@ -94,7 +101,7 @@ esac
 export VERSION="v0.5.0"
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
-    if [ "${BUILD_DOWNLOAD}" != "TRUE" ]; then
+    if [ "${DOWNLOAD_QT}" != "TRUE" ]; then
         sed -i "s/export QT_VERSION_DIR=.*/export QT_VERSION_DIR=${QT_VERSION_DIR}/g" ${SOURCE_DIR}/debian/postinst
         sed -i "s/export QT_VERSION=.*/export QT_VERSION=${QT_VERSION}/g" ${SOURCE_DIR}/debian/preinst
         cat ${SOURCE_DIR}/debian/postinst

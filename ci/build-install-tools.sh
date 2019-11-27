@@ -9,8 +9,8 @@ TOOLS_DIR=${SOURCE_DIR}/Tools
 function function_install_yasm()
 {
     #安装 yasm
-    mkdir -p ${SOURCE_DIR}/Tools/src
-    cd ${SOURCE_DIR}/Tools/src
+    mkdir -p ${TOOLS_DIR}/src
+    cd ${TOOLS_DIR}/src
     wget -c -nv http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz 
     tar xzf yasm-1.3.0.tar.gz
     cd yasm-1.3.0/
@@ -20,18 +20,18 @@ function function_install_yasm()
 
 function function_common()
 {
-    cd ${SOURCE_DIR}/Tools
+    cd ${TOOLS_DIR}
     #下载最新cmake程序
-    if [ "cmake" = "${QMAKE}" ]; then
-        if [ ! -d "`pwd`/cmake" ]; then
-            wget -nv --no-check-certificate http://www.cmake.org/files/v3.6/cmake-3.6.1-Linux-x86_64.tar.gz
-            tar xzf cmake-3.6.1-Linux-x86_64.tar.gz
-            mv cmake-3.6.1-Linux-x86_64 cmake
-        fi
-    fi
+    #if [ "cmake" = "${QMAKE}" ]; then
+    #    if [ ! -d "`pwd`/cmake" ]; then
+    #        wget -nv --no-check-certificate http://www.cmake.org/files/v3.6/cmake-3.6.1-Linux-x86_64.tar.gz
+    #        tar xzf cmake-3.6.1-Linux-x86_64.tar.gz
+    #        mv cmake-3.6.1-Linux-x86_64 cmake
+    #    fi
+    #fi
     
     # Qt qt安装参见：https://github.com/benlau/qtci  
-    if [ "$BUILD_DOWNLOAD" = "TRUE" ]; then
+    if [ "$DOWNLOAD_QT" = "TRUE" ]; then
         QT_DIR=`pwd`/Qt/${QT_VERSION}
         if [ ! -d "${QT_DIR}" ]; then
             if [ "${QT_VERSION}" = "5.6.3" ]; then
@@ -49,7 +49,7 @@ function function_common()
 
 function install_android()
 {
-    cd ${SOURCE_DIR}/Tools
+    cd ${TOOLS_DIR}
     if [ ! -d "`pwd`/android-sdk" ]; then
         ANDROID_STUDIO_VERSION=191.5900203
         wget -c -nv https://dl.google.com/dl/android/studio/ide-zips/3.5.1.0/android-studio-ide-${ANDROID_STUDIO_VERSION}-linux.tar.gz
@@ -63,10 +63,10 @@ function install_android()
         unzip -q sdk-tools-linux-4333796.zip
         echo "Install sdk and ndk ......"
         cd tools
-        (sleep 5 ; while true ; do sleep 1 ; printf 'y\r\n' ; done ) \
-        | ./bin/sdkmanager "platform-tools" "build-tools;28.0.3" "platforms;${ANDROID_API}" "ndk-bundle"
-        if [ ! -d ${SOURCE_DIR}/Tools/android-ndk ]; then
-            ln -s ${SOURCE_DIR}/Tools/android-sdk/ndk-bundle ${SOURCE_DIR}/Tools/android-ndk
+        (sleep 5 ; num=0 ; while [ $num -le 5 ] ; do sleep 1 ; num=$(($num+1)) ; printf 'y\r\n' ; done ) \
+        | ./bin/sdkmanager "platform-tools" "build-tools;28.0.3" "build-tools;28.0.2" "platforms;${ANDROID_API}" "ndk-bundle"
+        if [ ! -d ${TOOLS_DIR}/android-ndk ]; then
+            ln -s ${TOOLS_DIR}/android-sdk/ndk-bundle ${SOURCE_DIR}/Tools/android-ndk
         fi
     fi
 }
@@ -92,7 +92,7 @@ function install_android_sdk_and_ndk()
         fi
     fi
 
-    cd ${SOURCE_DIR}/Tools
+    cd ${TOOLS_DIR}
 
     #Download android sdk  
     if [ ! -d "`pwd`/android-sdk" ]; then
@@ -108,7 +108,7 @@ function install_android_sdk_and_ndk()
 
 function function_android()
 {
-    cd ${SOURCE_DIR}/Tools
+    cd ${TOOLS_DIR}
     
     sudo apt-get update -y -qq
     #sudo apt-get install -qq -y openjdk-11-jdk
@@ -133,7 +133,7 @@ function function_unix()
     #汇编工具yasm
     #function_install_yasm
 
-    if [ "$BUILD_DOWNLOAD" != "TRUE"  ]; then
+    if [ "$DOWNLOAD_QT" != "TRUE"  ]; then
         #See: https://launchpad.net/~beineri
         sudo add-apt-repository ppa:beineri/opt-qt-${QT_VERSION}-`lsb_release -c|awk '{print $2}'` -y
     fi
@@ -151,7 +151,7 @@ function function_unix()
         libmysqlclient-dev \
         libodbc1 
 
-    if [ "$BUILD_DOWNLOAD" != "TRUE" ]; then
+    if [ "$DOWNLOAD_QT" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base \
             qt${QT_VERSION_DIR}tools \
             qt${QT_VERSION_DIR}serialport
