@@ -171,7 +171,9 @@ if [ "${BUILD_TARGERT}" = "android" ]; then
           --input `pwd`/App/android-SerialPortAssistant.so-deployment-settings.json \
           --output `pwd`/android-build \ 
           --android-platform ${ANDROID_API} \
-          --gradle --verbose
+          --gradle --verbose \
+          --sign ${SOURCE_DIR}/SerialPortAssistant.keystore \
+          --storepass ${STOREPASS}
           #--jdk ${JAVA_HOME}
 else
     ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
@@ -198,7 +200,5 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
         MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
         echo "MD5:${MD5}"
         install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5} -m "v0.5.1"
-        
-        cat update_windows.xml
 	fi
 fi
