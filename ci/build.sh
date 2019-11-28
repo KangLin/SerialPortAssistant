@@ -178,10 +178,10 @@ if [ "${BUILD_TARGERT}" = "android" ]; then
           --input `pwd`/App/android-SerialPortAssistant.so-deployment-settings.json \
           --output `pwd`/android-build \ 
           --android-platform ${ANDROID_API} \
-          --gradle --verbose \
+          --gradle \
           --sign ${SOURCE_DIR}/SerialPortAssistant.keystore \
           --storepass ${STOREPASS}
-          #--jdk ${JAVA_HOME}
+          #--verbose --jdk ${JAVA_HOME}
 else
     ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
          "CONFIG+=release" ${CONFIG_PARA}\
@@ -194,10 +194,10 @@ fi
 
 if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
     
-    if [ "${AUTOBUILD_ARCH}" = "x86" ]; then
+    if [ "${BUILD_ARCH}" = "x86" ]; then
         cp /C/OpenSSL-Win32/bin/libeay32.dll install/bin
         cp /C/OpenSSL-Win32/bin/ssleay32.dll install/bin
-    elif [ "${AUTOBUILD_ARCH}" = "x64" ]; then
+    elif [ "${BUILD_ARCH}" = "x64" ]; then
         cp /C/OpenSSL-Win64/bin/libeay32.dll install/bin
         cp /C/OpenSSL-Win64/bin/ssleay32.dll install/bin
     fi
