@@ -98,7 +98,12 @@ case ${BUILD_TARGERT} in
         ;;
 esac
 
-export VERSION="v0.5.0"
+if [ -n "$appveyor_build_version" -a -z "$VERSION" ]; then
+    export VERSION=$appveyor_build_version
+fi
+if [ -z "$VERSION" ]; then
+    export VERSION="v0.5.0"
+fi
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     if [ "${DOWNLOAD_QT}" != "TRUE" ]; then
@@ -175,13 +180,36 @@ if [ "${BUILD_TARGERT}" = "android" ]; then
     $MAKE
     $MAKE install INSTALL_ROOT=`pwd`/android-build
     ${QT_ROOT}/bin/androiddeployqt \
-          --input `pwd`/App/android-SerialPortAssistant.so-deployment-settings.json \
-          --output `pwd`/android-build \ 
+          --input `pwd`/App/android-libSerialPortAssistant.so-deployment-settings.json \
+          --output `pwd`/android-build \
           --android-platform ${ANDROID_API} \
           --gradle \
-          --sign ${SOURCE_DIR}/SerialPortAssistant.keystore \
+          --verbose \
+          --sign ${RabbitCommon_DIR}/RabbitCommon.keystore rabbitcommon \
           --storepass ${STOREPASS}
-          #--verbose --jdk ${JAVA_HOME}
+          
+    APK_FILE=`find . -name "android-build-release-signed.apk"`
+    mv -f ${APK_FILE} $SOURCE_DIR/SerialPortAssistant-${VERSION}.apk
+    APK_FILE=$SOURCE_DIR/SerialPortAssistant_${VERSION}.apk
+    if [ "$TRAVIS_TAG" != "" -a "$BUILD_ARCH"="armeabi-v7a" -a "$QT_VERSION_DIR"="5.12" ]; then
+        cp $SOURCE_DIR/Update/update_android.xml .
+        
+        MD5=`md5sum ${APK_FILE} | awk '{print $1}'`
+        echo "MD5:${MD5}"
+        sed -i "s/<VERSION>.*</<VERSION>${VERSION}</g" update_android.xml
+        sed -i "s/<INFO>.*</<INFO>Release SerialPortAssistant-${VERSION}</g" update_android.xml
+        sed -i "s/<TIME>.*</<TIME>`date`</g" update_android.xml
+        sed -i "s/<ARCHITECTURE>.*</<ARCHITECTURE>${BUILD_ARCH}</g" update_android.xml
+        sed -i "s/<MD5SUM>.*</<MD5SUM>${MD5}</g" update_android.xml
+        sed -i "s:<URL>.*<:<URL>https\://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/SerialPortAssistant_${VERSION}.apk<:g" update_android.xml
+
+        export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"
+        #export UPLOADTOOL_PR_BODY=
+        wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+        chmod u+x upload.sh
+        ./upload.sh ${APK_FILE}
+        ./upload.sh update_android.xml
+    fi
 else
     ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
          "CONFIG+=release" ${CONFIG_PARA}\

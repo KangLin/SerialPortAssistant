@@ -126,7 +126,7 @@ function function_android()
 
     install_android
     
-    sudo apt-get install ant -qq -y
+    #sudo apt-get install ant -qq -y
     sudo apt-get install libicu-dev -qq -y
     
     function_common

@@ -4,6 +4,7 @@ Modify log
   - Modify ci
   - Update RabbitCommon interface
   - Modify updater
+  - Add android sign
 
 + Version: v0.5.0
   - Modify donation
