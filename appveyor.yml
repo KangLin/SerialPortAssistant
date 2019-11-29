@@ -1,7 +1,10 @@
 #TODO: Change version
-version: 'v0.5.0.{build}'
+version: 'v0.5..{build}'
 
 environment:
+  STOREPASS:
+    secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
+    
   matrix: 
   ##### msvc 2013 ########
   - BUILD_TARGERT: windows_msvc
@@ -78,11 +81,19 @@ environment:
     QT_ROOT: C:\Qt\5.12\mingw73_64
     BUILD_ARCH: x64
 
+  ##### android ########
+  - BUILD_TARGERT: android
+    BUILD_ARCH: "armeabi-v7a"
+    ANDROID_ARM_NEON: ON
+    QT_VERSION_DIR: 5.12
+    QT_VERSION: 5.12.6
+    ANDROID_API: android-24
+    TOOLCHAIN_VERSION: 4.9
+    
 matrix:
   fast_finish: false
 
 init:
-  - set BUILD_VERSION=%APPVEYOR_BUILD_VERSION%
   - set varch=%BUILD_ARCH%
   - if "%BUILD_ARCH%" == "x64" set varch=amd64
   - if "%BUILD_TARGERT%" == "windows_msvc" if %TOOLCHAIN_VERSION% LSS 15 (call "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN_VERSION%.0\VC\vcvarsall.bat" %varch%) else (call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %varch%)  
@@ -95,7 +106,8 @@ init:
 
 install:
   - C:\msys64\autorebase.bat
- #- if "%BUILD_TARGERT%"=="windows_mingw" set PATH=C:\Qt\Tools\mingw%TOOLCHAIN_VERSION%_32\bin;%PATH%
+  - C:\msys64\usr\bin\pacman.exe -S --noconfirm unzip
+  #- if "%BUILD_TARGERT%"=="windows_mingw" set PATH=C:\Qt\Tools\mingw%TOOLCHAIN_VERSION%_32\bin;%PATH%
   - if "%BUILD_TARGERT%" == "windows_mingw" set MSYSTEM=MINGW32  #设置编译系统为MINGW32
   
 before_build:
@@ -114,7 +126,7 @@ artifacts:
     #name: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
     type: zip
   - path: build_${BUILD_TARGERT}/update_windows.xml
-  - path: SerialPortAssistant_$(appveyor_build_version).apk
+  - path: SerialPortAssistant_*.apk
   
 test: off
 

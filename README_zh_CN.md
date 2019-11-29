@@ -9,16 +9,15 @@
 1. ![项目位置:https://github.com/KangLin/SerialPortAssistant](https://github.com/KangLin/SerialPortAssistant)  
 本项目是一个跨平台的串口助手。它能运行在:
     - [x] WINDOWS
-    - [x] linux
+    - [x] Linux
+    - [x] Android
     - [x] mac  
         本人没有mac设备，请有些设备的同学自行编译和测试
 
 2. 编译状态
 
-    |平台|状态|
-    |:---:|:------:|
-    |windows、android|[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)|
-    |linux|[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)|
+[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
+[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)
 
 3. 多语言
     * 中文  
@@ -32,31 +31,34 @@
 ![最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.5.0.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant-Setup-v0.5.0.exe)
+    + [SerialPortAssistant-Setup-v0.5.1.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant-Setup-v0.5.1.exe)
 
 - linux
-    + [SerialPortAssistant_v0.5.0.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant_v0.5.0.tar.gz)  
+    + [SerialPortAssistant_v0.5.1.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.tar.gz)  
         AppImage格式的执行程序，可直接运行在linux系统，详见：https://appimage.org/  
         使用:    
-        1. 解压。复制 SerialPortAssistant_v0.5.0.tar.gz 到安装目录，然后解压：
+        1. 解压。复制 SerialPortAssistant_v0.5.1.tar.gz 到安装目录，然后解压：
     
                   sudo mkdir /opt/SerialPortAssistant
                   cd SerialPortAssistant
-                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant_v0.5.0.tar.gz
-                  sudo tar xvfz SerialPortAssistant_v0.5.0.tar.gz
+                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.tar.gz
+                  sudo tar xvfz SerialPortAssistant_v0.5.1.tar.gz
     
-        2. install
+        2. 安装
     
-                  sudo ./install.sh install
+                  sudo ./install1.sh install SerialPortAssistant
     
-        3. If you want to uninstall
+        3. 如果你想卸裁
     
-                  sudo ./install.sh remove
+                  sudo ./install1.sh remove SerialPortAssistant
 
 - ubuntu
-    + [serialportassistant_0.5.0_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/serialportassistant_0.5.0_amd64.deb)
+    + [serialportassistant_0.5.1_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/serialportassistant_0.5.1_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.5.0_amd64.deb
+            sudo dpkg -i serialportassistant_0.5.1_amd64.deb
+
+- android
+    + [SerialPortAssistant_v0.5.1.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.apk)
 
 6. 捐赠  
 如果你用得满意，可以对本人进行捐赠  

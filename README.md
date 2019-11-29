@@ -10,16 +10,15 @@ Author: Kang Lin (kl222@126.com)
 This project is a cross-platform serial assistant. It can run on:
     - [x] WINDOWS
     - [x] linux
+    - [x] Android
     - [x] mac  
         Mac os, I don't have the corresponding equipment,
         please compile and test the user with the corresponding equipment.
 
 2. Complie status
 
-    |Platform|Status|
-    |:---:|:------:|
-    |windows、android|[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)|
-    |linux|[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)|
+[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
+[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)
 
 3. Multi-language
     * Chinese  
@@ -33,32 +32,35 @@ This project is a cross-platform serial assistant. It can run on:
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.5.0.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant-Setup-v0.5.0.exe)
+    + [SerialPortAssistant-Setup-v0.5.1.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant-Setup-v0.5.1.exe)
 
 - linux
-    + [SerialPortAssistant_v0.5.0.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant_v0.5.0.tar.gz)  
+    + [SerialPortAssistant_v0.5.1.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.tar.gz)  
         The AppImage format executable can be run directly on the Linux system, see: https://appimage.org/  
         Usage:    
-        1. Decompress. Copy SerialPortAssistant_v0.5.0.tar.gz to install directory, then decompress it:
+        1. Decompress. Copy SerialPortAssistant_v0.5.1.tar.gz to install directory, then decompress it:
     
                   sudo mkdir /opt/SerialPortAssistant
                   cd SerialPortAssistant
-                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/SerialPortAssistant_v0.5.0.tar.gz
-                  sudo tar xvfz SerialPortAssistant_v0.5.0.tar.gz
+                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.tar.gz
+                  sudo tar xvfz SerialPortAssistant_v0.5.1.tar.gz
     
         2. install
     
-                  sudo ./install.sh install
+                  sudo ./install1.sh install SerialPortAssistant
     
         3. If you want to uninstall
     
-                  sudo ./install.sh remove
+                  sudo ./install1.sh remove SerialPortAssistant
 
 - ubuntu
-    + [serialportassistant_0.5.0_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.0/serialportassistant_0.5.0_amd64.deb)
+    + [serialportassistant_0.5.1_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/serialportassistant_0.5.1_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.5.0_amd64.deb
+            sudo dpkg -i serialportassistant_0.5.1_amd64.deb
 
+- android
+    + [SerialPortAssistant_v0.5.1.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.1/SerialPortAssistant_v0.5.1.apk)
+    
 6. Donate  
 If you are satisfied, you can donate to me  
  
