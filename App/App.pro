@@ -5,8 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui serialport network xml
+android: QT += androidextras
 
-versionAtMost(QT_VERSION, 5.6) : error("Qt version must greater 5.6")
+android: versionAtMost(QT_VERSION, 5.10) : error("Qt version must greater 5.10")
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SerialPortAssistant
@@ -125,3 +126,13 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
 }
 
 include($${RabbitCommon_DIR}/pri/Translations.pri)
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/res/values/libs.xml
+
+contains(ANDROID_TARGET_ARCH,x86) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
+}

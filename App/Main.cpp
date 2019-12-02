@@ -22,9 +22,19 @@ Abstract:
 #include <QApplication>
 #include <QDir>
 #include "Global/Global.h"
+#if defined(Q_OS_ANDROID)
+    #include <QtAndroidExtras/QtAndroid>
+#endif
 
 int main(int argc, char *argv[])
 {
+#if (QT_VERSION > QT_VERSION_CHECK(5,6,0))
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    QtAndroid::hideSplashScreen();
+#endif
+    
     QApplication a(argc, argv);
     a.setApplicationName("SerialPortAssistant");
     
