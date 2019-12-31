@@ -3,11 +3,10 @@ DESTDIR = $$OUT_PWD/bin
 
 isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
 isEmpty(PREFIX) {
-    android {
-       PREFIX = /.
-    } else {
-        PREFIX = $$OUT_PWD/install
-    }
+    qnx : PREFIX = /tmp
+    else : android : PREFIX = /.
+    else : unix : PREFIX = /usr
+    else : PREFIX = $$OUT_PWD/../install
 }
 RabbitCommon.file = 3th_lib/RabbitCommon.pro
 App.depends = RabbitCommon
@@ -38,6 +37,7 @@ unix: !android: INSTALLS += install_unix
     icon128.path = $${PREFIX}/share/pixmaps
     icon128.CONFIG = directory no_check_exist
 
+    # install desktop file
     DESKTOP_FILE.target = DESKTOP_FILE
     DESKTOP_FILE.files = $$PWD/debian/SerialPortAssistant.desktop
     DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications

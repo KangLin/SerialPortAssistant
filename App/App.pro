@@ -21,11 +21,10 @@ CONFIG(debug, debug|release) {
 
 isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
 isEmpty(PREFIX) {
-    android {
-       PREFIX = /.
-    } else {
-        PREFIX = $$OUT_PWD/../install
-    }
+    qnx : PREFIX = /tmp
+    else : android : PREFIX = /.
+    else : unix : PREFIX = /usr
+    else : PREFIX = $$OUT_PWD/../install
 }
 
 isEmpty(BUILD_VERSION) {
