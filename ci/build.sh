@@ -107,7 +107,7 @@ if [ -z "$VERSION" ]; then
 fi
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
-    if [ "${DOWNLOAD_QT}" != "TRUE" ]; then
+    if [ "${DOWNLOAD_QT}" != "TRUE" -a "${DOWNLOAD_QT}" != "APT" ]; then
         sed -i "s/export QT_VERSION_DIR=.*/export QT_VERSION_DIR=${QT_VERSION_DIR}/g" ${SOURCE_DIR}/debian/postinst
         sed -i "s/export QT_VERSION=.*/export QT_VERSION=${QT_VERSION}/g" ${SOURCE_DIR}/debian/preinst
         cat ${SOURCE_DIR}/debian/postinst

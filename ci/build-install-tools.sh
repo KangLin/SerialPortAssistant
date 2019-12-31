@@ -159,7 +159,10 @@ function function_unix()
         libmysqlclient-dev \
         libodbc1 
 
-    if [ "$DOWNLOAD_QT" != "TRUE" ]; then
+    if [ "$DOWNLOAD_QT" != "APT" ]; then
+        sudo apt-get install -y -qq qt5-default \
+            libqt5serialport5-dev
+    elif [ "$DOWNLOAD_QT" != "TRUE" ]; then
         sudo apt-get install -y -qq qt${QT_VERSION_DIR}base \
             qt${QT_VERSION_DIR}tools \
             qt${QT_VERSION_DIR}serialport
