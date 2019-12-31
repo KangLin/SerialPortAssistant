@@ -70,24 +70,28 @@
   - RabbitCommon: https://github.com/KangLin/RabbitCommon
   
   ```
-  git clon https://github.com/KangLin/RabbitCommon.git
+  git clone https://github.com/KangLin/RabbitCommon.git
   ```
 
 8. 编译
-    - 用 QtCreator 编译
-      * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
-      * 设置参数 RabbitCommon_DIR
-      * 直接编译就可以生成程序
-    - 用命令行编译
-      * 在项目根目录下建立 build 目录
-      * qmake 生成编译工程
-      * make install 用本地工具链生成程序
-      * 在 install 目录下会生成程序
+  - 下载源码
 
-    ```sh
-    mkdir build
-    cd build
-    qmake ../SerialPortAssistant.pro RabbitCommon_DIR=
-    make install
-    cd install #进入生成的程序目录
-    ```
+        git clone https://github.com/KangLin/SerialPortAssistant.git
+
+  - 用 QtCreator 编译
+    * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
+    * 设置参数 RabbitCommon_DIR
+      项目 -> 编译和运行 -> 编译 -> 编译设置 -> 编译步骤 -> qmake -> 额外参数
+    * 直接编译就可以生成程序
+  - 用命令行编译
+    * 在项目根目录下建立 build 目录
+    * qmake 生成编译工程
+    * make install 用本地工具链生成程序
+    * 在 install 目录下会生成程序
+
+          mkdir build
+          cd build
+          qmake ../SerialPortAssistant.pro RabbitCommon_DIR=
+          make install
+          cd install #进入生成的程序目录
+

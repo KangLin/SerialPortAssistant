@@ -72,24 +72,27 @@ If you are satisfied, you can donate to me
   + RabbitCommon: https://github.com/KangLin/RabbitCommon
   
   ```
-  git clon https://github.com/KangLin/RabbitCommon.git
+  git clone https://github.com/KangLin/RabbitCommon.git
   ```
   
 8. Compile
-    - Compiled with QtCreator
-       * Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
-       * Set the parameter RabbitCommon_DIR
-       * Direct compilation can generate programs
-    - Compile with the command line
-       * Build the build directory in the project root directory
-       * *qmake* build compilation project
-       * *make* install Build the program with the local toolchain
-       * The program is generated in the *install* directory
+  - Download source code
 
-    ```sh
-    mkdir build
-    cd build
-    qmake ../SerialPortAssistant.pro
-    make install
-    cd install  #The program is generated in the install directory
-    ```
+        git clone https://github.com/KangLin/SerialPortAssistant.git
+
+  - Compiled with QtCreator
+    * Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
+    * Set the parameter RabbitCommon_DIR  
+      Project -> Build & Run -> Build -> Build settings -> Build step -> qmake 
+    * Direct compilation can generate programs
+  - Compile with the command line
+    * Build the build directory in the project root directory
+    * *qmake* build compilation project
+    * *make* install Build the program with the local toolchain
+    * The program is generated in the *install* directory
+
+          mkdir build
+          cd build
+          qmake ../SerialPortAssistant.pro
+          make install
+          cd install  #The program is generated in the install directory
