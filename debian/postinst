@@ -17,7 +17,7 @@ set -e
 # for details, see https://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
 
-function function_config()
+function_config()
 {
     if [ ! -f /usr/share/applications/SerialPortAssistant.desktop ]; then
         ln -s /opt/SerialPortAssistant/share/applications/SerialPortAssistant.desktop /usr/share/applications/SerialPortAssistant.desktop
