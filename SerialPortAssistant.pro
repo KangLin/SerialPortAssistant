@@ -6,7 +6,7 @@ isEmpty(PREFIX) {
     qnx : PREFIX = /tmp
     else : android : PREFIX = /.
     else : unix : PREFIX = /usr
-    else : PREFIX = $$OUT_PWD/../install
+    else : PREFIX = $$OUT_PWD/install
 }
 RabbitCommon.file = 3th_lib/RabbitCommon.pro
 App.depends = RabbitCommon

@@ -1,5 +1,8 @@
 Modify log
 ----------
++ Version: v0.5.2
+  - Modify install
+  
 + Version: v0.5.1
   - Modify ci
   - Update RabbitCommon interface
