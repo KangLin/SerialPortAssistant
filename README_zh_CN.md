@@ -73,14 +73,15 @@
   git clone https://github.com/KangLin/RabbitCommon.git
   ```
 
-8. 编译
+8. 开发  
+8.1. 编译  
   - 下载源码
 
         git clone https://github.com/KangLin/SerialPortAssistant.git
 
   - 用 QtCreator 编译
     * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
-    * 设置参数 RabbitCommon_DIR
+    * 设置参数 RabbitCommon_DIR  
       项目 -> 编译和运行 -> 编译 -> 编译设置 -> 编译步骤 -> qmake -> 额外参数
     * 直接编译就可以生成程序
   - 用命令行编译
@@ -95,3 +96,11 @@
           make install
           cd install #进入生成的程序目录
 
+8.2. 脚本  
+  - build_debpackage.sh
+    此脚本是 linux 下生成 deb 包的。使用前，请确保安装了下面程序
+    
+            sudo apt-get install debhelper fakeroot 
+            
+  - tag.sh
+    此脚本用于产生新的发行版本号和标签

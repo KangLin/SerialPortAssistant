@@ -75,7 +75,8 @@ If you are satisfied, you can donate to me
   git clone https://github.com/KangLin/RabbitCommon.git
   ```
   
-8. Compile
+8. Developer  
+8.1. Compile  
   - Download source code
 
         git clone https://github.com/KangLin/SerialPortAssistant.git
@@ -96,3 +97,13 @@ If you are satisfied, you can donate to me
           qmake ../SerialPortAssistant.pro
           make install
           cd install  #The program is generated in the install directory
+
+8.2. Script  
+  - build_debpackage.sh  
+    This script generates the deb package under linux.
+    Before use, please make sure the following programs are installed
+  
+          sudo apt-get install debhelper fakeroot 
+          
+  - tag.sh
+    This script is used to generate new release version numbers and tag
