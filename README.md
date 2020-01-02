@@ -100,10 +100,15 @@ If you are satisfied, you can donate to me
 
 8.2. Script  
   - build_debpackage.sh  
-    This script generates the deb package under linux.
-    Before use, please make sure the following programs are installed
+    + This script generates the deb package under linux.
+      Before use, please make sure the following programs are installed
   
-          sudo apt-get install debhelper fakeroot 
-          
+            sudo apt-get install debhelper fakeroot 
+      
+    + Use system qt
+    
+            sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
+                 libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
+
   - tag.sh
     This script is used to generate new release version numbers and tag

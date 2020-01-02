@@ -1,13 +1,18 @@
 #!/bin/bash
-set -ev
+set -e
 
 SOURCE_DIR=`pwd`
 if [ -n "$1" ]; then
     SOURCE_DIR=$1
 fi
 TOOLS_DIR=${SOURCE_DIR}/Tools
-export RabbitCommon_DIR="${SOURCE_DIR}/RabbitCommon"
 cd ${SOURCE_DIR}
+export RabbitCommon_DIR="${SOURCE_DIR}/RabbitCommon"
+
+function version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
+function version_le() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" == "$1"; }
+function version_lt() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1"; }
+function version_ge() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"; }
 
 if [ "$BUILD_TARGERT" = "android" ]; then
     export ANDROID_SDK_ROOT=${TOOLS_DIR}/android-sdk
@@ -38,7 +43,9 @@ if [ "$BUILD_TARGERT" = "android" ]; then
 fi
 
 if [ "${BUILD_TARGERT}" = "unix" ]; then
-    if [ "$DOWNLOAD_QT" = "TRUE" ]; then
+    if [ "$DOWNLOAD_QT" = "APT" ]; then
+        export QT_ROOT=/usr/lib/`uname -m`-linux-gnu/qt5
+    elif [ "$DOWNLOAD_QT" = "TRUE" ]; then
         QT_DIR=${TOOLS_DIR}/Qt/${QT_VERSION}
         export QT_ROOT=${QT_DIR}/${QT_VERSION}/gcc_64
     else
@@ -160,7 +167,7 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
             -m "v0.5.1"
     cat update_linux.xml
     
-    if [ "$TRAVIS_TAG" != "" -a "${QT_VERSION}" = "5.12.3" ]; then
+    if [ "$TRAVIS_TAG" != "" -a "$DOWNLOAD_QT" = "APT" ]; then
         export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"
         #export UPLOADTOOL_PR_BODY=
         wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
@@ -235,5 +242,5 @@ if [ "${BUILD_TARGERT}" = "windows_msvc" ]; then
         MD5=`md5sum SerialPortAssistant-Setup-*.exe|awk '{print $1}'`
         echo "MD5:${MD5}"
         install/bin/SerialPortAssistant.exe -f "`pwd`/update_windows.xml" --md5 ${MD5} -m "v0.5.1"
-	fi
+    fi
 fi

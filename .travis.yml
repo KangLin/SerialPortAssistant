@@ -4,6 +4,8 @@ language: cpp
 cache:
   - apt
   - directories:
+    - Package
+
 compiler:
   - g++
 #jdk: oraclejdk7
@@ -22,12 +24,18 @@ env:
     - RABBITIM_BUILD_THIRDLIBRARY="TRUE"
     
   matrix:
+    # DOWNLOAD_QT:
+    #     APT: Use apt to install from ubuntu source;
+    #     TRUE: download from download.qt.io
+    #     FALSE: install from https://launchpad.net/~beineri
     - BUILD_TARGERT="unix" DOWNLOAD_QT=APT
-    - BUILD_TARGERT="unix" QT_VERSION_DIR=512 QT_VERSION=5.12.2 DOWNLOAD_QT=FALSE
-    - BUILD_TARGERT="unix" QT_VERSION_DIR=511 QT_VERSION=5.11.2 DOWNLOAD_QT=FALSE STATIC=ON
-    - BUILD_TARGERT="unix" BUILD_ARCH="unix" QT_VERSION_DIR=5.12 QT_VERSION=5.12.4 DOWNLOAD_QT=TRUE
+    - BUILD_TARGERT="unix" QT_VERSION_DIR=512 QT_VERSION=5.12.3 DOWNLOAD_QT=FALSE
+    - BUILD_TARGERT="unix" QT_VERSION_DIR=511 QT_VERSION=5.11.3 DOWNLOAD_QT=FALSE STATIC=ON
+
+    - BUILD_TARGERT="unix" BUILD_ARCH="unix" QT_VERSION_DIR=5.12 QT_VERSION=5.12.6 DOWNLOAD_QT=TRUE
     - BUILD_TARGERT="unix" BUILD_ARCH="unix" QT_VERSION_DIR=5.13 QT_VERSION=5.13.2 DOWNLOAD_QT=TRUE STATIC=ON
-    
+
+    # BUILD_ARCH qt 大于等于 5.14.0 可选（arm64-v8a armeabi-v7a x86_64 x86）组合
     - BUILD_TARGERT="android" BUILD_ARCH="armeabi-v7a" ANDROID_API=android-24 ANDROID_ARM_NEON=ON QT_VERSION_DIR=5.13 QT_VERSION=5.13.2 DOWNLOAD_QT=TRUE
     - BUILD_TARGERT="android" BUILD_ARCH="armeabi-v7a" ANDROID_API=android-24 ANDROID_ARM_NEON=ON QT_VERSION_DIR=5.12 QT_VERSION=5.12.6 DOWNLOAD_QT=TRUE
     - BUILD_TARGERT="android" BUILD_ARCH="x86" ANDROID_API=android-24 QT_VERSION_DIR=5.12 QT_VERSION=5.12.6 DOWNLOAD_QT=TRUE
@@ -76,7 +84,7 @@ after_script:
 
 notifications:
   email: kl222@126.com
-  on_success: never
+  on_success: never  # [always|never|change]
   on_failure: always
 
 #deploy:
