@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
     CMainWindow w;
     
-    a.setApplicationDisplayName(QObject::tr("SerialPort Assistant"));
+    a.setApplicationDisplayName(QObject::tr("Serial Port Assistant"));
 #ifdef BUILD_VERSION
     a.setApplicationVersion(BUILD_VERSION);
 #endif
