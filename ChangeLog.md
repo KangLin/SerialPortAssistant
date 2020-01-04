@@ -3,7 +3,9 @@ Modify log
 + Version: v0.5.3
   - Modify UI
     + Add scrollarea
-  
+    + Modify ui for encode
+    + Modify SendHexChar
+
 + Version: v0.5.2
   - Modify install
   
