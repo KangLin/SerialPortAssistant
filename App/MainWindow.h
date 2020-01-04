@@ -27,6 +27,7 @@ Abstract:
 #include <QTranslator>
 #include <QLabel>
 #include <QLayout>
+#include <QComboBox>
 
 namespace Ui {
 class CMainWindow;
@@ -100,10 +101,6 @@ private slots:
     void on_cmbParity_currentIndexChanged(int index);
     void on_cmbStopBit_currentTextChanged(const QString &szText);
     void on_cmbFlowControl_currentIndexChanged(int index);
-    void on_rbReciveASCII_clicked(bool checked);
-    void on_rbReciveHex_clicked(bool checked);
-    void on_rbSendHex_clicked(bool checked);
-    void on_rbSendASCII_clicked(bool checked);
     void on_cmbRecent_activated(const QString &szText);
     void on_actionPasue_P_triggered();
     void on_actionLoad_File_F_triggered();
@@ -112,10 +109,15 @@ private slots:
     void on_actionUpdate_U_triggered();    
     void on_actionRefresh_R_triggered();
     
+    void on_cbReciveEncoded_currentIndexChanged(int index);
+    
+    void on_cbSendEncode_currentIndexChanged(int index);
+    
 private:
     int InitStatusBar();
     int InitToolBar();
     int InitLeftBar();
+    int InitEncodeComboBox(QComboBox *comboBox);
     void AddRecive(const QString &szText, bool bRecive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
     QString GetSerialPortSettingInfo();
@@ -134,7 +136,8 @@ private:
     int m_nTransmissions; //已发送次数  
     
     QLabel m_statusInfo;
-    QLabel m_statusRx, m_statusTx, m_statusDrop;    
+    QLabel m_statusRx, m_statusTx, m_statusDrop;
+    bool m_bInitEncodeCombox;
 };
 
 #endif // MAINWINDOW_H

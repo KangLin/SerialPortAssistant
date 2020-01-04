@@ -116,37 +116,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
     
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
-    
-    ui->rbReciverUtf8->setVisible(false);
-    ui->rbRecvieUnicode->setVisible(false);
-    CGlobal::CODE c = CGlobal::Instance()->GetReciveDisplayCode();
-    switch(c)
-    {
-    case CGlobal::ASCII:
-        ui->rbReciveASCII->setChecked(true);
-        break;
-    case CGlobal::HEX:
-        ui->rbReciveHex->setChecked(true);
-        break;
-    default:
-        break;
-    }
-
-    ui->rbSendUtf8->setVisible(false);
-    ui->rbSendUnicode->setVisible(false);
-    c = CGlobal::Instance()->GetSendDisplayCode();
-    switch(c)
-    {
-    case CGlobal::ASCII:
-        ui->rbSendASCII->setChecked(true);
-        break;
-    case CGlobal::HEX:
-        ui->rbSendHex->setChecked(true);
-        break;
-    default:
-        break;
-    }
-
 }
 
 CMainWindow::~CMainWindow()
@@ -213,10 +182,42 @@ int CMainWindow::InitToolBar()
 int CMainWindow::InitLeftBar()
 {
     bool bVisable = false;
+    m_bInitEncodeCombox = true;
+    InitEncodeComboBox(ui->cbReciveEncoded);
+    InitEncodeComboBox(ui->cbSendEncode);
+    m_bInitEncodeCombox = false;
+    CGlobal::ENCODE c = CGlobal::Instance()->GetReciveEncode();
+    ui->cbReciveEncoded->setCurrentIndex(ui->cbReciveEncoded->findData(c));
+    c = CGlobal::Instance()->GetSendEncode();
+    ui->cbSendEncode->setCurrentIndex(ui->cbSendEncode->findData(c));
+
     bVisable = CGlobal::Instance()->GetLeftBarVisable();
     ui->actionLeftBar_L->setChecked(bVisable);
     ui->frmLeftBar->setVisible(bVisable);
     return 0;
+}
+
+int CMainWindow::InitEncodeComboBox(QComboBox* comboBox)
+{
+    comboBox->addItem("ASCII", CGlobal::ASCII);
+    comboBox->addItem("HEX", CGlobal::HEX);
+    return 0;
+}
+
+void CMainWindow::on_cbReciveEncoded_currentIndexChanged(int index)
+{
+    Q_UNUSED(index)
+    if(m_bInitEncodeCombox) return;
+    CGlobal::Instance()->SetReciveEncode(
+        static_cast<CGlobal::ENCODE>(ui->cbReciveEncoded->currentData().toInt()));
+}
+
+void CMainWindow::on_cbSendEncode_currentIndexChanged(int index)
+{
+    Q_UNUSED(index)
+    if(m_bInitEncodeCombox) return;
+    CGlobal::Instance()->SetSendEncode(
+        static_cast<CGlobal::ENCODE>(ui->cbSendEncode->currentData().toInt()));
 }
 
 void CMainWindow::slotTimeOut()
@@ -435,18 +436,20 @@ void CMainWindow::slotRead()
     }
     
     QString szText;
-    if(ui->rbReciveASCII->isChecked())
+    CGlobal::ENCODE c = static_cast<CGlobal::ENCODE>(
+                ui->cbReciveEncoded->currentData().toInt());
+    switch (c) {
+    case CGlobal::ASCII:
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 3))
         szText = QString::fromStdString(d.toStdString());
 #else
         szText = d;
 #endif
-    else if(ui->rbReciverUtf8->isChecked())
-        szText = QString::fromUtf8(d, d.size());
-    else if(ui->rbSendUnicode->isChecked())
-        szText = QString::fromUtf16((const char16_t *)d.data(), d.size());
-    else if(ui->rbReciveHex->isChecked())
-    {
+        break;
+    case CGlobal::UTF8:
+        szText = QString::fromUtf8(d.constData(), d.size());
+        break;
+    case CGlobal::HEX:
         QString szOut;
         int nLen = d.size();
         for(int i = 0; i < nLen; i++)
@@ -459,6 +462,7 @@ void CMainWindow::slotRead()
             szOut += buff;
         }
         szText = szOut;
+        break;
     }
     
     //显示接收  
@@ -500,7 +504,7 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
         if(!check)
             return -1;
     
-        if(QChar(0x20) == c)
+        if(QChar(0x20) == c) //space
             continue;
         
         if(c >= 'a' && c <= 'f')
@@ -544,25 +548,22 @@ void CMainWindow::on_pbSend_clicked()
         szText += "\n";
 
     int nSendLength = szText.size();
-    if(ui->rbSendASCII->isChecked())
-    {
+    CGlobal::ENCODE c = static_cast<CGlobal::ENCODE>(
+                ui->cbSendEncode->currentData().toInt());
+    switch(c) {
+    case CGlobal::ASCII:
         nSendLength = szText.toStdString().size();
         nRet = m_SerialPort.write(szText.toStdString().c_str(), nSendLength);
-    }
-    else if(ui->rbSendUtf8->isChecked())
-    {
+        break;
+    case CGlobal::UTF8:
         nSendLength = szText.toUtf8().size();
         nRet = m_SerialPort.write(szText.toUtf8(), nSendLength);
-    }
-    else if(ui->rbSendUnicode->isChecked())
-    {
-        nSendLength = szText.length() * sizeof(ushort);
-        nRet = m_SerialPort.write((const char*)szText.utf16(),
-                                  nSendLength);
-    }
-    else if(ui->rbSendHex->isChecked())
-    {
+        break;
+    case CGlobal::HEX:
         nRet = SendHexChar(szText, nSendLength);
+        break;
+    default:
+        break;
     }
     if(0 > nRet)
     {
@@ -580,7 +581,7 @@ void CMainWindow::on_pbSend_clicked()
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
     m_nSend += nRet;
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
-    if(szText.length() != nRet)
+    if(nSendLength != nRet)
     {   
         m_nDrop += (nSendLength - nRet);
         m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
@@ -1093,31 +1094,6 @@ void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
     else
         SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
 }
-
-void CMainWindow::on_rbReciveASCII_clicked(bool checked)
-{
-    if(checked)
-        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::ASCII);
-}
-
-void CMainWindow::on_rbReciveHex_clicked(bool checked)
-{
-    if(checked)
-        CGlobal::Instance()->SetReciveDisplayCode(CGlobal::HEX);
-}
-
-void CMainWindow::on_rbSendHex_clicked(bool checked)
-{
-    if(checked)
-        CGlobal::Instance()->SetSendDisplayCode(CGlobal::HEX);
-}
-
-void CMainWindow::on_rbSendASCII_clicked(bool checked)
-{
-    if(checked)
-        CGlobal::Instance()->SetSendDisplayCode(CGlobal::ASCII);
-}
-
 
 void CMainWindow::on_actionPasue_P_triggered()
 {

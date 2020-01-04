@@ -38,6 +38,7 @@ Abstract:
 class CGlobal : public QObject
 {
     Q_OBJECT
+
 private:
     explicit CGlobal(QObject *parent = 0);
     virtual ~CGlobal();
@@ -114,20 +115,22 @@ private:
     bool m_bReciveDisplaySend;
     
 public:
-    enum CODE{
+    enum ENCODE{
         ASCII = 0,
-        HEX = 1
+        HEX,
+        UTF8
     };
-    CODE GetReciveDisplayCode();
-    int SetReciveDisplayCode(CODE code);
+    Q_ENUM(ENCODE)
+    ENCODE GetReciveEncode();
+    int SetReciveEncode(ENCODE code);
 private:
-    CODE m_ReciveDisplayCode;
+    ENCODE m_ReciveDisplayCode;
     
 public:
-    CODE GetSendDisplayCode();
-    int SetSendDisplayCode(CODE code);
+    ENCODE GetSendEncode();
+    int SetSendEncode(ENCODE code);
 private:
-    CODE m_SendDisplayCode;
+    ENCODE m_SendDisplayCode;
 
 signals:
 
