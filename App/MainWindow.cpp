@@ -476,7 +476,7 @@ bool CMainWindow::CheckHexChar(QChar c)
     if(!((c >= 'a' && c <= 'f')
          || (c >= 'A' && c <= 'F')
          || (c >= '0' && c <= '9')
-         || 0x20 == c.toLatin1()))
+         ))
     {
         QString szErr;
         szErr = "Invalid symbol: ";
@@ -489,6 +489,7 @@ bool CMainWindow::CheckHexChar(QChar c)
     return true;
 }
 
+// Must is format: 0xXX, etc: 0x31 0xAF 0x5D
 int CMainWindow::SendHexChar(QString szText, int &nLength)
 {
     QByteArray out;
@@ -500,12 +501,19 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
     for (int i = 0; i < nLen; i++)
     {
         QChar c = szText.at(i);
+        if(QChar(0x20) == c) //space
+            continue;
+        if(QChar('0') == c && QChar('x') == szText.at(i + 1).toLower()) // 0x
+        {
+            if(!isFirst) out.append(outBin); //只有一位
+            i++;
+            isFirst = true;
+            continue;
+        }
+        
         bool check = CheckHexChar(c);
         if(!check)
             return -1;
-    
-        if(QChar(0x20) == c) //space
-            continue;
         
         if(c >= 'a' && c <= 'f')
             c = c.toUpper();
@@ -514,12 +522,15 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
         {
             //处理第前4位
             if(c >= 'A' && c <= 'F')
-                outBin = (c.toLatin1() - 'A' + 10) << 4;
+                outBin = c.toLatin1() - 'A' + 10;
             else
-                outBin = (c.toLatin1() & ~0x30) << 4;
+                outBin = c.toLatin1() & ~0x30;
             isFirst = false;
+            if(i + 1 >= nLen)
+                out.append(outBin);
         } else {
             //处理后4位, 并组合起来
+            outBin <<= 4;
             if(c >= 'A' && c <= 'F')
                 outBin |= (c.toLatin1() - 'A' + 10);
             else
