@@ -201,6 +201,11 @@ int CMainWindow::InitEncodeComboBox(QComboBox* comboBox)
 {
     comboBox->addItem("ASCII", CGlobal::ASCII);
     comboBox->addItem("HEX", CGlobal::HEX);
+    if(comboBox == ui->cbReciveEncoded)
+    {
+        comboBox->addItem("HEX ASCII", CGlobal::HEX_ASCII);
+    }
+    comboBox->addItem("UTF8", CGlobal::UTF8);
     return 0;
 }
 
@@ -450,24 +455,55 @@ void CMainWindow::slotRead()
         szText = QString::fromUtf8(d.constData(), d.size());
         break;
     case CGlobal::HEX:
-        QString szOut;
-        int nLen = d.size();
-        for(int i = 0; i < nLen; i++)
         {
-            if(i)
-                szOut += " ";
-            char buff[16] = {0};
-            unsigned char c = d.at(i);
-            sprintf(buff, "0x%X", c);
-            szOut += buff;
+            QString szOut;
+            int nLen = d.size();
+            for(int i = 0; i < nLen; i++)
+            {
+                if(i)
+                    szOut += " ";
+                char buff[16] = {0};
+                unsigned char c = d.at(i);
+                sprintf(buff, "0x%X", c);
+                szOut += buff;
+            }
+            szText = szOut;
+            break;
         }
-        szText = szOut;
-        break;
+    case CGlobal::HEX_ASCII:
+        {
+            int nLen = d.size();
+            while(nLen)
+            {
+                QString szHex, szASCII;
+                int i = 0;
+                for(; i < 8; i++)
+                {
+                    if(nLen <= 0) break;
+                    char buff[16] = {0};
+                    unsigned char c = d.at(d.size() - nLen);
+                    if(QChar(c).isPrint())
+                        szASCII = szASCII + " " + c;
+                    else
+                        szASCII = szASCII + " .";
+                    sprintf(buff, "0x%X ", c);
+                    szHex += buff;
+                    nLen--;
+                }
+                if(i < 8)
+                {
+                    szHex += QString((8 - i) * 5, ' ');
+                }
+                szText = szText + szHex + szASCII + "\n";
+            }
+            szText = "\n" + szText;
+            break;
+        }
     }
-    
-    //显示接收  
+
+    //显示接收
     AddRecive(szText, true);
-    
+
     m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
 }
 

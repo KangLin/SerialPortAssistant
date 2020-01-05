@@ -118,7 +118,8 @@ public:
     enum ENCODE{
         ASCII = 0,
         HEX,
-        UTF8
+        UTF8,
+        HEX_ASCII
     };
     Q_ENUM(ENCODE)
     ENCODE GetReciveEncode();
