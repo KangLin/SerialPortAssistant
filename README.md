@@ -32,18 +32,18 @@ This project is a cross-platform serial assistant. It can run on:
 ![Latest release download](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 
 - windows
-    + [SerialPortAssistant-Setup-v0.5.2.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.2/SerialPortAssistant-Setup-v0.5.2.exe)
+    + [SerialPortAssistant-Setup-v0.5.3.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.3/SerialPortAssistant-Setup-v0.5.3.exe)
 
 - linux
-    + [SerialPortAssistant_v0.5.2.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.2/SerialPortAssistant_v0.5.2.tar.gz)  
+    + [SerialPortAssistant_v0.5.3.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.3/SerialPortAssistant_v0.5.3.tar.gz)  
         The AppImage format executable can be run directly on the Linux system, see: https://appimage.org/  
         Usage:    
-        1. Decompress. Copy SerialPortAssistant_v0.5.2.tar.gz to install directory, then decompress it:
+        1. Decompress. Copy SerialPortAssistant_v0.5.3.tar.gz to install directory, then decompress it:
     
                   sudo mkdir /opt/SerialPortAssistant
                   cd SerialPortAssistant
-                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.2/SerialPortAssistant_v0.5.2.tar.gz
-                  sudo tar xvfz SerialPortAssistant_v0.5.2.tar.gz
+                  sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.3/SerialPortAssistant_v0.5.3.tar.gz
+                  sudo tar xvfz SerialPortAssistant_v0.5.3.tar.gz
     
         2. install
     
@@ -54,12 +54,12 @@ This project is a cross-platform serial assistant. It can run on:
                   sudo ./install1.sh remove SerialPortAssistant
 
 - ubuntu
-    + [serialportassistant_0.5.2_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.2/serialportassistant_0.5.2_amd64.deb)
+    + [serialportassistant_0.5.3_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.3/serialportassistant_0.5.3_amd64.deb)
 
-            sudo dpkg -i serialportassistant_0.5.2_amd64.deb
+            sudo dpkg -i serialportassistant_0.5.3_amd64.deb
 
 - android
-    + [SerialPortAssistant_v0.5.2.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.2/SerialPortAssistant_v0.5.2.apk)
+    + [SerialPortAssistant_v0.5.3.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.3/SerialPortAssistant_v0.5.3.apk)
     
 6. Donate  
 If you are satisfied, you can donate to me  

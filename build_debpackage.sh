@@ -29,3 +29,4 @@ fi
 export RabbitCommon_DIR=$RabbitCommon_DIR
 export QT_ROOT=$QT_ROOT
 dpkg-buildpackage -us -uc -b
+#fakeroot debian/rules binary 

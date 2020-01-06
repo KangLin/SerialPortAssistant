@@ -57,8 +57,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
                                + QDir::separator() + "SerialAssistant.log");
     ui->setupUi(this);
     ui->leSaveToFile->setText(QStandardPaths::writableLocation(
-                                  QStandardPaths::TempLocation)
-                              + QDir::separator() + "SerialAssistantRecive.txt");
+                               QStandardPaths::TempLocation)
+             + QDir::separator() + "SerialAssistantRecive.txt");
+
 #ifdef RABBITCOMMON 
     CFrmUpdater updater;
     ui->actionUpdate_U->setIcon(updater.windowIcon());
@@ -73,7 +74,14 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitLeftBar();
 
     RefreshSerialPorts();
-
+    if(!QSerialPortInfo::availablePorts().isEmpty())
+        ui->leSaveToFile->setText(QStandardPaths::writableLocation(
+                                   QStandardPaths::TempLocation)
+            + QDir::separator() + "SerialAssistantRecive_"
+            + QSerialPortInfo::availablePorts()
+                              .at(ui->cmbPort->currentIndex()).portName()
+                              + ".txt");
+    
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
         ui->cmbBoudRate->addItem(QString::number(baudRate));
@@ -537,7 +545,7 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
     for (int i = 0; i < nLen; i++)
     {
         QChar c = szText.at(i);
-        if(QChar(0x20) == c) //space
+        if(QChar(0x20) == c || '\r' == c || '\n' == c) //space \r \n
             continue;
         if(QChar('0') == c && QChar('x') == szText.at(i + 1).toLower()) // 0x
         {
@@ -616,7 +624,8 @@ void CMainWindow::on_pbSend_clicked()
     {
         //m_statusInfo.setText(tr("Send fail"));
         SetStatusInfo(tr("Send fail"), Qt::red);
-        LOG_MODEL_ERROR("CMainWindows", "Write fail [%d]：%s",
+        LOG_MODEL_ERROR("CMainWindows", "Write fail [%d][%d]：%s",
+                        nRet,
                         m_SerialPort.error(),
                         m_SerialPort.errorString().toStdString().c_str());
         on_pbOpen_clicked(); //关闭串口  
@@ -665,10 +674,17 @@ void CMainWindow::on_cmbPort_currentIndexChanged(int index)
             ui->cmbPort->setCurrentIndex(m_cmbPortIndex);
             return;
         }
-        else
-            on_pbOpen_clicked();
+        
+        on_pbOpen_clicked();
     }
     m_cmbPortIndex = index;
+    if(!QSerialPortInfo::availablePorts().isEmpty())
+        ui->leSaveToFile->setText(QStandardPaths::writableLocation(
+                                   QStandardPaths::TempLocation)
+            + QDir::separator() + "SerialAssistantRecive_"
+            + QSerialPortInfo::availablePorts()
+                              .at(ui->cmbPort->currentIndex()).portName()
+                              + ".txt");
 }
 
 void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
