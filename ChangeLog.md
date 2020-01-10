@@ -5,6 +5,7 @@ Modify log
     + Add scrollarea
     + Modify ui for encode
     + Modify SendHexChar
+    + Modify send file
 
 + Version: v0.5.2
   - Modify install

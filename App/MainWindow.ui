@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>749</height>
+    <width>593</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,8 +65,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>743</width>
-         <height>666</height>
+         <width>593</width>
+         <height>732</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -211,11 +211,11 @@
              <property name="frameShadow">
               <enum>QFrame::Sunken</enum>
              </property>
-             <layout class="QGridLayout" name="gridLayout_4">
+             <layout class="QGridLayout" name="gridLayout_9">
               <item row="0" column="0">
                <widget class="QGroupBox" name="groupBox">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -240,6 +240,9 @@
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
+                     </property>
+                     <property name="editable">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -359,7 +362,7 @@
               <item row="1" column="0">
                <widget class="QGroupBox" name="groupBox_2">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -415,7 +418,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pbBrowse">
+                    <widget class="QPushButton" name="pbBrowseSave">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>0</horstretch>
@@ -435,7 +438,7 @@
               <item row="2" column="0">
                <widget class="QGroupBox" name="groupBox_3">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -443,78 +446,125 @@
                 <property name="title">
                  <string>Send Settings</string>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_3">
+                <layout class="QGridLayout" name="gridLayout_4">
                  <item row="0" column="0">
-                  <layout class="QHBoxLayout" name="horizontalLayout_11">
-                   <item>
-                    <widget class="QLabel" name="label_8">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>Auto Feed Line</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="cbr">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>r</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="cbn">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>n</string>
-                     </property>
-                     <property name="checked">
-                      <bool>false</bool>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <widget class="QTabWidget" name="tbSendSettings">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="currentIndex">
+                    <number>0</number>
+                   </property>
+                   <widget class="QWidget" name="Input">
+                    <attribute name="title">
+                     <string>Input</string>
+                    </attribute>
+                    <attribute name="toolTip">
+                     <string>Input</string>
+                    </attribute>
+                    <layout class="QGridLayout" name="gridLayout_3">
+                     <item row="0" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_11">
+                       <item>
+                        <widget class="QLabel" name="label_8">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>Auto Feed Line</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_8">
+                         <item>
+                          <widget class="QCheckBox" name="cbr">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>r</string>
+                           </property>
+                           <property name="checked">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QCheckBox" name="cbn">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>n</string>
+                           </property>
+                           <property name="checked">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_7">
+                       <item>
+                        <widget class="QLabel" name="label_12">
+                         <property name="text">
+                          <string>Encode:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QComboBox" name="cbSendEncode">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="SendFile">
+                    <attribute name="title">
+                     <string>Send file</string>
+                    </attribute>
+                    <attribute name="toolTip">
+                     <string>Send file</string>
+                    </attribute>
+                    <layout class="QGridLayout" name="gridLayout_10">
+                     <item row="0" column="0">
+                      <widget class="QLineEdit" name="leSendFile"/>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPushButton" name="pbBrowseSend">
+                       <property name="text">
+                        <string>Browse(&amp;B)</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
                  </item>
                  <item row="1" column="0">
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <item>
-                    <widget class="QLabel" name="label_12">
-                     <property name="text">
-                      <string>Encode:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="cbSendEncode">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="2" column="0">
                   <widget class="QGroupBox" name="groupBox_4">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -525,65 +575,73 @@
                    <property name="title">
                     <string>Loop</string>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout">
-                    <item>
+                   <layout class="QGridLayout" name="gridLayout_8">
+                    <item row="0" column="0">
                      <layout class="QHBoxLayout" name="horizontalLayout_14">
                       <item>
-                       <widget class="QLabel" name="label_9">
-                        <property name="text">
-                         <string>Loop number:</string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_13">
+                        <item>
+                         <widget class="QLabel" name="label_9">
+                          <property name="text">
+                           <string>Loop number:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="sbLoopNumber">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="toolTip">
+                           <string>-1: unlimited loop</string>
+                          </property>
+                          <property name="minimum">
+                           <number>-1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>99999</number>
+                          </property>
+                          <property name="value">
+                           <number>-1</number>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <widget class="QSpinBox" name="sbLoopNumber">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="toolTip">
-                         <string>-1: unlimited loop</string>
-                        </property>
-                        <property name="minimum">
-                         <number>-1</number>
-                        </property>
-                        <property name="maximum">
-                         <number>1000000</number>
-                        </property>
-                        <property name="value">
-                         <number>-1</number>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_10">
-                        <property name="text">
-                         <string>Transmissions:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="lbTransmissions">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="toolTip">
-                         <string>Transmissions</string>
-                        </property>
-                        <property name="text">
-                         <string>0</string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_12">
+                        <item>
+                         <widget class="QLabel" name="label_10">
+                          <property name="text">
+                           <string>Transmissions:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="lbTransmissions">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="toolTip">
+                           <string>Transmissions</string>
+                          </property>
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                      </layout>
                     </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_9">
+                    <item row="1" column="0">
+                     <layout class="QHBoxLayout" name="horizontalLayout_18">
                       <item>
                        <widget class="QCheckBox" name="cbSendLoop">
                         <property name="sizePolicy">
@@ -598,33 +656,37 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QSpinBox" name="sbLoopTime">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="maximum">
-                         <number>1000000000</number>
-                        </property>
-                        <property name="value">
-                         <number>1000</number>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_7">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="text">
-                         <string>ms</string>
-                        </property>
-                       </widget>
+                       <layout class="QHBoxLayout" name="horizontalLayout_9">
+                        <item>
+                         <widget class="QSpinBox" name="sbLoopTime">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="maximum">
+                           <number>1000000000</number>
+                          </property>
+                          <property name="value">
+                           <number>1000</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_7">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>ms</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                      </layout>
                     </item>
@@ -681,8 +743,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
-     <height>22</height>
+     <width>593</width>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools_T">

@@ -17,7 +17,6 @@ Abstract:
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include <QtSerialPort/QSerialPortInfo>
 #include <QtSerialPort/QSerialPort>
 #include <QTimer>
@@ -28,6 +27,9 @@ Abstract:
 #include <QLabel>
 #include <QLayout>
 #include <QComboBox>
+#include <QFile>
+
+#include "SendFile.h"
 
 namespace Ui {
 class CMainWindow;
@@ -40,7 +42,7 @@ class CMainWindow : public QMainWindow
 public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
-    
+
     void InitMenu();
     void ClearMenu();
     // Language menu    
@@ -57,9 +59,9 @@ private:
     QActionGroup m_ActionGroupTranslator;
     QSharedPointer<QTranslator> m_TranslatorQt;
     QSharedPointer<QTranslator> m_TranslatorApp;
-private slots:
+private Q_SLOTS:
     void slotActionGroupTranslateTriggered(QAction* pAct);
-    
+
     //Style menu
 private:
     QMenu m_MenuStyle;
@@ -69,10 +71,10 @@ private:
     int ClearMenuStyles();
     int OpenCustomStyleMenu();
     int LoadStyle();
-private slots:
+private Q_SLOTS:
     void slotActionGroupStyleTriggered(QAction* act);
-       
-private slots:
+
+private Q_SLOTS:
     void changeEvent(QEvent *e);
     void slotRead();
     void slotTimeOut();
@@ -104,19 +106,21 @@ private slots:
     void on_cmbRecent_activated(const QString &szText);
     void on_actionPasue_P_triggered();
     void on_actionLoad_File_F_triggered();
-    void on_pbBrowse_clicked();
     void on_actionOpen_Log_G_triggered();
     void on_actionUpdate_U_triggered();    
     void on_actionRefresh_R_triggered();
-    
     void on_cbReciveEncoded_currentIndexChanged(int index);
-    
-    void on_cbSendEncode_currentIndexChanged(int index);
-    
+    void on_cbSendEncode_currentIndexChanged(int index);   
+    void on_pbBrowseSend_clicked();
+    void on_pbBrowseSave_clicked();
+    void on_tbSendSettings_currentChanged(int index);
+
 private:
     int InitStatusBar();
     int InitToolBar();
     int InitLeftBar();
+    int SetSaveFileName();
+    bool isExistSaveFileName(const QString &szFile);
     int InitEncodeComboBox(QComboBox *comboBox);
     void AddRecive(const QString &szText, bool bRecive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
@@ -124,20 +128,33 @@ private:
     bool CheckHexChar(QChar c);
     int SendHexChar(QString szText, int &nLength);
     int RefreshSerialPorts();
+    /**
+     * @brief SendInput
+     * @return int: Returns the number of bytes sent.
+     *              if < 0, is error.
+     */
+    int SendInput();
+    
+    int SendFile();
+    int CloseSendFile();
+private Q_SLOTS:
+    void slotSendFile(qint64 bytes);
     
 private:
     Ui::CMainWindow *ui;
 
     QSerialPort m_SerialPort;
-    ulong m_nSend, m_nRecive, m_nDrop;
+    qint64 m_nSend, m_nRecive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
     int m_nLoopNumber;
     int m_nTransmissions; //已发送次数  
-    
+
     QLabel m_statusInfo;
     QLabel m_statusRx, m_statusTx, m_statusDrop;
     bool m_bInitEncodeCombox;
+
+    CSendFile m_SendFile;
 };
 
 #endif // MAINWINDOW_H

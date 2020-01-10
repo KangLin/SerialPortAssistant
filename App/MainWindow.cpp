@@ -56,9 +56,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
                                    QStandardPaths::TempLocation)
                                + QDir::separator() + "SerialAssistant.log");
     ui->setupUi(this);
-    ui->leSaveToFile->setText(QStandardPaths::writableLocation(
-                               QStandardPaths::TempLocation)
-             + QDir::separator() + "SerialAssistantRecive.txt");
 
 #ifdef RABBITCOMMON 
     CFrmUpdater updater;
@@ -72,15 +69,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitStatusBar();
     InitToolBar();
     InitLeftBar();
-
+    
     RefreshSerialPorts();
-    if(!QSerialPortInfo::availablePorts().isEmpty())
-        ui->leSaveToFile->setText(QStandardPaths::writableLocation(
-                                   QStandardPaths::TempLocation)
-            + QDir::separator() + "SerialAssistantRecive_"
-            + QSerialPortInfo::availablePorts()
-                              .at(ui->cmbPort->currentIndex()).portName()
-                              + ".txt");
+    SetSaveFileName();
     
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
@@ -272,7 +263,14 @@ void CMainWindow::on_pbOpen_clicked()
 
     if(m_SerialPort.isOpen())
     {
+        if("SendFile" == ui->tbSendSettings->currentWidget()->objectName())
+            CloseSendFile();
+
+        bCheck = m_SerialPort.disconnect();
+        Q_ASSERT(bCheck);
+
         m_SerialPort.close();
+
         if(m_Timer.isActive())
             m_Timer.stop();
         ui->pbOpen->setText(tr("Open(&O)"));
@@ -280,8 +278,6 @@ void CMainWindow::on_pbOpen_clicked()
         ui->actionOpen->setText(tr("Open(&O)"));
         ui->actionOpen->setIcon(QIcon(":/icon/Start"));
         ui->pbSend->setEnabled(false);
-        bCheck = m_SerialPort.disconnect();
-        Q_ASSERT(bCheck);
 
         SetStatusInfo(tr("Serail Port Close"));
         ui->actionRefresh_R->setVisible(true);
@@ -392,10 +388,10 @@ void CMainWindow::slotQTextEditMaxLength()
 void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 {
     QString szPrex;
-    
+
     if(ui->cbDisplayTime->isChecked())
         szPrex = QTime::currentTime().toString("hh:mm:ss.zzz") + " ";
-        
+
     if(ui->cbDisplaySend->isChecked())
     {
         if(bRecive)
@@ -403,15 +399,15 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
         else
             szPrex += "-> ";
     }
-    
+
     if(!szPrex.isEmpty())
     {
         ui->teRecive->insertPlainText("\n");
         ui->teRecive->insertPlainText(szPrex);
     }
-    
+
     ui->teRecive->insertPlainText(szText);
-   
+
     slotQTextEditMaxLength();
     if(!ui->actionPasue_P->isChecked())
     {
@@ -547,12 +543,15 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
         QChar c = szText.at(i);
         if(QChar(0x20) == c || '\r' == c || '\n' == c) //space \r \n
             continue;
-        if(QChar('0') == c && QChar('x') == szText.at(i + 1).toLower()) // 0x
+        if(i + 1 < nLen)
         {
-            if(!isFirst) out.append(outBin); //只有一位
-            i++;
-            isFirst = true;
-            continue;
+            if(QChar('0') == c && QChar('x') == szText.at(i + 1).toLower()) // 0x
+            {
+                if(!isFirst) out.append(outBin); //只有一位
+                i++;
+                isFirst = true;
+                continue;
+            }
         }
         
         bool check = CheckHexChar(c);
@@ -590,11 +589,19 @@ int CMainWindow::SendHexChar(QString szText, int &nLength)
 
 void CMainWindow::on_pbSend_clicked()
 {
+    if("Input" == ui->tbSendSettings->currentWidget()->objectName())
+        SendInput();
+    if("SendFile" == ui->tbSendSettings->currentWidget()->objectName())
+        SendFile();
+}
+
+int CMainWindow::SendInput()
+{
     int nRet = 0;
     if(ui->teSend->toPlainText().isEmpty())
     {
         LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
-        return;
+        return -1;
     }
     QString szText = ui->teSend->toPlainText();
     if(ui->cbr->isChecked())
@@ -628,8 +635,8 @@ void CMainWindow::on_pbSend_clicked()
                         nRet,
                         m_SerialPort.error(),
                         m_SerialPort.errorString().toStdString().c_str());
-        on_pbOpen_clicked(); //关闭串口  
-        return;
+        on_pbOpen_clicked(); //close serial port  
+        return nRet;
     }
     LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
 
@@ -638,19 +645,70 @@ void CMainWindow::on_pbSend_clicked()
     m_nSend += nRet;
     m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
     if(nSendLength != nRet)
-    {   
+    {
         m_nDrop += (nSendLength - nRet);
         m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
     }
-    
-    //显示发送  
+
+    //display send
     if(ui->cbDisplaySend->isChecked())
         AddRecive(szText, false);
-    
-    //增加到最近发送列表中  
+
+    //Add to recently sent list
     if(-1 == ui->cmbRecent->findText(
                 ui->teSend->toPlainText().toStdString().c_str()))
         ui->cmbRecent->addItem(ui->teSend->toPlainText().toStdString().c_str());
+
+    return nRet;
+}
+
+int CMainWindow::SendFile()
+{
+    int nRet = 0;
+    
+    if(m_SendFile.isOpen())
+    {
+        LOG_MODEL_WARNING("CMAinWindow", "There is send file");
+        return 0;
+    }
+    
+    nRet = m_SendFile.Open(ui->leSendFile->text());
+    if(nRet < 0)
+        return nRet;
+    
+    ui->pbSend->setEnabled(false);
+
+    bool check = connect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
+                         this, SLOT(slotSendFile(qint64)));
+    Q_ASSERT(check);
+
+    slotSendFile(0);
+    return nRet;
+}
+
+int CMainWindow::CloseSendFile()
+{
+    bool check = disconnect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
+                            this, SLOT(slotSendFile(qint64)));
+    Q_ASSERT(check);
+    m_SendFile.Close();
+    ui->pbSend->setEnabled(true);
+    return 0;
+}
+
+void CMainWindow::slotSendFile(qint64 bytes)
+{
+    //qDebug() << "CMainWindow::slotSendFile" << bytes;
+    qint64 nRet = 0;
+    nRet = m_SendFile.Write(&m_SerialPort);
+    if(nRet <= 0)
+    {
+        CloseSendFile();
+        return;
+    }
+
+    m_nSend += nRet;
+    m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
 }
 
 void CMainWindow::on_cmbPort_currentIndexChanged(int index)
@@ -678,13 +736,40 @@ void CMainWindow::on_cmbPort_currentIndexChanged(int index)
         on_pbOpen_clicked();
     }
     m_cmbPortIndex = index;
+    SetSaveFileName();
+}
+
+int CMainWindow::SetSaveFileName()
+{
+    int nRet = 0;
+    QString szFile = QStandardPaths::writableLocation(
+                QStandardPaths::TempLocation)
+            + QDir::separator() + "SerialAssistantRecive.txt";
     if(!QSerialPortInfo::availablePorts().isEmpty())
-        ui->leSaveToFile->setText(QStandardPaths::writableLocation(
-                                   QStandardPaths::TempLocation)
+        szFile = QStandardPaths::writableLocation(
+                QStandardPaths::TempLocation)
             + QDir::separator() + "SerialAssistantRecive_"
             + QSerialPortInfo::availablePorts()
-                              .at(ui->cmbPort->currentIndex()).portName()
-                              + ".txt");
+            .at(ui->cmbPort->currentIndex()).portName()
+            + ".txt";
+
+    while(QFile::exists(szFile))
+    {
+        int nPos = szFile.lastIndexOf("-");
+        if(-1 != nPos)
+        {
+            QString szNum = szFile.mid(nPos + 1);
+            int nPosNum = szNum.indexOf(".");
+            szNum = szNum.left(nPosNum);
+            szNum = QString::number(szNum.toInt() + 1);
+            szFile = szFile.left(nPos) + "-" + szNum + ".txt";
+        } else {
+            nPos = szFile.lastIndexOf(".");
+            szFile = szFile.left(nPos) + "-1.txt";
+        }
+    }
+    ui->leSaveToFile->setText(szFile);
+    return nRet;
 }
 
 void CMainWindow::on_cmbRecent_currentIndexChanged(const QString &szText)
@@ -1164,6 +1249,9 @@ void CMainWindow::on_actionPasue_P_triggered()
 
 void CMainWindow::on_actionLoad_File_F_triggered()
 {
+    on_pbBrowseSend_clicked();
+    return;
+    
     QString szFile = QFileDialog::getOpenFileName(this, tr("Load File"));
     if(szFile.isEmpty())
         return;
@@ -1176,12 +1264,6 @@ void CMainWindow::on_actionLoad_File_F_triggered()
     ui->teSend->setText(QString(r));
     
     f.close();
-}
-
-void CMainWindow::on_pbBrowse_clicked()
-{
-    QString szFile = QFileDialog::getOpenFileName(this);
-    ui->leSaveToFile->setText(szFile);
 }
 
 void CMainWindow::on_actionOpen_Log_G_triggered()
@@ -1205,4 +1287,33 @@ void CMainWindow::on_actionUpdate_U_triggered()
 void CMainWindow::on_actionRefresh_R_triggered()
 {
     RefreshSerialPorts();
+}
+
+void CMainWindow::on_pbBrowseSend_clicked()
+{
+    QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open send file"));
+    ui->leSendFile->setText(szFile);    
+}
+
+void CMainWindow::on_pbBrowseSave_clicked()
+{
+    QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open save file"));
+    ui->leSaveToFile->setText(szFile);
+}
+
+void CMainWindow::on_tbSendSettings_currentChanged(int index)
+{
+    if(m_SerialPort.isOpen())
+    {
+        int nRet = QMessageBox::warning(this, tr("Close serial port"),
+                                        tr("Will be close serial port ?"),
+                                        QMessageBox::Ok | QMessageBox::No);
+        if(QMessageBox::Ok == nRet)
+            on_pbOpen_clicked(); // close serial port
+    }
+    
+    if("SendFile" == ui->tbSendSettings->currentWidget()->objectName())
+        ui->teSend->setEnabled(false);
+    else
+        ui->teSend->setEnabled(true);
 }

@@ -17,19 +17,21 @@ set -e
 # for details, see https://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
 
+INSTALL_DIR=/opt/SerialPortAssistant
+
 function_config()
 {
     if [ ! -f /usr/share/applications/SerialPortAssistant.desktop ]; then
-        ln -s /opt/SerialPortAssistant/share/applications/SerialPortAssistant.desktop /usr/share/applications/SerialPortAssistant.desktop
+        ln -s ${INSTALL_DIR}/share/applications/SerialPortAssistant.desktop /usr/share/applications/SerialPortAssistant.desktop
     fi
     if [ ! -f /usr/share/pixmaps/SerialPortAssistant.png ]; then
         if [ ! -d /usr/share/pixmaps ]; then
             mkdir -p /usr/share/pixmaps
         fi
-        ln -s /opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/SerialPortAssistant.png
+        ln -s ${INSTALL_DIR}/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/SerialPortAssistant.png
     fi
-    echo "/opt/SerialPortAssistant/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
-    echo "/opt/SerialPortAssistant/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
+    echo "${INSTALL_DIR}/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
+    echo "${INSTALL_DIR}/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
     export QT_VERSION_DIR=
     if [ -n "${QT_VERSION_DIR}" ]; then
         echo "/opt/qt${QT_VERSION_DIR}/lib" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
@@ -39,7 +41,7 @@ function_config()
 
 case "$1" in
     configure)
-        if [ -d /opt/SerialPortAssistant ]; then
+        if [ -d ${INSTALL_DIR} ]; then
             function_config
         fi
     ;;

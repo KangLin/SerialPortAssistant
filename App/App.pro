@@ -67,12 +67,14 @@ SOURCES +=\
     $$PWD/Main.cpp \
     $$PWD/Global/Log.cpp \
     $$PWD/Global/Global.cpp \
-    $$PWD/Common/Tool.cpp 
+    $$PWD/Common/Tool.cpp  \
+    $$PWD/SendFile.cpp
     
 HEADERS += $$PWD/MainWindow.h \
     $$PWD/Global/Log.h \
     $$PWD/Global/Global.h \
-    $$PWD/Common/Tool.h 
+    $$PWD/Common/Tool.h  \
+    $$PWD/SendFile.h
 
 FORMS += $$PWD/MainWindow.ui
 
