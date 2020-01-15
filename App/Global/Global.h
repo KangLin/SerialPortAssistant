@@ -40,7 +40,7 @@ class CGlobal : public QObject
     Q_OBJECT
 
 private:
-    explicit CGlobal(QObject *parent = 0);
+    explicit CGlobal(QObject *parent = nullptr);
     virtual ~CGlobal();
 
 public:
@@ -89,6 +89,12 @@ public:
     int SetSendLoopTime(int nTime);
 private:
     int m_nSendLoopTime;
+
+public:
+    bool GetSaveFile();
+    int SetSaveFile(bool bSaveFile);
+private:
+    bool m_bSaveFile;
 
 public:
     enum SEND_R_N{

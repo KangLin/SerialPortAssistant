@@ -115,6 +115,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
+    ui->cbSaveToFile->setChecked(CGlobal::Instance()->GetSaveFile());
 }
 
 CMainWindow::~CMainWindow()
@@ -690,7 +691,7 @@ int CMainWindow::CloseSendFile()
 {
     bool check = disconnect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
                             this, SLOT(slotSendFile(qint64)));
-    Q_ASSERT(check);
+    //Q_ASSERT(check);
     m_SendFile.Close();
     ui->pbSend->setEnabled(true);
     return 0;
@@ -1292,12 +1293,16 @@ void CMainWindow::on_actionRefresh_R_triggered()
 void CMainWindow::on_pbBrowseSend_clicked()
 {
     QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open send file"));
+    if(szFile.isEmpty())
+        return;
     ui->leSendFile->setText(szFile);    
 }
 
 void CMainWindow::on_pbBrowseSave_clicked()
 {
     QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open save file"));
+    if(szFile.isEmpty())
+        return;
     ui->leSaveToFile->setText(szFile);
 }
 
@@ -1316,4 +1321,9 @@ void CMainWindow::on_tbSendSettings_currentChanged(int index)
         ui->teSend->setEnabled(false);
     else
         ui->teSend->setEnabled(true);
+}
+
+void CMainWindow::on_cbSaveToFile_clicked(bool checked)
+{
+    CGlobal::Instance()->SetSaveFile(checked);
 }

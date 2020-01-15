@@ -1,5 +1,8 @@
 Modify log
 ----------
++ Version: v0.5.4
+  - Modify same bugs
+  
 + Version: v0.5.3
   - Modify UI
     + Add scrollarea

@@ -35,6 +35,7 @@ CGlobal::CGlobal(QObject *parent) :
     m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", 0).toInt();
     m_bReciveDisplayTime = conf.value("Settings/Recive/DisplayTime", "false").toBool();
     m_bReciveDisplaySend = conf.value("Settings/Recive/DisplaySend", "false").toBool();
+    m_bSaveFile = conf.value("Settings/Recive/SaveFile", "false").toBool();
     m_ReciveDisplayCode = (ENCODE)conf.value("Settings/Recive/DisplayReciveCode", 0).toInt();
     m_SendDisplayCode = (ENCODE)conf.value("Settings/Recive/DisplaySendCode", 0).toInt();
 }
@@ -196,6 +197,20 @@ int CGlobal::SetReciveDisplaySend(bool bDisplay)
                    QSettings::IniFormat);
     conf.setValue("Settings/Recive/DisplaySend", m_bReciveDisplaySend);
     return 0; 
+}
+
+bool CGlobal::GetSaveFile()
+{
+    return m_bSaveFile;
+}
+
+int CGlobal::SetSaveFile(bool bSaveFile)
+{
+    m_bSaveFile = bSaveFile;
+    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
+                   QSettings::IniFormat);
+    conf.setValue("Settings/Recive/SaveFile", m_bSaveFile);
+    return 0;
 }
 
 CGlobal::ENCODE CGlobal::GetReciveEncode()

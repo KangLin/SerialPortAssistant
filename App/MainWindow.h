@@ -98,6 +98,7 @@ private Q_SLOTS:
     void on_cbn_clicked(bool checked);
     void on_cbDisplaySend_clicked(bool checked);
     void on_cbDisplayTime_clicked(bool checked);
+    void on_cbSaveToFile_clicked(bool checked);
     void on_cmbBoudRate_currentTextChanged(const QString &szText);
     void on_cmbDataBit_currentTextChanged(const QString &szText);
     void on_cmbParity_currentIndexChanged(int index);
@@ -139,7 +140,7 @@ private:
     int CloseSendFile();
 private Q_SLOTS:
     void slotSendFile(qint64 bytes);
-    
+
 private:
     Ui::CMainWindow *ui;
 
