@@ -779,6 +779,8 @@
     <addaction name="actionPasue_P"/>
     <addaction name="separator"/>
     <addaction name="actionOpen_Log_G"/>
+    <addaction name="actionOpen_save_file"/>
+    <addaction name="actionOpen_send_file"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
@@ -958,6 +960,28 @@
    </property>
    <property name="whatsThis">
     <string>Refresh serial ports</string>
+   </property>
+  </action>
+  <action name="actionOpen_save_file">
+   <property name="text">
+    <string>Open save file</string>
+   </property>
+   <property name="statusTip">
+    <string>Open save file</string>
+   </property>
+   <property name="whatsThis">
+    <string>Open save file</string>
+   </property>
+  </action>
+  <action name="actionOpen_send_file">
+   <property name="text">
+    <string>Open send file</string>
+   </property>
+   <property name="statusTip">
+    <string>Open send file</string>
+   </property>
+   <property name="whatsThis">
+    <string>Open send file</string>
    </property>
   </action>
  </widget>

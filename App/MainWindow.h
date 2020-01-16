@@ -108,6 +108,8 @@ private Q_SLOTS:
     void on_actionPasue_P_triggered();
     void on_actionLoad_File_F_triggered();
     void on_actionOpen_Log_G_triggered();
+    void on_actionOpen_send_file_triggered();
+    void on_actionOpen_save_file_triggered();    
     void on_actionUpdate_U_triggered();    
     void on_actionRefresh_R_triggered();
     void on_cbReciveEncoded_currentIndexChanged(int index);

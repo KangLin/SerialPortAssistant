@@ -26,6 +26,7 @@ Abstract:
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
+#include <QDesktopServices>
 
 #ifdef RABBITCOMMON
     #include "DlgAbout/DlgAbout.h"
@@ -1267,6 +1268,20 @@ void CMainWindow::on_actionLoad_File_F_triggered()
     f.close();
 }
 
+void CMainWindow::on_actionOpen_send_file_triggered()
+{
+    if(ui->leSendFile->text().isEmpty())
+        return;
+    QDesktopServices::openUrl(QUrl::fromLocalFile(ui->leSendFile->text()));
+}
+
+void CMainWindow::on_actionOpen_save_file_triggered()
+{
+    if(ui->leSaveToFile->text().isEmpty())
+        return;
+    QDesktopServices::openUrl(QUrl::fromLocalFile(ui->leSaveToFile->text()));
+}
+
 void CMainWindow::on_actionOpen_Log_G_triggered()
 {
     CLog::Instance()->OpneFile();
@@ -1327,3 +1342,4 @@ void CMainWindow::on_cbSaveToFile_clicked(bool checked)
 {
     CGlobal::Instance()->SetSaveFile(checked);
 }
+
