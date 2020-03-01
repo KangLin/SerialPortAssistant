@@ -107,11 +107,13 @@ case ${BUILD_TARGERT} in
 esac
 
 if [ -n "$appveyor_build_version" -a -z "$VERSION" ]; then
-    export VERSION="v0.5.3"
+    export VERSION="v0.5.4"
 fi
 if [ -z "$VERSION" ]; then
-    export VERSION="v0.5.3"
+    export VERSION="v0.5.4"
 fi
+export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}.<br>The change see [ChangeLog.md](ChangeLog.md) or [ChangeLog_zh_CN.md](ChangeLog_zh_CN.md)"
+#export UPLOADTOOL_PR_BODY=
 if [ "${BUILD_TARGERT}" = "unix" ]; then
     cd $SOURCE_DIR
     if [ "${DOWNLOAD_QT}" != "TRUE" -a "${DOWNLOAD_QT}" != "APT" ]; then
@@ -168,8 +170,6 @@ if [ "${BUILD_TARGERT}" = "unix" ]; then
     cat update_linux.xml
     
     if [ "$TRAVIS_TAG" != "" -a "$DOWNLOAD_QT" = "APT" ]; then
-        export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}"
-        #export UPLOADTOOL_PR_BODY=
         wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
         bash upload.sh $SOURCE_DIR/../serialportassistant_*_amd64.deb update_linux.xml
         bash upload.sh SerialPortAssistant_${VERSION}.tar.gz update_linux_appimage.xml

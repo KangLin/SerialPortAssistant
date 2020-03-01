@@ -1,5 +1,6 @@
-Modify log
+Change log
 ----------
+
 + Version: v0.5.4
   - Modify same bugs
   - Add open save file and open send file
