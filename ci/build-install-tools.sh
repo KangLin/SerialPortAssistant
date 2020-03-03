@@ -1,6 +1,13 @@
 #!/bin/bash 
 #下载工具  
 
+#
+# DOWNLOAD_QT:
+#     APT: Use apt-get install qt
+#     TRUE: install qt from download.qt.io/official_releases/qt
+#     FALSE: Use apt-get install qt from https://launchpad.net/~beineri
+#
+
 set -e
 SOURCE_DIR="`pwd`"
 echo $SOURCE_DIR
@@ -41,7 +48,7 @@ function function_common()
     # Qt qt安装参见：https://github.com/benlau/qtci  
     cd ${TOOLS_DIR}
     if [ "$DOWNLOAD_QT" = "TRUE" ]; then
-        QT_DIR=`pwd`/Qt/${QT_VERSION}
+        QT_DIR=${TOOLS_DIR}/Qt/${QT_VERSION}
         cd ${PACKAGE_DIR}
         if [ ! -d "${QT_DIR}" ]; then
             if [ "${QT_VERSION}" = "5.6.3" ]; then
@@ -59,6 +66,7 @@ function function_common()
             fi
         fi
     fi
+    cd ${SOURCE_DIR}
 }
 
 function install_android()
