@@ -4,6 +4,10 @@ version: 'v0.5.4.{build}'
 environment:
   STOREPASS:
     secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
+  QT_USER:
+    secure: EoBPaPuJ6u9UDYpQWjKhUg==
+  QT_PASSWORD:
+    secure: ejAYGgB+3sBispRxUSr0xw==
     
   matrix: 
   ##### msvc 2013 ########
