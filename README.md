@@ -63,8 +63,9 @@ This project is a cross-platform serial assistant. It can run on:
     
 6. Donate  
 If you are satisfied, you can donate to me  
- 
-![donation](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation")
+
+[![donation](https://gitee.com/kl222/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation")](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation")
+
 
 7. Dependence  
 
