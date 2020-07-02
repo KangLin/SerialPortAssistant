@@ -15,14 +15,15 @@ SUBDIRS = RabbitCommon App
 other.files = License.md Authors.md Authors_zh_CN.md \
     ChangeLog.md ChangeLog_zh_CN.md
 win32: other.files *= AppIcon.ico
-other.path = $$PREFIX
+android: other.path = $$PREFIX/assets
+else: other.path = $$PREFIX
 other.CONFIG += directory no_check_exist
 INSTALLS += other 
 
 install_win.files = Install/Install.nsi
 install_win.path = $$OUT_PWD
 install_win.CONFIG += directory no_check_exist 
-win32:  INSTALLS += install_win
+win32: INSTALLS += install_win
 
 install_unix.files = Install/install.sh
 install_unix.path = $$PREFIX
