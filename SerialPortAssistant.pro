@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
-DESTDIR = $$OUT_PWD/bin
+
+isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/../bin
 
 isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
 isEmpty(PREFIX) {

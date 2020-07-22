@@ -59,7 +59,7 @@ win32{
 icon.files = SerialPortAssistant.ico
 icon.path = $$PREFIX
 icon.CONFIG += directory no_check_exist 
-target.path = $$PREFIX/bin
+!android: target.path = $$PREFIX/bin
 INSTALLS += target icon
 
 SOURCES +=\
