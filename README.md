@@ -4,10 +4,10 @@ Author: Kang Lin (kl222@126.com)
 
 --------------------------------
 
-[<img src="Resource/png/China.png" alt="Chinese" title="Chinese" width="16" height="16" />Chinese](README_zh_CN.md)
+[<img src="App/Resource/png/China.png" alt="Chinese" title="Chinese" width="16" height="16" />Chinese](README_zh_CN.md)
 
 ## Introduction
-### [Project position](https://github.com/KangLin/SerialPortAssistant)
+### Project position: https://github.com/KangLin/SerialPortAssistant
 ### [Project home](http://kanglin.github.io/SerialPortAssistant)
 ### This project is a cross-platform serial assistant. It can run on:
 

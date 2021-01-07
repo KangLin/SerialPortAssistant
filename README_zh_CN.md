@@ -3,10 +3,10 @@
 作者：康林（kl222@126.com)
 --------
 
-[<img src="Resource/png/English.png" alt="English" title="English" width="16" height="16" />英语](README.md)
+[<img src="App/Resource/png/English.png" alt="English" title="English" width="16" height="16" />英语](README.md)
 
 ### 简介
-- [项目位置](https://github.com/KangLin/SerialPortAssistant)
+- 项目位置: https://github.com/KangLin/SerialPortAssistant
 - [项目主页](http://kanglin.github.io/SerialPortAssistant)
 - 本项目是一个跨平台的串口助手。它能运行在:
   - [x] WINDOWS
