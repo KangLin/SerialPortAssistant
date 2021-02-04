@@ -37,6 +37,8 @@ SetCompressor lzma
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
 !define MUI_FINISHPAGE_RUN "$INSTDIR\bin\${PRODUCT_NAME}.exe"
+!define MUI_FINISHPAGE_SHOWREADME
+!define MUI_FINISHPAGE_SHOWREADME_Function OpenReadme
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -182,6 +184,10 @@ Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(LANG_REMOVE_COMPONENT)" IDYES +2
   Abort
+FunctionEnd
+
+Function OpenReadme
+    ExecShell "open" "https://github.com/KangLin/SerialPortAssistant/" 
 FunctionEnd
 
 Section Uninstall
