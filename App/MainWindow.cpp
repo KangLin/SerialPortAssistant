@@ -829,6 +829,7 @@ void CMainWindow::on_actionAbout_A_triggered()
     CDlgAbout about(this);
     about.m_AppIcon = QImage(":/icon/AppIcon");
     about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
+    about.m_szCopyrightStartTime = "2017";
     #if defined (Q_OS_ANDROID)
         about.showMaximized();
         about.exec();
