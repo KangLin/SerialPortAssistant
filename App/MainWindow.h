@@ -143,6 +143,12 @@ private:
 private Q_SLOTS:
     void slotSendFile(qint64 bytes);
 
+    void on_pbPortSeetings_clicked();
+    
+    void on_pbReciveSettings_clicked();
+    
+    void on_pbSendSettings_clicked();
+    
 private:
     Ui::CMainWindow *ui;
 

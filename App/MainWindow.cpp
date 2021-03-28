@@ -1344,3 +1344,34 @@ void CMainWindow::on_cbSaveToFile_clicked(bool checked)
     CGlobal::Instance()->SetSaveFile(checked);
 }
 
+void CMainWindow::on_pbPortSeetings_clicked()
+{
+    bool bVisible = ui->gbPortSeetings->isHidden();
+    ui->gbPortSeetings->setVisible(bVisible);
+    ui->pbPortSeetings->setChecked(bVisible);
+    if(bVisible)
+        ui->pbPortSeetings->setIcon(QIcon(":/icon/Down"));
+    else
+        ui->pbPortSeetings->setIcon(QIcon(":/icon/Right"));
+}
+
+void CMainWindow::on_pbReciveSettings_clicked()
+{
+    bool bVisible = ui->gbReciveSettings->isHidden();
+    ui->gbReciveSettings->setVisible(bVisible);
+    ui->pbReciveSettings->setChecked(bVisible);
+    if(bVisible)
+        ui->pbReciveSettings->setIcon(QIcon(":/icon/Down"));
+    else
+        ui->pbReciveSettings->setIcon(QIcon(":/icon/Right"));
+}
+
+void CMainWindow::on_pbSendSettings_clicked()
+{
+    bool bVisible = ui->gbSendSettings->isHidden();
+    ui->gbSendSettings->setVisible(bVisible);
+    if(bVisible)
+        ui->pbSendSettings->setIcon(QIcon(":/icon/Down"));
+    else
+        ui->pbSendSettings->setIcon(QIcon(":/icon/Right"));
+}

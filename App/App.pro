@@ -68,13 +68,15 @@ SOURCES +=\
     $$PWD/Global/Log.cpp \
     $$PWD/Global/Global.cpp \
     $$PWD/Common/Tool.cpp  \
-    $$PWD/SendFile.cpp
+    $$PWD/SendFile.cpp \
+    ../3th_lib/Control/lightbutton.cpp
     
 HEADERS += $$PWD/MainWindow.h \
     $$PWD/Global/Log.h \
     $$PWD/Global/Global.h \
     $$PWD/Common/Tool.h  \
-    $$PWD/SendFile.h
+    $$PWD/SendFile.h \
+    ../3th_lib/Control/lightbutton.h
 
 FORMS += $$PWD/MainWindow.ui
 
