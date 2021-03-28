@@ -142,7 +142,7 @@ deploy:
     #token : https://github.com/settings/tokens 
     #password encrypt: https://ci.appveyor.com/tools/encrypt
     auth_token:
-      secure: MgBGASPDSdnmdh6R7VNGGNnALxirQXw8PBdLYzuWN/FsJas6b1P73EaCny7OdLS0
+      secure: joMF2UUj0RLsg64dmyYvMvqhygli0k6uPYAMg3+cctaQfmLxJzs+YdgPs9KzGDrW
     #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_build_version)
     #draft: true
     #prerelease: true
