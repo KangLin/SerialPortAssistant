@@ -58,6 +58,8 @@ OTHER_FILES += \
     test/* \
     Install/* \
     .travis.yml \
+    .github/* \
+    .github/workflows/* \
     tag.sh \
     debian/* \
     Update/* \
