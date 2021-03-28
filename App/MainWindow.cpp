@@ -34,18 +34,22 @@ Abstract:
     #include "RabbitCommonDir.h"
 #endif
 
+
+
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::CMainWindow),
     m_ActionGroupTranslator(this),
     m_ActionGroupStyle(this),
+    ui(new Ui::CMainWindow),
     m_SerialPort(this),
     m_nSend(0),    
     m_nRecive(0),
     m_nDrop(0),
     m_cmbPortIndex(-1),
     m_Timer(this),    
-    m_nTransmissions(0)
+    m_nTransmissions(0),
+    m_lbDTR(this),
+    m_lbRTS(this)
 {
     bool check = false;
     /*QDir d;
@@ -117,6 +121,14 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
     ui->cbSaveToFile->setChecked(CGlobal::Instance()->GetSaveFile());
+    
+    check = connect(&m_SerialPort, SIGNAL(dataTerminalReadyChanged(bool)),
+                    this, SLOT(slotDataTerminalReadyChanged(bool)));
+    Q_ASSERT(check);
+    
+    check = connect(&m_SerialPort, SIGNAL(requestToSendChanged(bool)),
+                    this, SLOT(slotRequestToSendChanged(bool)));
+    Q_ASSERT(check);
 }
 
 CMainWindow::~CMainWindow()
@@ -163,11 +175,24 @@ int CMainWindow::InitStatusBar()
                              QSizePolicy::Policy::Preferred);
     m_statusDrop.setSizePolicy(QSizePolicy::Policy::Preferred,
                              QSizePolicy::Policy::Preferred);
-
+    
     this->statusBar()->addWidget(&m_statusInfo);
     this->statusBar()->addWidget(&m_statusRx);
     this->statusBar()->addWidget(&m_statusTx);
     this->statusBar()->addWidget(&m_statusDrop);
+    
+    m_lbDTR.setSizePolicy(QSizePolicy::Policy::Preferred,
+                          QSizePolicy::Policy::Preferred);
+    m_lbDTR.setText(tr("DTR"));
+    m_lbDTR.setToolTip(tr("DTR"));
+    m_lbDTR.setGray();
+    m_lbRTS.setSizePolicy(QSizePolicy::Policy::Preferred,
+                          QSizePolicy::Policy::Preferred);
+    m_lbRTS.setText(tr("RTS"));
+    m_lbRTS.setToolTip(tr("RTS"));
+    m_lbRTS.setGray();
+    statusBar()->addWidget(&m_lbDTR);
+    statusBar()->addWidget(&m_lbRTS);
     
     return 0;
 }
@@ -348,6 +373,12 @@ void CMainWindow::on_pbOpen_clicked()
     }
     
     ui->actionRefresh_R->setVisible(false);
+    
+    QSerialPort::PinoutSignals ps = m_SerialPort.pinoutSignals();
+    if(ps & QSerialPort::DataTerminalReadySignal)
+        m_lbDTR.setGreen();
+    if(ps & QSerialPort::RequestToSendSignal)
+        m_lbRTS.setGreen();
 }
 
 int CMainWindow::SetStatusInfo(QString szText, QColor color)
@@ -1371,4 +1402,20 @@ void CMainWindow::on_pbSendSettings_clicked()
         ui->pbSendSettings->setIcon(QIcon(":/icon/Down"));
     else
         ui->pbSendSettings->setIcon(QIcon(":/icon/Right"));
+}
+
+void CMainWindow::slotDataTerminalReadyChanged(bool set)
+{
+    if(set)
+        m_lbDTR.setGreen();
+    else
+        m_lbDTR.setGray();
+}
+
+void CMainWindow::slotRequestToSendChanged(bool set)
+{
+    if(set)
+        m_lbRTS.setGreen();
+    else
+        m_lbRTS.setGray();
 }

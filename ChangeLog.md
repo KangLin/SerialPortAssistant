@@ -1,6 +1,10 @@
 Change log
 ----------
 
++ Version: v0.5.6
+  - Modify UI: Add push button
+  - Add outpin status
+  
 + Version: v0.5.5
   - Modify same things
   

@@ -30,6 +30,7 @@ Abstract:
 #include <QFile>
 
 #include "SendFile.h"
+#include "lightbutton.h"
 
 namespace Ui {
 class CMainWindow;
@@ -116,7 +117,10 @@ private Q_SLOTS:
     void on_pbBrowseSend_clicked();
     void on_pbBrowseSave_clicked();
     void on_tbSendSettings_currentChanged(int index);
-
+    void on_pbPortSeetings_clicked();
+    void on_pbReciveSettings_clicked();
+    void on_pbSendSettings_clicked();
+    
 private:
     int InitStatusBar();
     int InitToolBar();
@@ -141,12 +145,9 @@ private:
     int CloseSendFile();
 private Q_SLOTS:
     void slotSendFile(qint64 bytes);
-
-    void on_pbPortSeetings_clicked();
     
-    void on_pbReciveSettings_clicked();
-    
-    void on_pbSendSettings_clicked();
+    void slotDataTerminalReadyChanged(bool set);
+    void slotRequestToSendChanged(bool set);
     
 private:
     Ui::CMainWindow *ui;
@@ -160,6 +161,8 @@ private:
 
     QLabel m_statusInfo;
     QLabel m_statusRx, m_statusTx, m_statusDrop;
+    LightButton m_lbDTR, m_lbRTS;
+    
     bool m_bInitEncodeCombox;
 
     CSendFile m_SendFile;

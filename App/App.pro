@@ -69,14 +69,14 @@ SOURCES +=\
     $$PWD/Global/Global.cpp \
     $$PWD/Common/Tool.cpp  \
     $$PWD/SendFile.cpp \
-    ../3th_lib/Control/lightbutton.cpp
+    $$PWD/../3th_lib/Control/lightbutton.cpp
     
 HEADERS += $$PWD/MainWindow.h \
     $$PWD/Global/Log.h \
     $$PWD/Global/Global.h \
     $$PWD/Common/Tool.h  \
     $$PWD/SendFile.h \
-    ../3th_lib/Control/lightbutton.h
+    $$PWD/../3th_lib/Control/lightbutton.h
 
 FORMS += $$PWD/MainWindow.ui
 
@@ -118,7 +118,8 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
     DEFINES += RABBITCOMMON
     INCLUDEPATH += \
         $${RabbitCommon_DIR}/Src \
-        $${RabbitCommon_DIR}/Src/export
+        $${RabbitCommon_DIR}/Src/export \
+        $$PWD/../3th_lib/Control
     
     LIBS *= -L$$DESTDIR -lRabbitCommon
 } else {
