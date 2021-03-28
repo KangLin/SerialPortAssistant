@@ -1246,10 +1246,6 @@ void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
         SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
 }
 
-void CMainWindow::on_actionPasue_P_triggered()
-{
-}
-
 void CMainWindow::on_actionLoad_File_F_triggered()
 {
     on_pbBrowseSend_clicked();
@@ -1324,6 +1320,7 @@ void CMainWindow::on_pbBrowseSave_clicked()
 
 void CMainWindow::on_tbSendSettings_currentChanged(int index)
 {
+    Q_UNUSED(index);
     if(m_SerialPort.isOpen())
     {
         int nRet = QMessageBox::warning(this, tr("Close serial port"),

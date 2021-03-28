@@ -105,7 +105,6 @@ private Q_SLOTS:
     void on_cmbStopBit_currentTextChanged(const QString &szText);
     void on_cmbFlowControl_currentIndexChanged(int index);
     void on_cmbRecent_activated(const QString &szText);
-    void on_actionPasue_P_triggered();
     void on_actionLoad_File_F_triggered();
     void on_actionOpen_Log_G_triggered();
     void on_actionOpen_send_file_triggered();
