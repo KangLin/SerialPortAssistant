@@ -50,10 +50,12 @@ isEmpty(BUILD_VERSION){
 message("BUILD_VERSION:$$BUILD_VERSION")
 
 DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
-VERSION=$$replace(BUILD_VERSION, v,)
-win32{
-    VERSION=$$split(VERSION, -)
-    VERSION=$$first(VERSION)
+equals($$$$str_member(BUILD_VERSION, 0, $$num_add($$len, -1)), "v") {
+    VERSION=$$replace(BUILD_VERSION, v,)
+    win32{
+        VERSION=$$split(VERSION, -)
+        VERSION=$$first(VERSION)
+    }
 }
 
 icon.files = SerialPortAssistant.ico
