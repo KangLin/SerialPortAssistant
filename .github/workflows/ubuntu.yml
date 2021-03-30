@@ -28,7 +28,7 @@ jobs:
         # architectures to pass to dpkg --add-architecture
         #architectures: # optional
         # apt packages to install
-        packages: debhelper fakeroot qttools5-dev qttools5-dev-tools qtbase5-dev qtbase5-dev-tools qtmultimedia5-dev qtlocation5-dev libqt5svg5-dev libutf8proc-dev libqtermwidget5-0-dev
+        packages: debhelper fakeroot  qttools5-dev qttools5-dev-tools libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
      
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
