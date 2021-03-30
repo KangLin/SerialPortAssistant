@@ -12,9 +12,11 @@ jobs:
       matrix:
         os: [windows-latest]
         include:
-          - arch: x86
+          - os: windows-latest
+            arch: x86
             qt_arch: win32_msvc2015
-          - arch: x64
+          - os: windows-latest
+            arch: x64
             qt_arch: win64_msvc2015_64
             
     # The CMake configure and build commands are platform agnostic and should work equally
