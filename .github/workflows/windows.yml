@@ -10,7 +10,6 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
         include:
           - os: windows-latest
             arch: x86
