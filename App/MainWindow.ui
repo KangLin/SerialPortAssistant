@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>621</width>
-    <height>838</height>
+    <width>617</width>
+    <height>895</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,8 +65,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>621</width>
-         <height>755</height>
+         <width>603</width>
+         <height>844</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -100,104 +100,7 @@
            </sizepolicy>
           </property>
           <layout class="QGridLayout" name="gridLayout_6">
-           <property name="leftMargin">
-            <number>9</number>
-           </property>
-           <property name="topMargin">
-            <number>9</number>
-           </property>
-           <property name="rightMargin">
-            <number>9</number>
-           </property>
-           <property name="bottomMargin">
-            <number>9</number>
-           </property>
-           <property name="spacing">
-            <number>6</number>
-           </property>
-           <item row="0" column="1">
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <item>
-              <widget class="QTextEdit" name="teRecive">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QTextEdit" name="teSend">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-                   <horstretch>0</horstretch>
-                   <verstretch>2</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_2">
-                 <item>
-                  <widget class="QPushButton" name="pbOpen">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Open(&amp;O)</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="Resource/Resource.qrc">
-                     <normaloff>:/icon/Start</normaloff>:/icon/Start</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pbSend">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Send(&amp;S)</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="Resource/Resource.qrc">
-                     <normaloff>:/icon/Send</normaloff>:/icon/Send</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QComboBox" name="cmbRecent">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="0" column="0">
+           <item row="0" column="0" rowspan="4">
             <widget class="QFrame" name="frmLeftBar">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -871,6 +774,119 @@
              </layout>
             </widget>
            </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_19">
+             <item>
+              <widget class="LightButton" name="ltRNG" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltRTS" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltCTS" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltSTD" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltSRD" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltDTR" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltDCD" native="true"/>
+             </item>
+             <item>
+              <widget class="LightButton" name="ltDSR" native="true"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="1">
+            <widget class="QTextEdit" name="teRecive">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <widget class="QTextEdit" name="teSend">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                 <horstretch>0</horstretch>
+                 <verstretch>2</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QPushButton" name="pbOpen">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Open(&amp;O)</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="Resource/Resource.qrc">
+                   <normaloff>:/icon/Start</normaloff>:/icon/Start</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbSend">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Send(&amp;S)</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="Resource/Resource.qrc">
+                   <normaloff>:/icon/Send</normaloff>:/icon/Send</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="cmbRecent">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -885,8 +901,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>621</width>
-     <height>22</height>
+     <width>617</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools_T">
@@ -1128,6 +1144,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>LightButton</class>
+   <extends>QWidget</extends>
+   <header>lightbutton.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Resource/Resource.qrc"/>
  </resources>

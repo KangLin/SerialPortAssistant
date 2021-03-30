@@ -148,6 +148,9 @@ private Q_SLOTS:
     
     void slotDataTerminalReadyChanged(bool set);
     void slotRequestToSendChanged(bool set);
+private:
+    int InitPinout();
+    int setPinoutStatus();
     
 private:
     Ui::CMainWindow *ui;
@@ -161,7 +164,6 @@ private:
 
     QLabel m_statusInfo;
     QLabel m_statusRx, m_statusTx, m_statusDrop;
-    LightButton m_lbDTR, m_lbRTS;
     
     bool m_bInitEncodeCombox;
 

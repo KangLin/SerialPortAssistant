@@ -255,7 +255,7 @@ QColor LightButton::getOverlayColor() const
 
 QSize LightButton::sizeHint() const
 {
-    return QSize(100, 100);
+    return QSize(50, 50);
 }
 
 QSize LightButton::minimumSizeHint() const

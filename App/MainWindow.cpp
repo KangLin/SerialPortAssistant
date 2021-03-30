@@ -47,9 +47,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_nDrop(0),
     m_cmbPortIndex(-1),
     m_Timer(this),    
-    m_nTransmissions(0),
-    m_lbDTR(this),
-    m_lbRTS(this)
+    m_nTransmissions(0)
 {
     bool check = false;
     /*QDir d;
@@ -129,6 +127,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     check = connect(&m_SerialPort, SIGNAL(requestToSendChanged(bool)),
                     this, SLOT(slotRequestToSendChanged(bool)));
     Q_ASSERT(check);
+    
+    InitPinout();
 }
 
 CMainWindow::~CMainWindow()
@@ -180,19 +180,6 @@ int CMainWindow::InitStatusBar()
     this->statusBar()->addWidget(&m_statusRx);
     this->statusBar()->addWidget(&m_statusTx);
     this->statusBar()->addWidget(&m_statusDrop);
-    
-    m_lbDTR.setSizePolicy(QSizePolicy::Policy::Preferred,
-                          QSizePolicy::Policy::Preferred);
-    m_lbDTR.setText(tr("DTR"));
-    m_lbDTR.setToolTip(tr("DTR"));
-    m_lbDTR.setGray();
-    m_lbRTS.setSizePolicy(QSizePolicy::Policy::Preferred,
-                          QSizePolicy::Policy::Preferred);
-    m_lbRTS.setText(tr("RTS"));
-    m_lbRTS.setToolTip(tr("RTS"));
-    m_lbRTS.setGray();
-    statusBar()->addWidget(&m_lbDTR);
-    statusBar()->addWidget(&m_lbRTS);
     
     return 0;
 }
@@ -308,6 +295,8 @@ void CMainWindow::on_pbOpen_clicked()
 
         SetStatusInfo(tr("Serail Port Close"));
         ui->actionRefresh_R->setVisible(true);
+        
+        InitPinout();
         return;
     }
 
@@ -374,11 +363,7 @@ void CMainWindow::on_pbOpen_clicked()
     
     ui->actionRefresh_R->setVisible(false);
     
-    QSerialPort::PinoutSignals ps = m_SerialPort.pinoutSignals();
-    if(ps & QSerialPort::DataTerminalReadySignal)
-        m_lbDTR.setGreen();
-    if(ps & QSerialPort::RequestToSendSignal)
-        m_lbRTS.setGreen();
+    setPinoutStatus();
 }
 
 int CMainWindow::SetStatusInfo(QString szText, QColor color)
@@ -1406,16 +1391,81 @@ void CMainWindow::on_pbSendSettings_clicked()
 
 void CMainWindow::slotDataTerminalReadyChanged(bool set)
 {
-    if(set)
-        m_lbDTR.setGreen();
-    else
-        m_lbDTR.setGray();
+    Q_UNUSED(set);
+    setPinoutStatus();
 }
 
 void CMainWindow::slotRequestToSendChanged(bool set)
 {
-    if(set)
-        m_lbRTS.setGreen();
+    Q_UNUSED(set);
+    setPinoutStatus();
+}
+
+int CMainWindow::InitPinout()
+{
+    ui->ltCTS->setText(tr("CTS"));
+    ui->ltCTS->setGray();
+    ui->ltDCD->setText(tr("DCD"));
+    ui->ltDCD->setGray();
+    ui->ltDTR->setText(tr("DTR"));
+    ui->ltDTR->setGray();
+    ui->ltDSR->setText(tr("DSR"));
+    ui->ltDSR->setGray();
+    ui->ltRNG->setText(tr("PNG"));
+    ui->ltRNG->setGray();
+    ui->ltRTS->setText(tr("RTS"));
+    ui->ltRTS->setGray();
+    ui->ltSRD->setText(tr("SRD"));
+    ui->ltSRD->setGray();
+    ui->ltSTD->setText(tr("STD"));
+    ui->ltSTD->setGray();
+    return 0;
+}
+
+int CMainWindow::setPinoutStatus()
+{
+    if(!m_SerialPort.isOpen())
+        return -1;
+    QSerialPort::PinoutSignals ps = m_SerialPort.pinoutSignals();
+    if(QSerialPort::DataTerminalReadySignal & ps)
+        ui->ltDTR->setGreen();
     else
-        m_lbRTS.setGray();
+        ui->ltDTR->setGray();
+    
+    if(QSerialPort::DataCarrierDetectSignal & ps)
+        ui->ltDCD->setGreen();
+    else
+        ui->ltDCD->setGray();
+    
+    if(QSerialPort::DataSetReadySignal & ps)
+        ui->ltDSR->setGreen();
+    else
+        ui->ltDSR->setGray();
+    
+    if(QSerialPort::RingIndicatorSignal & ps)
+        ui->ltRNG->setGreen();
+    else
+        ui->ltRNG->setGray();
+    
+    if(QSerialPort::RequestToSendSignal & ps)
+        ui->ltRTS->setGreen();
+    else
+        ui->ltRTS->setGray();
+    
+    if(QSerialPort::ClearToSendSignal & ps)
+        ui->ltCTS->setGreen();
+    else
+        ui->ltCTS->setGray();
+    
+    if(QSerialPort::SecondaryTransmittedDataSignal & ps)
+        ui->ltSTD->setGreen();
+    else
+        ui->ltSTD->setGray();
+    
+    if(QSerialPort::SecondaryReceivedDataSignal & ps)
+        ui->ltSRD->setGreen();
+    else
+        ui->ltSRD->setGray();
+    
+    return 0;
 }
