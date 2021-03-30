@@ -14,9 +14,11 @@ jobs:
           - os: windows-latest
             arch: x86
             qt_arch: win32_msvc2017
+            qt_setup_python: false
           - os: windows-latest
             arch: x64
             qt_arch: win64_msvc2017_64
+            qt_setup_python: true
             
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
@@ -40,7 +42,7 @@ jobs:
         # Enable Specre mitigations
         #spectre: # optional
         # VC++ compiler toolset version
-        toolset: 15.0 # msvc2017 # optional
+        #toolset: 14.11 # msvc2017 # optional
         # Build for Universal Windows Platform
         #uwp: # optional
     
@@ -66,7 +68,7 @@ jobs:
         # Whether or not to actually download Qt
         #cached: # optional, default is false
         # Whether or not to automatically run setup-python to find a valid python version.
-        #setup-python: # optional, default is true
+        setup-python: ${{ matrix.qt_setup_python }} # optional, default is true
         # Qt tools to download--specify comma-separated argument lists which are themselves separated by spaces: <tool_name>,<tool_version>,<tool_arch>
         #tools: # optional
         # Whether or not to set environment variables after running aqtinstall
