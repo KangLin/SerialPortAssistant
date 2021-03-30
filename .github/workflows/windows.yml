@@ -98,7 +98,7 @@ jobs:
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: |
-        ${{env.Qt5_Dir}}/bin/qmake $GITHUB_WORKSPACE CONFIG*=$BUILD_TYPE RabbitCommon_DIR=${{github.workspace}}/RabbitCommon prefix=${{github.workspace}}/build/install
+        ${{env.Qt5_DIR}}/bin/qmake ${{github.workspace}}/SerialPortAssistant.pro CONFIG*=$BUILD_TYPE RabbitCommon_DIR=${{github.workspace}}/RabbitCommon prefix=${{github.workspace}}/build/install
         nmake install
         makensis ${{github.workspace}}/build/Install.nsi
 

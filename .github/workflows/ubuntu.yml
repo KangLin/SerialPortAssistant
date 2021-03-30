@@ -71,14 +71,13 @@ jobs:
       # Use a bash shell so we can use the same syntax for environment variable
       # access regardless of the host operating system
       shell: bash
-      #working-directory: ${{github.workspace}}
       env:
         RabbitCommon_DIR: ${{github.workspace}}/RabbitCommon
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: |
-        cd $GITHUB_WORKSPACE
-        ./build_debpackage.sh ${{env.Qt5_dir}}
+        cd ${{github.workspace}}
+        /usr/bin/bash ./build_debpackage.sh ${{env.Qt5_DIR}}
         #$Qt5_DIR/bin/qmake $GITHUB_WORKSPACE CONFIG*=$BUILD_TYPE RabbitCommon_DIR=${{github.workspace}}/RabbitCommon
         #make
