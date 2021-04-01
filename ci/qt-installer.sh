@@ -24,6 +24,7 @@ export WORKDIR=$PWD
 INSTALLER=$1
 OUTPUT=$2
 SCRIPT="$(mktemp /tmp/tmp.XXXXXXXXX)"
+LIST_PACKAGES=0
 
 case $BUILD_ARCH in
     unix)
@@ -48,7 +49,7 @@ case $BUILD_ARCH in
         ;;
 esac
 
-if[ -n QT_CI_PACKAGES]
+if [ -n "$QT_CI_PACKAGES" ]; then
     PACKAGES=$QT_CI_PACKAGES
 fi
 
@@ -134,8 +135,8 @@ Controller.prototype.WelcomePageCallback = function() {
 }
 Controller.prototype.CredentialsPageCallback = function() {
 	
-	var login = installer.environmentVariable("QT_CI_LOGIN");
-	var password = installer.environmentVariable("QT_CI_PASSWORD");
+	var login = installer.environmentVariable("QT_USER");
+	var password = installer.environmentVariable("QT_PASSWORD");
 	if (login === "" || password === "") {
 		gui.clickButton(buttons.CommitButton);
 	}
@@ -144,6 +145,12 @@ Controller.prototype.CredentialsPageCallback = function() {
 	widget.loginWidget.EmailLineEdit.setText(login);
 	widget.loginWidget.PasswordLineEdit.setText(password);
     gui.clickButton(buttons.CommitButton);
+}
+Controller.prototype.ObligationsPageCallback = function() {
+    var page = gui.pageWidgetByObjectName("ObligationsPage");
+    page.obligationsAgreement.setChecked(true);
+    page.completeChanged();
+    gui.clickButton(buttons.NextButton);
 }
 Controller.prototype.ComponentSelectionPageCallback = function() {
     log("ComponentSelectionPageCallback");
