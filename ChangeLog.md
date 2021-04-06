@@ -1,6 +1,10 @@
 Change log
 ----------
 
++ Version: v0.5.7
+  - Modify style use RabbitCommon::CStyle
+  - Add QUIWidget
+  
 + Version: v0.5.6
   - Modify UI: Add push button
   - Add outpin status
