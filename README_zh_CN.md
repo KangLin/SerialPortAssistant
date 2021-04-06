@@ -31,19 +31,19 @@
 
 - [最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
   - windows
-    + [SerialPortAssistant-Setup-v0.5.6.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.6/SerialPortAssistant-Setup-v0.5.6.exe)
+    + [SerialPortAssistant-Setup-v0.5.7.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.7/SerialPortAssistant-Setup-v0.5.7.exe)
   - linux
-    + [SerialPortAssistant_v0.5.6.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.6/SerialPortAssistant_v0.5.6.tar.gz)
+    + [SerialPortAssistant_v0.5.7.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.7/SerialPortAssistant_v0.5.7.tar.gz)
 
     AppImage格式的执行程序，可直接运行在linux系统，详见：https://appimage.org/
 
     使用:    
-       1. 解压。复制 SerialPortAssistant_v0.5.6.tar.gz 到安装目录，然后解压：
+       1. 解压。复制 SerialPortAssistant_v0.5.7.tar.gz 到安装目录，然后解压：
     
         sudo mkdir /opt/SerialPortAssistant
         cd SerialPortAssistant
-        sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.6/SerialPortAssistant_v0.5.6.tar.gz
-        sudo tar xvfz SerialPortAssistant_v0.5.6.tar.gz
+        sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.7/SerialPortAssistant_v0.5.7.tar.gz
+        sudo tar xvfz SerialPortAssistant_v0.5.7.tar.gz
     
        2. 安装
     
@@ -54,12 +54,12 @@
         sudo ./install1.sh remove SerialPortAssistant
 
   - ubuntu
-    + [serialportassistant_0.5.6_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.6/serialportassistant_0.5.6_amd64.deb)
+    + [serialportassistant_0.5.7_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.7/serialportassistant_0.5.7_amd64.deb)
 
-        sudo dpkg -i serialportassistant_0.5.6_amd64.deb
+        sudo dpkg -i serialportassistant_0.5.7_amd64.deb
 
   - android
-    + [SerialPortAssistant_v0.5.6.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.6/SerialPortAssistant_v0.5.6.apk)
+    + [SerialPortAssistant_v0.5.7.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.7/SerialPortAssistant_v0.5.7.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  
