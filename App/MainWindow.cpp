@@ -34,12 +34,13 @@ Abstract:
     #include "RabbitCommonDir.h"
 #endif
 
-
+#ifdef BUILD_QUIWidget
+    #include "QUIWidget/QUIWidget.h"
+#endif
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     m_ActionGroupTranslator(this),
-    m_ActionGroupStyle(this),
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
     m_nSend(0),    
@@ -66,7 +67,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 #endif
 
     LoadTranslate();
-    LoadStyle();
+    m_Style.LoadStyle();
     InitMenu();
     
     InitStatusBar();
@@ -842,16 +843,28 @@ void CMainWindow::on_actionClear_Send_History_triggered()
 void CMainWindow::on_actionAbout_A_triggered()
 {
 #ifdef RABBITCOMMON
-    CDlgAbout about(this);
-    about.m_AppIcon = QImage(":/icon/AppIcon");
-    about.m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
-    about.m_szCopyrightStartTime = "2017";
+    CDlgAbout* about = new CDlgAbout(this);
+    about->m_AppIcon = QImage(":/icon/AppIcon");
+    about->m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
+    about->m_szCopyrightStartTime = "2017";
+#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
+    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
+    quiwidget->setMainWidget(about);
+    quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
+#if defined (Q_OS_ANDROID)
+    quiwidget->showMaximized();
+    quiwidget->exec();
+#else
+    quiwidget->exec();
+#endif
+#else
     #if defined (Q_OS_ANDROID)
-        about.showMaximized();
-        about.exec();
+        about->showMaximized();
+        about->exec();
     #else
-        about.exec();
+        about->exec();
     #endif
+#endif
 #endif
 }
 
@@ -995,133 +1008,16 @@ void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
     }
 }
 
-int CMainWindow::InitMenuStyles()
-{
-    QMap<QString, QAction*>::iterator it;
-    m_ActionStyles["Custom"] = ui->menuStype_S->addAction(tr("Custom"));
-    m_ActionStyles["System"] = ui->menuStype_S->addAction(tr("System"));
-//    m_ActionStyles["Gradient blue"] = ui->menuStype_S->addAction(tr("Gradient blue"));
-//    m_ActionStyles["Blue"] = ui->menuStype_S->addAction(tr("Blue"));
-//    m_ActionStyles["Gradient Dark"] = ui->menuStype_S->addAction(tr("Gradient Dark"));
-    m_ActionStyles["Dark"] = ui->menuStype_S->addAction(tr("Dark"));
-    
-    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
-    {
-        it.value()->setCheckable(true);
-        m_ActionGroupStyle.addAction(it.value());
-    }
-    bool check = connect(&m_ActionGroupStyle, SIGNAL(triggered(QAction*)),
-                         SLOT(slotActionGroupStyleTriggered(QAction*)));
-    Q_ASSERT(check);
-    QAction* pAct = m_ActionStyles[CGlobal::Instance()->GetStyleMenu()];
-    if(pAct)
-    {
-        pAct->setChecked(true);
-    }
-    return 0;
-}
-
-int CMainWindow::ClearMenuStyles()
-{
-    QMap<QString, QAction*>::iterator it;
-    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
-    {
-        m_ActionGroupStyle.removeAction(it.value());
-    }
-    m_ActionGroupStyle.disconnect();
-    m_ActionStyles.clear();
-    ui->menuStype_S->clear();
-    return 0;
-}
-
-int CMainWindow::LoadStyle()
-{
-    QString szFile = CGlobal::Instance()->GetStyle();
-    if(szFile.isEmpty())
-        qApp->setStyleSheet("");
-    else
-    {
-        QFile file(szFile);
-        if(file.open(QFile::ReadOnly))
-        {
-            QString stylesheet= file.readAll();
-            qApp->setStyleSheet(stylesheet);
-            file.close();
-        }
-        else
-        {
-            LOG_MODEL_ERROR("app", "file open file [%s] fail:%d",
-                        CGlobal::Instance()->GetStyle().toStdString().c_str(),
-                        file.error());
-        }
-    }
-    return 0;
-}
-
-int CMainWindow::OpenCustomStyleMenu()
-{
-    QString szFile;
-    QString szFilter("*.qss *.*");
-    szFile = CTool::FileDialog(this, QString(), szFilter, tr("Open File"));
-    if(szFile.isEmpty())
-        return -1;
-
-    QFile file(szFile);
-    if(file.open(QFile::ReadOnly))
-    {
-        QString stylesheet= file.readAll();
-        qApp->setStyleSheet(stylesheet);
-        file.close();
-        QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                       QSettings::IniFormat);
-        conf.setValue("UI/StyleSheet", szFile);
-        
-        CGlobal::Instance()->SetStyleMenu("Custom", szFile);
-    }
-    else
-    {
-        LOG_MODEL_ERROR("app", "file open file [%s] fail:%d", 
-                        szFile.toStdString().c_str(), file.error());
-    }
-    return 0;
-}
-
-void CMainWindow::slotActionGroupStyleTriggered(QAction* act)
-{
-    QMap<QString, QAction*>::iterator it;
-    for(it = m_ActionStyles.begin(); it != m_ActionStyles.end(); it++)
-    {
-        if(it.value() == act)
-        {
-            act->setChecked(true);
-            if(it.key() == "Blue")
-                CGlobal::Instance()->SetStyleMenu("Blue", ":/sink/Blue");
-            else if(it.key() == "Dark")
-                CGlobal::Instance()->SetStyleMenu("Dark", ":/sink/Dark");
-            else if(it.key() == "Gradient blue")
-                CGlobal::Instance()->SetStyleMenu("Gradient blue", ":/sink/Gradient_blue");
-            else if(it.key() == "Gradient Dark")
-                CGlobal::Instance()->SetStyleMenu("Gradient Dark", ":/sink/Gradient_Dark");
-            else if(it.key() == "Custom")
-                OpenCustomStyleMenu();
-            else
-                CGlobal::Instance()->SetStyleMenu("System", "");
-        }
-    }
-
-    LoadStyle();
-}
-
 void CMainWindow::InitMenu()
 {
-    InitMenuStyles();
+    ui->menuStype_S->addAction(tr("Default"), &m_Style, SLOT(slotSetDefaultStyle()));
+    ui->menuStype_S->addAction(tr("Custom"), &m_Style, SLOT(slotStyle()));
     InitMenuTranslate();
 }
 
 void CMainWindow::ClearMenu()
 {
     ClearMenuTranslate();
-    ClearMenuStyles();
 }
 
 void CMainWindow::changeEvent(QEvent *e)
@@ -1305,11 +1201,22 @@ void CMainWindow::on_actionUpdate_U_triggered()
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater();
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
+#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
+    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
+    quiwidget->setMainWidget(pUpdater);
+    //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
+    #if defined (Q_OS_ANDROID)
+        quiwidget->showMaximized();
+    #else
+        quiwidget->show();
+    #endif
+#else
     #if defined (Q_OS_ANDROID)
         pUpdater->showMaximized();
     #else
         pUpdater->show();
     #endif
+#endif
 #endif
 }
 

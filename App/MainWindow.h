@@ -31,6 +31,9 @@ Abstract:
 
 #include "SendFile.h"
 #include "lightbutton.h"
+#ifdef RABBITCOMMON
+    #include "RabbitCommonStyle.h"
+#endif
 
 namespace Ui {
 class CMainWindow;
@@ -65,15 +68,7 @@ private Q_SLOTS:
 
     //Style menu
 private:
-    QMenu m_MenuStyle;
-    QActionGroup m_ActionGroupStyle;
-    QMap<QString, QAction*> m_ActionStyles;
-    int InitMenuStyles();
-    int ClearMenuStyles();
-    int OpenCustomStyleMenu();
-    int LoadStyle();
-private Q_SLOTS:
-    void slotActionGroupStyleTriggered(QAction* act);
+    RabbitCommon::CStyle m_Style;
 
 private Q_SLOTS:
     void changeEvent(QEvent *e);

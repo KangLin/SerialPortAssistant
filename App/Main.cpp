@@ -25,6 +25,9 @@ Abstract:
 #if defined(Q_OS_ANDROID)
     #include <QtAndroidExtras/QtAndroid>
 #endif
+#ifdef BUILD_QUIWidget
+    #include "QUIWidget/QUIWidget.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -47,7 +50,7 @@ int main(int argc, char *argv[])
     RabbitCommon::CTools::Instance()->Init(szLocale);
 #endif
 
-    CMainWindow w;
+    CMainWindow *w = new CMainWindow();
     
     a.setApplicationDisplayName(QObject::tr("Serial Port Assistant"));
 #ifdef BUILD_VERSION
@@ -61,7 +64,20 @@ int main(int argc, char *argv[])
         return 0; 
 #endif
 
-    w.show();
+#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
+    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
+    quiwidget->setMainWidget(w);
+    //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
+    //quiwidget.setTitle(a.applicationDisplayName());
+    quiwidget->show();
+#else
+    w->show();
+#endif
 
-    return a.exec();
+    int nRet = a.exec();
+    
+#ifndef BUILD_QUIWidget
+    delete w;
+#endif
+    return nRet;
 }

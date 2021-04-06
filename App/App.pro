@@ -58,6 +58,8 @@ equals($$$$str_member(BUILD_VERSION, 0, $$num_add($$len, -1)), "v") {
     }
 }
 
+!equals(BUILD_QUIWidget, "OFF"): DEFINES *= BUILD_QUIWidget
+
 icon.files = SerialPortAssistant.ico
 icon.path = $$PREFIX
 icon.CONFIG += directory no_check_exist 
