@@ -17,8 +17,9 @@ environment:
     QT_VERSION_DIR: 5.12
     QT_VERSION: 5.12.10
     ANDROID_API: android-24
-    TOOLCHAIN_VERSION: 4.9
-    
+    TOOLCHAIN_VERSION: 4.
+    QT_SELECT_COMPONENTS: android_armv7
+
   ##### msvc 2013 ########
   - BUILD_TARGERT: windows_msvc
     TOOLCHAIN_VERSION: 12

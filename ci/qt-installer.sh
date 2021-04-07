@@ -8,16 +8,37 @@
 
 set -e #quit on error
 
-if [ $# -lt 2 ];
-then
-    echo qt-installer.sh qt-installer-file output_path
+function usage() {
+    echo "Usage:"
+    echo "    qt-installer.sh qt-installer-file output_path"
+    echo "    extract-qt-installer --list-packages qt-installer"
+    echo "Environment Variable:"
+    echo "    QT_USER:     qt user"
+    echo "    QT_PASSWORD: user password"
+    echo "    QT_SELECT_COMPONENTS: be will installed packages of separated by commas"
     exit -1
-fi
+}
 
-function version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
-function version_le() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" == "$1"; }
-function version_lt() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1"; }
-function version_ge() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"; }
+if [ "$GETOPT_RET_CODE" != "4" ]
+then
+    echo "Warning: gnu-getopt is not installed. Long parameter like '--list-package' will not be working. Please install gnu-getopt by 'brew install gnu-getopt'"   
+else
+
+	OPTS=`getopt -o l --long list-packages --long disable-progress-report -n "extract-qt-installer" -- "$@"`
+
+    eval set -- "$OPTS"
+
+    while true
+    do
+      case "$1" in
+        --list-packages)
+          LIST_PACKAGES=1
+          shift;;
+        --) shift;break;;
+        *) shift;;
+      esac
+    done
+fi
 
 export PATH=$PATH:$PWD
 export WORKDIR=$PWD
@@ -26,31 +47,27 @@ OUTPUT=$2
 SCRIPT="$(mktemp /tmp/tmp.XXXXXXXXX)"
 LIST_PACKAGES=0
 
-case $BUILD_ARCH in
-    unix)
-        PACKAGES=gcc_64
-        ;;
-    arm*|x86*)
-        if version_ge $QT_VERSION_DIR 5.14 ; then
-            PACKAGES=android
-        else
-            case $BUILD_ARCH in
-                arm*)
-                    PACKAGES=android_armv7
-                    ;;
-                x86*)
-                    PACKAGES=android_x86
-                    ;;
-            esac
-        fi
-        ;;
-    *)
-        echo "Aach[$BUILD_ARCH] don't suppoert"
-        ;;
-esac
+if [ $LIST_PACKAGES -gt 0 ]
+then 
+
+	if [ $# -lt 1 ]
+	then
+		usage
+	fi
+	
+	OUTPUT="/tmp/Qt"
+
+else
+
+	if [ $# -lt 2 ]
+	then
+		usage
+	fi
+    
+fi
 
 if [ -n "$QT_CI_PACKAGES" ]; then
-    PACKAGES=$QT_CI_PACKAGES
+    QT_SELECT_COMPONENTS=$QT_CI_PACKAGES
 fi
 
 cat <<EOF > $SCRIPT
@@ -152,6 +169,10 @@ Controller.prototype.ObligationsPageCallback = function() {
     page.completeChanged();
     gui.clickButton(buttons.NextButton);
 }
+Controller.prototype.StartMenuDirectoryPageCallback = function() {
+    console.log("qs:StartMenuDirectoryPageCallback");
+    gui.clickButton(buttons.NextButton);
+}
 Controller.prototype.ComponentSelectionPageCallback = function() {
     log("ComponentSelectionPageCallback");
     function list_packages() {
@@ -174,7 +195,7 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
         return str.replace(/^ +/,"").replace(/ *$/,"");
     }
     var widget = gui.currentPageWidget();
-    var packages = trim("$PACKAGES").split(",");
+    var packages = trim("$QT_SELECT_COMPONENTS").split(",");
     if (packages.length > 0 && packages[0] !== "") {
         widget.deselectAll();
         var components = installer.components();
@@ -183,7 +204,7 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
             var pkg = trim(packages[i]);
             var found = false;
             for (var j in components) {
-                if (components[j].name === pkg) {
+                if (components[j].name.indexOf(pkg) != -1) {
                     found = true;
                     break;
                 }
