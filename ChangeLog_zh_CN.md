@@ -1,5 +1,8 @@
 修改日志
 ------
++ 版本: v0.5.8
+  - 用更新后的 RabbitCommon::CStyle
+  
 + 版本: v0.5.7
   - 修改样式实现，用RabbitCommon::CStyle
   - 增加 QUIWidget 实现窗口

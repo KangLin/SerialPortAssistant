@@ -31,7 +31,7 @@ Abstract:
 
 int main(int argc, char *argv[])
 {
-#if defined (_DEBUG) || !defined(BUILD_SHARED_LIBS)
+#if defined (_DEBUG)
     Q_INIT_RESOURCE(translations_SerialPortAssistant);
 #endif
     
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 #ifdef RABBITCOMMON
     RabbitCommon::CTools::Instance()->Clean();
 #endif
-#if defined (_DEBUG) || !defined(BUILD_SHARED_LIBS)
+#if defined (_DEBUG)
     Q_CLEANUP_RESOURCE(translations_SerialPortAssistant);
 #endif
     return nRet;

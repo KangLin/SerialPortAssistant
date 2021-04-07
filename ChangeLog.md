@@ -1,6 +1,8 @@
 Change log
 ----------
-
++ Version: v0.5.8
+  - Use update RabbitCommon::CStyle
+  
 + Version: v0.5.7
   - Modify style use RabbitCommon::CStyle
   - Add QUIWidget

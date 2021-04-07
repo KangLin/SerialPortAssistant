@@ -17,7 +17,7 @@ TEMPLATE = app
 isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/../bin
 
 CONFIG(debug, debug|release) {
-    DEFINES += _DEBUG
+    DEFINES *= _DEBUG
 }
 
 isEmpty(PREFIX) : !isEmpty(INSTALL_ROOT) : PREFIX=$$INSTALL_ROOT
