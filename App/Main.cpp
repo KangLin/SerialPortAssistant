@@ -31,6 +31,10 @@ Abstract:
 
 int main(int argc, char *argv[])
 {
+#if defined (_DEBUG) || !defined(BUILD_SHARED_LIBS)
+    Q_INIT_RESOURCE(translations_SerialPortAssistant);
+#endif
+    
 #if (QT_VERSION > QT_VERSION_CHECK(5,6,0))
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
@@ -78,6 +82,13 @@ int main(int argc, char *argv[])
     
 #ifndef BUILD_QUIWidget
     delete w;
+#endif
+    
+#ifdef RABBITCOMMON
+    RabbitCommon::CTools::Instance()->Clean();
+#endif
+#if defined (_DEBUG) || !defined(BUILD_SHARED_LIBS)
+    Q_CLEANUP_RESOURCE(translations_SerialPortAssistant);
 #endif
     return nRet;
 }
