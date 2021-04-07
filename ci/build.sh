@@ -28,10 +28,10 @@ if [ "$BUILD_TARGERT" = "android" ]; then
     export JAVA_HOME=${TOOLS_DIR}/android-studio/jre
     case $BUILD_ARCH in
         arm*)
-            export QT_ROOT=${TOOLS_DIR}/Qt/${QT_VERSION}/${QT_VERSION}/android_armv7
+            export QT_ROOT=${TOOLS_DIR}/Qt/${QT_VERSION}/android_armv7
             ;;
         x86)
-        export QT_ROOT=${TOOLS_DIR}/Qt/${QT_VERSION}/${QT_VERSION}/android_x86
+            export QT_ROOT=${TOOLS_DIR}/Qt/${QT_VERSION}/android_x86
         ;;
     esac
     export PATH=${TOOLS_DIR}/apache-ant/bin:$JAVA_HOME/bin:$PATH
