@@ -31,9 +31,6 @@ Abstract:
 
 #include "SendFile.h"
 #include "lightbutton.h"
-#ifdef RABBITCOMMON
-    #include "RabbitCommonStyle.h"
-#endif
 
 namespace Ui {
 class CMainWindow;
@@ -65,10 +62,6 @@ private:
     QSharedPointer<QTranslator> m_TranslatorApp;
 private Q_SLOTS:
     void slotActionGroupTranslateTriggered(QAction* pAct);
-
-    //Style menu
-private:
-    RabbitCommon::CStyle m_Style;
 
 private Q_SLOTS:
     void changeEvent(QEvent *e);

@@ -32,8 +32,8 @@ Abstract:
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
     #include "RabbitCommonDir.h"
+    #include "RabbitCommonStyle.h"
 #endif
-
 #ifdef BUILD_QUIWidget
     #include "QUIWidget/QUIWidget.h"
 #endif
@@ -67,7 +67,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 #endif
 
     LoadTranslate();
-    m_Style.LoadStyle();
+    RabbitCommon::CStyle::Instance()->LoadStyle();
     InitMenu();
     
     InitStatusBar();
@@ -1010,8 +1010,10 @@ void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
 
 void CMainWindow::InitMenu()
 {
-    ui->menuStype_S->addAction(tr("Default"), &m_Style, SLOT(slotSetDefaultStyle()));
-    ui->menuStype_S->addAction(tr("Custom"), &m_Style, SLOT(slotStyle()));
+    ui->menuStype_S->addAction(tr("Default"), RabbitCommon::CStyle::Instance(),
+                               SLOT(slotSetDefaultStyle()));
+    ui->menuStype_S->addAction(tr("Custom"), RabbitCommon::CStyle::Instance(),
+                               SLOT(slotStyle()));
     InitMenuTranslate();
 }
 
