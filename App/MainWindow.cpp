@@ -709,7 +709,7 @@ int CMainWindow::CloseSendFile()
 {
     bool check = disconnect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
                             this, SLOT(slotSendFile(qint64)));
-    //Q_ASSERT(check);
+    Q_ASSERT(check);
     m_SendFile.Close();
     ui->pbSend->setEnabled(true);
     return 0;
@@ -717,6 +717,7 @@ int CMainWindow::CloseSendFile()
 
 void CMainWindow::slotSendFile(qint64 bytes)
 {
+    Q_UNUSED(bytes);
     //qDebug() << "CMainWindow::slotSendFile" << bytes;
     qint64 nRet = 0;
     nRet = m_SendFile.Write(&m_SerialPort);
@@ -847,24 +848,17 @@ void CMainWindow::on_actionAbout_A_triggered()
     about->m_AppIcon = QImage(":/icon/AppIcon");
     about->m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
     about->m_szCopyrightStartTime = "2017";
-#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
-    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
-    quiwidget->setMainWidget(about);
-    quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
-#if defined (Q_OS_ANDROID)
-    quiwidget->showMaximized();
-    quiwidget->exec();
-#else
-    quiwidget->exec();
-#endif
-#else
-    #if defined (Q_OS_ANDROID)
-        about->showMaximized();
-        about->exec();
+    #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
+        QUIWidget* quiwidget = new QUIWidget(nullptr, true);
+        quiwidget->setMainWidget(about);
+        quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
+        quiwidget->exec();
     #else
-        about->exec();
+        #if defined (Q_OS_ANDROID)
+            about->showMaximized();
+        #endif
+            about->exec();
     #endif
-#endif
 #endif
 }
 
@@ -1203,22 +1197,18 @@ void CMainWindow::on_actionUpdate_U_triggered()
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater();
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
-    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
-    quiwidget->setMainWidget(pUpdater);
-    //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
-    #if defined (Q_OS_ANDROID)
-        quiwidget->showMaximized();
-    #else
+    #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
+        QUIWidget* quiwidget = new QUIWidget(nullptr, true);
+        quiwidget->setMainWidget(pUpdater);
+        //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
         quiwidget->show();
-    #endif
-#else
-    #if defined (Q_OS_ANDROID)
-        pUpdater->showMaximized();
     #else
-        pUpdater->show();
+        #if defined (Q_OS_ANDROID)
+            pUpdater->showMaximized();
+        #else
+            pUpdater->show();
+        #endif
     #endif
-#endif
 #endif
 }
 
