@@ -1,65 +1,87 @@
 ＃ 串口助手
 
 作者：康林（kl222@126.com)
---------
 
-[<img src="App/Resource/png/English.png" alt="English" title="English" width="16" height="16" />英语](README.md)
+--------------------------------
 
-### 简介
-- 项目位置: https://github.com/KangLin/SerialPortAssistant
-- [项目主页](http://kanglin.github.io/SerialPortAssistant)
-- 本项目是一个跨平台的串口助手。它能运行在:
-  - [x] WINDOWS
-  - [x] Linux
-  - [x] Android
-  - [x] mac、os  本人没有mac设备，请有些设备的同学自行编译和测试
-- 编译状态
+[:us: English](README.md)
+
+[![GitHub 点赞量](https://img.shields.io/github/stars/KangLin/SerialPortAssistant?label=Github%20点赞量)](https://github.com/KangLin/SerialPortAssistant/stars)
+[![star](https://gitee.com/kl222/SerialPortAssistant/badge/star.svg?theme=dark)](https://gitee.com/kl222/SerialPortAssistant/stargazers)
+
+[![GitHub forks](https://img.shields.io/github/forks/KangLin/SerialPortAssistant)](https://github.com/KangLin/SerialPortAssistant/forks)
+[![GitHub issues](https://img.shields.io/github/issues/KangLin/SerialPortAssistant)](https://github.com/KangLin/SerialPortAssistant/issues)
+
+[![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
+[![sourceforge 最后发行版本下载](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
+
+[![github 下载量](https://img.shields.io/github/downloads/KangLin/SerialPortAssistant/total?label=Github%20下载量)](https://github.com/KangLin/SerialPortAssistant/releases)
+[![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20下载量)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
+
 [![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
 [![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)
 
-### 程序截屏
+--------------------------------
 
-- 多语言
-  * 中文  
+### 简介
+- 项目位置:
+  + 主库: https://github.com/KangLin/SerialPortAssistant
+  + 镜像库:
+    - 中国： https://gitee.com/kl222/SerialPortAssistant
+    - https://gitlab.com/kl222/SerialPortAssistant
+    - https://sourceforge.net/projects/serialportassistant/
+- [项目主页](http://kanglin.github.io/SerialPortAssistant)
+- 本项目是一个跨平台的串口助手。它能运行在:
+  + [x] WINDOWS
+  + [x] Linux
+  + [x] Android
+  + [x] mac、os  本人没有mac设备，请有些设备的同学自行编译和测试
+- 程序截屏
+  + 多语言
+    - 中文  
     ![中文](Docs/ui-zh.jpg "中文")
-  * 英语  
+    - 英语      
     ![英文](Docs/ui-en.jpg "英文")
 - 多样式
 
 
-### [发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases)
+### 下载
+- [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
+- [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- [最后发行版本下载](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-  - windows
-    + [SerialPortAssistant-Setup-v0.5.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe)
-  - linux
-    + [SerialPortAssistant_v0.5.8.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz)
-
+- windows
+  + [从 sourceforge 下载 SerialPortAssistant-Setup-v0.5.8.exe](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe/download)
+  + [从 github 下载 SerialPortAssistant-Setup-v0.5.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe)  
+- linux
+  + [从 sourceforge 下载SerialPortAssistant_v0.5.8.tar.gz](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz/download)
+  + [从 github 下载 SerialPortAssistant_v0.5.8.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz)
+  
     AppImage格式的执行程序，可直接运行在linux系统，详见：https://appimage.org/
 
     使用:    
-       1. 解压。复制 SerialPortAssistant_v0.5.8.tar.gz 到安装目录，然后解压：
+    1. 解压。复制 SerialPortAssistant_v0.5.8.tar.gz 到安装目录，然后解压：
     
-        sudo mkdir /opt/SerialPortAssistant
-        cd SerialPortAssistant
-        sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz
-        sudo tar xvfz SerialPortAssistant_v0.5.8.tar.gz
+           sudo mkdir /opt/SerialPortAssistant
+           cd SerialPortAssistant
+           sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz
+           sudo tar xvfz SerialPortAssistant_v0.5.8.tar.gz
     
-       2. 安装
+     2. 安装
     
-        sudo ./install1.sh install SerialPortAssistant
+            sudo ./install1.sh install SerialPortAssistant
     
-       3. 如果你想卸裁
+     3. 如果你想卸裁
     
-        sudo ./install1.sh remove SerialPortAssistant
+            sudo ./install1.sh remove SerialPortAssistant
 
-  - ubuntu
-    + [serialportassistant_0.5.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/serialportassistant_0.5.8_amd64.deb)
-
+- ubuntu
+  + [从 sourceforge 下载serialportassistant_0.5.8_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/serialportassistant_0.5.8_amd64.deb/download)
+  + [从 github 下载 serialportassistant_0.5.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/serialportassistant_0.5.8_amd64.deb)
+  
         sudo dpkg -i serialportassistant_0.5.8_amd64.deb
 
-  - android
-    + [SerialPortAssistant_v0.5.8.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.apk)
+- android
+  + [从 github 下载 SerialPortAssistant_v0.5.8.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

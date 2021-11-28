@@ -1,5 +1,9 @@
 修改日志
 ------
+
++ Version: v0.5.9
+  - 增加镜像库
+  
 + 版本: v0.5.8
   - 用更新后的 RabbitCommon::CStyle
   

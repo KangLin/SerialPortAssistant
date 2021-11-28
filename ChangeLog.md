@@ -1,5 +1,9 @@
 Change log
 ----------
+
++ Version: v0.5.9
+  - Add mirror repository
+  
 + Version: v0.5.8
   - Use update RabbitCommon::CStyle
   
