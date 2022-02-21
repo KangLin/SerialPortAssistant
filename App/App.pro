@@ -15,7 +15,7 @@ TARGET = SerialPortAssistant
 TEMPLATE = app
 
 isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/../bin
-
+DEFINES *= HAVE_GUI
 CONFIG(debug, debug|release) {
     DEFINES *= _DEBUG
 }

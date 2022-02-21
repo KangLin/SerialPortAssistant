@@ -1,4 +1,4 @@
-name: mirror sourceforge
+name: mirror to sourceforge
 on: push
 
 jobs:
@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: mirror
+      - name: mirror to sourceforge
         uses: yesolutions/mirror-action@master
         with:
           REMOTE: ssh://kl222@git.code.sf.net/p/serialportassistant/code
