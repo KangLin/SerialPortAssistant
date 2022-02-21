@@ -47,6 +47,7 @@ unix: !android: INSTALLS += install_unix
 }
 
 OTHER_FILES += \
+    .travis.yml.bak \
     Authors.md \
     Authors_zh_CN.md \
     License.md \
@@ -57,7 +58,6 @@ OTHER_FILES += \
     ci/* \
     test/* \
     Install/* \
-    .travis.yml \
     .github/* \
     .github/workflows/* \
     tag.sh \

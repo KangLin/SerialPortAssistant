@@ -3,6 +3,8 @@
 
 + Version: v0.5.9
   - 增加镜像库
+  - 修改自动化编译
+    + 增加 github actions
   
 + 版本: v0.5.8
   - 用更新后的 RabbitCommon::CStyle

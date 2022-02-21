@@ -19,7 +19,8 @@ Author: Kang Lin (kl222@126.com)
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20downloads)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
 [![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
-[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)
+[![Linux Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
+[![Android Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
 
 --------------------------------
 
@@ -54,21 +55,21 @@ Author: Kang Lin (kl222@126.com)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
 - windows
-  + [Download SerialPortAssistant-Setup-v0.5.8.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe)
-  + [Download SerialPortAssistant-Setup-v0.5.8.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe/download)
+  + [Download SerialPortAssistant-Setup-v0.5.9.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant-Setup-v0.5.9.exe)
+  + [Download SerialPortAssistant-Setup-v0.5.9.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/SerialPortAssistant-Setup-v0.5.9.exe/download)
 - linux
-  + [Download SerialPortAssistant_v0.5.8.tar.gz from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz)  
-  + [Download SerialPortAssistant_v0.5.8.tar.gz from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz/download)
+  + [Download SerialPortAssistant_v0.5.9.tar.gz from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz)  
+  + [Download SerialPortAssistant_v0.5.9.tar.gz from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz/download)
   
   The AppImage format executable can be run directly on the Linux system, see: https://appimage.org/  
   Usage:
 
-  1. Decompress. Copy SerialPortAssistant_v0.5.8.tar.gz to install directory, then decompress it:
+  1. Decompress. Copy SerialPortAssistant_v0.5.9.tar.gz to install directory, then decompress it:
 
          sudo mkdir /opt/SerialPortAssistant
          cd SerialPortAssistant
-         sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz
-         sudo tar xvfz SerialPortAssistant_v0.5.8.tar.gz
+         sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz
+         sudo tar xvfz SerialPortAssistant_v0.5.9.tar.gz
     
   2. install
     
@@ -79,13 +80,13 @@ Author: Kang Lin (kl222@126.com)
          sudo ./install1.sh remove SerialPortAssistant
 
 - ubuntu
-  + [Download serialportassistant_0.5.8_amd64.deb from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/serialportassistant_0.5.8_amd64.deb)
-  + [Download serialportassistant_0.5.8_amd64.deb from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/serialportassistant_0.5.8_amd64.deb/download)
+  + [Download serialportassistant_0.5.9_amd64.deb from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/serialportassistant_0.5.9_amd64.deb)
+  + [Download serialportassistant_0.5.9_amd64.deb from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/serialportassistant_0.5.9_amd64.deb/download)
   
-        sudo dpkg -i serialportassistant_0.5.8_amd64.deb
+        sudo dpkg -i serialportassistant_0.5.9_amd64.deb
 
 - android
-  + [Download SerialPortAssistant_v0.5.8.apk from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.apk)
+  + [Download SerialPortAssistant_v0.5.9.apk from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.apk)
   
 ## Donate  
 If you are satisfied, you can donate to me
@@ -96,7 +97,9 @@ If you are satisfied, you can donate to me
 ### Dependence  
 
 + [Qt (LGPL v2.1)](http://qt.io/)
-+ RabbitCommon: https://github.com/KangLin/RabbitCommon
++ RabbitCommon: https://github.com/KangLin/RabbitCommon  
+  It can be downloaded to the same directory of the project.
+  If it is a different directory, set the environment variable RabbitCommon_DIR 
 
         git clone https://github.com/KangLin/RabbitCommon.git
 
@@ -108,7 +111,8 @@ If you are satisfied, you can donate to me
 
 - Compiled with QtCreator
   + Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
-  + Set the parameter RabbitCommon_DIR
+  + The RabbitCommon can be downloaded to the same directory of the project.
+    If it is a different directory, Set the parameter RabbitCommon_DIR
 
         Project -> Build & Run -> Build -> Build settings -> Build step -> qmake 
 

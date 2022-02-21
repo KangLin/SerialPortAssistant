@@ -107,10 +107,10 @@ case ${BUILD_TARGERT} in
 esac
 
 if [ -n "$appveyor_build_version" -a -z "$VERSION" ]; then
-    export VERSION="v0.5.8"
+    export VERSION="v0.5.9"
 fi
 if [ -z "$VERSION" ]; then
-    export VERSION="v0.5.8"
+    export VERSION="v0.5.9"
 fi
 export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}.<br>The change see [ChangeLog.md](ChangeLog.md) or [ChangeLog_zh_CN.md](ChangeLog_zh_CN.md)"
 #export UPLOADTOOL_PR_BODY=
@@ -219,7 +219,7 @@ if [ "${BUILD_TARGERT}" = "android" ]; then
     fi
 else
     ${QT_ROOT}/bin/qmake ${SOURCE_DIR} \
-         "CONFIG+=release" ${CONFIG_PARA}\
+         "CONFIG+=release" ${CONFIG_PARA} \
          PREFIX=`pwd`/install 
                 
     $MAKE

@@ -19,7 +19,8 @@
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20下载量)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
 [![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
-[![linux](https://travis-ci.org/KangLin/SerialPortAssistant.svg?branch=master)](https://travis-ci.org/KangLin/SerialPortAssistant)
+[![Linux Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
+[![Android Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
 
 --------------------------------
 
@@ -50,21 +51,21 @@
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
 - windows
-  + [从 sourceforge 下载 SerialPortAssistant-Setup-v0.5.8.exe](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe/download)
-  + [从 github 下载 SerialPortAssistant-Setup-v0.5.8.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant-Setup-v0.5.8.exe)  
+  + [从 sourceforge 下载 SerialPortAssistant-Setup-v0.5.9-10.exe](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/SerialPortAssistant-Setup-v0.5.9.exe/download)
+  + [从 github 下载 SerialPortAssistant-Setup-v0.5.9.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant-Setup-v0.5.9.exe)  
 - linux
-  + [从 sourceforge 下载SerialPortAssistant_v0.5.8.tar.gz](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz/download)
-  + [从 github 下载 SerialPortAssistant_v0.5.8.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz)
+  + [从 sourceforge 下载SerialPortAssistant_v0.5.9.tar.gz](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz/download)
+  + [从 github 下载 SerialPortAssistant_v0.5.9.tar.gz](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz)
   
     AppImage格式的执行程序，可直接运行在linux系统，详见：https://appimage.org/
 
     使用:    
-    1. 解压。复制 SerialPortAssistant_v0.5.8.tar.gz 到安装目录，然后解压：
+    1. 解压。复制 SerialPortAssistant_v0.5.9.tar.gz 到安装目录，然后解压：
     
            sudo mkdir /opt/SerialPortAssistant
            cd SerialPortAssistant
-           sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.tar.gz
-           sudo tar xvfz SerialPortAssistant_v0.5.8.tar.gz
+           sudo wget https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.tar.gz
+           sudo tar xvfz SerialPortAssistant_v0.5.9.tar.gz
     
      2. 安装
     
@@ -75,13 +76,13 @@
             sudo ./install1.sh remove SerialPortAssistant
 
 - ubuntu
-  + [从 sourceforge 下载serialportassistant_0.5.8_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.8/serialportassistant_0.5.8_amd64.deb/download)
-  + [从 github 下载 serialportassistant_0.5.8_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/serialportassistant_0.5.8_amd64.deb)
+  + [从 sourceforge 下载serialportassistant_0.5.9_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.9/serialportassistant_0.5.9_amd64.deb/download)
+  + [从 github 下载 serialportassistant_0.5.9_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/serialportassistant_0.5.9_amd64.deb)
   
-        sudo dpkg -i serialportassistant_0.5.8_amd64.deb
+        sudo dpkg -i serialportassistant_0.5.9_amd64.deb
 
 - android
-  + [从 github 下载 SerialPortAssistant_v0.5.8.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.8/SerialPortAssistant_v0.5.8.apk)
+  + [从 github 下载 SerialPortAssistant_v0.5.9.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.9/SerialPortAssistant_v0.5.9.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  
@@ -92,19 +93,25 @@
 #### 依赖
 
 - [Qt (LGPL v2.1)](http://qt.io/)
-- RabbitCommon: https://github.com/KangLin/RabbitCommon
-  
-        git clone https://github.com/KangLin/RabbitCommon.git
- 
+- RabbitCommon: https://github.com/KangLin/RabbitCommon  
+  RabbitCommon 下载到与本项目同级目录中。如果不在同级目录，则需要指定环境变量： RabbitCommon_DIR
+
+      git clone https://github.com/KangLin/RabbitCommon.git
+
+
 #### 编译  
 
 - 下载源码
 
-        git clone https://github.com/KangLin/SerialPortAssistant.git
+      git clone https://github.com/KangLin/SerialPortAssistant.git
 
+- 下载 RabbitCommon
+
+      git clone https://github.com/KangLin/RabbitCommon.git
+      
 - 用 QtCreator 编译
   * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
-  * 设置参数 RabbitCommon_DIR  
+  * 如果 RabbitCommon 不在本项目同级目录中，设置参数 RabbitCommon_DIR 指定其位置。 
       项目 -> 编译和运行 -> 编译 -> 编译设置 -> 编译步骤 -> qmake -> 额外参数
   * 直接编译就可以生成程序
 - 用命令行编译
@@ -115,7 +122,7 @@
 
         mkdir build
         cd build
-        qmake ../SerialPortAssistant.pro RabbitCommon_DIR=
+        qmake ../SerialPortAssistant.pro [RabbitCommon_DIR=...]
         make install
         cd install #进入生成的程序目录
 

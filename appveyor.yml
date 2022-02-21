@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.5.8.{build}'
+version: 'v0.5.9.{build}'
 
 environment:
   STOREPASS:
@@ -10,16 +10,6 @@ environment:
     secure: ejAYGgB+3sBispRxUSr0xw==
     
   matrix:
-  ##### android ########
-  - BUILD_TARGERT: android
-    BUILD_ARCH: "armeabi-v7a"
-    ANDROID_ARM_NEON: ON
-    QT_VERSION_DIR: 5.12
-    QT_VERSION: 5.12.6
-    ANDROID_API: android-24
-    TOOLCHAIN_VERSION: 4.9
-    QT_SELECT_COMPONENTS: android_armv7
-
   ##### msvc 2013 ########
   - BUILD_TARGERT: windows_msvc
     TOOLCHAIN_VERSION: 12
@@ -95,6 +85,16 @@ environment:
     QT_ROOT: C:\Qt\5.12\mingw73_64
     BUILD_ARCH: x64
     
+  ##### android ########
+  - BUILD_TARGERT: android
+    BUILD_ARCH: "armeabi-v7a"
+    ANDROID_ARM_NEON: ON
+    QT_VERSION_DIR: 5.12
+    QT_VERSION: 5.12.6
+    ANDROID_API: android-24
+    TOOLCHAIN_VERSION: 4.9
+    QT_SELECT_COMPONENTS: android_armv7
+
 matrix:
   fast_finish: false
 
