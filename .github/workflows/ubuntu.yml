@@ -80,6 +80,18 @@ jobs:
     #          -qmake=qmake -appimage -verbose
     #    cp SerialPort_Assistant-${VERSION}-x86_64.AppImage ${{github.workspace}}/.
 
+    - name: Upload To Github Release
+      if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        #prerelease: true
+        body: |
+          [:cn: 修改日志](ChangeLog_zh_CN.md) [:us: Change log](ChangeLog.md)
+        files: |
+          serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
+          
     - name: update
       uses: actions/upload-artifact@v2
       with:
@@ -87,14 +99,3 @@ jobs:
         path: |
           serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
 
-    - name: Upload To Github Release
-      if: ${{ startsWith(github.ref, 'refs/tags/') }}
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        prerelease: true
-        body: |
-          [:cn: 修改日志](ChangeLog_zh_CN.md) [:us: Change log](ChangeLog.md)
-        files: |
-          serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
