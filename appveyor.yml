@@ -136,20 +136,20 @@ artifacts:
 test: off
 
 #See:https://www.appveyor.com/docs/deployment/github/
-deploy:
-  - provider: GitHub
-    #release: SerialPortAssistant-$(appveyor_build_version)
-    description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
-    #token : https://github.com/settings/tokens 
-    #password encrypt: https://ci.appveyor.com/tools/encrypt
-    auth_token:
-      secure: WY9AaRg0OPH09fE94aJSte2c1DY/yE0gHdpx75QRpQR20oCyEzJdoRb9+/3Y1jmd
-    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_build_version)
-    #draft: true
-    #prerelease: true
-    on:
-      BUILD_TARGERT: windows_msvc
-      TOOLCHAIN_VERSION: 14
-      QT_VERSION: 5.6.3
-      BUILD_ARCH: x86
-      appveyor_repo_tag: true        # deploy on tag push only
+#deploy:
+#  - provider: GitHub
+#    #release: SerialPortAssistant-$(appveyor_build_version)
+#    description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
+#    #token : https://github.com/settings/tokens 
+#    #password encrypt: https://ci.appveyor.com/tools/encrypt
+#    auth_token:
+#      secure: VmOXFRFRrZ75F7Cxbr510vlZJI64Xxc6iBYHXB322QwFEVlMwi9ZfdSDQ9zTuGGN
+#    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_build_version)
+#    #draft: true
+#    #prerelease: true
+#    on:
+#      BUILD_TARGERT: windows_msvc
+#      TOOLCHAIN_VERSION: 14
+#      QT_VERSION: 5.6.3
+#      BUILD_ARCH: x86
+#      appveyor_repo_tag: true        # deploy on tag push only

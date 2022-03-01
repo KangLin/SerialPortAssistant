@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   use_install_qt:
-    name: ${{ matrix.os }}-${{matrix.triplet}}-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}
+    name: ${{ matrix.os }}-qt${{matrix.qt_version}}-${{matrix.vc_version}}-${{matrix.vc_arch}}-${{matrix.BUILD_TYPE}}
 
     strategy:
       matrix:
@@ -15,14 +15,20 @@ jobs:
             qt_version: 6.2.2
             qt_arch: win64_msvc2019_64
             qt_modules: qtscxml qtpositioning
-
+            vc_version: 2019
+            vc_arch: amd64
+            
           - os: windows-2019
             qt_version: 5.15.2
             qt_arch: win64_msvc2019_64
+            vc_version: 2019
+            vc_arch: amd64
             
           - os: windows-2016
             qt_version: 5.12.12
             qt_arch: win32_msvc2017
+            vc_version: 2017
+            vc_arch: x86
             CMAKE_GENERATOR: "Visual Studio 15 2017"
             CMAKE_GENERATOR_PLATFORM: Win32
 
@@ -39,7 +45,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+ 
     - name: Install Qt
       # You may pin to the exact commit or the version.
       # uses: jurplel/install-qt-action@a962fb91949c8e846a3e4a944d50e7ef5cc3a28a
@@ -86,16 +92,14 @@ jobs:
       run: git clone https://github.com/KangLin/RabbitCommon.git
       
     - name: build SerialPortAssistant
-      # Use a bash shell so we can use the same syntax for environment variable
-      # access regardless of the host operating system
+      shell: cmd
       working-directory: ${{github.workspace}}/build
       env:
         RabbitCommon_DIR: ${{github.workspace}}/RabbitCommon
-      # Note the current convention is to use the -S and -B options here to specify source 
-      # and build directories, but this is only available with CMake 3.13 and higher.  
-      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: |
-        ${{env.Qt5_DIR}}/bin/qmake ${{github.workspace}}/SerialPortAssistant.pro CONFIG*=${{matrix.BUILD_TYPE}} RabbitCommon_DIR=${{env.RabbitCommon_DIR}} prefix=${{github.workspace}}/build/install
+        "C:\Program Files (x86)\Microsoft Visual Studio\${{matrix.vc_version}}\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.vc_arch}}
+        set PATH=%PATH%;${{env.Qt5_Dir}}\bin;${{env.Qt6_Dir}}\bin
+        qmake ${{github.workspace}}/SerialPortAssistant.pro CONFIG*=${{matrix.BUILD_TYPE}} RabbitCommon_DIR=${{env.RabbitCommon_DIR}} prefix=${{github.workspace}}/build/install
         nmake install
         makensis ${{github.workspace}}/build/Install.nsi
 
