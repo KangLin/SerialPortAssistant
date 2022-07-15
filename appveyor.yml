@@ -128,7 +128,7 @@ build_script:
 
 artifacts:
   - path: build_${BUILD_TARGERT}/SerialPortAssistant-Setup-*.exe
-    #name: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
+    #name: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_v$(appveyor_SerialPortAssistant_VERSION)
     type: zip
   - path: build_${BUILD_TARGERT}/update_windows.xml
   - path: SerialPortAssistant_*.apk
@@ -138,13 +138,13 @@ test: off
 #See:https://www.appveyor.com/docs/deployment/github/
 #deploy:
 #  - provider: GitHub
-#    #release: SerialPortAssistant-$(appveyor_build_version)
+#    #release: SerialPortAssistant-$(appveyor_SerialPortAssistant_VERSION)
 #    description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
 #    #token : https://github.com/settings/tokens 
 #    #password encrypt: https://ci.appveyor.com/tools/encrypt
 #    auth_token:
 #      secure: VmOXFRFRrZ75F7Cxbr510vlZJI64Xxc6iBYHXB322QwFEVlMwi9ZfdSDQ9zTuGGN
-#    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_build_version)
+#    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_SerialPortAssistant_VERSION)
 #    #draft: true
 #    #prerelease: true
 #    on:

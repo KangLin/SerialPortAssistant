@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
     CMainWindow *w = new CMainWindow();
     
     a.setApplicationDisplayName(QObject::tr("Serial Port Assistant"));
-#ifdef BUILD_VERSION
-    a.setApplicationVersion(BUILD_VERSION);
+#ifdef SerialPortAssistant_VERSION
+    a.setApplicationVersion(SerialPortAssistant_VERSION);
 #endif
 
 #ifdef RABBITCOMMON 

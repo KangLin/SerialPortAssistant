@@ -27,31 +27,31 @@ isEmpty(PREFIX) {
     else : PREFIX = $$OUT_PWD/../install
 }
 
-isEmpty(BUILD_VERSION) {
+isEmpty(SerialPortAssistant_VERSION) {
     isEmpty(GIT) : GIT=$$(GIT)
     isEmpty(GIT) : GIT=git
     isEmpty(GIT_DESCRIBE) {
         GIT_DESCRIBE = $$system(cd $$system_path($$PWD) && $$GIT describe --tags)
-        isEmpty(BUILD_VERSION) {
-            BUILD_VERSION = $$GIT_DESCRIBE
+        isEmpty(SerialPortAssistant_VERSION) {
+            SerialPortAssistant_VERSION = $$GIT_DESCRIBE
         }
     }
-    isEmpty(BUILD_VERSION) {
-        BUILD_VERSION = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
+    isEmpty(SerialPortAssistant_VERSION) {
+        SerialPortAssistant_VERSION = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
     }
     
-    isEmpty(BUILD_VERSION){
-        warning("Built without git, please add BUILD_VERSION to DEFINES or add git path to environment variable GIT or qmake parameter GIT")
+    isEmpty(SerialPortAssistant_VERSION){
+        warning("Built without git, please add SerialPortAssistant_VERSION to DEFINES or add git path to environment variable GIT or qmake parameter GIT")
     }
 }
-isEmpty(BUILD_VERSION){
-    BUILD_VERSION="v0.4.2"
+isEmpty(SerialPortAssistant_VERSION){
+    SerialPortAssistant_VERSION="v0.4.2"
 }
-message("BUILD_VERSION:$$BUILD_VERSION")
+message("SerialPortAssistant_VERSION:$$SerialPortAssistant_VERSION")
 
-DEFINES += BUILD_VERSION=\"\\\"$$quote($$BUILD_VERSION)\\\"\"
-equals($$$$str_member(BUILD_VERSION, 0, $$num_add($$len, -1)), "v") {
-    VERSION=$$replace(BUILD_VERSION, v,)
+DEFINES += SerialPortAssistant_VERSION=\"\\\"$$quote($$SerialPortAssistant_VERSION)\\\"\"
+equals($$$$str_member(SerialPortAssistant_VERSION, 0, $$num_add($$len, -1)), "v") {
+    VERSION=$$replace(SerialPortAssistant_VERSION, v,)
     win32{
         VERSION=$$split(VERSION, -)
         VERSION=$$first(VERSION)
