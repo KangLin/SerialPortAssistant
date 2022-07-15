@@ -50,7 +50,8 @@ isEmpty(SerialPortAssistant_VERSION){
 message("SerialPortAssistant_VERSION:$$SerialPortAssistant_VERSION")
 
 DEFINES += SerialPortAssistant_VERSION=\"\\\"$$quote($$SerialPortAssistant_VERSION)\\\"\"
-equals($$$$str_member(SerialPortAssistant_VERSION, 0, $$num_add($$len, -1)), "v") {
+first_version = $$$$str_member($$SerialPortAssistant_VERSION, 0, 0)
+equals(first_version, "v") {
     VERSION=$$replace(SerialPortAssistant_VERSION, v,)
     win32{
         VERSION=$$split(VERSION, -)
