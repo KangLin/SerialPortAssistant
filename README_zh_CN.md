@@ -19,8 +19,9 @@
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20下载量)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
 [![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
-[![Linux Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
-[![Android Build status](https://github.com/kanglin/SerialPortAssistant/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/kanglin/SerialPortAssistant/actions)
+[![msvc](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml)
+[![ubuntu](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml)
+[![android](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml)
 
 --------------------------------
 
