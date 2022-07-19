@@ -28,7 +28,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.9
+      SerialPortAssistant_VERSION: v0.5.10
       VCPKGGITCOMMITID: 5cf60186a241e84e8232641ee973395d4fde90e1
       qt_modules: qtwebengine
 
