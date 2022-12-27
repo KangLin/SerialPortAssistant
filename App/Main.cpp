@@ -16,7 +16,6 @@ Abstract:
 #ifdef RABBITCOMMON
     #include "RabbitCommonTools.h"
     #include "FrmUpdater/FrmUpdater.h"
-    #include "RabbitCommonDir.h"
 #endif
 #include "MainWindow.h"
 #include <QApplication>
