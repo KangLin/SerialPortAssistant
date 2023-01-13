@@ -1136,7 +1136,7 @@
   <action name="actionStyle_S">
    <property name="icon">
     <iconset resource="Resource/Resource.qrc">
-     <normaloff>:/icon/Stype</normaloff>:/icon/Stype</iconset>
+     <normaloff>:/icon/style</normaloff>:/icon/style</iconset>
    </property>
    <property name="text">
     <string>Style(&amp;S)</string>
