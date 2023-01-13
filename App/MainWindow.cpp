@@ -32,7 +32,7 @@ Abstract:
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
     #include "RabbitCommonDir.h"
-    #include "RabbitCommonStyle.h"
+    #include "FrmStyle/FrmStyle.h"
 #endif
 #ifdef BUILD_QUIWidget
     #include "QUIWidget/QUIWidget.h"
@@ -67,7 +67,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 #endif
 
     LoadTranslate();
-    RabbitCommon::CStyle::Instance()->LoadStyle();
+
     InitMenu();
     
     InitStatusBar();
@@ -1004,10 +1004,6 @@ void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
 
 void CMainWindow::InitMenu()
 {
-    ui->menuStype_S->addAction(tr("Default"), RabbitCommon::CStyle::Instance(),
-                               SLOT(slotSetDefaultStyle()));
-    ui->menuStype_S->addAction(tr("Custom"), RabbitCommon::CStyle::Instance(),
-                               SLOT(slotStyle()));
     InitMenuTranslate();
 }
 
@@ -1368,3 +1364,10 @@ int CMainWindow::setPinoutStatus()
     
     return 0;
 }
+
+void CMainWindow::on_actionStyle_S_triggered()
+{
+    CFrmStyle* p = new CFrmStyle(false);
+    p->show();
+}
+

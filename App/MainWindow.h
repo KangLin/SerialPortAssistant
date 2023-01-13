@@ -136,6 +136,8 @@ private Q_SLOTS:
     
     void slotDataTerminalReadyChanged(bool set);
     void slotRequestToSendChanged(bool set);
+    void on_actionStyle_S_triggered();
+    
 private:
     int InitPinout();
     int setPinoutStatus();

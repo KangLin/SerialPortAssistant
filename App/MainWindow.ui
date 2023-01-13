@@ -66,7 +66,7 @@
          <x>0</x>
          <y>0</y>
          <width>617</width>
-         <height>812</height>
+         <height>807</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -902,7 +902,7 @@
      <x>0</x>
      <y>0</y>
      <width>617</width>
-     <height>22</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools_T">
@@ -918,15 +918,6 @@
        <normaloff>:/icon/Language</normaloff>:/icon/Language</iconset>
      </property>
     </widget>
-    <widget class="QMenu" name="menuStype_S">
-     <property name="title">
-      <string>Stype(&amp;S)</string>
-     </property>
-     <property name="icon">
-      <iconset resource="Resource/Resource.qrc">
-       <normaloff>:/icon/Stype</normaloff>:/icon/Stype</iconset>
-     </property>
-    </widget>
     <addaction name="actionOpen"/>
     <addaction name="actionRefresh_R"/>
     <addaction name="separator"/>
@@ -940,9 +931,9 @@
     <addaction name="actionOpen_save_file"/>
     <addaction name="actionOpen_send_file"/>
     <addaction name="separator"/>
+    <addaction name="actionStyle_S"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
-    <addaction name="menuStype_S"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
     <addaction name="separator"/>
@@ -1140,6 +1131,15 @@
    </property>
    <property name="whatsThis">
     <string>Open send file</string>
+   </property>
+  </action>
+  <action name="actionStyle_S">
+   <property name="icon">
+    <iconset resource="Resource/Resource.qrc">
+     <normaloff>:/icon/Stype</normaloff>:/icon/Stype</iconset>
+   </property>
+   <property name="text">
+    <string>Style(&amp;S)</string>
    </property>
   </action>
  </widget>
