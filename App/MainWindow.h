@@ -28,9 +28,9 @@ Abstract:
 #include <QLayout>
 #include <QComboBox>
 #include <QFile>
-
+#include <QActionGroup>
 #include "SendFile.h"
-#include "lightbutton.h"
+#include <lightbutton.h>
 
 namespace Ui {
 class CMainWindow;

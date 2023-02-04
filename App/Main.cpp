@@ -21,7 +21,7 @@ Abstract:
 #include <QApplication>
 #include <QDir>
 #include "Global/Global.h"
-#if defined(Q_OS_ANDROID)
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     #include <QtAndroidExtras/QtAndroid>
 #endif
 #ifdef BUILD_QUIWidget
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 #if (QT_VERSION > QT_VERSION_CHECK(5,6,0))
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QtAndroid::hideSplashScreen();
 #endif
     

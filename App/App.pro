@@ -6,7 +6,7 @@
 
 QT       += core gui serialport network xml
 CONFIG *= c++11 link_pkgconfig link_prl
-android: QT += androidextras
+android: versionAtMost(QT_VERSION, 6): QT += androidextras
 
 android: versionAtMost(QT_VERSION, 5.10) : error("Qt version must greater 5.10")
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

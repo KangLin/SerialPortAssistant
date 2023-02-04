@@ -94,7 +94,7 @@ int CLog::Log(const char *pszFile, int nLine, int nLevel,
             return 0;
         }
         QTextStream out(&f);  
-        out << szTemp << endl;
+        out << szTemp << "\n";
         f.close();
     }
     

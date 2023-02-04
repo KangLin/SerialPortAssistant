@@ -19,7 +19,7 @@ Abstract:
 #include <QDir>
 #include <QGuiApplication>
 #include <QScreen>
-#include <QDesktopWidget>
+//#include <QDesktopWidget>
 #include <QApplication>
 #include <QFileDialog>
 #include <sstream>
@@ -29,7 +29,7 @@ Abstract:
 #include <QFile>
 #include <QPainter>
 
-#ifdef ANDROID
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     #include <QtAndroidExtras/QAndroidJniObject>
 #endif
 #ifdef WINDOWS

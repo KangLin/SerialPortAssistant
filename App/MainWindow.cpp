@@ -506,7 +506,7 @@ void CMainWindow::slotRead()
                     char buff[16] = {0};
                     unsigned char c = d.at(d.size() - nLen);
                     if(QChar(c).isPrint())
-                        szASCII = szASCII + " " + c;
+                        szASCII = szASCII + " " + QChar(c);
                     else
                         szASCII = szASCII + " .";
                     sprintf(buff, "0x%X ", c);
