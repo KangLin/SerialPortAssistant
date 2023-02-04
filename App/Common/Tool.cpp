@@ -28,6 +28,7 @@ Abstract:
 #include <QCryptographicHash>
 #include <QFile>
 #include <QPainter>
+#include <QLoggingCategory>
 
 #if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     #include <QtAndroidExtras/QAndroidJniObject>
@@ -36,6 +37,8 @@ Abstract:
     #include <windows.h>
     #pragma comment(lib, "User32.lib")
 #endif
+
+Q_LOGGING_CATEGORY(logTool, "Tool");
 
 CTool::CTool(QObject *parent) :
     QObject(parent)
@@ -49,7 +52,7 @@ CTool::~CTool()
 //设置日志的回调函数  
 void Log(void*, int, const char* fmt, va_list vl)
 {
-    LOG_MODEL_DEBUG("ffmpeg", fmt, vl);
+    qDebug(logTool, fmt, vl);
 }
 
 bool CTool::removeDirectory(QString dirName)
@@ -88,7 +91,7 @@ int CTool::SetWindowsGeometry(QWidget *pWindow)
 {
     /*
     QDesktopWidget *pDesk = QApplication::desktop();
-    LOG_MODEL_DEBUG("CTool", "availableGeometry:%d,%d; screenGeometry:%d,%d; geometry:%d,%d",
+    qDebug(logTool, "availableGeometry:%d,%d; screenGeometry:%d,%d; geometry:%d,%d",
                     pDesk->availableGeometry().width(),
                     pDesk->availableGeometry().height(),
                     pDesk->screenGeometry().width(),
@@ -104,7 +107,7 @@ int CTool::SetWindowsGeometry(QWidget *pWindow)
     //*/
     //*
     QScreen *pScreen = QGuiApplication::primaryScreen();
-    LOG_MODEL_DEBUG("CTool", "availableGeometry:%d,%d; geometry:%d,%d",
+    qDebug(logTool, "availableGeometry:%d,%d; geometry:%d,%d",
                     pScreen->availableGeometry().width(),
                     pScreen->availableGeometry().height(),
                     pScreen->geometry().width(),
@@ -163,7 +166,7 @@ QByteArray CTool::GetFileMd5Sum(QString filePath)
     
     if (!localFile.open(QFile::ReadOnly))
     {
-        LOG_MODEL_ERROR("CTool", "file open error.");
+        qCritical(logTool) << "file open error.";
         return 0;
     }
     

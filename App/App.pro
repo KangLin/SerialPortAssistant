@@ -71,14 +71,12 @@ INSTALLS += target icon
 SOURCES +=\
     $$PWD/MainWindow.cpp \
     $$PWD/Main.cpp \
-    $$PWD/Global/Log.cpp \
     $$PWD/Global/Global.cpp \
     $$PWD/Common/Tool.cpp  \
     $$PWD/SendFile.cpp \
     $$PWD/../3th_lib/Control/lightbutton.cpp
     
 HEADERS += $$PWD/MainWindow.h \
-    $$PWD/Global/Log.h \
     $$PWD/Global/Global.h \
     $$PWD/Common/Tool.h  \
     $$PWD/SendFile.h \

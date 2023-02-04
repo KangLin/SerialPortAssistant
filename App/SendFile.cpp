@@ -1,6 +1,7 @@
 #include "SendFile.h"
-#include "Global/Log.h"
+#include <QLoggingCategory>
 
+Q_LOGGING_CATEGORY(logSendFile, "SendFile");
 CSendFile::CSendFile(const QString &szFile, QObject *parent) : QObject(parent)
 {
     Open(szFile);
@@ -20,7 +21,8 @@ int CSendFile::Open(const QString &szFile)
         m_File.setFileName(szFile);
         if(!m_File.open(QFile::ReadOnly))
         {
-            LOG_MODEL_ERROR("CSendFile", "Open file fail: %s", szFile.toStdString().c_str());
+            qCritical(logSendFile) << "Open file fail:"
+                                   << szFile.toStdString().c_str();
             return -1;
         }
         m_nTotal = m_File.size();
@@ -55,7 +57,7 @@ qint64 CSendFile::Write(QIODevice *device)
     {
         if(!m_File.isOpen())
         {
-            LOG_MODEL_ERROR("SendFile", "Read file isn't open");
+            qCritical(logSendFile) << "Read file isn't open";
             return -1;
         }
 
@@ -69,7 +71,7 @@ qint64 CSendFile::Write(QIODevice *device)
         nLen = m_File.read(buf, m_nBuffLen);
         if(nLen < 0)
         {
-            LOG_MODEL_ERROR("SendFile", "Read file fail: %s", m_File.errorString().toStdString().c_str());
+            qCritical(logSendFile) << "Read file fail: %s" << m_File.errorString().toStdString().c_str();
             return nLen;
         }
     }
@@ -78,7 +80,7 @@ qint64 CSendFile::Write(QIODevice *device)
     nRet = device->write(buf + m_nBuffStart, nLen);
     if(nRet < 0)
     {
-        LOG_MODEL_ERROR("SendFile", "Write file fail: %s", device->errorString().toStdString().c_str());
+        qCritical(logSendFile) << "Write file fail: %s" << device->errorString().toStdString().c_str();
         return nRet;
     }
 

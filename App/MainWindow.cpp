@@ -15,28 +15,32 @@ Abstract:
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "Global/Log.h"
+
 #include "Global/Global.h"
 #include "Common/Tool.h"
 #include <QMessageBox>
 #include <QTime>
 #include <QFile>
 #include <QDir>
-#include <QtDebug>
+#include <QDebug>
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
 #include <QDesktopServices>
+#include <QLoggingCategory>
 
 #ifdef RABBITCOMMON
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
     #include "RabbitCommonDir.h"
     #include "FrmStyle/FrmStyle.h"
+    #include "RabbitCommonTools.h"
 #endif
 #ifdef BUILD_QUIWidget
     #include "QUIWidget/QUIWidget.h"
 #endif
+
+Q_LOGGING_CATEGORY(Logger, "MainWindow");
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -56,9 +60,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
                       QStandardPaths::DataLocation)))
         d.mkdir(QStandardPaths::writableLocation(
                   QStandardPaths::DataLocation));*/
-    CLog::Instance()->SaveFile(QStandardPaths::writableLocation(
-                                   QStandardPaths::TempLocation)
-                               + QDir::separator() + "SerialAssistant.log");
+
     ui->setupUi(this);
 
 #ifdef RABBITCOMMON 
@@ -332,7 +334,7 @@ void CMainWindow::on_pbOpen_clicked()
         szError = tr("Open serail port %1 fail errNo[%2]: %3").
                 arg(ui->cmbPort->currentText(),
                     QString::number(m_SerialPort.error()), m_SerialPort.errorString());
-        LOG_MODEL_ERROR("MainWindows", szError.toStdString().c_str());
+        qCritical(Logger) << szError;
         SetStatusInfo(szError, Qt::red);
         return;
     }
@@ -400,7 +402,7 @@ void CMainWindow::slotQTextEditMaxLength()
         cursor.removeSelectedText();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
         //ui->teRecive->setTextCursor(cursor);
-        LOG_MODEL_DEBUG("MainWindow", "slotQTextEditMaxLength");
+        qDebug(Logger) << "slotQTextEditMaxLength";
     }
 }
 
@@ -440,14 +442,14 @@ void CMainWindow::slotRead()
 {
     if(!m_SerialPort.isOpen())
     {
-        LOG_MODEL_ERROR("MainWindow", "SerialPort don't open!");
+        qCritical(Logger) << "SerialPort don't open!";
         return;
     }
 
     QByteArray d = m_SerialPort.readAll();
     if(d.isEmpty())
     {
-        LOG_MODEL_ERROR("MainWindows", "read data fail");   
+        qCritical(Logger) << "read data fail";   
         return;
     }
     m_nRecive += d.length();
@@ -540,7 +542,7 @@ bool CMainWindow::CheckHexChar(QChar c)
         QString szErr;
         szErr = "Invalid symbol: ";
         szErr += c;
-        LOG_MODEL_ERROR("CMainWindow", szErr.toStdString().c_str());
+        qCritical(Logger) << szErr;
         //m_statusInfo.setText(szErr);
         SetStatusInfo(szErr, Qt::red);
         return false;
@@ -619,7 +621,7 @@ int CMainWindow::SendInput()
     int nRet = 0;
     if(ui->teSend->toPlainText().isEmpty())
     {
-        LOG_MODEL_WARNING("CMainWindow", "Send text is empty");
+        qWarning(Logger) << "Send text is empty";
         return -1;
     }
     QString szText = ui->teSend->toPlainText();
@@ -650,14 +652,13 @@ int CMainWindow::SendInput()
     {
         //m_statusInfo.setText(tr("Send fail"));
         SetStatusInfo(tr("Send fail"), Qt::red);
-        LOG_MODEL_ERROR("CMainWindows", "Write fail [%d][%d]：%s",
-                        nRet,
-                        m_SerialPort.error(),
-                        m_SerialPort.errorString().toStdString().c_str());
+        qCritical(Logger) << "Write fail: nRet:" << nRet << "; Serial error["
+                 << m_SerialPort.error() << "]：" << m_SerialPort.errorString();
+                        
         on_pbOpen_clicked(); //close serial port  
         return nRet;
     }
-    LOG_MODEL_DEBUG("CMainWindows", "Send %d bytes", nRet);
+    qInfo(Logger) << "Send" << nRet << "bytes";
 
     m_nTransmissions++;
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
@@ -687,7 +688,7 @@ int CMainWindow::SendFile()
     
     if(m_SendFile.isOpen())
     {
-        LOG_MODEL_WARNING("CMAinWindow", "There is send file");
+        qWarning(Logger) << "There is send file";
         return 0;
     }
     
@@ -888,9 +889,8 @@ int CMainWindow::InitMenuTranslate()
         m_ActionGroupTranslator.addAction(it.value());
     }
 
-    LOG_MODEL_DEBUG("MainWindow",
-                    "MainWindow::InitMenuTranslate m_ActionTranslator size:%d",
-                    m_ActionTranslator.size());
+    qDebug(Logger) << "MainWindow::InitMenuTranslate m_ActionTranslator size:"
+                    <<m_ActionTranslator.size();
 
     bool check = connect(&m_ActionGroupTranslator, SIGNAL(triggered(QAction*)),
                         SLOT(slotActionGroupTranslateTriggered(QAction*)));
@@ -900,13 +900,11 @@ int CMainWindow::InitMenuTranslate()
     QAction* pAct = m_ActionTranslator[szLocale];
     if(pAct)
     {
-        LOG_MODEL_DEBUG("MainWindow",
-                        "MainWindow::InitMenuTranslate setchecked locale:%s",
-                        szLocale.toStdString().c_str());
+        qDebug(Logger) << "MainWindow::InitMenuTranslate setchecked locale:"
+                       << szLocale.toStdString().c_str();
         pAct->setChecked(true);
         ui->menuLanguage_A->setIcon(pAct->icon());
-        LOG_MODEL_DEBUG("MainWindow",
-                        "MainWindow::InitMenuTranslate setchecked end");
+        qDebug(Logger) << "MainWindow::InitMenuTranslate setchecked end";
     }
     
     return 0;
@@ -923,10 +921,9 @@ int CMainWindow::ClearMenuTranslate()
     m_ActionTranslator.clear();
     ui->menuLanguage_A->clear();    
 
-    LOG_MODEL_DEBUG("MainWindow",
-                    "MainWindow::ClearMenuTranslate m_ActionTranslator size:%d",
-                    m_ActionTranslator.size());
-    
+    qDebug(Logger) << "MainWindow::ClearMenuTranslate m_ActionTranslator size:"
+                   << m_ActionTranslator.size();
+
     return 0;
 }
 
@@ -958,25 +955,25 @@ int CMainWindow::LoadTranslate(QString szLocale)
         szLocale = QLocale::system().name();
     }
 
-    LOG_MODEL_DEBUG("main", "locale language:%s",
-                    szLocale.toStdString().c_str());
+    qDebug(Logger) << "locale language:"
+                   << szLocale;
 
     ClearTranslate();
-    LOG_MODEL_DEBUG("MainWindow", "Translate dir:%s",
-          qPrintable(RabbitCommon::CDir::Instance()->GetDirTranslations()));
+    qDebug(Logger) << "Translate dir:" 
+          << qPrintable(RabbitCommon::CDir::Instance()->GetDirTranslations());
 
     m_TranslatorQt = QSharedPointer<QTranslator>(new QTranslator(this));
-    m_TranslatorQt->load("qt_" + szLocale + ".qm",
-                         RabbitCommon::CDir::Instance()->GetDirApplication()
-                         + QDir::separator() + "translations");
-    qApp->installTranslator(m_TranslatorQt.data());
+    if(m_TranslatorQt->load("qt_" + szLocale + ".qm",
+                            RabbitCommon::CDir::Instance()->GetDirApplication()
+                            + QDir::separator() + "translations"))
+        qApp->installTranslator(m_TranslatorQt.data());
 
     m_TranslatorApp = QSharedPointer<QTranslator>(new QTranslator(this));
 
-    m_TranslatorApp->load("SerialPortAssistant_" + szLocale + ".qm",
-                        RabbitCommon::CDir::Instance()->GetDirTranslations()
-                          );
-    qApp->installTranslator(m_TranslatorApp.data());
+    if(m_TranslatorApp->load("SerialPortAssistant_" + szLocale + ".qm",
+                             RabbitCommon::CDir::Instance()->GetDirTranslations()
+                             ))
+        qApp->installTranslator(m_TranslatorApp.data());
 
     ui->retranslateUi(this);
     return 0;
@@ -984,7 +981,7 @@ int CMainWindow::LoadTranslate(QString szLocale)
 
 void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
 {
-    LOG_MODEL_DEBUG("MainWindow", "MainWindow::slotActionGroupTranslateTriggered");
+    qDebug(Logger) << "MainWindow::slotActionGroupTranslateTriggered";
     QMap<QString, QAction*>::iterator it;
     for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
     {
@@ -1185,7 +1182,7 @@ void CMainWindow::on_actionOpen_save_file_triggered()
 
 void CMainWindow::on_actionOpen_Log_G_triggered()
 {
-    CLog::Instance()->OpneFile();
+    RabbitCommon::CTools::OpenLogFile();
 }
 
 void CMainWindow::on_actionUpdate_U_triggered()
