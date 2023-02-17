@@ -60,7 +60,7 @@ equals(first_version, "v") {
     }
 }
 
-!equals(BUILD_QUIWidget, "OFF"): DEFINES *= BUILD_QUIWidget
+equals(BUILD_QUIWidget, "ON"): DEFINES *= BUILD_QUIWidget
 
 icon.files = SerialPortAssistant.ico
 icon.path = $$PREFIX
