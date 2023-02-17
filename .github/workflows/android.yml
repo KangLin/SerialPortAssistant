@@ -11,7 +11,7 @@ jobs:
         BUILD_TYPE: [Release]
         ANDROID_ABI: [armeabi-v7a, x86]
         ANDROID_PLATFORM: [android-28]
-        os: [Ubuntu-18.04]
+        os: [Ubuntu-latest]
         qt_version: [5.12.12]
         include:
           - VCPKG_TARGET_TRIPLET: arm-android
@@ -28,7 +28,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.10
+      SerialPortAssistant_VERSION: v0.5.11
       VCPKGGITCOMMITID: 5cf60186a241e84e8232641ee973395d4fde90e1
       qt_modules: qtwebengine
 
@@ -146,7 +146,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        #prerelease: true
+        prerelease: true
         body: |
           [:cn: 修改日志](ChangeLog_zh_CN.md) [:us: Change log](ChangeLog.md)
         files: |

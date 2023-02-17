@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.5.10.{build}'
+version: 'v0.5.11.{build}'
 
 environment:
   STOREPASS:
@@ -86,14 +86,14 @@ environment:
     BUILD_ARCH: x64
     
   ##### android ########
-  - BUILD_TARGERT: android
-    BUILD_ARCH: "armeabi-v7a"
-    ANDROID_ARM_NEON: ON
-    QT_VERSION_DIR: 5.12
-    QT_VERSION: 5.12.6
-    ANDROID_API: android-24
-    TOOLCHAIN_VERSION: 4.9
-    QT_SELECT_COMPONENTS: android_armv7
+#  - BUILD_TARGERT: android
+#    BUILD_ARCH: "armeabi-v7a"
+#    ANDROID_ARM_NEON: ON
+#    QT_VERSION_DIR: 5.12
+#    QT_VERSION: 5.12.6
+#    ANDROID_API: android-24
+#    TOOLCHAIN_VERSION: 4.9
+#    QT_SELECT_COMPONENTS: android_armv7
 
 matrix:
   fast_finish: false
@@ -127,7 +127,7 @@ build_script:
   - C:\msys64\usr\bin\bash.exe %APPVEYOR_BUILD_FOLDER%\ci\build.sh
 
 artifacts:
-  - path: build_${BUILD_TARGERT}/SerialPortAssistant-Setup-*.exe
+  - path: build_${BUILD_TARGERT}/SerialPortAssistant_Setup_*.exe
     #name: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_v$(appveyor_SerialPortAssistant_VERSION)
     type: zip
   - path: build_${BUILD_TARGERT}/update_windows.xml
@@ -136,20 +136,20 @@ artifacts:
 test: off
 
 #See:https://www.appveyor.com/docs/deployment/github/
-#deploy:
-#  - provider: GitHub
-#    #release: SerialPortAssistant-$(appveyor_SerialPortAssistant_VERSION)
-#    description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
-#    #token : https://github.com/settings/tokens 
-#    #password encrypt: https://ci.appveyor.com/tools/encrypt
-#    auth_token:
-#      secure: VmOXFRFRrZ75F7Cxbr510vlZJI64Xxc6iBYHXB322QwFEVlMwi9ZfdSDQ9zTuGGN
-#    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_SerialPortAssistant_VERSION)
-#    #draft: true
-#    #prerelease: true
-#    on:
-#      BUILD_TARGERT: windows_msvc
-#      TOOLCHAIN_VERSION: 14
-#      QT_VERSION: 5.6.3
-#      BUILD_ARCH: x86
-#      appveyor_repo_tag: true        # deploy on tag push only
+deploy:
+  - provider: GitHub
+    #release: SerialPortAssistant-$(appveyor_SerialPortAssistant_VERSION)
+    #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
+    #token: https://github.com/settings/tokens
+    #password encrypt: https://ci.appveyor.com/tools/encrypt
+    auth_token:
+      secure: aHx5YgjM6tiYF+7TF6HkutBJyo414Yzw0d9uhNqvy1PMmNw0ilrEaDuR/Dz9KOlb
+    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(appveyor_SerialPortAssistant_VERSION)
+    draft: true
+    prerelease: true
+    on:
+      BUILD_TARGERT: windows_msvc
+      TOOLCHAIN_VERSION: 14
+      QT_VERSION: 5.6.3
+      BUILD_ARCH: x86
+      appveyor_repo_tag: true        # deploy on tag push only

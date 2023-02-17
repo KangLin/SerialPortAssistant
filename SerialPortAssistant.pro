@@ -48,19 +48,13 @@ unix: !android: INSTALLS += install_unix
 
 OTHER_FILES += \
     .travis.yml.bak \
-    Authors.md \
-    Authors_zh_CN.md \
-    License.md \
-    README*.md \
-    ChangeLog.md \
-    ChangeLog_zh_CN.md \
+    *.md \
     appveyor.yml \
     ci/* \
     test/* \
     Install/* \
     .github/* \
     .github/workflows/* \
-    tag.sh \
+    *.sh \
     debian/* \
-    Update/* \
-    build_debpackage.sh
+    Update/*

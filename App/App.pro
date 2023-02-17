@@ -37,8 +37,9 @@ isEmpty(SerialPortAssistant_VERSION) {
             SerialPortAssistant_VERSION = $$GIT_DESCRIBE
         }
     }
+    SerialPortAssistant_VERSION_Revision = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
     isEmpty(SerialPortAssistant_VERSION) {
-        SerialPortAssistant_VERSION = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
+        SerialPortAssistant_VERSION = $$SerialPortAssistant_VERSION_Revision
     }
     
     isEmpty(SerialPortAssistant_VERSION){
@@ -49,8 +50,12 @@ isEmpty(SerialPortAssistant_VERSION){
     SerialPortAssistant_VERSION="v0.4.2"
 }
 message("SerialPortAssistant_VERSION:$$SerialPortAssistant_VERSION")
+message("SerialPortAssistant_VERSION_Revision:$$SerialPortAssistant_VERSION_Revision")
 
 DEFINES += SerialPortAssistant_VERSION=\"\\\"$$quote($$SerialPortAssistant_VERSION)\\\"\"
+!isEmpty(SerialPortAssistant_VERSION_Revision) {
+    DEFINES *= SerialPortAssistant_VERSION_Revision=\"\\\"$$quote($$SerialPortAssistant_VERSION_Revision)\\\"\"
+}
 first_version = $$$$str_member($$SerialPortAssistant_VERSION, 0, 0)
 equals(first_version, "v") {
     VERSION=$$replace(SerialPortAssistant_VERSION, v,)

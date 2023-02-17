@@ -1,6 +1,12 @@
 Change log
 ----------
 
++ Version: v0.5.11
+  - Update the code of RabbitCommon
+  - Support Qt6
+  - Modify github actions
+  - Rename tag.sh to deploy.sh
+
 + Version: v0.5.10
   - FIX: divide by 0 crash. Affects all previous releases.
     See RabbitCommon: 7ed300a206d8a36c30003b6c19ad181682d0ff5f

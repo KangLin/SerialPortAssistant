@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SerialPortAssistant"
-!define PRODUCT_VERSION "v0.5.10"
+!define PRODUCT_VERSION "v0.5.11"
 !define PRODUCT_PUBLISHER "KangLin studio"
 !define PRODUCT_WEB_SITE "https://github.com/KangLin/${PRODUCT_NAME}"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}.exe"
@@ -61,7 +61,7 @@ LangString LANG_REMOVE_COMPONENT ${LANG_SIMPCHINESE} "你确实要完全移除 $
 
 Name "$(LANG_PRODUCT_NAME) ${PRODUCT_VERSION}"
 Caption "$(LANG_PRODUCT_NAME) ${PRODUCT_VERSION}"
-OutFile "${PRODUCT_NAME}-Setup-${PRODUCT_VERSION}.exe"
+OutFile "${PRODUCT_NAME}_Setup_${PRODUCT_VERSION}.exe"
 InstallDir "$LOCALAPPDATA\${PRODUCT_NAME}"
 ;InstallDirRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_DIR_REGKEY}" ""
 

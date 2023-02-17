@@ -1,11 +1,17 @@
 修改日志
 ------
 
-+ Version: v0.5.10
++ 版本: v0.5.11
+  - 更新与 RabbitCommon 相关的代码
+  - 支持 Qt6
+  - 修改 github actions
+  - 重命名 tag.sh 到 deploy.sh
+  
++ 版本: v0.5.10
   - 修复除 0 引起的崩溃。影响前面所有发行版本。此错误是 RabbitCommon 引起的。
     详见：RabbitCommon: 7ed300a206d8a36c30003b6c19ad181682d0ff5f
 
-+ Version: v0.5.9
++ 版本: v0.5.9
   - 增加镜像库
   - 修改自动化编译
     + 增加 github actions
