@@ -100,13 +100,13 @@ private Q_SLOTS:
     void on_actionOpen_save_file_triggered();    
     void on_actionUpdate_U_triggered();    
     void on_actionRefresh_R_triggered();
-    void on_cbReciveEncoded_currentIndexChanged(int index);
+    void on_cbReceiveEncoded_currentIndexChanged(int index);
     void on_cbSendEncode_currentIndexChanged(int index);   
     void on_pbBrowseSend_clicked();
     void on_pbBrowseSave_clicked();
     void on_tbSendSettings_currentChanged(int index);
     void on_pbPortSeetings_clicked();
-    void on_pbReciveSettings_clicked();
+    void on_pbReceiveSettings_clicked();
     void on_pbSendSettings_clicked();
     
 private:
@@ -116,7 +116,7 @@ private:
     int SetSaveFileName();
     bool isExistSaveFileName(const QString &szFile);
     int InitEncodeComboBox(QComboBox *comboBox);
-    void AddRecive(const QString &szText, bool bRecive = false);
+    void AddReceive(const QString &szText, bool bReceive = false);
     int SetStatusInfo(QString szText, QColor color = Qt::black);
     QString GetSerialPortSettingInfo();
     bool CheckHexChar(QChar c);
@@ -146,7 +146,7 @@ private:
     Ui::CMainWindow *ui;
 
     QSerialPort m_SerialPort;
-    qint64 m_nSend, m_nRecive, m_nDrop;
+    qint64 m_nSend, m_nReceive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
     int m_nLoopNumber;

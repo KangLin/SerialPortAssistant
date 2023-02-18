@@ -45,7 +45,7 @@
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="141"/>
-        <source>Recive Settings</source>
+        <source>Receive Settings</source>
         <translation>接收設置</translation>
     </message>
     <message>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="1061"/>
-        <source>Pasue(&amp;P) the flow list</source>
+        <source>Pause(&amp;P) the flow list</source>
         <translation>暫停滾動列表(&amp;P)</translation>
     </message>
     <message>
@@ -323,12 +323,12 @@
     <message>
         <location filename="../../MainWindow.cpp" line="271"/>
         <location filename="../../MainWindow.cpp" line="299"/>
-        <source>Serail Port Close</source>
+        <source>Serial Port Close</source>
         <translation>串口關閉</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="334"/>
-        <source>Open serail port %1 fail errNo[%2]: %3</source>
+        <source>Open Serial port %1 fail errNo[%2]: %3</source>
         <translation>打開串口[%1]失敗。錯誤號[%2]: %3</translation>
     </message>
     <message>

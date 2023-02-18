@@ -109,16 +109,16 @@ private:
     SEND_R_N m_SendRN;
 
 public:
-    bool GetReciveDisplayTime();
-    int SetReciveDisplayTime(bool bDisplay);
+    bool GetReceiveDisplayTime();
+    int SetReceiveDisplayTime(bool bDisplay);
 private:
-    bool m_bReciveDisplayTime;
+    bool m_bReceiveDisplayTime;
     
 public:
-    bool GetReciveDisplaySend();
-    int SetReciveDisplaySend(bool bDisplay);
+    bool GetReceiveDisplaySend();
+    int SetReceiveDisplaySend(bool bDisplay);
 private:
-    bool m_bReciveDisplaySend;
+    bool m_bReceiveDisplaySend;
     
 public:
     enum ENCODE{
@@ -128,10 +128,10 @@ public:
         HEX_ASCII
     };
     Q_ENUM(ENCODE)
-    ENCODE GetReciveEncode();
-    int SetReciveEncode(ENCODE code);
+    ENCODE GetReceiveEncode();
+    int SetReceiveEncode(ENCODE code);
 private:
-    ENCODE m_ReciveDisplayCode;
+    ENCODE m_ReceiveDisplayCode;
     
 public:
     ENCODE GetSendEncode();

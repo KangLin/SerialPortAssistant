@@ -48,7 +48,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
     m_nSend(0),    
-    m_nRecive(0),
+    m_nReceive(0),
     m_nDrop(0),
     m_cmbPortIndex(-1),
     m_Timer(this),    
@@ -119,8 +119,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cbr->setChecked(v & CGlobal::SEND_R_N::R);
     ui->cbn->setChecked(v & CGlobal::SEND_R_N::N);
     
-    ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReciveDisplaySend());
-    ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReciveDisplayTime());
+    ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReceiveDisplaySend());
+    ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReceiveDisplayTime());
     ui->cbSaveToFile->setChecked(CGlobal::Instance()->GetSaveFile());
     
     check = connect(&m_SerialPort, SIGNAL(dataTerminalReadyChanged(bool)),
@@ -199,11 +199,11 @@ int CMainWindow::InitLeftBar()
 {
     bool bVisable = false;
     m_bInitEncodeCombox = true;
-    InitEncodeComboBox(ui->cbReciveEncoded);
+    InitEncodeComboBox(ui->cbReceiveEncoded);
     InitEncodeComboBox(ui->cbSendEncode);
     m_bInitEncodeCombox = false;
-    CGlobal::ENCODE c = CGlobal::Instance()->GetReciveEncode();
-    ui->cbReciveEncoded->setCurrentIndex(ui->cbReciveEncoded->findData(c));
+    CGlobal::ENCODE c = CGlobal::Instance()->GetReceiveEncode();
+    ui->cbReceiveEncoded->setCurrentIndex(ui->cbReceiveEncoded->findData(c));
     c = CGlobal::Instance()->GetSendEncode();
     ui->cbSendEncode->setCurrentIndex(ui->cbSendEncode->findData(c));
 
@@ -217,7 +217,7 @@ int CMainWindow::InitEncodeComboBox(QComboBox* comboBox)
 {
     comboBox->addItem("ASCII", CGlobal::ASCII);
     comboBox->addItem("HEX", CGlobal::HEX);
-    if(comboBox == ui->cbReciveEncoded)
+    if(comboBox == ui->cbReceiveEncoded)
     {
         comboBox->addItem("HEX ASCII", CGlobal::HEX_ASCII);
     }
@@ -225,12 +225,12 @@ int CMainWindow::InitEncodeComboBox(QComboBox* comboBox)
     return 0;
 }
 
-void CMainWindow::on_cbReciveEncoded_currentIndexChanged(int index)
+void CMainWindow::on_cbReceiveEncoded_currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     if(m_bInitEncodeCombox) return;
-    CGlobal::Instance()->SetReciveEncode(
-        static_cast<CGlobal::ENCODE>(ui->cbReciveEncoded->currentData().toInt()));
+    CGlobal::Instance()->SetReceiveEncode(
+        static_cast<CGlobal::ENCODE>(ui->cbReceiveEncoded->currentData().toInt()));
 }
 
 void CMainWindow::on_cbSendEncode_currentIndexChanged(int index)
@@ -268,7 +268,7 @@ void CMainWindow::slotReadChannelFinished()
         bCheck = m_SerialPort.disconnect();
         Q_ASSERT(bCheck);
 
-        SetStatusInfo(tr("Serail Port Close"));
+        SetStatusInfo(tr("Serial Port Close"));
         return;
     }
 }
@@ -296,7 +296,7 @@ void CMainWindow::on_pbOpen_clicked()
         ui->actionOpen->setIcon(QIcon(":/icon/Start"));
         ui->pbSend->setEnabled(false);
 
-        SetStatusInfo(tr("Serail Port Close"));
+        SetStatusInfo(tr("Serial Port Close"));
         ui->actionRefresh_R->setVisible(true);
         
         InitPinout();
@@ -331,7 +331,7 @@ void CMainWindow::on_pbOpen_clicked()
     if(!bCheck)
     {
         QString szError;
-        szError = tr("Open serail port %1 fail errNo[%2]: %3").
+        szError = tr("Open Serial port %1 fail errNo[%2]: %3").
                 arg(ui->cmbPort->currentText(),
                     QString::number(m_SerialPort.error()), m_SerialPort.errorString());
         qCritical(Logger) << szError;
@@ -351,7 +351,7 @@ void CMainWindow::on_pbOpen_clicked()
 
     SetStatusInfo(GetSerialPortSettingInfo(), Qt::green);
     m_nSend = 0;
-    m_nRecive = 0;
+    m_nReceive = 0;
     m_nDrop = 0;
     m_nTransmissions = 0;
     m_statusRx.setText(tr("Rx: 0 Bytes"));
@@ -392,21 +392,21 @@ QString CMainWindow::GetSerialPortSettingInfo()
 void CMainWindow::slotQTextEditMaxLength()
 {
     int maxLength = 102400;
-    int length = ui->teRecive->toPlainText().length();
+    int length = ui->teReceive->toPlainText().length();
     if(length > maxLength << 1)
     {
-        QTextCursor cursor = ui->teRecive->textCursor();
+        QTextCursor cursor = ui->teReceive->textCursor();
         cursor.movePosition(QTextCursor::Start);
         cursor.setPosition(length - maxLength, QTextCursor::KeepAnchor);
         cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
         cursor.removeSelectedText();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
-        //ui->teRecive->setTextCursor(cursor);
+        //ui->teReceive->setTextCursor(cursor);
         qDebug(Logger) << "slotQTextEditMaxLength";
     }
 }
 
-void CMainWindow::AddRecive(const QString &szText, bool bRecive)
+void CMainWindow::AddReceive(const QString &szText, bool bReceive)
 {
     QString szPrex;
 
@@ -415,7 +415,7 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 
     if(ui->cbDisplaySend->isChecked())
     {
-        if(bRecive)
+        if(bReceive)
             szPrex += "<- ";
         else
             szPrex += "-> ";
@@ -423,18 +423,18 @@ void CMainWindow::AddRecive(const QString &szText, bool bRecive)
 
     if(!szPrex.isEmpty())
     {
-        ui->teRecive->insertPlainText("\n");
-        ui->teRecive->insertPlainText(szPrex);
+        ui->teReceive->insertPlainText("\n");
+        ui->teReceive->insertPlainText(szPrex);
     }
 
-    ui->teRecive->insertPlainText(szText);
+    ui->teReceive->insertPlainText(szText);
 
     slotQTextEditMaxLength();
-    if(!ui->actionPasue_P->isChecked())
+    if(!ui->actionPause_P->isChecked())
     {
-        QTextCursor cursor = ui->teRecive->textCursor();
+        QTextCursor cursor = ui->teReceive->textCursor();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
-        ui->teRecive->setTextCursor(cursor);
+        ui->teReceive->setTextCursor(cursor);
     }
 }
 
@@ -452,7 +452,7 @@ void CMainWindow::slotRead()
         qCritical(Logger) << "read data fail";   
         return;
     }
-    m_nRecive += d.length();
+    m_nReceive += d.length();
     qDebug() << "slotRead: length:" << d.size() <<  d;
     
     if(ui->cbSaveToFile->isChecked())
@@ -467,7 +467,7 @@ void CMainWindow::slotRead()
     
     QString szText;
     CGlobal::ENCODE c = static_cast<CGlobal::ENCODE>(
-                ui->cbReciveEncoded->currentData().toInt());
+                ui->cbReceiveEncoded->currentData().toInt());
     switch (c) {
     case CGlobal::ASCII:
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 3))
@@ -527,9 +527,9 @@ void CMainWindow::slotRead()
     }
 
     //显示接收
-    AddRecive(szText, true);
+    AddReceive(szText, true);
 
-    m_statusRx.setText(tr("Rx: ") + QString::number(m_nRecive) + tr(" Bytes"));
+    m_statusRx.setText(tr("Rx: ") + QString::number(m_nReceive) + tr(" Bytes"));
 }
 
 bool CMainWindow::CheckHexChar(QChar c)
@@ -672,7 +672,7 @@ int CMainWindow::SendInput()
 
     //display send
     if(ui->cbDisplaySend->isChecked())
-        AddRecive(szText, false);
+        AddReceive(szText, false);
 
     //Add to recently sent list
     if(-1 == ui->cmbRecent->findText(
@@ -765,11 +765,11 @@ int CMainWindow::SetSaveFileName()
     int nRet = 0;
     QString szFile = QStandardPaths::writableLocation(
                 QStandardPaths::TempLocation)
-            + QDir::separator() + "SerialAssistantRecive.txt";
+            + QDir::separator() + "SerialAssistantReceive.txt";
     if(!QSerialPortInfo::availablePorts().isEmpty())
         szFile = QStandardPaths::writableLocation(
                 QStandardPaths::TempLocation)
-            + QDir::separator() + "SerialAssistantRecive_"
+            + QDir::separator() + "SerialAssistantReceive_"
             + QSerialPortInfo::availablePorts()
             .at(ui->cmbPort->currentIndex()).portName()
             + ".txt";
@@ -823,7 +823,7 @@ void CMainWindow::on_cbSendLoop_clicked()
 
 void CMainWindow::on_actionClear_triggered()
 {
-    ui->teRecive->clear();
+    ui->teReceive->clear();
 }
 
 void CMainWindow::on_actionOpen_triggered()
@@ -1065,12 +1065,12 @@ void CMainWindow::on_cbn_clicked(bool checked)
 
 void CMainWindow::on_cbDisplaySend_clicked(bool checked)
 {
-    CGlobal::Instance()->SetReciveDisplaySend(checked);
+    CGlobal::Instance()->SetReceiveDisplaySend(checked);
 }
 
 void CMainWindow::on_cbDisplayTime_clicked(bool checked)
 {
-    CGlobal::Instance()->SetReciveDisplayTime(checked);
+    CGlobal::Instance()->SetReceiveDisplayTime(checked);
 }
 
 void CMainWindow::on_cmbBoudRate_currentTextChanged(const QString &szText)
@@ -1263,15 +1263,15 @@ void CMainWindow::on_pbPortSeetings_clicked()
         ui->pbPortSeetings->setIcon(QIcon(":/icon/Right"));
 }
 
-void CMainWindow::on_pbReciveSettings_clicked()
+void CMainWindow::on_pbReceiveSettings_clicked()
 {
-    bool bVisible = ui->gbReciveSettings->isHidden();
-    ui->gbReciveSettings->setVisible(bVisible);
-    ui->pbReciveSettings->setChecked(bVisible);
+    bool bVisible = ui->gbReceiveSettings->isHidden();
+    ui->gbReceiveSettings->setVisible(bVisible);
+    ui->pbReceiveSettings->setChecked(bVisible);
     if(bVisible)
-        ui->pbReciveSettings->setIcon(QIcon(":/icon/Down"));
+        ui->pbReceiveSettings->setIcon(QIcon(":/icon/Down"));
     else
-        ui->pbReciveSettings->setIcon(QIcon(":/icon/Right"));
+        ui->pbReceiveSettings->setIcon(QIcon(":/icon/Right"));
 }
 
 void CMainWindow::on_pbSendSettings_clicked()

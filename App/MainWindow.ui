@@ -133,12 +133,12 @@
                </widget>
               </item>
               <item row="2" column="0">
-               <widget class="QPushButton" name="pbReciveSettings">
+               <widget class="QPushButton" name="pbReceiveSettings">
                 <property name="autoFillBackground">
                  <bool>false</bool>
                 </property>
                 <property name="text">
-                 <string>Recive Settings</string>
+                 <string>Receive Settings</string>
                 </property>
                 <property name="icon">
                  <iconset resource="Resource/Resource.qrc">
@@ -209,7 +209,7 @@
                </layout>
               </item>
               <item row="3" column="0">
-               <widget class="QGroupBox" name="gbReciveSettings">
+               <widget class="QGroupBox" name="gbReceiveSettings">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -246,7 +246,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="cbReciveEncoded">
+                    <widget class="QComboBox" name="cbReceiveEncoded">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -810,7 +810,7 @@
             </layout>
            </item>
            <item row="1" column="1">
-            <widget class="QTextEdit" name="teRecive">
+            <widget class="QTextEdit" name="teReceive">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -925,7 +925,7 @@
     <addaction name="separator"/>
     <addaction name="actionClear"/>
     <addaction name="actionClear_Send_History"/>
-    <addaction name="actionPasue_P"/>
+    <addaction name="actionPause_P"/>
     <addaction name="separator"/>
     <addaction name="actionOpen_Log_G"/>
     <addaction name="actionOpen_save_file"/>
@@ -969,7 +969,7 @@
    <addaction name="actionRefresh_R"/>
    <addaction name="actionOpen"/>
    <addaction name="actionClear"/>
-   <addaction name="actionPasue_P"/>
+   <addaction name="actionPause_P"/>
    <addaction name="separator"/>
    <addaction name="actionAbout_A"/>
    <addaction name="separator"/>
@@ -1049,7 +1049,7 @@
     <string>LeftBar(&amp;L)</string>
    </property>
   </action>
-  <action name="actionPasue_P">
+  <action name="actionPause_P">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1058,7 +1058,7 @@
      <normaloff>:/icon/Pause</normaloff>:/icon/Pause</iconset>
    </property>
    <property name="text">
-    <string>Pasue(&amp;P) the flow list</string>
+    <string>Pause(&amp;P) the flow list</string>
    </property>
    <property name="toolTip">
     <string>Pause the flow list</string>
