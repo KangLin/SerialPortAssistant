@@ -136,4 +136,4 @@ If it cannot be displayed, please open:
         sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
                  libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
 
-- tag.sh: This script is used to generate new release version numbers and tag
+- deploy.sh: This script is used to generate new release version numbers and tag
