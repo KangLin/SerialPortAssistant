@@ -127,4 +127,4 @@
         sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
                  libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
 
-- tag.sh: 此脚本用于产生新的发行版本号和标签
+- deploy.sh: 此脚本用于产生新的发行版本号和标签
