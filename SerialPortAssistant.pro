@@ -15,7 +15,7 @@ SUBDIRS = RabbitCommon App
 
 other.files = License.md Authors.md Authors_zh_CN.md \
     ChangeLog.md ChangeLog_zh_CN.md
-win32: other.files *= AppIcon.ico
+win32: other.files *= App/SerialPortAssistant.ico
 android: other.path = $$PREFIX/assets
 else: other.path = $$PREFIX
 other.CONFIG += directory no_check_exist
