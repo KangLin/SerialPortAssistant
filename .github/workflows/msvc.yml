@@ -113,7 +113,7 @@ jobs:
         nmake install
         makensis Install.nsi
 
-    - name: Package 
+    - name: Update artifact 
       uses: actions/upload-artifact@v2
       with:
         name: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.BUILD_TYPE}}_qt${{matrix.qt_version}}_${{matrix.qt_arch}}
