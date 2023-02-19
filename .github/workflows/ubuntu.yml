@@ -19,7 +19,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     env:
-      SerialPortAssistant_VERSION: 0.5.11
+      SerialPortAssistant_VERSION: 0.5.12
 
     steps:
     - uses: actions/checkout@v2

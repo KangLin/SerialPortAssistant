@@ -1,15 +1,9 @@
-serialportassistant (0.5.11) stable; urgency=medium
+serialportassistant (0.5.12) stable; urgency=medium
 
-    * CI: fix msvc.yml
-    * Disable QUIWidget
-    * Use qDebug
-    * Support Qt6
-    * StateMachin support Qt6
-    * Modify translations
-    * Modify spelling error
-    * Modify style menu
-    * modify install.nsi
-    * Remove not use file
+    * Docs: modify screen shot and chang log
+    * CI: modify msvc.yml
+    * Fix typos #4
+    * Update README.md
 
- -- Kang Lin <kl222@126.com>  Sat, 18 Feb 2023 13:11:45 +0800
+ -- Kang Lin <kl222@126.com>  Sun, 19 Feb 2023 10:29:14 +0800
 

@@ -1,5 +1,9 @@
 修改日志
 ------
++ 版本: v0.5.12
+  - 修复拼写错误
+  - github actions:
+    + msvc.yml 能够工作
 
 + 版本: v0.5.11
   - 更新与 RabbitCommon 相关的代码

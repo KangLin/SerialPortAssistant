@@ -1,6 +1,11 @@
 Change log
 ----------
 
++ Version: v0.5.12
+  - Fix typos
+  - github actions:
+    + msvc.yml works
+
 + Version: v0.5.11
   - Update the code of RabbitCommon
   - Support Qt6

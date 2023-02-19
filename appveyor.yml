@@ -1,5 +1,5 @@
 #TODO: Change version
-version: 'v0.5.11.{build}'
+version: 'v0.5.12.{build}'
 
 environment:
   STOREPASS:
