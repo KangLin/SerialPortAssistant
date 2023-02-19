@@ -50,7 +50,7 @@ jobs:
       uses: actions/cache@v1  # not v2!
       with:
         path: ${{env.TOOSL_DIR}}/qt
-        key: SerialPortAssistant_msvc_qt-${{matrix.qt_arch}}-qt${{matrix.qt_version}}
+        key: SerialPortAssistant_msvc_qt${{matrix.qt_version}}_${{matrix.qt_arch}}
     
     - name: Install Qt
       # You may pin to the exact commit or the version.
@@ -116,7 +116,7 @@ jobs:
     - name: Package 
       uses: actions/upload-artifact@v2
       with:
-        name: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}
+        name: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.BUILD_TYPE}}_qt${{matrix.qt_version}}_${{matrix.qt_arch}}
         path: |
           ${{github.workspace}}/build/SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe
           #${{github.workspace}}/build/update_*.xml
