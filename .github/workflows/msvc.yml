@@ -36,7 +36,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      SerialPortAssistant_VERSION: v0.5.12
+      SerialPortAssistant_VERSION: v0.5.13
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       SOURCE_DIR:  ${{github.workspace}}\.cache\source
       TOOSL_DIR:   ${{github.workspace}}\.cache\tools

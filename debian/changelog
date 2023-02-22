@@ -1,9 +1,12 @@
-serialportassistant (0.5.12) stable; urgency=medium
+serialportassistant (0.5.13) stable; urgency=medium
 
-    * Docs: modify screen shot and chang log
-    * CI: modify msvc.yml
-    * Fix typos #4
-    * Update README.md
+    * CI: modify ubuntu.yml
+    * Modify name
+    * Docs: modify README
+    * Fix: Fixed a bug where the correct dependency library could not be loaded when there were different versions of the dependency library under Linux
+    * Add restore and save main window state
+    * CI: add mingw.yml
+    * CI: Modify msvc.yml
 
- -- Kang Lin <kl222@126.com>  Sun, 19 Feb 2023 10:55:21 +0800
+ -- Kang Lin <kl222@126.com>  Wed, 22 Feb 2023 15:31:48 +0800
 
