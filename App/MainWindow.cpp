@@ -132,6 +132,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     Q_ASSERT(check);
     
     InitPinout();
+    
+    RabbitCommon::CTools::RestoreWidget(this);
 }
 
 CMainWindow::~CMainWindow()
@@ -139,6 +141,7 @@ CMainWindow::~CMainWindow()
     on_pbOpen_clicked();
     ClearMenu();
     ClearTranslate();
+    RabbitCommon::CTools::SaveWidget(this);
 
     delete ui;
 }
