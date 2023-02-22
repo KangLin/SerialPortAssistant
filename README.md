@@ -20,6 +20,7 @@ Author: Kang Lin (kl222@126.com)
 
 [![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
 [![msvc](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml)
+[![mingw](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml)
 [![ubuntu](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml)
 [![android](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml)
 

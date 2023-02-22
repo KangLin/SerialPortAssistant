@@ -3,11 +3,13 @@ Change log
 + Version: v0.5.13
   - Fix: Fixed a bug where the correct dependency library could not be loaded
      when there were different versions of the dependency library under Linux.
+  - Add save and restore main window state
 
 + Version: v0.5.12
   - Fix typos
   - github actions:
     + msvc.yml works
+  - About window: add revisioin, and be opened from main repository
 
 + Version: v0.5.11
   - Update the code of RabbitCommon
