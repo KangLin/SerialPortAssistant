@@ -30,8 +30,8 @@ function_config()
         fi
         ln -s ${INSTALL_DIR}/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/SerialPortAssistant.png
     fi
-    echo "${INSTALL_DIR}/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
-    echo "${INSTALL_DIR}/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
+    #echo "${INSTALL_DIR}/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
+    #echo "${INSTALL_DIR}/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
     export QT_VERSION_DIR=
     if [ -n "${QT_VERSION_DIR}" ]; then
         echo "/opt/qt${QT_VERSION_DIR}/lib" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
