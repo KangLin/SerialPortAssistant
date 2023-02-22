@@ -56,7 +56,7 @@ Author: Kang Lin (kl222@126.com)
 - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- windows
+- windows: Windows XP or later
   + [Download SerialPortAssistant_Setup_v0.5.13.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.13/SerialPortAssistant_Setup_v0.5.13.exe)
   + [Download SerialPortAssistant_Setup_v0.5.13.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.13/SerialPortAssistant_Setup_v0.5.13.exe/download)
 
