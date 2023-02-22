@@ -61,16 +61,22 @@ Author: Kang Lin (kl222@126.com)
   + [Download SerialPortAssistant_Setup_v0.5.12.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/SerialPortAssistant_Setup_v0.5.12.exe/download)
 
 - ubuntu
-  + Download from sourceforge:
-    - [serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb/download)
-    - [serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb/download)
-  + Download from github:
-    - [serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb)
-    - [serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb)
+  + serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb/download)
+    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb)
+    
+            sudo apt install ./serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+            # If you're on an older Linux distribution, you will need to run this instead:         
+            # sudo dpkg -i serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+            # sudo apt-get install -f # Install dependencies
 
-          sudo apt install ./serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+  + serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb:
+    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb/download)
+    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb)
+
+          sudo apt install ./serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb
           # If you're on an older Linux distribution, you will need to run this instead:         
-          # sudo dpkg -i serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+          # sudo dpkg -i serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb
           # sudo apt-get install -f # Install dependencies
 
 - android

@@ -30,7 +30,7 @@ install_unix.files = Install/install.sh
 install_unix.path = $$PREFIX
 install_unix.CONFIG += directory no_check_exist
 
-start_script.files = Install/SerialPortAssistant.sh
+start_script.files = share/SerialPortAssistant.sh
 start_script.path = $$PREFIX/bin
 start_script.CONFIG += directory no_check_exist
 unix: !android: INSTALLS += install_unix start_script
@@ -44,7 +44,7 @@ unix: !android: INSTALLS += install_unix start_script
 
     # install desktop file
     DESKTOP_FILE.target = DESKTOP_FILE
-    DESKTOP_FILE.files = $$PWD/debian/SerialPortAssistant.desktop
+    DESKTOP_FILE.files = share/SerialPortAssistant.desktop
     DESKTOP_FILE.path = $$system_path($${PREFIX})/share/applications
     DESKTOP_FILE.CONFIG += directory no_check_exist
     INSTALLS += DESKTOP_FILE icon128

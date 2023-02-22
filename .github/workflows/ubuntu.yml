@@ -2,15 +2,12 @@ name: ubuntu
 
 on: [push]
 
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
-
 jobs:
   build:
     strategy:
       matrix:
         os: [Ubuntu-20.04, Ubuntu-18.04]
+        BUILD_TYPE: [Release]
 
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
@@ -52,22 +49,33 @@ jobs:
         ./build_debpackage.sh
         cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
 
-    - name: Install deb
+    - name: update xml file
+      working-directory: ${{github.workspace}}
+      if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.os == 'Ubuntu-20.04'}}
       run: |
         sudo Xvfb :99 -ac &
         export DISPLAY=:99.0
-        sudo dpkg -i serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
+        sudo apt install ./serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
         echo "test ......"
         ./test/test_linux.sh
+        echo "Update update_linux.xml ......"
+        MD5=`md5sum serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb | awk '{print $1}'`
+        export QT_XCB_GL_INTEGRATION=none
+        ulimit -c unlimited
+        echo "# sudo sysctl -w kernel.core_pattern=core"
+        sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
+        /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
+                -f "`pwd`/update_linux.xml" \
+                --md5 ${MD5} \
+                -m "${{env.SerialPortAssistant_VERSION}}" \
+                --pf serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb \
+                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64_${{matrix.os}}.deb"
 
-    #- name: Install deb
-    #  run: |
-        # MD5=`md5sum serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb | awk '{print $1}'`
-        # /opt/SerialPortAssistant/bin/SerialPortAssistant \
-        #        -f "`pwd`/update_linux.xml" \
-        #        --md5 ${MD5} \
-        #        -m "${{env.SerialPortAssistant_VERSION}}" \
-        #        --url "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb"
+    - name: dump core
+      if: false
+      working-directory: ${{github.workspace}}
+      run: |
+        gdb /opt/SerialPortAssistant/bin/SerialPortAssistant core
 
     #- name: Generate appimage
     #  run: |
@@ -80,6 +88,14 @@ jobs:
     #          -qmake=qmake -appimage -verbose
     #    cp SerialPort_Assistant-${VERSION}-x86_64.AppImage ${{github.workspace}}/.
 
+    - name: update
+      uses: actions/upload-artifact@v2
+      with:
+        name: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}
+        path: |
+          serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
+          update_linux.xml
+    
     - name: Upload To Github Release
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       uses: softprops/action-gh-release@v1
@@ -91,11 +107,4 @@ jobs:
           [:cn: 修改日志](ChangeLog_zh_CN.md) [:us: Change log](ChangeLog.md)
         files: |
           serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
-          
-    - name: update
-      uses: actions/upload-artifact@v2
-      with:
-        name: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.os }}
-        path: |
-          serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}_amd64.deb
-
+          update_linux.xml

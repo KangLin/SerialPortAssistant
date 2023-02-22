@@ -52,21 +52,27 @@
 - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- windows
+- windows: 支持 Windows XP 及以后系统
   + [从 sourceforge 下载 SerialPortAssistant_Setup_v0.5.12-10.exe](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/SerialPortAssistant_Setup_v0.5.12.exe/download)
   + [从 github 下载 SerialPortAssistant_Setup_v0.5.12.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/SerialPortAssistant_Setup_v0.5.12.exe)  
 
 - ubuntu
-  + 从 sourceforge 下载:
-    - [serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb/download)
-    - [serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb/download)
-  + 从 github 下载:
-    - [serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb)
-    - [serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb)
-
+  + serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb/download)
+    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb)
+  
           sudo apt install ./serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
-          # If you're on an older Linux distribution, you will need to run this instead:         
+          # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
           # sudo dpkg -i serialportassistant_0.5.12_Ubuntu-20.04_amd64.deb
+          # sudo apt-get install -f # Install dependencies
+
+  + serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb:
+    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb/download)
+    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.12/serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb)
+
+          sudo apt install ./serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb
+          # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
+          # sudo dpkg -i serialportassistant_0.5.12_Ubuntu-18.04_amd64.deb
           # sudo apt-get install -f # Install dependencies
  
 - android
