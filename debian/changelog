@@ -1,12 +1,8 @@
-serialportassistant (0.5.13) stable; urgency=medium
+serialportassistant (0.5.14) stable; urgency=medium
 
-    * CI: modify ubuntu.yml
-    * Modify name
+    * CI: Use qDebug output log file
+    * FIX deploy.sh for mingw.yml
     * Docs: modify README
-    * Fix: Fixed a bug where the correct dependency library could not be loaded when there were different versions of the dependency library under Linux
-    * Add restore and save main window state
-    * CI: add mingw.yml
-    * CI: Modify msvc.yml
 
- -- Kang Lin <kl222@126.com>  Wed, 22 Feb 2023 15:31:48 +0800
+ -- Kang Lin <kl222@126.com>  Thu, 02 Mar 2023 21:28:55 +0800
 

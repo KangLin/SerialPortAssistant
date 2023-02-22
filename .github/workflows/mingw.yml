@@ -22,7 +22,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}\.cache\source
       TOOSL_DIR:   ${{github.workspace}}\.cache\tools
       INSTALL_DIR: ${{github.workspace}}\.cache\install_mingw
-      SerialPortAssistant_VERSION: v0.5.13
+      SerialPortAssistant_VERSION: v0.5.14
 
     steps:
     - uses: actions/checkout@v2

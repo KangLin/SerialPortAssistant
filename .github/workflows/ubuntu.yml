@@ -16,23 +16,63 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     env:
-      SerialPortAssistant_VERSION: 0.5.13
+      SerialPortAssistant_VERSION: 0.5.14
+      SOURCE_DIR:  ${{github.workspace}}/.cache/source
+      TOOSL_DIR:   ${{github.workspace}}/.cache/tools
+      INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.BUILD_TYPE}}_${{matrix.os}}
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Make directory
+      run: |
+        cmake -E make_directory ${{github.workspace}}/build
+        cmake -E make_directory ${{env.SOURCE_DIR}}
+        cmake -E make_directory ${{env.TOOSL_DIR}}
+        cmake -E make_directory ${{env.INSTALL_DIR}}
 
     - name: apt helper action
-      uses: ryankurte/action-apt@v0.2.0
-      with:
-        # architectures to pass to dpkg --add-architecture
-        #architectures: # optional
-        # apt packages to install
-        packages: xvfb xpra debhelper fakeroot qttools5-dev qttools5-dev-tools libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
+      run: |
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install xvfb xpra debhelper fakeroot \
+          qttools5-dev qttools5-dev-tools libqt5serialport5-dev qtbase5-dev \
+          qtbase5-dev-tools cmake
+        if [ "Ubuntu-20.04" == "${{matrix.os}}" ]; then
+            echo "sudo apt install libcmark-gfm-dev libcmark-gfm-extensions-dev"
+            sudo apt install libcmark-gfm-dev libcmark-gfm-extensions-dev
+        fi
 
-    - name: Create Build Environment
-      # Some projects don't allow in-source building, so create a separate build directory
-      # We'll use this as our working directory for all subsequent commands
-      run: cmake -E make_directory ${{github.workspace}}/build
+    - name: Cache installed
+      uses: actions/cache@v2
+      id: cache-installed
+      with:
+        path: |
+          ${{env.INSTALL_DIR}}
+        key: SerialPortAssistant-cache-installed-ubuntu-${{matrix.os}}-${{matrix.BUILD_TYPE}}
+
+#    - name: build log4qt
+#      working-directory: ${{env.SOURCE_DIR}}
+#      env:
+#        QT_ROOT: /usr/lib/`uname -m`-linux-gnu/qt5
+#      run: |
+#        if [ ! -d ${{env.INSTALL_DIR}}/lib/cmake/Log4Qt ]; then
+#            git clone https://github.com/KangLin/Log4Qt.git
+#            cd Log4Qt
+#            cmake -E make_directory build
+#            cd build
+#            cmake .. -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} \
+#                -DQT_DIR=${{env.QT_ROOT}}/lib/cmake/Qt5 \
+#                -DQt5_DIR=${{env.QT_ROOT}}/lib/cmake/Qt5 \
+#                -DCMAKE_INSTALL_PREFIX=${{env.INSTALL_DIR}} \
+#                -DCMAKE_PREFIX_PATH=${{env.QT_ROOT}} \
+#                -DLOG4QT_ENABLE_EXAMPLES=OFF \
+#                -DLOG4QT_ENABLE_TESTS=OFF
+#            cmake --build . --config ${{matrix.BUILD_TYPE}}
+#            cmake --build . --config ${{matrix.BUILD_TYPE}} --target install/strip
+#        fi
 
     - name: git clone RabbitCommon
       working-directory: ${{github.workspace}}
@@ -41,6 +81,8 @@ jobs:
     - name: build SerialPortAssistant
       env:
         RabbitCommon_DIR: ${{github.workspace}}/RabbitCommon
+        #Log4Qt_DIR: ${{env.INSTALL_DIR}}
+        WITH_CMARK_GFM: ON
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12

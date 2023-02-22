@@ -1,5 +1,8 @@
 Change log
 ----------
++ Version: v0.5.14
+  - Fix: log output file
+
 + Version: v0.5.13
   - Fix: Fixed a bug where the correct dependency library could not be loaded
      when there were different versions of the dependency library under Linux.

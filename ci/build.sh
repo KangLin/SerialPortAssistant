@@ -107,10 +107,10 @@ case ${BUILD_TARGERT} in
 esac
 
 if [ -n "$appveyor_SerialPortAssistant_VERSION" -a -z "$VERSION" ]; then
-    export VERSION="v0.5.13"
+    export VERSION="v0.5.14"
 fi
 if [ -z "$VERSION" ]; then
-    export VERSION="v0.5.13"
+    export VERSION="v0.5.14"
 fi
 export UPLOADTOOL_BODY="Release SerialPortAssistant-${VERSION}.<br>The change see [ChangeLog.md](ChangeLog.md) or [ChangeLog_zh_CN.md](ChangeLog_zh_CN.md)"
 #export UPLOADTOOL_PR_BODY=
