@@ -4,5 +4,5 @@ serialportassistant (0.5.14) stable; urgency=medium
     * FIX deploy.sh for mingw.yml
     * Docs: modify README
 
- -- Kang Lin <kl222@126.com>  Thu, 02 Mar 2023 21:28:55 +0800
+ -- Kang Lin <kl222@126.com>  Thu, 02 Mar 2023 21:31:34 +0800
 

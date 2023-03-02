@@ -47,7 +47,7 @@ isEmpty(SerialPortAssistant_VERSION) {
     }
 }
 isEmpty(SerialPortAssistant_VERSION){
-    SerialPortAssistant_VERSION="v0.5.1"
+    SerialPortAssistant_VERSION="v0.5.14"
 }
 message("SerialPortAssistant_VERSION:$$SerialPortAssistant_VERSION")
 message("SerialPortAssistant_VERSION_Revision:$$SerialPortAssistant_VERSION_Revision")
