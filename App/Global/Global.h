@@ -47,22 +47,22 @@ public:
     static CGlobal* Instance();
 
 public:
-    bool GetStatusbarVisable();
-    int SetStatusbarVisable(bool bVisable);
+    bool GetStatusbarVisible();
+    int SetStatusbarVisible(bool bVisible);
 private:
-    bool m_StatusbarVisable;
+    bool m_StatusbarVisible;
 
 public:
-    bool GetToolbarVisable();
-    int SetToolbarVisable(bool bVisable);
+    bool GetToolbarVisible();
+    int SetToolbarVisible(bool bVisible);
 private:
-    bool m_ToolbarVisable;
+    bool m_ToolbarVisible;
 
 public:
-    bool GetLeftBarVisable();
-    int SetLeftBarVisable(bool bVisable);
+    bool GetLeftBarVisible();
+    int SetLeftBarVisible(bool bVisible);
 private:
-    bool m_LeftBarVisable;
+    bool m_LeftBarVisible;
     
 public:
     QString GetLanguage();

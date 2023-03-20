@@ -33,7 +33,7 @@ Abstract:
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
     #include "RabbitCommonDir.h"
-    #include "FrmStyle/FrmStyle.h"
+    #include "FrmStyle.h"
     #include "RabbitCommonTools.h"
 #endif
 #ifdef BUILD_QUIWidget
@@ -72,6 +72,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     InitMenu();
     
+    ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
+                             RabbitCommon::CTools::GetLogMenu(ui->menuTools_T));
+
     InitStatusBar();
     InitToolBar();
     InitLeftBar();
@@ -132,8 +135,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     Q_ASSERT(check);
     
     InitPinout();
-    
+#ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::RestoreWidget(this);
+#endif
 }
 
 CMainWindow::~CMainWindow()
@@ -141,8 +145,9 @@ CMainWindow::~CMainWindow()
     on_pbOpen_clicked();
     ClearMenu();
     ClearTranslate();
+#ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::SaveWidget(this);
-
+#endif
     delete ui;
 }
 
@@ -166,8 +171,8 @@ int CMainWindow::RefreshSerialPorts()
 int CMainWindow::InitStatusBar()
 {
     ui->actionStatusBar_S->setChecked(
-                CGlobal::Instance()->GetStatusbarVisable());
-    statusBar()->setVisible(CGlobal::Instance()->GetStatusbarVisable());
+                CGlobal::Instance()->GetStatusbarVisible());
+    statusBar()->setVisible(CGlobal::Instance()->GetStatusbarVisible());
 
     SetStatusInfo(tr("Ready"));
     m_statusRx.setText(tr("Rx: 0 Bytes"));
@@ -193,14 +198,14 @@ int CMainWindow::InitStatusBar()
 int CMainWindow::InitToolBar()
 {
     ui->actionToolBar_T->setChecked(
-                CGlobal::Instance()->GetToolbarVisable());
-    ui->mainToolBar->setVisible(CGlobal::Instance()->GetToolbarVisable());
+                CGlobal::Instance()->GetToolbarVisible());
+    ui->mainToolBar->setVisible(CGlobal::Instance()->GetToolbarVisible());
     return 0;
 }
 
 int CMainWindow::InitLeftBar()
 {
-    bool bVisable = false;
+    bool bVisible = false;
     m_bInitEncodeCombox = true;
     InitEncodeComboBox(ui->cbReceiveEncoded);
     InitEncodeComboBox(ui->cbSendEncode);
@@ -210,9 +215,9 @@ int CMainWindow::InitLeftBar()
     c = CGlobal::Instance()->GetSendEncode();
     ui->cbSendEncode->setCurrentIndex(ui->cbSendEncode->findData(c));
 
-    bVisable = CGlobal::Instance()->GetLeftBarVisable();
-    ui->actionLeftBar_L->setChecked(bVisable);
-    ui->frmLeftBar->setVisible(bVisable);
+    bVisible = CGlobal::Instance()->GetLeftBarVisible();
+    ui->actionLeftBar_L->setChecked(bVisible);
+    ui->frmLeftBar->setVisible(bVisible);
     return 0;
 }
 
@@ -852,8 +857,8 @@ void CMainWindow::on_actionAbout_A_triggered()
     about->m_AppIcon = QImage(":/icon/AppIcon");
     about->m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
     about->m_szCopyrightStartTime = "2017";
-#ifdef SerialPortAssistant_VERSION_Revision
-    about->m_szVersionRevision = SerialPortAssistant_VERSION_Revision;
+#ifdef SerialPortAssistant_Revision
+    about->m_szVersionRevision = SerialPortAssistant_Revision;
 #endif
     #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
         QUIWidget* quiwidget = new QUIWidget(nullptr, true);
@@ -1022,27 +1027,29 @@ void CMainWindow::changeEvent(QEvent *e)
     case QEvent::LanguageChange:
         ui->retranslateUi(this);
         break;
+    default:
+        break;
     }
 }
 
 void CMainWindow::on_actionToolBar_T_triggered()
 {
     ui->mainToolBar->setVisible(ui->actionToolBar_T->isChecked());
-    CGlobal::Instance()->SetToolbarVisable(ui->actionToolBar_T->isChecked());
+    CGlobal::Instance()->SetToolbarVisible(ui->actionToolBar_T->isChecked());
 }
 
 void CMainWindow::on_actionStatusBar_S_triggered()
 {
     this->statusBar()->setVisible(ui->actionStatusBar_S->isChecked());
-    CGlobal::Instance()->SetStatusbarVisable(ui->actionStatusBar_S->isChecked());
+    CGlobal::Instance()->SetStatusbarVisible(ui->actionStatusBar_S->isChecked());
 }
 
 void CMainWindow::on_actionLeftBar_L_triggered()
 {
-    bool bVisable = false;
-    bVisable = ui->actionLeftBar_L->isChecked();
-    ui->frmLeftBar->setVisible(bVisable);
-    CGlobal::Instance()->SetLeftBarVisable(bVisable);
+    bool bVisible = false;
+    bVisible = ui->actionLeftBar_L->isChecked();
+    ui->frmLeftBar->setVisible(bVisible);
+    CGlobal::Instance()->SetLeftBarVisible(bVisible);
 }
 
 void CMainWindow::on_sbLoopTime_valueChanged(int v)
@@ -1184,11 +1191,6 @@ void CMainWindow::on_actionOpen_save_file_triggered()
     if(ui->leSaveToFile->text().isEmpty())
         return;
     QDesktopServices::openUrl(QUrl::fromLocalFile(ui->leSaveToFile->text()));
-}
-
-void CMainWindow::on_actionOpen_Log_G_triggered()
-{
-    RabbitCommon::CTools::OpenLogFile();
 }
 
 void CMainWindow::on_actionUpdate_U_triggered()

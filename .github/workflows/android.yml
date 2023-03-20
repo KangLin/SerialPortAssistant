@@ -4,8 +4,6 @@ on: [push]
 
 jobs:
   use_install_qt:
-    name: use install qt android_${{matrix.os}}-qt${{matrix.qt_version}}-${{matrix.VCPKG_TARGET_TRIPLET}}-${{matrix.BUILD_TYPE}}
-
     strategy:
       matrix:
         BUILD_TYPE: [Release]

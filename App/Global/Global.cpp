@@ -27,9 +27,9 @@ CGlobal::CGlobal(QObject *parent) :
     m_szStyleFile = conf.value(
                 "UI/StyleSheet", "").toString();
     m_szStyleMenu = conf.value("UI/MenuStyleSheet", "System").toString();
-    m_StatusbarVisable = conf.value("UI/Visable/Statusbar", "true").toBool();
-    m_ToolbarVisable = conf.value("UI/Visable/Toolbar", "true").toBool();
-    m_LeftBarVisable = conf.value("UI/Visable/LeftBar", "true").toBool();
+    m_StatusbarVisible = conf.value("UI/Visible/Statusbar", "true").toBool();
+    m_ToolbarVisible = conf.value("UI/Visible/Toolbar", "true").toBool();
+    m_LeftBarVisible = conf.value("UI/Visible/LeftBar", "true").toBool();
     m_bSendLoop = conf.value("Settings/Send/Loop", "false").toBool();
     m_nSendLoopTime = conf.value("Settings/Send/LoopTime", 1000).toInt();
     m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", 0).toInt();
@@ -73,45 +73,45 @@ int CGlobal::SetStyleMenu(QString szMenu, QString szFile)
     return 0;
 }
 
-bool CGlobal::GetStatusbarVisable()
+bool CGlobal::GetStatusbarVisible()
 {
-    return m_StatusbarVisable;
+    return m_StatusbarVisible;
 }
 
-int CGlobal::SetStatusbarVisable(bool bVisable)
+int CGlobal::SetStatusbarVisible(bool bVisible)
 {
-    m_StatusbarVisable = bVisable;
+    m_StatusbarVisible = bVisible;
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
-    conf.setValue("UI/Visable/Statusbar", m_StatusbarVisable);
+    conf.setValue("UI/Visible/Statusbar", m_StatusbarVisible);
     return 0;
 }
 
-bool CGlobal::GetToolbarVisable()
+bool CGlobal::GetToolbarVisible()
 {
-    return m_ToolbarVisable;
+    return m_ToolbarVisible;
 }
 
-int CGlobal::SetToolbarVisable(bool bVisable)
+int CGlobal::SetToolbarVisible(bool bVisible)
 {
-    m_ToolbarVisable = bVisable;
+    m_ToolbarVisible = bVisible;
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
-    conf.setValue("UI/Visable/Toolbar", m_ToolbarVisable);
+    conf.setValue("UI/Visible/Toolbar", m_ToolbarVisible);
     return 0;
 }
 
-bool CGlobal::GetLeftBarVisable()
+bool CGlobal::GetLeftBarVisible()
 {
-    return m_LeftBarVisable;
+    return m_LeftBarVisible;
 }
 
-int CGlobal::SetLeftBarVisable(bool bVisable)
+int CGlobal::SetLeftBarVisible(bool bVisible)
 {
-    m_LeftBarVisable = bVisable;
+    m_LeftBarVisible = bVisible;
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
-    conf.setValue("UI/Visable/LeftBar", m_LeftBarVisable);
+    conf.setValue("UI/Visible/LeftBar", m_LeftBarVisible);
     return 0;
 }
 

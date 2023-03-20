@@ -45,7 +45,7 @@
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="371"/>
-        <source>Recive Settings</source>
+        <source>Receive Settings</source>
         <translation>接收設置</translation>
     </message>
     <message>

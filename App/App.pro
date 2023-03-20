@@ -16,7 +16,7 @@ TARGET = SerialPortAssistant
 TEMPLATE = app
 
 isEmpty(DESTDIR): DESTDIR = $$OUT_PWD/../bin
-DEFINES *= HAVE_GUI
+DEFINES *= HAVE_RABBITCOMMON_GUI
 CONFIG(debug, debug|release) {
     DEFINES *= _DEBUG
 }
@@ -37,9 +37,9 @@ isEmpty(SerialPortAssistant_VERSION) {
             SerialPortAssistant_VERSION = $$GIT_DESCRIBE
         }
     }
-    SerialPortAssistant_VERSION_Revision = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
+    SerialPortAssistant_Revision = $$system(cd $$system_path($$PWD) && $$GIT rev-parse --short HEAD)
     isEmpty(SerialPortAssistant_VERSION) {
-        SerialPortAssistant_VERSION = $$SerialPortAssistant_VERSION_Revision
+        SerialPortAssistant_VERSION = $$SerialPortAssistant_Revision
     }
     
     isEmpty(SerialPortAssistant_VERSION){
@@ -50,11 +50,11 @@ isEmpty(SerialPortAssistant_VERSION){
     SerialPortAssistant_VERSION="v0.5.14"
 }
 message("SerialPortAssistant_VERSION:$$SerialPortAssistant_VERSION")
-message("SerialPortAssistant_VERSION_Revision:$$SerialPortAssistant_VERSION_Revision")
+message("SerialPortAssistant_Revision:$$SerialPortAssistant_Revision")
 
 DEFINES += SerialPortAssistant_VERSION=\"\\\"$$quote($$SerialPortAssistant_VERSION)\\\"\"
-!isEmpty(SerialPortAssistant_VERSION_Revision) {
-    DEFINES *= SerialPortAssistant_VERSION_Revision=\"\\\"$$quote($$SerialPortAssistant_VERSION_Revision)\\\"\"
+!isEmpty(SerialPortAssistant_Revision) {
+    DEFINES *= SerialPortAssistant_Revision=\"\\\"$$quote($$SerialPortAssistant_Revision)\\\"\"
 }
 first_version = $$$$str_member($$SerialPortAssistant_VERSION, 0, 0)
 equals(first_version, "v") {
@@ -124,10 +124,13 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$(RabbitCommon_DIR)
 isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
 !isEmpty(RabbitCommon_DIR): exists("$${RabbitCommon_DIR}/Src/Src.pro"){
     CONFIG(static): DEFINES *= RABBITCOMMON_STATIC_DEFINE LUNARCALENDAR_STATIC_DEFINE
-    DEFINES += RABBITCOMMON
+    DEFINES += RABBITCOMMON HAVE_RABBITCOMMON_GUI HAVE_UPDATE HAVE_ABOUT
     INCLUDEPATH += \
         $${RabbitCommon_DIR}/Src \
         $${RabbitCommon_DIR}/Src/export \
+        $${RabbitCommon_DIR}/Src/DlgAbout \
+        $${RabbitCommon_DIR}/Src/FrmUpdater \
+        $${RabbitCommon_DIR}/Src/Style \
         $$PWD/../3th_lib/Control
     
     LIBS *= -L$$DESTDIR -lRabbitCommon
@@ -135,8 +138,14 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
     message("Don't find RabbitCommon, in environment variable RabbitCommon_DIR:$$RabbitCommon_DIR")
     message("1. Please download RabbitCommon source code from https://github.com/KangLin/RabbitCommon ag:")
     message("   git clone https://github.com/KangLin/RabbitCommon.git")
-    error  ("2. Then set environment variable RabbitCommon_DIR to download dirctory")
+    error  ("2. Then set environment variable RabbitCommon_DIR to download directory")
 }
+
+configure.files = $$PWD/../etc/SerialPortAssistant_logqt.ini
+configure.path = $$PREFIX/etc
+configure.CONFIG += directory no_check_exist 
+!android: configure.path = $$PREFIX/etc
+INSTALLS += configure
 
 include($${RabbitCommon_DIR}/pri/Translations.pri)
 
