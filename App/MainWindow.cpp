@@ -73,7 +73,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitMenu();
     
     ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
-                             RabbitCommon::CTools::GetLogMenu(ui->menuTools_T));
+                             RabbitCommon::CTools::GetLogMenu(this));
 
     InitStatusBar();
     InitToolBar();
