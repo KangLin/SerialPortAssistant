@@ -36,6 +36,7 @@ jobs:
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       SerialPortAssistant_VERSION: v1.0.9
       artifact_name: build_macos
+      VCPKGGITCOMMITID: 1286cac8751e13bb289061b7e3b89eb4c3f613a2
 
     # Map the job outputs to step outputs
     outputs:
@@ -61,6 +62,21 @@ jobs:
           path: |
             ${{env.INSTALL_DIR}}
           key: Cache-macos-installed-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}
+
+      - name: run-vcpkg
+        uses: lukka/run-vcpkg@v7.4
+        with:
+          # Indicates whether to only setup vcpkg (i.e. installing it and setting the environment variables VCPKG_ROOT, RUNVCPK_VCPKG_ROOT), without installing any port.
+          #setupOnly: # optional
+          #vcpkgGitURL: https://github.com/KangLin/vcpkg.git
+          vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
+          vcpkgDirectory: ${{runner.workspace}}/vcpkg/
+          # Since the cache must be invalidated when content of the vcpkg.json file changes, let's
+          # compute its hash and append this to the computed cache's key.
+          appendedCacheKey: RabbitCommon_cache-vcpkg-msvc-vc${{matrix.VCPKG_PLATFORM_TOOLSET}}-${{matrix.triplet}}-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}-${{env.VCPKGGITCOMMITID}}
+          #additionalCachedPaths: ${{ env.VCPKG_ROOT }}/installed
+          vcpkgTriplet: '${{matrix.triplet}}'
+          vcpkgArguments: 'zlib openssl'
 
       - name: Cache Qt
         id: cache-qt

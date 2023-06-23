@@ -27,7 +27,7 @@ jobs:
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.BUILD_TYPE}}_${{matrix.qt_arch}}
       SerialPortAssistant_VERSION: v0.5.14
-      VCPKGGITCOMMITID: 5cf60186a241e84e8232641ee973395d4fde90e1
+      VCPKGGITCOMMITID: 1286cac8751e13bb289061b7e3b89eb4c3f613a2
       qt_modules: qtwebengine
 
     steps:
