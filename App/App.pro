@@ -132,7 +132,7 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
         $${RabbitCommon_DIR}/Src/FrmUpdater \
         $${RabbitCommon_DIR}/Src/Style \
         $$PWD/../3th_lib/Control
-    
+
     LIBS *= -L$$DESTDIR -lRabbitCommon
 } else {
     message("Don't find RabbitCommon, in environment variable RabbitCommon_DIR:$$RabbitCommon_DIR")
@@ -143,7 +143,7 @@ isEmpty(RabbitCommon_DIR): RabbitCommon_DIR=$$PWD/../../RabbitCommon
 
 configure.files = $$PWD/../etc/SerialPortAssistant_logqt.ini
 configure.path = $$PREFIX/etc
-configure.CONFIG += directory no_check_exist 
+configure.CONFIG += directory no_check_exist
 !android: configure.path = $$PREFIX/etc
 INSTALLS += configure
 
