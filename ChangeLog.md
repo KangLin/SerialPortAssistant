@@ -1,5 +1,8 @@
 Change log
 ----------
++ Version: v0.5.15
+  - Use RabbitCommon v2
+
 + Version: v0.5.14
   - Fix: log output file
 
