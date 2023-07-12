@@ -1,15 +1,15 @@
 #!/bin/bash
 
-if [ -f /usr/lib/`uname -m`-linux-gnu/qt5/bin/qmake -a -z "$QT_ROOT" ]; then
-    QT_ROOT=/usr/lib/`uname -m`-linux-gnu/qt5
+if [ -f /usr/bin/qmake -a -z "$QT_ROOT" ]; then
+    QMAKE=qmake
 fi
 
 if [ -n "$1" ]; then
-	QT_ROOT=$1
+	QMAKE=$1
 fi
 
 if [ ! -f /usr/bin/qmake -a -z "$QT_ROOT" ]; then
-	echo "$0 QT_ROOT RabbitCommon_DIR"
+	echo "$0 QMAKE RabbitCommon_DIR"
     exit -1
 fi
 
@@ -22,11 +22,11 @@ if [ -z "$RabbitCommon_DIR" ]; then
 fi
 
 if [ ! -d "$RabbitCommon_DIR" ]; then
-	echo "$0 QT_ROOT RabbitCommon_DIR"
+	echo "$0 QMAKE RabbitCommon_DIR"
         exit -2
 fi
 
 export RabbitCommon_DIR=$RabbitCommon_DIR
-export QT_ROOT=$QT_ROOT
+export QMAKE=$QMAKE
 dpkg-buildpackage -us -uc -b
 #fakeroot debian/rules binary 

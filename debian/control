@@ -10,6 +10,7 @@ Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
 
 Package: serialportassistant
 Architecture: any
-Pre-Depends: ${misc:Pre-Depends}
+Recommends: qt6-qpa-plugins, libqt6svg6, libqt6svgwidgets6, libqt6webenginecore6-bin
+#Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Serial Port Assistant 

@@ -927,7 +927,6 @@
     <addaction name="actionClear_Send_History"/>
     <addaction name="actionPause_P"/>
     <addaction name="separator"/>
-    <addaction name="actionOpen_Log_G"/>
     <addaction name="actionOpen_save_file"/>
     <addaction name="actionOpen_send_file"/>
     <addaction name="separator"/>

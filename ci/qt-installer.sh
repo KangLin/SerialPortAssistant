@@ -234,7 +234,7 @@ Controller.prototype.IntroductionPageCallback = function() {
     
    	/* 
 	   Online installer 3.0.6 
-	   - Don't click buttons.NextButton directly. It will skip the componenet selection.
+	   - Don't click buttons.NextButton directly. It will skip the component selection.
     */
     
 	if (installer.isOfflineOnly()) {

@@ -17,10 +17,6 @@
 %:
 	dh $@
 
-ifdef Log4Qt_DIR
-    PARAS += Log4Qt_DIR=$(Log4Qt_DIR)
-endif
-
 ifdef WITH_CMARK_GFM
     PARAS += WITH_CMARK_GFM=$(WITH_CMARK_GFM)
     ifdef cmark-gfm_DIR
@@ -33,9 +29,9 @@ ifdef INSTALL_DIR
 endif
 
 # dh_make generated override targets
-# This is example for Cmake (See https://bugs.debian.org/641051 )
+# This is example for Cmake ( See https://bugs.debian.org/641051 )
 override_dh_auto_configure:
-	$(QT_ROOT)/bin/qmake PREFIX=/opt/SerialPortAssistant ${PARAS}
+	$(QMAKE) PREFIX=/opt/SerialPortAssistant ${PARAS}
 
 override_dh_auto_build:
 	dh_auto_build -- $(if "`cat /proc/cpuinfo |grep 'cpu cores' |wc -l`" = "0",, -j`cat /proc/cpuinfo |grep 'cpu cores' |wc -l`)
