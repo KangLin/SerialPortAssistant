@@ -28,6 +28,7 @@ Abstract:
 #include <QStandardPaths>
 #include <QDesktopServices>
 #include <QLoggingCategory>
+#include <QFileDialog>
 
 #ifdef RABBITCOMMON
     #include "DlgAbout/DlgAbout.h"
@@ -1220,7 +1221,7 @@ void CMainWindow::on_actionRefresh_R_triggered()
 
 void CMainWindow::on_pbBrowseSend_clicked()
 {
-    QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open send file"));
+    QString szFile = QFileDialog::getOpenFileName(this, tr("Open send file"));
     if(szFile.isEmpty())
         return;
     ui->leSendFile->setText(szFile);    
@@ -1228,7 +1229,7 @@ void CMainWindow::on_pbBrowseSend_clicked()
 
 void CMainWindow::on_pbBrowseSave_clicked()
 {
-    QString szFile = RabbitCommon::CDir::GetOpenFileName(this, tr("Open save file"));
+    QString szFile = QFileDialog::getOpenFileName(this, tr("Open save file"));
     if(szFile.isEmpty())
         return;
     ui->leSaveToFile->setText(szFile);
