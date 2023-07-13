@@ -124,7 +124,7 @@ jobs:
           appendedCacheKey: RabbitCommon_cache-vcpkg-msvc-vc${{matrix.VCPKG_PLATFORM_TOOLSET}}-${{matrix.triplet}}-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}-${{env.VCPKGGITCOMMITID}}
           #additionalCachedPaths: ${{ env.VCPKG_ROOT }}/installed
           vcpkgTriplet: '${{matrix.triplet}}'
-          vcpkgArguments: 'zlib openssl'
+          vcpkgArguments: 'openssl'
 
       - name: Cache installed
         uses: actions/cache@v3
