@@ -18,11 +18,7 @@ Author: Kang Lin (kl222@126.com)
 [![All releases downloads](https://img.shields.io/github/downloads/KangLin/SerialPortAssistant/total?label=Github%20downloads)](https://github.com/KangLin/SerialPortAssistant/releases)
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20downloads)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
-[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
-[![msvc](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml)
-[![mingw](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml)
-[![ubuntu](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml)
-[![android](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml)
+[![build](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml)
 
 --------------------------------
 
@@ -34,13 +30,16 @@ Author: Kang Lin (kl222@126.com)
     - https://sourceforge.net/projects/serialportassistant/
     - https://gitee.com/kl222/SerialPortAssistant
 - [Project home](http://kanglin.github.io/SerialPortAssistant)
-- This project is a cross-platform serial assistant. It can run on:
+- This project is a cross-platform serial assistant.
+  It can run on:
   + [x] WINDOWS
   + [x] linux
   + [x] Android
   + [x] mac, os  
     Mac os, I don't have the corresponding equipment,
     please compile and test the user with the corresponding equipment.
+    
+  See: [Qt5 supported platforms](https://doc.qt.io/qt-5/supported-platforms.html), [Qt6 supported platforms](https://doc.qt.io/qt-6/supported-platforms.html).
 - Multi-language
   + Chinese
   

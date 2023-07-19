@@ -18,11 +18,7 @@
 [![github 下载量](https://img.shields.io/github/downloads/KangLin/SerialPortAssistant/total?label=Github%20下载量)](https://github.com/KangLin/SerialPortAssistant/releases)
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20下载量)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
-[![windows、android](https://ci.appveyor.com/api/projects/status/y77e828ysqc79r9o?svg=true)](https://ci.appveyor.com/project/KangLin/serialportassistant)
-[![mingw](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/mingw.yml)
-[![msvc](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/msvc.yml)
-[![ubuntu](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/ubuntu.yml)
-[![android](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/android.yml)
+[![build](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml)
 
 --------------------------------
 
@@ -34,11 +30,14 @@
     - https://gitlab.com/kl222/SerialPortAssistant
     - https://sourceforge.net/projects/serialportassistant/
 - [项目主页](http://kanglin.github.io/SerialPortAssistant)
-- 本项目是一个跨平台的串口助手。它能运行在:
+- 本项目是一个跨平台的串口助手。  
+  它能运行在:
   + [x] WINDOWS
   + [x] Linux
   + [x] Android
   + [x] mac、os  本人没有mac设备，请有些设备的同学自行编译和测试
+  
+  详见：[Qt5 支持平台](https://doc.qt.io/qt-5/supported-platforms.html)、[Qt6 支持平台](https://doc.qt.io/qt-6/supported-platforms.html)。
 - 程序截屏
   + 多语言
     - 中文  
