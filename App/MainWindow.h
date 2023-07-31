@@ -17,8 +17,8 @@ Abstract:
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QtSerialPort/QSerialPort>
+#include <QSerialPortInfo>
+#include <QSerialPort>
 #include <QTimer>
 #include <QMenu>
 #include <QMap>

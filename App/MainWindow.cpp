@@ -858,9 +858,9 @@ void CMainWindow::on_actionAbout_A_triggered()
     about->m_AppIcon = QImage(":/icon/AppIcon");
     about->m_szHomePage = "https://github.com/KangLin/SerialPortAssistant";
     about->m_szCopyrightStartTime = "2017";
-#ifdef SerialPortAssistant_Revision
-    about->m_szVersionRevision = SerialPortAssistant_Revision;
-#endif
+    #ifdef SerialPortAssistant_Revision
+        about->m_szVersionRevision = SerialPortAssistant_Revision;
+    #endif
     #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
         QUIWidget* quiwidget = new QUIWidget(nullptr, true);
         quiwidget->setMainWidget(about);

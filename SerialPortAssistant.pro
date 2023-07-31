@@ -26,16 +26,17 @@ install_win.path = $$OUT_PWD
 install_win.CONFIG += directory no_check_exist 
 win32: INSTALLS += install_win
 
-install_unix.files = Install/install.sh
-install_unix.path = $$PREFIX
-install_unix.CONFIG += directory no_check_exist
-
-start_script.files = share/SerialPortAssistant.sh
-start_script.path = $$PREFIX/bin
-start_script.CONFIG += directory no_check_exist
-unix: !android: INSTALLS += install_unix start_script
-
 !android : !macx : unix {
+
+    install_unix.files = Install/install.sh
+    install_unix.path = $$PREFIX
+    install_unix.CONFIG += directory no_check_exist
+    
+    start_script.files = share/SerialPortAssistant.sh
+    start_script.path = $$PREFIX/bin
+    start_script.CONFIG += directory no_check_exist
+    unix: !android: INSTALLS += install_unix start_script
+
     # install icons
     icon128.target = icon128
     icon128.files = App/Resource/png/SerialPortAssistant.png

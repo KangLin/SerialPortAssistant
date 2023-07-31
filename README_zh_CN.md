@@ -51,33 +51,24 @@
 - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- windows: 支持 Windows XP 及以后系统
-  + [从 sourceforge 下载 SerialPortAssistant_Setup_v0.5.14-10.exe](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/SerialPortAssistant_Setup_v0.5.14.exe/download)
-  + [从 github 下载 SerialPortAssistant_Setup_v0.5.14.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_Setup_v0.5.14.exe)  
+- windows: 支持 Windows 7 及以后系统
+  + [Download SerialPortAssistant_Setup_v0.5.15.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_Setup_v0.5.15.exe)
+  + [Download SerialPortAssistant_Setup_v0.5.15.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/SerialPortAssistant_Setup_v0.5.15.exe/download)
 
 - ubuntu
-  + serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
-    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb/download)
-    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb)
+  + serialportassistant_0.5.15_amd64.deb
+    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/serialportassistant_0.5.15_amd64.deb/download)
+    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/serialportassistant_0.5.15_amd64.deb)
   
-          sudo apt install ./serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
+          sudo apt install ./serialportassistant_0.5.15_amd64.deb
           # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-          # sudo dpkg -i serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
+          # sudo dpkg -i serialportassistant_0.5.15_amd64.deb
           # sudo apt-get install -f # Install dependencies
 
-  + serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb:
-    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb/download)
-    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb)
-
-          sudo apt install ./serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb
-          # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-          # sudo dpkg -i serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb
-          # sudo apt-get install -f # Install dependencies
- 
 - android
   + 从 github 下载:
-    - [SerialPortAssistant_armeabi-v7a_v0.5.14.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_armeabi-v7a_v0.5.14.apk)
-    - [SerialPortAssistant_x86_v0.5.14.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_x86_v0.5.14.apk)
+    - [SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk)
+    - [SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  
@@ -105,20 +96,17 @@
       git clone https://github.com/KangLin/RabbitCommon.git
       
 - 用 QtCreator 编译
-  * 直接用 QtCreator 打开工程文件 ![SerialPortAssistant.pro](SerialPortAssistant.pro) 
+  * 直接用 QtCreator 打开工程文件 [CMakeLists.txt](CMakeLists.txt)
   * 如果 RabbitCommon 不在本项目同级目录中，设置参数 RabbitCommon_DIR 指定其位置。 
-      项目 -> 编译和运行 -> 编译 -> 编译设置 -> 编译步骤 -> qmake -> 额外参数
   * 直接编译就可以生成程序
 - 用命令行编译
   * 在项目根目录下建立 build 目录
-  * qmake 生成编译工程
-  * make install 用本地工具链生成程序
-  * 在 install 目录下会生成程序
+  * cmake 生成编译工程
 
         mkdir build
         cd build
-        qmake ../SerialPortAssistant.pro [RabbitCommon_DIR=...]
-        make install
+        cmake .. --config Release [-DRabbitCommon_DIR=...]
+        cmake --build . --config Release --traget install
         cd install #进入生成的程序目录
 
 #### 脚本  
@@ -133,4 +121,4 @@
         sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
                  libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
 
-- deploy.sh: 此脚本用于产生新的发行版本号和标签
+- deploy.sh: 此脚本用于产生新的发行版本号和标签。仅程序发布者使用。

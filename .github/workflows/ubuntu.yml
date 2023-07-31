@@ -22,7 +22,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_ubuntu_${{matrix.BUILD_TYPE}}
-      SerialPortAssistant_VERSION: 0.5.14
+      SerialPortAssistant_VERSION: 0.5.15
       artifact_name: build_ubuntu
 
     # Map the job outputs to step outputs
@@ -50,6 +50,7 @@ jobs:
               libglu1-mesa-dev libpulse-mainloop-glib0 \
               cmake debhelper fakeroot \
               qttools5-dev qttools5-dev-tools qtbase5-dev qtbase5-dev-tools \
+              qtwebengine5-dev \
               libqt5serialport5-dev \
               libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
               libx11-dev libxfixes-dev
@@ -120,18 +121,5 @@ jobs:
         with:
           name: ${{ env.artifact_name }}
           path: |
-            ${{github.workspace}}/build/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
-            ${{github.workspace}}/build/update_linux.xml
-
-#      - name: Upload To Github Release
-#        if: ${{ startsWith(github.ref, 'refs/tags/') }}
-#        uses: softprops/action-gh-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          prerelease: true
-#          body: |
-#            [:cn: 修改日志](ChangeLog_zh_CN.md) [:us: Change log](ChangeLog.md)
-#          files: |
-#            serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
-#            update_linux.xml
+            ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
+            ${{github.workspace}}/update_linux.xml

@@ -1,8 +1,18 @@
-serialportassistant (0.5.14) stable; urgency=medium
+serialportassistant (0.5.15) stable; urgency=medium
 
-    * CI: Use qDebug output log file
-    * FIX deploy.sh for mingw.yml
-    * Docs: modify README
+    * Add CMake
+    * Modify README
+    * CI: modify build.yml
+    * Modify change log
+    * Merge branch 'develop'
+    * Use QFileDialog::getOpenFileName
+    * Rename HAVE_GUI to HAVE_RABBITCOMMON_GUI
+    * Modify etc/SerialPortAssistant_logqt.ini
+    * Android: modify AndroidManifest.xml
+    * vcpkg update to VCPKGGITCOMMITID: 1286cac8751e13bb289061b7e3b89eb4c3f613a2
+    * CI: add webengine
+    * Modify log menu
+    * Use RabbitCommon v2
 
- -- Kang Lin <kl222@126.com>  Thu, 02 Mar 2023 21:31:34 +0800
+ -- Kang Lin <kl222@126.com>  Mon, 07 Aug 2023 15:50:12 +0800
 

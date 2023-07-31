@@ -55,33 +55,24 @@ Author: Kang Lin (kl222@126.com)
 - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- windows: Windows XP or later
-  + [Download SerialPortAssistant_Setup_v0.5.14.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_Setup_v0.5.14.exe)
-  + [Download SerialPortAssistant_Setup_v0.5.14.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/SerialPortAssistant_Setup_v0.5.14.exe/download)
+- windows: Windows 7 or later
+  + [Download SerialPortAssistant_Setup_v0.5.15.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_Setup_v0.5.15.exe)
+  + [Download SerialPortAssistant_Setup_v0.5.15.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/SerialPortAssistant_Setup_v0.5.15.exe/download)
 
 - ubuntu
-  + serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
-    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb/download)
-    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb)
+  + serialportassistant_0.5.15_amd64.deb
+    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/serialportassistant_0.5.15_amd64.deb/download)
+    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/serialportassistant_0.5.15_amd64.deb)
     
-            sudo apt install ./serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
+            sudo apt install ./serialportassistant_0.5.15_amd64.deb
             # If you're on an older Linux distribution, you will need to run this instead:         
-            # sudo dpkg -i serialportassistant_0.5.14_Ubuntu-20.04_amd64.deb
+            # sudo dpkg -i serialportassistant_0.5.15_amd64.deb
             # sudo apt-get install -f # Install dependencies
-
-  + serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb:
-    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.14/serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb/download)
-    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb)
-
-          sudo apt install ./serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb
-          # If you're on an older Linux distribution, you will need to run this instead:         
-          # sudo dpkg -i serialportassistant_0.5.14_Ubuntu-18.04_amd64.deb
-          # sudo apt-get install -f # Install dependencies
 
 - android
   + Download from github:
-    - [SerialPortAssistant_armeabi-v7a_v0.5.14.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_armeabi-v7a_v0.5.14.apk)
-    - [SerialPortAssistant_x86_v0.5.14.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.14/SerialPortAssistant_x86_v0.5.14.apk)
+    - [SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk)
+    - [SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk)
 
 ## Donate  
 If you are satisfied, you can donate to me
@@ -110,24 +101,18 @@ If it cannot be displayed, please open:
         git clone https://github.com/KangLin/SerialPortAssistant.git
 
 - Compiled with QtCreator
-  + Open the project file ![SerialPortAssistant.pro](SerialPortAssistant.pro) with QtCreator
+  + Open the project file [CMakeLists.txt](CMakeLists.txt) with QtCreator
   + The RabbitCommon can be downloaded to the same directory of the project.
     If it is a different directory, Set the parameter RabbitCommon_DIR
-
-        Project -> Build & Run -> Build -> Build settings -> Build step -> qmake 
-
   + Direct compilation can generate programs
 - Compile with the command line
   + Build the build directory in the project root directory
-  + *qmake* build compilation project
-    - *make* install Build the program with the local toolchain
-    - The program is generated in the *install* directory
 
-          mkdir build
-          cd build
-          qmake ../SerialPortAssistant.pro
-          make install
-          cd install  #The program is generated in the install directory
+        mkdir build
+        cd build
+        cmake .. --config Release [-DRabbitCommon_DIR=...]
+        cmake --build . --config Release --traget install
+        cd install  #The program is generated in the install directory
 
 ### Script  
 
@@ -142,4 +127,5 @@ If it cannot be displayed, please open:
         sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
                  libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
 
-- deploy.sh: This script is used to generate new release version numbers and tag
+- deploy.sh: This script is used to generate new release version numbers and tag.
+  Used only by the program publisher.

@@ -31,10 +31,14 @@ endif
 # dh_make generated override targets
 # This is example for Cmake ( See https://bugs.debian.org/641051 )
 override_dh_auto_configure:
-	$(QMAKE) PREFIX=/opt/SerialPortAssistant ${PARAS}
+	dh_auto_configure --  -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant \
+        -DQt5_DIR=${QT_ROOT}/lib/cmake/Qt5 \
+        -DRabbitCommon_DIR=${RabbitCommon_DIR} \
+        ${PARAS}
 
 override_dh_auto_build:
 	dh_auto_build -- $(if "`cat /proc/cpuinfo |grep 'cpu cores' |wc -l`" = "0",, -j`cat /proc/cpuinfo |grep 'cpu cores' |wc -l`)
 
 override_dh_shlibdeps:
-	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -l`pwd`/debian/serialportassistant/opt/SerialPortAssistant/bin:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib:$(LIB_PARAS)
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -l`pwd`/debian/serialportassistant/opt/SerialPortAssistant/bin:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib:`pwd`/debian/serialportassistant/opt/SerialPortAssistant/lib/`uname -m`-linux-gnu:$(LIB_PARAS)

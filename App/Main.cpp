@@ -33,14 +33,7 @@ int main(int argc, char *argv[])
 #if defined (_DEBUG)
     Q_INIT_RESOURCE(translations_SerialPortAssistant);
 #endif
-    
-#if (QT_VERSION > QT_VERSION_CHECK(5,6,0))
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
-#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QtAndroid::hideSplashScreen();
-#endif
-    
+
     QApplication a(argc, argv);
     a.setApplicationName("SerialPortAssistant");
     
