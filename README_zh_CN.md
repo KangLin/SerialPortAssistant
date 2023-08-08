@@ -70,6 +70,10 @@
     - [SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk)
     - [SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.15/SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk)
 
+  + 从 sourceforge 下载
+    - [SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/SerialPortAssistant_v0.5.15_android_armv7_qt6.6.0_Release.apk/download)
+    - [SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.15/SerialPortAssistant_v0.5.15_android_x86_qt6.6.0_Release.apk/download)
+
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  
 
