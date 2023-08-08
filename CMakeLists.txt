@@ -75,11 +75,11 @@ else()
 endif()
 
 GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
-    OUT_REVISION SerialPortAssistant_REVISION)
+    OUT_REVISION SerialPortAssistant_Revision)
 IF(NOT SerialPortAssistant_VERSION)
     SET(SerialPortAssistant_VERSION "v0.5.14")
 ENDIF()
-message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_REVISION}")
+message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
 
 add_subdirectory(App)
 

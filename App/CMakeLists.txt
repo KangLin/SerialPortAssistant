@@ -25,6 +25,13 @@ if(WIN32)
     list(APPEND RESOURCE_FILES AppIcon.rc)
 endif()
 
+GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
+    OUT_REVISION SerialPortAssistant_Revision)
+IF(NOT SerialPortAssistant_VERSION)
+    SET(SerialPortAssistant_VERSION "v0.5.14")
+ENDIF()
+message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
+
 ADD_TARGET(NAME ${PROJECT_NAME}
     ISEXE
     ISWINDOWS
@@ -36,7 +43,7 @@ ADD_TARGET(NAME ${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/3th_lib/Control>
     PRIVATE_LIBS RabbitCommon ${QT_LIBRARIES}
     PRIVATE_DEFINITIONS SerialPortAssistant_VERSION="${SerialPortAssistant_VERSION}"
-        SerialPortAssistant_REVISION="${SerialPortAssistant_REVISION}"
+        SerialPortAssistant_Revision="${SerialPortAssistant_Revision}"
         RABBITCOMMON
     VERSION ${SerialPortAssistant_VERSION}
     )

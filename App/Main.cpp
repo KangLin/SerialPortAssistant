@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     a.setApplicationName("SerialPortAssistant");
+#ifdef SerialPortAssistant_VERSION
+    a.setApplicationVersion(SerialPortAssistant_VERSION);
+#endif
     
 #ifdef RABBITCOMMON
     QString szLocale = CGlobal::Instance()->GetLanguage();
@@ -46,12 +49,9 @@ int main(int argc, char *argv[])
     RabbitCommon::CTools::Instance()->Init(szLocale);
 #endif
 
-    CMainWindow *w = new CMainWindow();
-    
     a.setApplicationDisplayName(QObject::tr("Serial Port Assistant"));
-#ifdef SerialPortAssistant_VERSION
-    a.setApplicationVersion(SerialPortAssistant_VERSION);
-#endif
+    
+    CMainWindow *w = new CMainWindow();
 
 #ifdef RABBITCOMMON 
     CFrmUpdater *pUpdater = new CFrmUpdater(); 
