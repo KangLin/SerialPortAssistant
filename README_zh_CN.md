@@ -104,16 +104,23 @@
   * 如果 RabbitCommon 不在本项目同级目录中，设置参数 RabbitCommon_DIR 指定其位置。 
   * 直接编译就可以生成程序
 - 用命令行编译
-  * 在项目根目录下建立 build 目录
-  * cmake 生成编译工程
+  * 在同一目录中下载源码与依赖
 
+        git clone https://github.com/KangLin/RabbitCommon.git
+        git clone https://github.com/KangLin/SerialPortAssistant.git
+  
+  * 在项目根目录下建立 build 目录
+
+        cd SerialPortAssistant
         mkdir build
         cd build
-        cmake .. --config Release [-DRabbitCommon_DIR=...]
-        cmake --build . --config Release --traget install
-        cd install #进入生成的程序目录
+        # cmake 配置
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_DIR=...]
+        # 编译
+        cmake --build . --config Release --target install
+        cd install  # 程序安装在 install/bin 目录下
 
-#### 脚本  
+#### 脚本
 
 - build_debpackage.sh
   + 此脚本是 linux 下生成 deb 包的。使用前，请确保安装了下面程序

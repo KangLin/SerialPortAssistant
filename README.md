@@ -110,15 +110,23 @@ If it cannot be displayed, please open:
     If it is a different directory, Set the parameter RabbitCommon_DIR
   + Direct compilation can generate programs
 - Compile with the command line
-  + Build the build directory in the project root directory
+  + Download source code and the deplendence in same directory
+  
+        git clone https://github.com/KangLin/RabbitCommon.git
+        git clone https://github.com/KangLin/SerialPortAssistant.git
 
+  + Make the build directory in the project root directory
+
+        cd SerialPortAssistant
         mkdir build
         cd build
-        cmake .. --config Release [-DRabbitCommon_DIR=...]
-        cmake --build . --config Release --traget install
-        cd install  #The program is generated in the install directory
+        # cmake configure
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_DIR=...]
+        # compiling
+        cmake --build . --config Release --target install
+        cd install  # The program is installed in the install/bin directory
 
-### Script  
+### Script
 
 - build_debpackage.sh
   + This script generates the deb package under linux.
