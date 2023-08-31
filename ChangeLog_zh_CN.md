@@ -1,5 +1,5 @@
-修改日志
-------
++ 版本: v0.5.16
+  - 修复 DockDebugLog 崩溃. 详见:  https://github.com/KangLin/RabbitCommon/commit/af2e434e39af35876113436ead2a946efcf74199
 
 + 版本: v0.5.15
   - 使用 RabbitCommon v2
@@ -26,7 +26,7 @@
   
 + 版本: v0.5.10
   - 修复除 0 引起的崩溃。影响前面所有发行版本。此错误是 RabbitCommon 引起的。
-    详见：RabbitCommon: 7ed300a206d8a36c30003b6c19ad181682d0ff5f
+    详见： https://github.com/KangLin/RabbitCommon/commit/7ed300a206d8a36c30003b6c19ad181682d0ff5f
 
 + 版本: v0.5.9
   - 增加镜像库

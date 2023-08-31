@@ -1,5 +1,6 @@
-Change log
-----------
++ Version: v0.5.16
+  - FIX: DockDebugLog core dump. See: https://github.com/KangLin/RabbitCommon/commit/af2e434e39af35876113436ead2a946efcf74199
+
 + Version: v0.5.15
   - Use RabbitCommon v2
   - Add CMakeLists.txt
@@ -26,7 +27,7 @@ Change log
 
 + Version: v0.5.10
   - FIX: divide by 0 crash. Affects all previous releases.
-    See RabbitCommon: 7ed300a206d8a36c30003b6c19ad181682d0ff5f
+    See https://github.com/KangLin/RabbitCommon/commit/7ed300a206d8a36c30003b6c19ad181682d0ff5f
   
 + Version: v0.5.9
   - Add mirror repository
