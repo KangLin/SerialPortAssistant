@@ -1,5 +1,8 @@
-serialportassistant (0.5.15) stable; urgency=medium
+serialportassistant (0.5.16) stable; urgency=medium
 
+    * Modify ChangeLog
+    * Modify README
+    * Release v0.5.15
     * Modify README
     * Add CMake
     * Modify README
@@ -15,5 +18,5 @@ serialportassistant (0.5.15) stable; urgency=medium
     * Modify log menu
     * Use RabbitCommon v2
 
- -- Kang Lin <kl222@126.com>  Tue, 08 Aug 2023 10:59:42 +0800
+ -- Kang Lin <kl222@126.com>  Sat, 02 Sep 2023 12:42:30 +0800
 

@@ -42,7 +42,7 @@ jobs:
       CMAKE_GENERATOR: "Visual Studio 17 2022"
       VCPKG_PLATFORM_TOOLSET: ${{matrix.VCPKG_PLATFORM_TOOLSET}}
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
-      SerialPortAssistant_VERSION: v0.5.15
+      SerialPortAssistant_VERSION: v0.5.16
       VCPKGGITCOMMITID: 2f6176ce98fee807a207dc9e8fec213f111c291b
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       artifact_name: build_msvc

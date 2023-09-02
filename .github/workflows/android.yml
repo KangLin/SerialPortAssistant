@@ -38,7 +38,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.BUILD_TYPE}}_${{matrix.qt_arch}}
-      SerialPortAssistant_VERSION: v0.5.15
+      SerialPortAssistant_VERSION: v0.5.16
       VCPKGGITCOMMITID: 2f6176ce98fee807a207dc9e8fec213f111c291b
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23
