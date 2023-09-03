@@ -19,7 +19,7 @@ jobs:
         qt_version: [6.5.2, 5.15.2, 5.12.12]
         include:
           - qt_version: 6.5.2
-            qt_modules: qtscxml qtserialport webchannel positioning macextras
+            qt_modules: qtscxml qtserialport qtwebchannel qtwebengine qtpositioning
 
           - qt_version: 5.15.2
             qt_modules: ""
