@@ -34,7 +34,6 @@ Abstract:
     #include "DlgAbout/DlgAbout.h"
     #include "FrmUpdater/FrmUpdater.h"
     #include "RabbitCommonDir.h"
-    #include "FrmStyle.h"
     #include "RabbitCommonTools.h"
 #endif
 #ifdef BUILD_QUIWidget
@@ -73,8 +72,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     InitMenu();
     
+    RabbitCommon::CTools::InsertStyleMenu(ui->menuTools_T,
+                                          ui->actionOpen_save_file);
     ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
                              RabbitCommon::CTools::GetLogMenu(this));
+    ui->menuTools_T->addSeparator();
 
     InitStatusBar();
     InitToolBar();
@@ -1371,9 +1373,4 @@ int CMainWindow::setPinoutStatus()
     return 0;
 }
 
-void CMainWindow::on_actionStyle_S_triggered()
-{
-    CFrmStyle* p = new CFrmStyle(false);
-    p->show();
-}
 

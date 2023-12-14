@@ -930,7 +930,6 @@
     <addaction name="actionOpen_save_file"/>
     <addaction name="actionOpen_send_file"/>
     <addaction name="separator"/>
-    <addaction name="actionStyle_S"/>
     <addaction name="separator"/>
     <addaction name="menuLanguage_A"/>
     <addaction name="separator"/>
@@ -1130,15 +1129,6 @@
    </property>
    <property name="whatsThis">
     <string>Open send file</string>
-   </property>
-  </action>
-  <action name="actionStyle_S">
-   <property name="icon">
-    <iconset resource="Resource/Resource.qrc">
-     <normaloff>:/icon/style</normaloff>:/icon/style</iconset>
-   </property>
-   <property name="text">
-    <string>Style(&amp;S)</string>
    </property>
   </action>
  </widget>

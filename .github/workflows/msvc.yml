@@ -12,9 +12,9 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
-        qt_version: [6.5.2, 5.15.2, 5.12.12]
+        qt_version: [6.6.1, 5.15.2, 5.12.12]
         include:
-          - qt_version: 6.5.2
+          - qt_version: 6.6.1
             triplet: x64-windows
             VCPKG_PLATFORM_TOOLSET: v142
             qt_arch: win64_msvc2019_64
@@ -173,7 +173,7 @@ jobs:
 
       - name: Package
         working-directory: ${{github.workspace}}/build
-        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.5.2' == matrix.qt_version }}
+        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.6.1' == matrix.qt_version }}
         run: |
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Application
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Runtime
@@ -188,7 +188,7 @@ jobs:
               -m "${{env.SerialPortAssistant_VERSION}}"
 
       - name: Update artifact
-        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.5.2' == matrix.qt_version }}
+        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.6.1' == matrix.qt_version }}
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact_name }}
