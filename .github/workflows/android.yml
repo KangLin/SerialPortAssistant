@@ -13,7 +13,7 @@ jobs:
       matrix:
         BUILD_TYPE: [Release]
         qt_arch: [android_arm64_v8a, android_armv7, android_x86_64, android_x86]
-        qt_version: [6.6.0]
+        qt_version: [6.6.1]
         include:
           - BUILD_TYPE: Release
             qt_arch: android_arm64_v8a
@@ -132,6 +132,9 @@ jobs:
         env:
           RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
           QT_ROOT: ${{env.Qt5_DIR}}
+          QT_ANDROID_KEYSTORE_PATH: ${{env.SOURCE_DIR}}/RabbitCommon/RabbitCommon.keystore
+          QT_ANDROID_KEYSTORE_ALIAS: rabbitcommon
+          QT_ANDROID_KEYSTORE_STORE_PASS: ${{secrets.STOREPASS}}
         run: |
           sudo chmod 777 ${Qt6_DIR}/bin/qt-cmake
           ${Qt6_DIR}/bin/qt-cmake .. \
@@ -142,6 +145,8 @@ jobs:
               -DQT_HOST_PATH=${Qt6_DIR}/../gcc_64 \
               -DANDROID_PLATFORM=${{env.ANDROID_PLATFORM}} \
               -DANDROID_NATIVE_API_LEVEL=${{env.ANDROID_NATIVE_API_LEVEL}} \
+              -DQT_ANDROID_SIGN_APK=ON \
+              -DQT_ENABLE_VERBOSE_DEPLOYMENT=OFF \
               -DQt6LinguistTools_DIR=${Qt6_DIR}/../gcc_64/lib/cmake/Qt6LinguistTools \
               -DCMAKE_INSTALL_PREFIX=`pwd`/install
           cmake --build . --config ${{matrix.BUILD_TYPE}} --target all
