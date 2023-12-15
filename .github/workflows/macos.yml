@@ -37,7 +37,7 @@ jobs:
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       SerialPortAssistant_VERSION: v1.0.9
       artifact_name: build_macos
-      VCPKGGITCOMMITID: 2f6176ce98fee807a207dc9e8fec213f111c291b
+      VCPKGGITCOMMITID: 6359372f3ca1e6072e302e1d7238f31b259c5b51
 
     # Map the job outputs to step outputs
     outputs:
