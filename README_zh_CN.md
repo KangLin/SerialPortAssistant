@@ -29,6 +29,7 @@
     - 中国： https://gitee.com/kl222/SerialPortAssistant
     - https://gitlab.com/kl222/SerialPortAssistant
     - https://sourceforge.net/projects/serialportassistant/
+    - https://invent.kde.org/kanglin/SerialPortAssistant
 - [项目主页](http://kanglin.github.io/SerialPortAssistant)
 - 本项目是一个跨平台的串口助手。  
   它能运行在:
