@@ -1,4 +1,4 @@
-serialportassistant (0.5.16) stable; urgency=medium
+serialportassistant (0.5.16) unstable; urgency=medium
 
     * Modify ChangeLog
     * Modify README

@@ -49,9 +49,9 @@ jobs:
           sudo apt install -y -q cmake build-essential xvfb xpra \
               libglu1-mesa-dev libpulse-mainloop-glib0 \
               cmake debhelper fakeroot \
-              qttools5-dev qttools5-dev-tools qtbase5-dev qtbase5-dev-tools \
-              qtwebengine5-dev \
-              libqt5serialport5-dev \
+              qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
+              qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
+              qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev \
               libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
               libx11-dev libxfixes-dev
 

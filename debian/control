@@ -1,16 +1,23 @@
+# https://www.debian.org/doc/manuals/maint-guide/dreq.zh-cn.html#control
+# https://www.debian.org/doc/debian-policy/ch-controlfields.html
+
 Source: serialportassistant
 Section: main
 Priority: optional
 Maintainer: Kang Lin <kl222@126.com>
-Build-Depends: debhelper (>= 6)
-Standards-Version:"v0.5.16"
+Build-Depends: debhelper (>=13~), debhelper-compat (=13), fakeroot,
+ libssl-dev,
+ qt6-tools-dev, qt6-tools-dev-tools, qt6-base-dev, qt6-base-dev-tools,
+ qt6-l10n-tools, qt6-translations-l10n, qt6-scxml-dev,
+ qt6-webengine-dev, qt6-webengine-dev-tools, libqt6serialport6-dev
+Standards-Version: 4.6.2
 Homepage: https://github.com/KangLin/SerialPortAssistant
 Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
-#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/SerialPortAssistant.git
+Vcs-Browser: https://github.com/KangLin/SerialPortAssistant
 
 Package: serialportassistant
 Architecture: any
 Recommends: qt6-qpa-plugins, libqt6svg6, libqt6svgwidgets6, libqt6webenginecore6-bin
 #Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Serial Port Assistant 
+Description: Serial Port Assistant
