@@ -53,6 +53,9 @@ fi
 
 # -b  Equivalent to --build=binary or --build=any,all.
 # -S  Equivalent to --build=source
+# -d, --no-check-builddeps    do not check build dependencies and conflicts.
+#      --ignore-builtin-builddeps
+#                              do not check builtin build dependencies.
 
 #The -us -uc tell it there is no need to GPG sign the package. the -b is build binary
 dpkg-buildpackage -us -uc -b -d
