@@ -74,34 +74,13 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: cache-installed-msvc
-
-      - name: Cache vcpkg
-        #if: false
-        uses: actions/cache@v2
-        id: cache-vcpkg
-        with:
-          path: |
-            ${{ runner.workspace }}/vcpkg/
-          key: cache-vcpkg
+          key: cache-installed-msvc-${{ matrix.qt_arch}}
 
       - name: run-vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
           vcpkgDirectory: ${{runner.workspace}}/vcpkg/
-
-      - name: run vcpkg
-        run: |
-          vcpkg install --triplet=${{matrix.triplet}}
-
-      - name: Cache Qt
-        if: false
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ${{env.TOOSL_DIR}}/qt
-          key: qt${{matrix.qt_version}}_${{matrix.qt_arch}}-${{matrix.triplet}}
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -112,7 +91,7 @@ jobs:
           modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/
           cache: true
           cache-key-prefix: install-qt-action
-      
+
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
         run: |

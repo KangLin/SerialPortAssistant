@@ -70,18 +70,6 @@ jobs:
           vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
           vcpkgDirectory: ${{runner.workspace}}/vcpkg/
 
-      - name: run vcpkg
-        run: |
-          vcpkg install --triplet ${{matrix.triplet}}
-
-      - name: Cache Qt
-        if: false
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ${{env.TOOSL_DIR}}/qt
-          key: qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.triplet}}
-
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:

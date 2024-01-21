@@ -62,14 +62,6 @@ jobs:
             ${{env.INSTALL_DIR}}
           key: installed-qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.triplet}}
 
-      - name: Cache Qt
-        if: false
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ${{env.TOOSL_DIR}}/qt
-          key: -qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.triplet}}
-
       - name: Install Qt of gcc_64
         uses: jurplel/install-qt-action@v3
         with:
@@ -101,15 +93,6 @@ jobs:
           cache: true
           cache-key-prefix: install-qt-action
 
-      - name: Cache vcpkg
-        if: false
-        uses: actions/cache@v2
-        id: cache-vcpkg
-        with:
-          path: |
-            ${{ runner.workspace }}/vcpkg/
-          key: cache-vcpkg
-
       - name: run-vcpkg
         if: false
         uses: lukka/run-vcpkg@v11
@@ -119,11 +102,6 @@ jobs:
           #vcpkgGitURL: https://github.com/KangLin/vcpkg.git
           vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          
-      - name: run vcpkg
-        if: false
-        run: |
-          vcpkg install --triplet=${{matrix.triplet}}
 
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
