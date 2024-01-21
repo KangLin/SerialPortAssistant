@@ -55,7 +55,7 @@ fi
 # -S  Equivalent to --build=source
 
 #The -us -uc tell it there is no need to GPG sign the package. the -b is build binary
-dpkg-buildpackage -us -uc -b
+dpkg-buildpackage -us -uc -b -d
 
 #The -us -uc tell it there is no need to GPG sign the package. the -S is build source package
 #dpkg-buildpackage -us -uc -S
