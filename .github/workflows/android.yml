@@ -60,7 +60,7 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: installed-qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.triplet}}
+          key: installed-qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.VCPKG_TARGET_TRIPLET}}
 
       - name: Install Qt of gcc_64
         uses: jurplel/install-qt-action@v3

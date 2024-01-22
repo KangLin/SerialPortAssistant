@@ -18,7 +18,7 @@ jobs:
         BUILD_TYPE: [Release, Debug]
         qt_version: [6.6.1, 5.15.2, 5.12.12]
         qt_arch: [clang_64]
-        triplet: [x64-osx]
+        VCPKG_TARGET_TRIPLET: [x64-osx]
         include:
           - qt_version: 6.5.2
             qt_modules: qtscxml qtserialport qtwebchannel qtwebengine qtpositioning
@@ -66,7 +66,7 @@ jobs:
             ${{env.INSTALL_DIR}}
           key: Cache-macos-installed-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}
 
-      - name: run-vcpkg
+      - name: run vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
