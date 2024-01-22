@@ -16,11 +16,17 @@ Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
 Vcs-Browser: https://github.com/KangLin/SerialPortAssistant
 
 Package: serialportassistant
+Section: utils
 Architecture: any
-Recommends: qt6-qpa-plugins, libqt6svg6, libqt6svgwidgets6, libqt6webenginecore6-bin
+Replaces: rabbitcommon (>=2)
 #Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Serial Port Assistant
  Serial port assistant
  .
  Author: Kang Lin <kl222@126.com>
+ .
+ Donation:
+ https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+ https://gitee.com/kl222/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+ https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
