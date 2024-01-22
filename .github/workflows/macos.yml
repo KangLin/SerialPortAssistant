@@ -20,7 +20,7 @@ jobs:
         qt_arch: [clang_64]
         VCPKG_TARGET_TRIPLET: [x64-osx]
         include:
-          - qt_version: 6.5.2
+          - qt_version: 6.6.1
             qt_modules: qtscxml qtserialport qtwebchannel qtwebengine qtpositioning
 
           - qt_version: 5.15.2

@@ -19,7 +19,7 @@ jobs:
     defaults:
       run:
         shell: cmd
-        
+
     runs-on: windows-latest
 
     env:
@@ -45,7 +45,7 @@ jobs:
           cmake -E make_directory ${{env.TOOSL_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
           cmake -E make_directory ${{github.workspace}}/build
-      
+
       - name: pacman
         env:
           PATH: C:\msys64\usr\bin
@@ -83,10 +83,16 @@ jobs:
           PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin
           PKG_CONFIG_PATH: ${{env.INSTALL_DIR}}/lib/pkgconfig
         run: |
-          qmake ${{github.workspace}}\SerialPortAssistant.pro CONFIG*=${{matrix.BUILD_TYPE}} RabbitCommon_DIR=${{env.RabbitCommon_DIR}} prefix=${{github.workspace}}\build\install
-          make install
-          move /Y install\plugins\*crypto*.dll install\bin
-          move /Y install\plugins\*ssl*.dll install\bin
+          cmake .. -G"MinGW Makefiles" ^
+            -DCMARK_SHARED=OFF ^
+            -DCMARK_TESTS=OFF ^
+            -DCMARK_STATIC=ON ^
+            -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} ^
+            -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/build/install ^
+            -DBUILD_FREERDP=ON ^
+            -DCMAKE_PREFIX_PATH=${{env.INSTALL_DIR}}
+          cmake --build . --config ${{ matrix.BUILD_TYPE }}
+          cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
           copy /Y C:\msys64\mingw64\bin\*.dll install\bin
           copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
           copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
