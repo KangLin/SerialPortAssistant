@@ -93,8 +93,7 @@ jobs:
           cache: true
           cache-key-prefix: install-qt-action
 
-      - name: run-vcpkg
-        if: false
+      - name: run vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           # Indicates whether to only setup vcpkg (i.e. installing it and setting the environment variables VCPKG_ROOT, RUNVCPK_VCPKG_ROOT), without installing any port.

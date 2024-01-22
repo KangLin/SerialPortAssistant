@@ -31,13 +31,13 @@ Abstract:
 #include <QFileDialog>
 
 #ifdef RABBITCOMMON
-    #include "DlgAbout/DlgAbout.h"
-    #include "FrmUpdater/FrmUpdater.h"
+    #include "DlgAbout.h"
+    #include "FrmUpdater.h"
     #include "RabbitCommonDir.h"
     #include "RabbitCommonTools.h"
 #endif
 #ifdef BUILD_QUIWidget
-    #include "QUIWidget/QUIWidget.h"
+    #include "QUIWidget.h"
 #endif
 
 Q_LOGGING_CATEGORY(Logger, "MainWindow");

@@ -23,7 +23,6 @@ fi
 
 if [ ! -d "$RabbitCommon_DIR" ]; then
 	echo "$0 QMAKE RabbitCommon_DIR"
-        exit -2
 fi
 
 
