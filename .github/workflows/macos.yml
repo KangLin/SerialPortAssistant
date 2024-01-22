@@ -21,7 +21,7 @@ jobs:
         VCPKG_TARGET_TRIPLET: [x64-osx]
         include:
           - qt_version: 6.6.1
-            qt_modules: qtscxml qtmultimedia qtwebchannel qtwebsockets qtwebview qtpositioning
+            qt_modules: qtscxml qtmultimedia qtwebchannel qtwebsockets qtwebview qtserialport
 
           - qt_version: 5.15.2
 
