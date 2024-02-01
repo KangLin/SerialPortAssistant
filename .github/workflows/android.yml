@@ -12,24 +12,16 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release]
-        qt_arch: [android_arm64_v8a, android_armv7, android_x86_64, android_x86]
+        qt_arch: [android_arm64_v8a, android_x86_64]
         qt_version: [6.6.1]
         include:
           - BUILD_TYPE: Release
             qt_arch: android_arm64_v8a
-            VCPKG_TARGET_TRIPLET: arm-android
-
-          - BUILD_TYPE: Release
-            qt_arch: android_armv7
-            VCPKG_TARGET_TRIPLET: arm-android
+            VCPKG_TARGET_TRIPLET: arm64-android
 
           - BUILD_TYPE: Release
             qt_arch: android_x86_64 
             VCPKG_TARGET_TRIPLET: x64-android
-
-          - BUILD_TYPE: Release
-            qt_arch: android_x86
-            VCPKG_TARGET_TRIPLET: x32-android
 
     runs-on: ubuntu-latest
 
@@ -37,12 +29,12 @@ jobs:
       artifact_name: build_android
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
-      INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.BUILD_TYPE}}_${{matrix.qt_arch}}
+      INSTALL_DIR: ${{github.workspace}}/.cache/install
       SerialPortAssistant_VERSION: v0.5.16
-      VCPKGGITCOMMITID: 6359372f3ca1e6072e302e1d7238f31b259c5b51
+      VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23
-      qt_modules: qtscxml qtserialport qtwebview
+      qt_modules: 'qtscxml qtserialport qtwebchannel qtwebsockets qtwebview'
 
     # Map the job outputs to step outputs
     outputs:
@@ -68,32 +60,25 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: cache-installed-android-qt${{matrix.qt_version}}-${{matrix.VCPKG_TARGET_TRIPLET}}-${{matrix.BUILD_TYPE}}
-
-      - name: Cache Qt
-        #if: false
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ${{env.TOOSL_DIR}}/qt
-          key: qt${{matrix.qt_version}}_${{matrix.qt_arch}}
+          key: installed-qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.VCPKG_TARGET_TRIPLET}}
 
       - name: Install Qt of gcc_64
         uses: jurplel/install-qt-action@v3
         with:
-          dir: '${{env.TOOSL_DIR}}/qt' # optional
+          dir: '${{env.TOOSL_DIR}}' # optional
           version: '${{matrix.qt_version}}'
           #host: 'linux'
           target: 'desktop'
           arch: 'gcc_64'
           set-env: false
-          cached: '${{ steps.cache-qt.outputs.cache-hit }}' # optional, default is false
+          cache: true
+          cache-key-prefix: install-qt-action
 
       - name: Install Qt of android
         uses: jurplel/install-qt-action@v3
         with:
           # Directory to install Qt
-          dir: '${{env.TOOSL_DIR}}/qt' # optional
+          dir: '${{env.TOOSL_DIR}}' # optional
           # Version of Qt to install
           version: '${{matrix.qt_version}}'
           # Host platform
@@ -104,23 +89,18 @@ jobs:
           arch: '${{matrix.qt_arch}}' # optional
           # Additional Qt modules to install
           modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/
-          cached: '${{ steps.cache-qt.outputs.cache-hit }}' # optional, default is false
+          # Whether or not to actually download Qt
+          cache: true
+          cache-key-prefix: install-qt-action
 
-      - name: run-vcpkg
-        if: false
-        uses: lukka/run-vcpkg@v7.4
+      - name: run vcpkg
+        uses: lukka/run-vcpkg@v11
         with:
           # Indicates whether to only setup vcpkg (i.e. installing it and setting the environment variables VCPKG_ROOT, RUNVCPK_VCPKG_ROOT), without installing any port.
           #setupOnly: # optional
           #vcpkgGitURL: https://github.com/KangLin/vcpkg.git
           vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          # Since the cache must be invalidated when content of the vcpkg.json file changes, let's
-          # compute its hash and append this to the computed cache's key.
-          appendedCacheKey: android_${{matrix.os}}-qt${{matrix.qt_version}}-${{matrix.VCPKG_TARGET_TRIPLET}}-${{matrix.BUILD_TYPE}}-${{env.VCPKGGITCOMMITID}}
-          additionalCachedPaths: $VCPKG_ROOT/installed
-          vcpkgTriplet: '${{ matrix.VCPKG_TARGET_TRIPLET }}'
-          vcpkgArguments: 'openssl'
 
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
@@ -131,7 +111,6 @@ jobs:
         working-directory: ${{github.workspace}}/build
         env:
           RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
-          QT_ROOT: ${{env.Qt5_DIR}}
           QT_ANDROID_KEYSTORE_PATH: ${{env.SOURCE_DIR}}/RabbitCommon/RabbitCommon.keystore
           QT_ANDROID_KEYSTORE_ALIAS: rabbitcommon
           QT_ANDROID_KEYSTORE_STORE_PASS: ${{secrets.STOREPASS}}

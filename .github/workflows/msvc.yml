@@ -15,20 +15,20 @@ jobs:
         qt_version: [6.6.1, 5.15.2, 5.12.12]
         include:
           - qt_version: 6.6.1
-            triplet: x64-windows
+            VCPKG_TARGET_TRIPLET: x64-windows
             VCPKG_PLATFORM_TOOLSET: v142
             qt_arch: win64_msvc2019_64
             CMAKE_GENERATOR_PLATFORM: x64
             qt_modules: qtscxml qtserialport qtwebchannel qtwebsockets qtwebview qtpositioning
 
           - qt_version: 5.15.2
-            triplet: x64-windows
+            VCPKG_TARGET_TRIPLET: x64-windows
             VCPKG_PLATFORM_TOOLSET: v142
             qt_arch: win64_msvc2019_64
             CMAKE_GENERATOR_PLATFORM: x64
 
           - qt_version: 5.12.12
-            triplet: x86-windows
+            VCPKG_TARGET_TRIPLET: x86-windows
             VCPKG_PLATFORM_TOOLSET: v141
             qt_arch: win32_msvc2017
             CMAKE_GENERATOR_PLATFORM: Win32
@@ -43,7 +43,7 @@ jobs:
       VCPKG_PLATFORM_TOOLSET: ${{matrix.VCPKG_PLATFORM_TOOLSET}}
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
       SerialPortAssistant_VERSION: v0.5.16
-      VCPKGGITCOMMITID: 6359372f3ca1e6072e302e1d7238f31b259c5b51
+      VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       artifact_name: build_msvc
 
@@ -67,64 +67,6 @@ jobs:
           cmake -E make_directory ${{env.SOURCE_DIR}}
           cmake -E make_directory ${{env.TOOSL_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
- 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ${{env.TOOSL_DIR}}/qt
-          key: qt${{matrix.qt_version}}_${{matrix.qt_arch}}
-    
-      - name: Install Qt
-        # You may pin to the exact commit or the version.
-        # uses: jurplel/install-qt-action@a962fb91949c8e846a3e4a944d50e7ef5cc3a28a
-        uses: jurplel/install-qt-action@v3.0.0
-        with:
-          # Directory to install Qt
-          dir: ${{env.TOOSL_DIR}}/qt # optional
-          # Version of Qt to install
-          version: ${{matrix.qt_version}} # optional, default is 5.15.2
-          # Host platform
-          #host: linux # optional
-          # Target platform for build
-          #target: desktop # optional, default is desktop
-          # Architecture for Windows/Android
-          arch: ${{matrix.qt_arch}} # optional
-          # Whether or not to install Qt dependencies on Linux
-          #install-deps: true # optional, default is true
-          # Additional Qt modules to install
-          modules: ${{env.qt_modules}} # optional. see: https://ddalcino.github.io/aqt-list-server/
-          # Force a Qt mirror in case the default is not working
-          #mirror: # optional
-          # Whether or not to actually download Qt
-          cached: ${{ steps.cache-qt.outputs.cache-hit }} # optional, default is false
-          # Whether or not to automatically run setup-python to find a valid python version.
-          #setup-python: false # optional, default is true
-          # Qt tools to download--specify comma-separated argument lists which are themselves separated by spaces: <tool_name>,<tool_version>,<tool_arch>
-          #tools: # optional
-          # Whether or not to actually install Qt or just the tools from the tools argument
-          #tools-only: false # optional, default is false
-          # Version of aqtinstall to use in case of issues
-          #aqtversion: # optional, default is ==0.10.0
-          # Version of py7zr to use in case of issues
-          #py7zrversion: # optional, default is ==0.11.0
-          # Any extra arguments to append to the back
-          #extra: # optional
-
-      - name: run-vcpkg
-        uses: lukka/run-vcpkg@v7.4
-        with:
-          # Indicates whether to only setup vcpkg (i.e. installing it and setting the environment variables VCPKG_ROOT, RUNVCPK_VCPKG_ROOT), without installing any port.
-          #setupOnly: # optional
-          #vcpkgGitURL: https://github.com/KangLin/vcpkg.git
-          vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
-          vcpkgDirectory: ${{runner.workspace}}/vcpkg/
-          # Since the cache must be invalidated when content of the vcpkg.json file changes, let's
-          # compute its hash and append this to the computed cache's key.
-          appendedCacheKey: RabbitCommon_cache-vcpkg-msvc-vc${{matrix.VCPKG_PLATFORM_TOOLSET}}-${{matrix.triplet}}-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}-${{env.VCPKGGITCOMMITID}}
-          #additionalCachedPaths: ${{ env.VCPKG_ROOT }}/installed
-          vcpkgTriplet: '${{matrix.triplet}}'
-          vcpkgArguments: 'openssl'
 
       - name: Cache installed
         uses: actions/cache@v3
@@ -132,25 +74,28 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: msvc_cache-installed-vc${{matrix.VCPKG_PLATFORM_TOOLSET}}-${{matrix.triplet}}-qt${{matrix.qt_version}}-${{matrix.BUILD_TYPE}}
+          key: cache-installed-msvc-${{ matrix.qt_arch}}
+
+      - name: run-vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgGitCommitId: ${{env.VCPKGGITCOMMITID}}
+          vcpkgDirectory: ${{runner.workspace}}/vcpkg/
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          dir: '${{env.TOOSL_DIR}}/qt' # optional
+          version: '${{matrix.qt_version}}' # optional, default is 5.15.2
+          arch: '${{matrix.qt_arch}}' # optional
+          modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/
+          cache: true
+          cache-key-prefix: install-qt-action
 
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
         run: |
           git clone https://github.com/KangLin/RabbitCommon.git
-
-#      - uses: ilammy/msvc-dev-cmd@v1
-#        with:
-#          arch: ${{ matrix.CMAKE_GENERATOR_PLATFORM }}
-#          vsversion: ${{ matrix.vc_version }}
-
-#      - name: Setup Visual Studio Tools
-#        uses: egor-tensin/vs-shell@v2
-#        with:
-#          arch: ${{ matrix.CMAKE_GENERATOR_PLATFORM }}
-
-#      - name: Install jom
-#        run: choco install jom
 
       - name: build SerialPortAssistant
         working-directory: ${{github.workspace}}/build

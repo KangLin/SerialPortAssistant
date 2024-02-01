@@ -1,5 +1,7 @@
 + 版本: v0.5.17
   - 在　SerialPortAssistant.desktop　中修改　MimeType　的值
+  - 修改 debian 打包
+  - 删除 pro
 
 + 版本: v0.5.16
   - 修复 DockDebugLog 崩溃. 详见:  https://github.com/KangLin/RabbitCommon/commit/af2e434e39af35876113436ead2a946efcf74199

@@ -1,5 +1,7 @@
 + Version: v0.5.17
   - Modify MimeType in org.Rabbit.Calendar.desktop
+  - Modify debian package
+  - Remove pro
 
 + Version: v0.5.16
   - FIX: DockDebugLog core dump. See: https://github.com/KangLin/RabbitCommon/commit/af2e434e39af35876113436ead2a946efcf74199
