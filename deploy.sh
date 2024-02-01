@@ -63,6 +63,8 @@ sed -i "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml
 MAJOR_VERSION=`echo ${DEBIAN_VERSION}|cut -d "." -f 1`
 sed -i "s/android:versionCode=.*android/android:versionCode=\"${MAJOR_VERSION}\" android/g"  ${SOURCE_DIR}/App/android/AndroidManifest.xml
+sed -i "s/android:versionName=.*>/android:versionName=\"${DEBIAN_VERSION}\" >/g"  ${SOURCE_DIR}/App/android/AndroidManifest.xml
+
 
 CHANGLOG_TMP=${SOURCE_DIR}/debian/changelog.tmp
 CHANGLOG_FILE=${SOURCE_DIR}/debian/changelog
