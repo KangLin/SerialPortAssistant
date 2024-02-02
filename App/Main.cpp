@@ -56,8 +56,11 @@ int main(int argc, char *argv[])
 #ifdef RABBITCOMMON 
     CFrmUpdater *pUpdater = new CFrmUpdater(); 
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-    if(!pUpdater->GenerateUpdateXml()) 
-        return 0; 
+    if(a.arguments().length() > 1) {
+        pUpdater->GenerateUpdateJson();
+        pUpdater->GenerateUpdateXml();
+        return 0;
+    }
 #endif
 
 #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)

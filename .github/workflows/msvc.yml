@@ -127,7 +127,8 @@ jobs:
           copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis Install.nsi
           ${{github.workspace}}\build\install\bin\SerialPortAssistant.exe ^
-              -f "update_windows.xml" ^
+              -f "update_windows.json" ^
+              --foc 1 ^
               -u https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
               --pf SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
               -m "${{env.SerialPortAssistant_VERSION}}"

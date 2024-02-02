@@ -93,7 +93,8 @@ jobs:
           echo "# sudo sysctl -w kernel.core_pattern=core"
           sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
           /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
-                -f "`pwd`/update_linux.xml" \
+                -f "`pwd`/update_linux.json" \
+                --foc 1 \
                 --md5 ${MD5} \
                 -m "${{env.SerialPortAssistant_VERSION}}" \
                 --pf serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb \
