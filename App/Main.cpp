@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     
     CMainWindow *w = new CMainWindow();
 
-#ifdef RABBITCOMMON 
+#ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater(); 
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
     if(a.arguments().length() > 1) {

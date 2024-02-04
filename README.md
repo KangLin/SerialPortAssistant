@@ -57,27 +57,27 @@ Author: Kang Lin (kl222@126.com)
 - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
 - windows: Windows 7 or later
-  + [Download SerialPortAssistant_Setup_v0.5.16.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.16/SerialPortAssistant_Setup_v0.5.16.exe)
-  + [Download SerialPortAssistant_Setup_v0.5.16.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.16/SerialPortAssistant_Setup_v0.5.16.exe/download)
+  + [Download SerialPortAssistant_Setup_v0.5.17.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_Setup_v0.5.17.exe)
+  + [Download SerialPortAssistant_Setup_v0.5.17.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_Setup_v0.5.17.exe/download)
 
 - ubuntu
-  + serialportassistant_0.5.16_amd64.deb
-    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.16/serialportassistant_0.5.16_amd64.deb/download)
-    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.16/serialportassistant_0.5.16_amd64.deb)
+  + serialportassistant_0.5.17_amd64.deb
+    - [Download from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/serialportassistant_0.5.17_amd64.deb/download)
+    - [Download from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/serialportassistant_0.5.17_amd64.deb)
 
-            sudo apt install ./serialportassistant_0.5.16_amd64.deb
+            sudo apt install ./serialportassistant_0.5.17_amd64.deb
             # If you're on an older Linux distribution, you will need to run this instead:         
-            # sudo dpkg -i serialportassistant_0.5.16_amd64.deb
+            # sudo dpkg -i serialportassistant_0.5.17_amd64.deb
             # sudo apt-get install -f # Install dependencies
 
 - android
   + Download from github:
-    - [SerialPortAssistant_v0.5.16_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.16/SerialPortAssistant_v0.5.16_android_armv7_qt6.6.0_Release.apk)
-    - [SerialPortAssistant_v0.5.16_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.16/SerialPortAssistant_v0.5.16_android_x86_qt6.6.0_Release.apk)
+    - [SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk)
+    - [SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk)
 
   + Download from sourceforge
-    - [SerialPortAssistant_v0.5.16_android_armv7_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.16/SerialPortAssistant_v0.5.16_android_armv7_qt6.6.0_Release.apk/download)
-    - [SerialPortAssistant_v0.5.16_android_x86_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.16/SerialPortAssistant_v0.5.16_android_x86_qt6.6.0_Release.apk/download)
+    - [SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk/download)
+    - [SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk/download)
 
 ## Donate  
 If you are satisfied, you can donate to me

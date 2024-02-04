@@ -22,7 +22,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_ubuntu_${{matrix.BUILD_TYPE}}
-      SerialPortAssistant_VERSION: 0.5.16
+      SerialPortAssistant_VERSION: 0.5.17
       artifact_name: build_ubuntu
 
     # Map the job outputs to step outputs
@@ -93,12 +93,24 @@ jobs:
           echo "# sudo sysctl -w kernel.core_pattern=core"
           sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
           /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
-                -f "`pwd`/update_linux.json" \
+                -f "`pwd`/update_ubuntu.json" \
                 --foc 1 \
                 --md5 ${MD5} \
                 -m "${{env.SerialPortAssistant_VERSION}}" \
-                --pf serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb \
-                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${VERSION}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb"
+                -p serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb \
+                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb"
+          mv update_ubuntu.json.xml update_linux.xml
+
+      - name: Update version configure file
+        if: ${{ matrix.BUILD_TYPE == 'Release'}}
+        working-directory: ${{github.workspace}}
+        run: |
+          sudo Xvfb :99 -ac &
+          export DISPLAY=:99.0
+          /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
+               -f "${{github.workspace}}/version.json" \
+               --foc 0 \
+               --pv ${{env.SerialPortAssistant_VERSION}}
 
       - name: dump core
         if: false
@@ -123,4 +135,6 @@ jobs:
           name: ${{ env.artifact_name }}
           path: |
             ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
+            ${{github.workspace}}/update_ubuntu.json
             ${{github.workspace}}/update_linux.xml
+            ${{github.workspace}}/version.json

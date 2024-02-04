@@ -1,22 +1,33 @@
-serialportassistant (0.5.16) unstable; urgency=medium
+serialportassistant (0.5.17) stable; urgency=medium
 
-    * Modify ChangeLog
-    * Modify README
-    * Release v0.5.15
-    * Modify README
-    * Add CMake
-    * Modify README
-    * CI: modify build.yml
-    * Modify change log
+    * CI: modify ci
+    * Modify generate update json
+    * Update issue templates
+    * Modify github issue templates
     * Merge branch 'develop'
-    * Use QFileDialog::getOpenFileName
-    * Rename HAVE_GUI to HAVE_RABBITCOMMON_GUI
-    * Modify etc/SerialPortAssistant_logqt.ini
-    * Android: modify AndroidManifest.xml
-    * vcpkg update to VCPKGGITCOMMITID: 1286cac8751e13bb289061b7e3b89eb4c3f613a2
-    * CI: add webengine
-    * Modify log menu
-    * Use RabbitCommon v2
+    * Modify deploy.sh
+    * Update issue templates
+    * CI: fix qtpositioning
+    * CI: modify macos.yml
+    * CI: modify ci
+    * debian: modify debian/control
+    * CI: rename triplet to VCPKG_TARGET_TRIPLET
+    * Remove pro
+    * debian: Modify descript
+    * CI: modify macos.yml
+    * Add vcpkg.json
+    * CI: modify vcpkg
+    *  -d, --no-check-builddeps    do not check build dependencies and conflicts.       --ignore-builtin-builddeps                               do not check builtin build dependencies.
+    * debian: add depend rabbitcommon-dev (>=2)
+    * CI: modify ci
+    * debain: modify debian package
+    * Modify postinst for permissions in ubuntu
+    * Modify README to add https://invent.kde.org/kanglin/SerialPortAssistant
+    * CI: update vcpkg to 2f6176ce98fee807a207dc9e8fec213f111c291b
+    * Modify style menu
+    * CI: sign for android
+    * Modify MimeType in SerialPortAssistant.desktop
+    * CI: momdify macos.yml
 
- -- Kang Lin <kl222@126.com>  Sat, 02 Sep 2023 12:42:30 +0800
+ -- Kang Lin <kl222@126.com>  Tue, 06 Feb 2024 12:04:00 +0800
 

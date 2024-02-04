@@ -26,7 +26,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}\.cache\source
       TOOSL_DIR:   ${{github.workspace}}\.cache\tools
       INSTALL_DIR: ${{github.workspace}}\.cache\install_mingw
-      SerialPortAssistant_VERSION: v0.5.16
+      SerialPortAssistant_VERSION: v0.5.17
       artifact_name: build_mingw
 
     # Map the job outputs to step outputs
@@ -97,11 +97,10 @@ jobs:
           copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
           copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis ${{github.workspace}}\build\Install.nsi
-          md5sum SerialPortAssistant_setup_${{env.SerialPortAssistant_VERSION}}.exe > SerialPortAssistant_setup_${{env.SerialPortAssistant_VERSION}}.exe.md5
 
       - name: update artifact
+        if: false
         uses: actions/upload-artifact@v3
-        if: ${{ matrix.BUILD_TYPE == 'Release' }}
         with:
           name: ${{ env.artifact_name }}
           path: |

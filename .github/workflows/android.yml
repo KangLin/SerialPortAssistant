@@ -18,10 +18,12 @@ jobs:
           - BUILD_TYPE: Release
             qt_arch: android_arm64_v8a
             VCPKG_TARGET_TRIPLET: arm64-android
+            config_arch: arm64_v8a
 
           - BUILD_TYPE: Release
             qt_arch: android_x86_64 
             VCPKG_TARGET_TRIPLET: x64-android
+            config_arch: x86_64
 
     runs-on: ubuntu-latest
 
@@ -30,7 +32,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.16
+      SerialPortAssistant_VERSION: v0.5.17
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23
@@ -132,34 +134,14 @@ jobs:
           APK_FILE=`find . -name "android-*.apk"`
           cp $APK_FILE SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_${{matrix.BUILD_TYPE}}.apk
 
-      - name: Package
-        if: false
-        env:
-          QT_ROOT: ${{env.Qt5_DIR}}
-          RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
-          STOREPASS: ${{secrets.STOREPASS}}
+      - name: Update configure file
+        working-directory: ${{github.workspace}}/build
         run: |
-          ${QT_ROOT}/bin/androiddeployqt \
-              --input `pwd`/App/android-libSerialPortAssistant.so-deployment-settings.json \
-              --output `pwd`/android-build \
-              --android-platform ${{matrix.ANDROID_PLATFORM}} \
-              --gradle \
-              --verbose \
-              --sign ${{env.RabbitCommon_DIR}}/RabbitCommon.keystore rabbitcommon \
-              --storepass ${{env.STOREPASS}}
-          APK_FILE=`find . -name "android-build-release-signed.apk"`
-          APK_NAME=SerialPortAssistant_${{matrix.ANDROID_ABI}}_${{env.SerialPortAssistant_VERSION}}.apk
-          mv -f ${APK_FILE} ${APK_NAME}
-          APK_FILE=${APK_NAME}
-          cp ${{github.workspace}}/Update/update_android.xml update_android_${{matrix.ANDROID_ABI}}.xml
-          MD5=`md5sum ${APK_FILE} | awk '{print $1}'`
-          echo "MD5:${MD5}"
-          sed -i "s/<VERSION>.*</<VERSION>${{env.SerialPortAssistant_VERSION}}</g" update_android_${{matrix.ANDROID_ABI}}.xml
-          sed -i "s/<INFO>.*</<INFO>Release SerialPortAssistant ${{env.SerialPortAssistant_VERSION}}</g" update_android_${{matrix.ANDROID_ABI}}.xml
-          sed -i "s/<TIME>.*</<TIME>`date`</g" update_android_${{matrix.ANDROID_ABI}}.xml
-          sed -i "s/<ARCHITECTURE>.*</<ARCHITECTURE>${{matrix.ANDROID_ABI}}</g" update_android_${{matrix.ANDROID_ABI}}.xml
-          sed -i "s/<MD5SUM>.*</<MD5SUM>${MD5}</g" update_android_${{matrix.ANDROID_ABI}}.xml
-          sed -i "s:<URL>.*<:<URL>https\://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/${APK_NAME}<:g" update_android_${{matrix.ANDROID_ABI}}.xml
+          ${{env.SOURCE_DIR}}/RabbitCommon/Install/GenerateJsonFile.sh \
+            update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json \
+            SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_${{matrix.BUILD_TYPE}}.apk \
+            android ${{matrix.config_arch}} \
+            "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_${{matrix.BUILD_TYPE}}.apk,https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_${{matrix.BUILD_TYPE}}.apk"
 
       - name: update
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
@@ -168,3 +150,4 @@ jobs:
           name: ${{ env.artifact_name }}
           path: |
             ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_${{matrix.BUILD_TYPE}}.apk
+            ${{github.workspace}}/build/update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json

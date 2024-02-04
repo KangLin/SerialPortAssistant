@@ -42,7 +42,7 @@ jobs:
       CMAKE_GENERATOR: "Visual Studio 17 2022"
       VCPKG_PLATFORM_TOOLSET: ${{matrix.VCPKG_PLATFORM_TOOLSET}}
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
-      SerialPortAssistant_VERSION: v0.5.16
+      SerialPortAssistant_VERSION: v0.5.17
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       artifact_name: build_msvc
@@ -118,7 +118,7 @@ jobs:
 
       - name: Package
         working-directory: ${{github.workspace}}/build
-        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.6.1' == matrix.qt_version }}
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
         run: |
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Application
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Runtime
@@ -126,21 +126,34 @@ jobs:
           copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
           copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis Install.nsi
-          ${{github.workspace}}\build\install\bin\SerialPortAssistant.exe ^
-              -f "update_windows.json" ^
-              --foc 1 ^
-              -u https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
-              --pf SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
-              -m "${{env.SerialPortAssistant_VERSION}}"
+          copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe
+
+      - name: Update configure file
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
+        working-directory: ${{github.workspace}}\build
+        run: |
+          .\install\bin\SerialPortAssistant.exe ^
+               -f "${{github.workspace}}\build\update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json" ^
+               --foc 1 ^
+               -p ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
+               -m "${{env.SerialPortAssistant_VERSION}}" ^
+               -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe"
+
+      - name: Update xml file
+        if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '5.12.12' }}
+        working-directory: ${{github.workspace}}\build
+        run: |
+          mv update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json.xml update_windows.xml
 
       - name: Update artifact
-        if: ${{ matrix.BUILD_TYPE == 'Release' && '6.6.1' == matrix.qt_version }}
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact_name }}
           path: |
-            ${{github.workspace}}\build\SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe
+            ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe
             ${{github.workspace}}\build\update_windows.xml
+            ${{github.workspace}}\build\update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json
 
 #    - name: Upload To Github Release
 #      if: ${{ matrix.BUILD_TYPE == 'Release' && '5.12.12' == matrix.qt_version && startsWith(github.ref, 'refs/tags/') }}
@@ -154,4 +167,4 @@ jobs:
 #        files: |
 #          ${{github.workspace}}\build\SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe
 #          ${{github.workspace}}\build\update_windows.xml
-#    
+#
