@@ -49,31 +49,18 @@
 
 
 ### 下载
-- [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-- [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- windows: 支持 Windows 7 及以后系统
-  + [Download SerialPortAssistant_Setup_v0.5.17.exe from github](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_Setup_v0.5.17.exe)
-  + [Download SerialPortAssistant_Setup_v0.5.17.exe from sourceforge](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_Setup_v0.5.17.exe/download)
+- 从以下位置下载：
+  - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
+  - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
-- ubuntu
-  + serialportassistant_0.5.17_amd64.deb
-    - [从 sourceforge 下载](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/serialportassistant_0.5.17_amd64.deb/download)
-    - [从 github 下载](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/serialportassistant_0.5.17_amd64.deb)
+- 安装说明：
+  - ubuntu
   
-          sudo apt install ./serialportassistant_0.5.17_amd64.deb
-          # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-          # sudo dpkg -i serialportassistant_0.5.17_amd64.deb
-          # sudo apt-get install -f # Install dependencies
-
-- android
-  + 从 github 下载:
-    - [SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk)
-    - [SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.17/SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk)
-
-  + 从 sourceforge 下载
-    - [SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_v0.5.17_android_armv7_qt6.6.0_Release.apk/download)
-    - [SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk](https://sourceforge.net/projects/serialportassistant/files/v0.5.17/SerialPortAssistant_v0.5.17_android_x86_qt6.6.0_Release.apk/download)
+        sudo apt install ./serialportassistant_0.5.17_amd64.deb
+        # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
+        # sudo dpkg -i serialportassistant_0.5.17_amd64.deb
+        # sudo apt-get install -f # Install dependencies
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

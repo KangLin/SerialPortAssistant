@@ -126,7 +126,7 @@ jobs:
           copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
           copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis Install.nsi
-          copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe
+          copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
 
       - name: Update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
@@ -135,9 +135,9 @@ jobs:
           .\install\bin\SerialPortAssistant.exe ^
                -f "${{github.workspace}}\build\update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json" ^
                --foc 1 ^
-               -p ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ^
+               -p ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ^
                -m "${{env.SerialPortAssistant_VERSION}}" ^
-               -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe"
+               -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe"
 
       - name: Update xml file
         if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '5.12.12' }}
@@ -151,7 +151,7 @@ jobs:
         with:
           name: ${{ env.artifact_name }}
           path: |
-            ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_Setup.exe
+            ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
             ${{github.workspace}}\build\update_windows.xml
             ${{github.workspace}}\build\update_${{matrix.qt_arch}}_${{matrix.qt_version}}.json
 
