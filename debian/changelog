@@ -29,5 +29,5 @@ serialportassistant (0.5.17) stable; urgency=medium
     * Modify MimeType in SerialPortAssistant.desktop
     * CI: momdify macos.yml
 
- -- Kang Lin <kl222@126.com>  Tue, 06 Feb 2024 12:04:00 +0800
+ -- Kang Lin <kl222@126.com>  Tue, 06 Feb 2024 12:32:46 +0800
 
