@@ -80,7 +80,6 @@ jobs:
               echo "$file"
               if [ -f $file ]; then
                   if [ "${file##*.}" != "xml" ] && [ "${file##*.}" != "json" ]; then
-                      echo "md5sum $file"
                       md5sum $file > $file.md5sum
                       cat $file.md5sum >> ${{github.workspace}}/Release.md
                   fi

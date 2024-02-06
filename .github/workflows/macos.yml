@@ -80,7 +80,7 @@ jobs:
           arch: '${{matrix.qt_arch}}' # optional
           modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/
           cache: true
-          cache-key-prefix: install-qt-action
+          cache-key-prefix: cached_qt
 
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
