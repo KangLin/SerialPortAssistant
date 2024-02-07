@@ -48,10 +48,9 @@ int main(int argc, char *argv[])
     }
     RabbitCommon::CTools::Instance()->Init(szLocale);
 #endif
-
-    a.setApplicationDisplayName(QObject::tr("Serial Port Assistant"));
     
     CMainWindow *w = new CMainWindow();
+    a.setApplicationDisplayName(w->windowTitle());
 
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater(); 

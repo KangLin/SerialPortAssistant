@@ -511,12 +511,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>QObject</name>
-    <message>
-        <location filename="../../Main.cpp" line="52"/>
-        <source>Serial Port Assistant</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
 </TS>

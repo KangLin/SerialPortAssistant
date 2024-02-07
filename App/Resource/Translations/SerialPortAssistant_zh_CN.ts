@@ -514,9 +514,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Main.cpp" line="52"/>
         <source>Serial Port Assistant</source>
-        <translation>串口助手</translation>
+        <translation type="vanished">串口助手</translation>
     </message>
 </context>
 </TS>
