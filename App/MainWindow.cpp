@@ -114,8 +114,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbFlowControl->addItem(tr("SoftWare"));
 
     ui->cmbRecent->setDuplicatesEnabled(false);
-    
-    ui->cbSendLoop->setChecked(CGlobal::Instance()->GetSendLoop());
+
+    ui->gpSendLoop->setChecked(CGlobal::Instance()->GetSendLoop());
     m_nLoopNumber = ui->sbLoopNumber->value();
     ui->sbLoopTime->setValue(CGlobal::Instance()->GetSendLoopTime());
     check = connect(&m_Timer, SIGNAL(timeout()), this, SLOT(slotTimeOut()));
@@ -259,7 +259,7 @@ void CMainWindow::slotTimeOut()
         m_nLoopNumber--;
     if(0 == m_nLoopNumber)
     {
-        ui->cbSendLoop->setChecked(false);
+        ui->gpSendLoop->setChecked(false);
         m_Timer.stop();
     }
 }
@@ -369,7 +369,7 @@ void CMainWindow::on_pbOpen_clicked()
     m_statusTx.setText(tr("Tx: 0 Bytes"));
     m_statusDrop.setText(tr("Drop: 0 Bytes"));
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
-    if(ui->cbSendLoop->isChecked())
+    if(ui->gpSendLoop->isChecked())
     {
         m_nLoopNumber = ui->sbLoopNumber->value();
         m_Timer.start(ui->sbLoopTime->value());
@@ -814,9 +814,9 @@ void CMainWindow::on_cmbRecent_activated(const QString &szText)
     ui->teSend->setText(szText);
 }
 
-void CMainWindow::on_cbSendLoop_clicked()
+void CMainWindow::on_gpSendLoop_clicked()
 {
-    if(ui->cbSendLoop->isChecked())
+    if(ui->gpSendLoop->isChecked())
     {
         if((!m_Timer.isActive()) && m_SerialPort.isOpen())
         {
@@ -829,7 +829,7 @@ void CMainWindow::on_cbSendLoop_clicked()
         if(m_Timer.isActive())
             m_Timer.stop();
     }
-    CGlobal::Instance()->SetSendLoop(ui->cbSendLoop->isChecked());
+    CGlobal::Instance()->SetSendLoop(ui->gpSendLoop->isChecked());
 }
 
 void CMainWindow::on_actionClear_triggered()

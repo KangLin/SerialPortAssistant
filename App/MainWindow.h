@@ -73,7 +73,7 @@ private Q_SLOTS:
     void on_pbSend_clicked();
     void on_cmbPort_currentIndexChanged(int index);
     void on_cmbRecent_currentIndexChanged(const QString &szText);
-    void on_cbSendLoop_clicked();
+    void on_gpSendLoop_clicked();
     void on_actionClear_triggered();
     void on_actionOpen_triggered();
     void on_actionExit_triggered();

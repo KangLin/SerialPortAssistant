@@ -1,3 +1,6 @@
++ 版本: v0.5.18
+  - 修改界面
+
 + 版本: v0.5.17
   - 在　SerialPortAssistant.desktop　中修改　MimeType　的值
   - 修改 debian 打包

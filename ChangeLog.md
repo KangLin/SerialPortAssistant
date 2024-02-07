@@ -1,3 +1,6 @@
++ Version: v0.5.18
+  - Modify UI
+
 + Version: v0.5.17
   - Modify MimeType in org.Rabbit.Calendar.desktop
   - Modify debian package
