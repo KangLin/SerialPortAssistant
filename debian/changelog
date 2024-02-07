@@ -1,33 +1,11 @@
-serialportassistant (0.5.17) stable; urgency=medium
+serialportassistant (0.5.18) stable; urgency=medium
 
+    * Fix windows title
+    * Modify translations
+    * Modify UI
     * CI: modify ci
-    * Modify generate update json
-    * Update issue templates
-    * Modify github issue templates
-    * Merge branch 'develop'
-    * Modify deploy.sh
-    * Update issue templates
-    * CI: fix qtpositioning
-    * CI: modify macos.yml
-    * CI: modify ci
-    * debian: modify debian/control
-    * CI: rename triplet to VCPKG_TARGET_TRIPLET
-    * Remove pro
-    * debian: Modify descript
-    * CI: modify macos.yml
-    * Add vcpkg.json
-    * CI: modify vcpkg
-    *  -d, --no-check-builddeps    do not check build dependencies and conflicts.       --ignore-builtin-builddeps                               do not check builtin build dependencies.
-    * debian: add depend rabbitcommon-dev (>=2)
-    * CI: modify ci
-    * debain: modify debian package
-    * Modify postinst for permissions in ubuntu
-    * Modify README to add https://invent.kde.org/kanglin/SerialPortAssistant
-    * CI: update vcpkg to 2f6176ce98fee807a207dc9e8fec213f111c291b
-    * Modify style menu
-    * CI: sign for android
-    * Modify MimeType in SerialPortAssistant.desktop
-    * CI: momdify macos.yml
+    * Modify deploy.sh to disable update.xml
+    * Modify README
 
- -- Kang Lin <kl222@126.com>  Tue, 06 Feb 2024 12:32:46 +0800
+ -- Kang Lin <kl222@126.com>  Wed, 07 Feb 2024 12:32:58 +0800
 
