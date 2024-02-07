@@ -113,7 +113,7 @@ jobs:
                "${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json" \
                "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip" \
                macos ${{matrix.config_arch}} \
-               "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip"
+               "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/files/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip"
       
       - name: Update artifact
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
