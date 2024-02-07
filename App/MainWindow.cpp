@@ -136,7 +136,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     check = connect(&m_SerialPort, SIGNAL(requestToSendChanged(bool)),
                     this, SLOT(slotRequestToSendChanged(bool)));
     Q_ASSERT(check);
-    
+
     InitPinout();
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::RestoreWidget(this);

@@ -89,10 +89,6 @@
         <translation>毫秒</translation>
     </message>
     <message>
-        <source>Loop number:</source>
-        <translation type="vanished">循環次數:</translation>
-    </message>
-    <message>
         <location filename="../../MainWindow.ui" line="622"/>
         <source>Save to file:</source>
         <translation>保存到文件:</translation>
@@ -122,10 +118,6 @@
         <location filename="../../MainWindow.ui" line="1022"/>
         <source>0</source>
         <translation></translation>
-    </message>
-    <message>
-        <source> Loop interval:</source>
-        <translation type="vanished">循環間隔:</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="198"/>
@@ -163,12 +155,12 @@
     <message>
         <location filename="../../MainWindow.ui" line="956"/>
         <source>Interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>循環間隔:</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="915"/>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>循環次數:</translation>
     </message>
     <message>
         <location filename="../../MainWindow.ui" line="1093"/>
@@ -263,10 +255,6 @@
         <location filename="../../MainWindow.ui" line="1292"/>
         <source>Refresh serial ports</source>
         <translation>刷新串口</translation>
-    </message>
-    <message>
-        <source>Style(&amp;S)</source>
-        <translation type="vanished">樣式(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../MainWindow.cpp" line="97"/>
