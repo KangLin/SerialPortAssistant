@@ -1,0 +1,109 @@
+version: 'v0.5.18.{build}'
+
+cache:
+  - C:\projects\other_source
+
+environment:
+  STOREPASS:
+    secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
+  QT_USER:
+    secure: EoBPaPuJ6u9UDYpQWjKhUg==
+  QT_PASSWORD:
+    secure: ejAYGgB+3sBispRxUSr0xw==
+    
+  matrix:
+  ##### msvc 2015 ########
+  - GENERATORS: "Visual Studio 14 2015"
+    TOOLCHAIN_VERSION: 14
+    QT_ROOT: C:\Qt\5.6\msvc2015
+    BUILD_ARCH: x86
+
+  - GENERATORS: "Visual Studio 14 2015 Win64"
+    TOOLCHAIN_VERSION: 14
+    QT_ROOT: C:\Qt\5.6\msvc2015_64
+    BUILD_ARCH: x64
+
+matrix:
+  fast_finish: false
+
+init:
+  - set varch=%BUILD_ARCH%
+  - if "%BUILD_ARCH%" == "x64" set varch=amd64
+  - if %TOOLCHAIN_VERSION% LSS 15 (call "C:\Program Files (x86)\Microsoft Visual Studio %TOOLCHAIN_VERSION%.0\VC\vcvarsall.bat" %varch%) else (call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %varch%)  
+  - echo NUMBER_OF_PROCESSORS=%NUMBER_OF_PROCESSORS%
+  - echo PROCESSOR_IDENTIFIER=%PROCESSOR_IDENTIFIER%
+  - if NOT "%QT_ROOT%" == "NO" for /f "delims=" %%i in ('%QT_ROOT%/bin/qmake -query QT_VERSION') do (set QT_VERSION=%%i)
+  - echo QT_ROOT=%QT_ROOT%
+  - echo QT_VERSION=%QT_VERSION%
+  - set SerialPortAssistant_VERSION=v0.5.18
+
+install:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - git submodule update --init --recursive
+  - git clone https://github.com/KangLin/RabbitCommon.git
+  - set RabbitCommon_DIR=%APPVEYOR_BUILD_FOLDER%/RabbitCommon
+
+  - set OTHER_SOURCE=%APPVEYOR_BUILD_FOLDER%\..\other_source
+  - set INSTALL_DIR=%OTHER_SOURCE%\install_dir
+  - if not exist "%OTHER_SOURCE%" ( mkdir "%OTHER_SOURCE%" )
+  - if not exist "%INSTALL_DIR%" (mkdir "%INSTALL_DIR%")
+
+  - cd %OTHER_SOURCE%
+  - set CMAKE_VERSION=3.28.3
+  - if not exist cmake-%CMAKE_VERSION%-windows-i386 (curl -fsSL -o cmake-%CMAKE_VERSION%-windows-i386.zip https://github.com/Kitware/CMake/releases/download/v%CMAKE_VERSION%/cmake-%CMAKE_VERSION%-windows-i386.zip && 7z x cmake-%CMAKE_VERSION%-windows-i386.zip)
+  - cd cmake-%CMAKE_VERSION%-windows-i386
+  - set PATH="%CD%/bin";%PATH%
+
+  - cd %OTHER_SOURCE%
+  - set VCPKG_DIR=%OTHER_SOURCE%\vcpkg
+  - if not exist %VCPKG_DIR% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_DIR%" && git checkout -b a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 && bootstrap-vcpkg.bat) 
+
+before_build:
+
+build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - mkdir build
+  - cd build
+  - cmake %APPVEYOR_BUILD_FOLDER% ^
+        -G"%GENERATORS%" ^
+        -DCMARK_SHARED=OFF ^
+        -DCMARK_TESTS=OFF ^
+        -DCMARK_STATIC=ON ^
+        -DCMAKE_BUILD_TYPE=Release ^
+        -DCMAKE_INSTALL_PREFIX=%CD%/install ^
+        -DCMAKE_TOOLCHAIN_FILE=%OTHER_SOURCE%/vcpkg/scripts/buildsystems/vcpkg.cmake ^
+        -DVCPKG_VERBOSE=ON ^
+        -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON ^
+        -DVCPKG_APPLOCAL_DEPS=ON ^
+        -DBUILD_QUIWidget=OFF ^
+        -DINSTALL_QT=ON ^
+        -DQT_DIR=%QT_ROOT%/lib/cmake/qt5 ^
+        -DQt5_DIR=%QT_ROOT%/lib/cmake/qt5
+  - cmake --build . --config Release
+  - cmake --build . --config Release --target install
+  - makensis Install.nsi
+  - copy /Y SerialPortAssistant_Setup_%SerialPortAssistant_VERSION%.exe SerialPortAssistant_%SerialPortAssistant_VERSION%_winxp_%BUILD_ARCH%_Setup.exe
+
+artifacts:
+  - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_winxp_%BUILD_ARCH%_Setup.exe
+
+test: off
+
+#See:https://www.appveyor.com/docs/deployment/github/
+deploy:
+  - provider: GitHub
+    #release: SerialPortAssistant-$(SerialPortAssistant_VERSION)
+    #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
+    #token: https://github.com/settings/tokens
+    #password encrypt: https://ci.appveyor.com/tools/encrypt
+    auth_token:
+      secure: uuBaDAE/gzmEF9G4r9IwPf75qjC93JfzDcSElphUXRg0N2+emQ1Wc1ZRs2oZiw3E
+    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(SerialPortAssistant_VERSION)
+    draft: true
+    prerelease: true
+    on:
+      BUILD_TARGERT: windows_msvc
+      TOOLCHAIN_VERSION: 14
+      QT_VERSION: 5.6.3
+      BUILD_ARCH: x86
+      appveyor_repo_tag: true        # deploy on tag push only
