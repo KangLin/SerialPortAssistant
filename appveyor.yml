@@ -1,9 +1,12 @@
-version: 'v0.5.18.{build}'
+version: 'v0.5.19.{build}'
 
 cache:
-  - C:\projects\other_source
+  - ..\other_source
+# Clean cached
+# https://www.appveyor.com/docs/build-cache/#cleaning-up-cache
 
 environment:
+  SerialPortAssistant_VERSION: "v0.5.19"
   STOREPASS:
     secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
   QT_USER:
@@ -35,7 +38,6 @@ init:
   - if NOT "%QT_ROOT%" == "NO" for /f "delims=" %%i in ('%QT_ROOT%/bin/qmake -query QT_VERSION') do (set QT_VERSION=%%i)
   - echo QT_ROOT=%QT_ROOT%
   - echo QT_VERSION=%QT_VERSION%
-  - set SerialPortAssistant_VERSION=v0.5.18
 
 install:
   - cd %APPVEYOR_BUILD_FOLDER%
@@ -102,7 +104,6 @@ deploy:
     draft: true
     prerelease: true
     on:
-      BUILD_TARGERT: windows_msvc
       TOOLCHAIN_VERSION: 14
       QT_VERSION: 5.6.3
       BUILD_ARCH: x86

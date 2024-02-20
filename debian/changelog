@@ -1,11 +1,10 @@
-serialportassistant (0.5.18) stable; urgency=medium
+serialportassistant (0.5.19) stable; urgency=medium
 
-    * Fix windows title
-    * Modify translations
-    * Modify UI
-    * CI: modify ci
-    * Modify deploy.sh to disable update.xml
-    * Modify README
+    * CI: modify appveyor.yml
+    * CI: remove appveyor.yml
+    * Modify etc/SerialPortAssistant_logqt.ini
+    * CI: fix urls bug in macos.yml
+    * CI: remove xml
 
- -- Kang Lin <kl222@126.com>  Wed, 07 Feb 2024 12:32:58 +0800
+ -- Kang Lin <kl222@126.com>  Tue, 20 Feb 2024 13:04:05 +0800
 

@@ -1,3 +1,6 @@
++ Version: v0.5.19
+  - Modify ci to windows xp
+
 + Version: v0.5.18
   - Modify UI
 
