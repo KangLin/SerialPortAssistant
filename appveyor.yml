@@ -84,10 +84,10 @@ build_script:
   - cmake --build . --config Release
   - cmake --build . --config Release --target install
   - makensis Install.nsi
-  - copy /Y SerialPortAssistant_Setup_%SerialPortAssistant_VERSION%.exe SerialPortAssistant_%SerialPortAssistant_VERSION%_winxp_%BUILD_ARCH%_Setup.exe
+  - copy /Y SerialPortAssistant_Setup_%SerialPortAssistant_VERSION%.exe SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
 
 artifacts:
-  - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_winxp_%BUILD_ARCH%_Setup.exe
+  - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
 
 test: off
 
