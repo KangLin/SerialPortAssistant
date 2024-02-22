@@ -1,5 +1,5 @@
 {
-  "name": "rabbitcommon",
+  "name": "serialportassistant",
   "version-string":"1.0.9",
   "dependencies": [
     "openssl"
