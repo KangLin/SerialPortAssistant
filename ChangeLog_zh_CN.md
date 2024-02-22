@@ -1,3 +1,7 @@
++ 版本: v0.5.21
+  - 修复 deploy.sh 错误
+  - 修复复制 openssl 库错误
+
 + 版本: v0.5.20
   - 修改 deploy.sh
 

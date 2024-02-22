@@ -7,10 +7,6 @@ project(SerialPortAssistant)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_CXX_EXTENSIONS OFF)
-if(CMAKE_VERSION VERSION_LESS "3.7.0")
-    set(CMAKE_INCLUDE_CURRENT_DIR ON)
-endif()
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "verbose")
 
 IF(MSVC)
@@ -44,7 +40,7 @@ SET(CMAKE_AUTORCC ON)
 
 # Need qt components
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-SET(QT_COMPONENTS Core Gui Widgets SerialPort Network Xml)
+SET(QT_COMPONENTS Core Gui Widgets SerialPort Network)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${QT_COMPONENTS})
 message("QT_VERSION:${Qt${QT_VERSION_MAJOR}_VERSION}")
 if(Qt${QT_VERSION_MAJOR}_FOUND)
@@ -55,7 +51,7 @@ endif()
 get_filename_component(QT_INSTALL_DIR "${Qt${QT_VERSION_MAJOR}_DIR}/../../.." ABSOLUTE)
 message("Qt${QT_VERSION_MAJOR}_DIR:${Qt${QT_VERSION_MAJOR}_DIR}")
 message("QT_INSTALL_DIR:${QT_INSTALL_DIR}")
-message("${PROJECT_NAME} QT_LIBRARIES:${QT_LIBRARIES}")
+message("QT_LIBRARIES:${QT_LIBRARIES}")
 
 if(NOT RabbitCommon_DIR)
     set(RabbitCommon_DIR $ENV{RabbitCommon_DIR})
@@ -82,47 +78,4 @@ else()
     endif()
 endif()
 
-GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
-    OUT_REVISION SerialPortAssistant_Revision)
-IF(NOT SerialPortAssistant_VERSION)
-    SET(SerialPortAssistant_VERSION "v0.5.14")
-ENDIF()
-message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
-
 add_subdirectory(App)
-
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
-        DESTINATION etc COMPONENT Runtime)
-
-iF(WIN32)
-    INSTALL(FILES Install/Install.nsi DESTINATION "${CMAKE_BINARY_DIR}"
-        COMPONENT Runtime)
-endif()
-# Install other files
-set(OTHER_FILES
-    License.md
-    Authors.md
-    ChangeLog.md
-    Authors_zh_CN.md
-    ChangeLog_zh_CN.md)
-if(ANDROID)
-    INSTALL(FILES ${OTHER_FILES} DESTINATION "assets" COMPONENT Runtime)
-else()
-    INSTALL(FILES ${OTHER_FILES} DESTINATION "." COMPONENT Runtime)
-endif()
-
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
-    DESTINATION "."
-        COMPONENT Runtime)
-
-if(UNIX AND NOT ANDROID)
-    INSTALL(FILES ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.desktop
-        DESTINATION "share/applications"
-            COMPONENT Runtime)
-    INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
-        DESTINATION "${CMAKE_INSTALL_BINDIR}"
-            COMPONENT Runtime)
-    INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
-        DESTINATION "share/pixmaps"
-            COMPONENT Runtime)
-endif()

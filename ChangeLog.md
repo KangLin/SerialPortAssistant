@@ -1,3 +1,7 @@
++ Version: v0.5.21
+  - Fix deploy.sh bug
+  - CI: copy openssl dll
+
 + Version: v0.5.20
   - Modify deploy.sh
 

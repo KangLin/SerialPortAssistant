@@ -83,6 +83,8 @@ build_script:
         -DQt5_DIR=%QT_ROOT%/lib/cmake/qt5
   - cmake --build . --config Release
   - cmake --build . --config Release --target install
+  - if "%BUILD_ARCH%" == "x86" (copy /Y c:\OpenSSL-Win32\bin\ssleay32.dll install\bin && copy /Y c:\OpenSSL-Win32\bin\libeay32.dll install\bin)
+  - if "%BUILD_ARCH%" == "x64" (copy /Y c:\OpenSSL-Win64\bin\ssleay32.dll install\bin && copy /Y c:\OpenSSL-Win64\bin\libeay32.dll install\bin)
   - makensis Install.nsi
   - copy /Y SerialPortAssistant_Setup_%SerialPortAssistant_VERSION%.exe SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
 

@@ -107,6 +107,12 @@ jobs:
           cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
           7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip install/.
 
+      - name: test run
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
+        working-directory: ${{github.workspace}}/build
+        run: |
+          ./install/bin/SerialPortAssistant.sh
+      
       - name: Update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
         working-directory: ${{github.workspace}}/build

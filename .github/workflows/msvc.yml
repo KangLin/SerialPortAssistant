@@ -123,10 +123,8 @@ jobs:
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Application
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Runtime
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=DependLibraries
-          copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
-          copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis Install.nsi
-          copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
+          copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
 
       - name: Update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
@@ -140,7 +138,7 @@ jobs:
                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe"
 
       - name: Update artifact
-        if: ${{ matrix.BUILD_TYPE == 'Release' }}
+        if: ${{ matrix.BUILD_TYPE == 'Release'}} # && matrix.qt_version = '6.6.2' }}
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact_name }}

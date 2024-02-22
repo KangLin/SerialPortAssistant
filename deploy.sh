@@ -49,7 +49,7 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: \"${VERSIO
 #sed -i "s/export VERSION=.*/export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 #sed -i "s/^\  - export VERSION=.*/\  - export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
-#sed -i "s/<VERSION>.*</<VERSION>${VERSION}</g" ${SOURCE_DIR}/Update/update.xml
+sed -i "s/SET(SerialPortAssistant_VERSION=.*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\")/SET(SerialPortAssistant_VERSION \"${VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
@@ -57,7 +57,7 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}
 sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 sed -i "s/          \"version\":[[:blank:]]*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
 if [ -f ${SOURCE_DIR}/vcpkg.json ]; then
-    sed -i "s/\"version-string\":[0-9]\+\.[0-9]\+\.[0-9]\+\".*\"/\"version-string\":\"${DEBIAN_VERSION}\"/g" ${SOURCE_DIR}/vcpkg.json
+    sed -i "s/^  \"version-string\":\"[0-9]\+\.[0-9]\+\.[0-9]\+\",/  \"version-string\":\"${DEBIAN_VERSION}\",/g" ${SOURCE_DIR}/vcpkg.json
 fi
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`

@@ -41,12 +41,7 @@ int main(int argc, char *argv[])
 #endif
     
 #ifdef RABBITCOMMON
-    QString szLocale = CGlobal::Instance()->GetLanguage();
-    if("Default" == szLocale)
-    {
-        szLocale = QLocale::system().name();
-    }
-    RabbitCommon::CTools::Instance()->Init(szLocale);
+    RabbitCommon::CTools::Instance()->Init();
 #endif
     
     CMainWindow *w = new CMainWindow();
