@@ -57,9 +57,9 @@
 - 安装说明：
   - ubuntu
   
-        sudo apt install ./serialportassistant_0.5.19_amd64.deb
+        sudo apt install ./serialportassistant_0.5.20_amd64.deb
         # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-        # sudo dpkg -i serialportassistant_0.5.19_amd64.deb
+        # sudo dpkg -i serialportassistant_0.5.20_amd64.deb
         # sudo apt-get install -f # Install dependencies
 
 ### 捐赠  

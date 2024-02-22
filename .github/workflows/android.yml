@@ -32,7 +32,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.19
+      SerialPortAssistant_VERSION: v0.5.20
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23

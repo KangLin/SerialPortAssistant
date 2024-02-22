@@ -1,3 +1,6 @@
++ Version: v0.5.20
+  - Modify deploy.sh
+
 + Version: v0.5.19
   - Modify ci to windows xp
 

@@ -1,10 +1,9 @@
-serialportassistant (0.5.19) stable; urgency=medium
+serialportassistant (0.5.20) stable; urgency=medium
 
-    * CI: modify appveyor.yml
-    * CI: remove appveyor.yml
-    * Modify etc/SerialPortAssistant_logqt.ini
-    * CI: fix urls bug in macos.yml
-    * CI: remove xml
+    * Modify deploy.sh to vcpkg.json
+    * CI: modify appveyor.yml to rename winxp to windows_xp
+    * CI: modify macos.yml
+    * CI: update qt version 6.6.1 to 6.6.2
 
- -- Kang Lin <kl222@126.com>  Tue, 20 Feb 2024 13:04:05 +0800
+ -- Kang Lin <kl222@126.com>  Thu, 22 Feb 2024 14:37:02 +0800
 
