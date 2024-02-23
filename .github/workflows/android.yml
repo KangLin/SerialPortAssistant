@@ -15,13 +15,11 @@ jobs:
         qt_arch: [android_arm64_v8a, android_x86_64]
         qt_version: [6.6.2]
         include:
-          - BUILD_TYPE: Release
-            qt_arch: android_arm64_v8a
+          - qt_arch: android_arm64_v8a
             VCPKG_TARGET_TRIPLET: arm64-android
             config_arch: arm64_v8a
 
-          - BUILD_TYPE: Release
-            qt_arch: android_x86_64 
+          - qt_arch: android_x86_64 
             VCPKG_TARGET_TRIPLET: x64-android
             config_arch: x86_64
 
@@ -34,6 +32,8 @@ jobs:
       INSTALL_DIR: ${{github.workspace}}/.cache/install
       SerialPortAssistant_VERSION: v0.5.20
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
+      VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
+      VCPKG_DEFAULT_HOST_TRIPLET: x64-linux
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23
       qt_modules: 'qtscxml qtserialport qtwebchannel qtwebsockets qtwebview'
@@ -123,11 +123,17 @@ jobs:
               -DCMARK_TESTS=OFF \
               -DCMARK_STATIC=ON \
               -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} \
+              -DCMAKE_TOOLCHAIN_FILE="${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake" \
+              -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${Qt6_DIR}/lib/cmake/Qt6/qt.toolchain.cmake \
+              -DVCPKG_TARGET_TRIPLET=${{env.VCPKG_TARGET_TRIPLET}} \
+              -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON \
+              -DVCPKG_APPLOCAL_DEPS=ON \
+              -DINSTALL_QT=ON \
               -DQT_HOST_PATH=${Qt6_DIR}/../gcc_64 \
               -DANDROID_PLATFORM=${{env.ANDROID_PLATFORM}} \
               -DANDROID_NATIVE_API_LEVEL=${{env.ANDROID_NATIVE_API_LEVEL}} \
               -DQT_ANDROID_SIGN_APK=ON \
-              -DQT_ENABLE_VERBOSE_DEPLOYMENT=OFF \
+              -DQT_ENABLE_VERBOSE_DEPLOYMENT=ON \
               -DQt6LinguistTools_DIR=${Qt6_DIR}/../gcc_64/lib/cmake/Qt6LinguistTools \
               -DCMAKE_INSTALL_PREFIX=`pwd`/install
           cmake --build . --config ${{matrix.BUILD_TYPE}} --target all

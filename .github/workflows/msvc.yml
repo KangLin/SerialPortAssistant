@@ -44,6 +44,7 @@ jobs:
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
       SerialPortAssistant_VERSION: v0.5.20
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
+      VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       artifact_name: build_msvc
 
@@ -101,7 +102,6 @@ jobs:
         working-directory: ${{github.workspace}}/build
         env:
           RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
-          #Log4Qt_DIR: ${{env.INSTALL_DIR}}
         run: |
           cmake ${{github.workspace}} ^
               -A ${{matrix.CMAKE_GENERATOR_PLATFORM}} ^
@@ -113,7 +113,9 @@ jobs:
               -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/build/install ^
               -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake ^
               -DVCPKG_VERBOSE=ON ^
-              -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
+              -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON ^
+              -DVCPKG_APPLOCAL_DEPS=ON ^
+              -DINSTALL_QT=ON
           cmake --build . --config ${{matrix.BUILD_TYPE}}
 
       - name: Package
