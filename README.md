@@ -37,8 +37,11 @@ Author: Kang Lin (kl222@126.com)
   + [x] linux
   + [x] Android
   + [x] mac, os  
-    Mac os, I don't have the corresponding equipment,
+    - Mac os, I don't have the corresponding equipment,
     please compile and test the user with the corresponding equipment.
+    - Currently compiles successfully.
+    but the loading dynamic library path is not set correctly.
+    Please help you set it.
     
   See: [Qt5 supported platforms](https://doc.qt.io/qt-5/supported-platforms.html), [Qt6 supported platforms](https://doc.qt.io/qt-6/supported-platforms.html).
 - Multi-language

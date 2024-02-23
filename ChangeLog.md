@@ -1,6 +1,10 @@
 + Version: v0.5.21
   - Fix deploy.sh bug
-  - CI: copy openssl dll
+  - CI: copy openssl dll in windows. See: https://github.com/KangLin/RabbitCommon/commit/673aa9198ec1f88eb1f9f265d0b85f613ee86418
+  - Fix android resource
+  - MacOS can now be successfully compiled in CI.
+    but the loading dynamic library path is not set correctly.
+    Please help you set it.
 
 + Version: v0.5.20
   - Modify deploy.sh

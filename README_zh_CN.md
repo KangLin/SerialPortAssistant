@@ -36,7 +36,9 @@
   + [x] WINDOWS
   + [x] Linux
   + [x] Android
-  + [x] mac、os  本人没有mac设备，请有些设备的同学自行编译和测试
+  + [x] mac、os
+    - 本人没有mac设备，请有些设备的同学自行编译和测试
+    - 当前可以成功编译，但是没有正确设置加载动态库路径。请会设置的朋友帮助设置。
   
   详见：[Qt5 支持平台](https://doc.qt.io/qt-5/supported-platforms.html)、[Qt6 支持平台](https://doc.qt.io/qt-6/supported-platforms.html)。
 - 程序截屏
