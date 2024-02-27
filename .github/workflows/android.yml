@@ -124,8 +124,8 @@ jobs:
               -DCMARK_TESTS=OFF \
               -DCMARK_STATIC=ON \
               -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} \
-              -DCMAKE_TOOLCHAIN_FILE="${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake" \
-              -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${Qt6_DIR}/lib/cmake/Qt6/qt.toolchain.cmake \
+              -DQT_CHAINLOAD_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake \
+              -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake \
               -DVCPKG_TARGET_TRIPLET=${{env.VCPKG_TARGET_TRIPLET}} \
               -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON \
               -DVCPKG_APPLOCAL_DEPS=ON \
