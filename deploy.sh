@@ -49,7 +49,7 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: \"${VERSIO
 #sed -i "s/export VERSION=.*/export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 #sed -i "s/^\  - export VERSION=.*/\  - export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
-sed -i "s/SET(SerialPortAssistant_VERSION=.*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\")/SET(SerialPortAssistant_VERSION \"${VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
+sed -i "s/SET(SerialPortAssistant_VERSION=.*\"v[0-9]\+\.[0-9]\+\.[0-9]\+\")/SET(SerialPortAssistant_VERSION \"${VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
