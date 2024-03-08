@@ -844,7 +844,7 @@ void CMainWindow::on_actionOpen_triggered()
 
 void CMainWindow::on_actionExit_triggered()
 {
-    this->close();
+    close();
 }
 
 void CMainWindow::on_actionClear_Send_History_triggered()

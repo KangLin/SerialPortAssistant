@@ -377,102 +377,102 @@
         <translation>串口[%1]已打開，是否關閉它？</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="883"/>
+        <location filename="../../MainWindow.cpp" line="884"/>
         <source>Default</source>
         <translation>默認</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="884"/>
+        <location filename="../../MainWindow.cpp" line="885"/>
         <source>English</source>
         <translation>英語</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="885"/>
+        <location filename="../../MainWindow.cpp" line="886"/>
         <source>Chinese</source>
         <translation>中文</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="886"/>
+        <location filename="../../MainWindow.cpp" line="887"/>
         <source>Chinese(TaiWan)</source>
         <translation>中文（臺灣）</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1008"/>
+        <location filename="../../MainWindow.cpp" line="1009"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1009"/>
+        <location filename="../../MainWindow.cpp" line="1010"/>
         <source>Language changes, close the program, and please restart the program.</source>
         <translation>語言改變，關閉程序，並請從重啟程序。</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1309"/>
+        <location filename="../../MainWindow.cpp" line="1310"/>
         <source>CTS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1311"/>
+        <location filename="../../MainWindow.cpp" line="1312"/>
         <source>DCD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1313"/>
+        <location filename="../../MainWindow.cpp" line="1314"/>
         <source>DTR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1315"/>
+        <location filename="../../MainWindow.cpp" line="1316"/>
         <source>DSR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1317"/>
+        <location filename="../../MainWindow.cpp" line="1318"/>
         <source>PNG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1319"/>
+        <location filename="../../MainWindow.cpp" line="1320"/>
         <source>RTS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1321"/>
+        <location filename="../../MainWindow.cpp" line="1322"/>
         <source>SRD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1323"/>
+        <location filename="../../MainWindow.cpp" line="1324"/>
         <source>STD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1100"/>
+        <location filename="../../MainWindow.cpp" line="1101"/>
         <source>Set baud rate fail</source>
         <translation>設置比特率失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1113"/>
+        <location filename="../../MainWindow.cpp" line="1114"/>
         <source>Set data bits fail</source>
         <translation>設置數據位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1134"/>
+        <location filename="../../MainWindow.cpp" line="1135"/>
         <source>Set parity fail</source>
         <translation>設置校驗失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1148"/>
+        <location filename="../../MainWindow.cpp" line="1149"/>
         <source>Set stop bits fail</source>
         <translation>設置停止位失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1163"/>
+        <location filename="../../MainWindow.cpp" line="1164"/>
         <source>Set Flow Control fail</source>
         <translation>設置流控失敗</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1171"/>
+        <location filename="../../MainWindow.cpp" line="1172"/>
         <source>Load File</source>
         <translation>加載文件</translation>
     </message>
@@ -480,7 +480,7 @@
         <location filename="../../MainWindow.ui" line="1308"/>
         <location filename="../../MainWindow.ui" line="1311"/>
         <location filename="../../MainWindow.ui" line="1314"/>
-        <location filename="../../MainWindow.cpp" line="1226"/>
+        <location filename="../../MainWindow.cpp" line="1227"/>
         <source>Open send file</source>
         <translation>打開發送文件</translation>
     </message>
@@ -488,17 +488,17 @@
         <location filename="../../MainWindow.ui" line="1297"/>
         <location filename="../../MainWindow.ui" line="1300"/>
         <location filename="../../MainWindow.ui" line="1303"/>
-        <location filename="../../MainWindow.cpp" line="1234"/>
+        <location filename="../../MainWindow.cpp" line="1235"/>
         <source>Open save file</source>
         <translation>打開保存文件</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1245"/>
+        <location filename="../../MainWindow.cpp" line="1246"/>
         <source>Close serial port</source>
         <translation>關閉串口</translation>
     </message>
     <message>
-        <location filename="../../MainWindow.cpp" line="1246"/>
+        <location filename="../../MainWindow.cpp" line="1247"/>
         <source>Will be close serial port ?</source>
         <translation>要關閉串口？</translation>
     </message>
