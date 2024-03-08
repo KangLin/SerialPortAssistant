@@ -49,13 +49,14 @@ ADD_TARGET(NAME ${PROJECT_NAME}
     )
 
 INSTALL(FILES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
-        DESTINATION etc COMPONENT Runtime)
+        DESTINATION ${CMAKE_INSTALL_SYSCONFDIR} COMPONENT Runtime)
 
 iF(WIN32)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/Install/Install.nsi
         DESTINATION "${CMAKE_BINARY_DIR}"
             COMPONENT Runtime)
 endif()
+
 # Install other files
 set(OTHER_FILES
     ${CMAKE_SOURCE_DIR}/License.md
@@ -63,11 +64,9 @@ set(OTHER_FILES
     ${CMAKE_SOURCE_DIR}/ChangeLog.md
     ${CMAKE_SOURCE_DIR}/Authors_zh_CN.md
     ${CMAKE_SOURCE_DIR}/ChangeLog_zh_CN.md)
-if(ANDROID)
-    INSTALL(FILES ${OTHER_FILES} DESTINATION "assets" COMPONENT Runtime)
-else()
-    INSTALL(FILES ${OTHER_FILES} DESTINATION "." COMPONENT Runtime)
-endif()
+INSTALL_FILE(SOURCES ${OTHER_FILES}
+    DESTINATION ${CMAKE_INSTALL_DOCDIR}
+        COMPONENT Runtime)
 
 INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
     DESTINATION "."
@@ -75,12 +74,12 @@ INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
 
 if(UNIX AND NOT ANDROID)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.desktop
-        DESTINATION "share/applications"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
             COMPONENT Runtime)
     INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
             COMPONENT Runtime)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
-        DESTINATION "share/pixmaps"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps"
             COMPONENT Runtime)
 endif()
