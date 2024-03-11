@@ -48,8 +48,9 @@ ADD_TARGET(NAME ${PROJECT_NAME}
     VERSION ${SerialPortAssistant_VERSION}
     )
 
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
-        DESTINATION ${CMAKE_INSTALL_SYSCONFDIR} COMPONENT Runtime)
+INSTALL_FILE(SOURCES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
+    DESTINATION etc
+        COMPONENT Runtime)
 
 iF(WIN32)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/Install/Install.nsi
