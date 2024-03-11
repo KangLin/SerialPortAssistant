@@ -111,7 +111,7 @@ jobs:
         if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
         working-directory: ${{github.workspace}}/build
         run: |
-          ./install/bin/SerialPortAssistant.sh
+          ./install/bin/SerialPortAssistant
       
       - name: Update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
