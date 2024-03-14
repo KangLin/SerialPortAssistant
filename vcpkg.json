@@ -1,6 +1,6 @@
 {
   "name": "serialportassistant",
-  "version-string": "1.0.9",
+  "version-string": "",
   "dependencies": [
     "openssl"
   ],

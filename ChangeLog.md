@@ -6,6 +6,7 @@
     but the loading dynamic library path is not set correctly.
     Please help you set it.
   - Use RabbitCommon v2.1.0
+  - Add version output log
 
 + Version: v0.5.20
   - Modify deploy.sh

@@ -28,6 +28,9 @@ Abstract:
     #include "QUIWidget/QUIWidget.h"
 #endif
 
+#include <QLoggingCategory>
+static Q_LOGGING_CATEGORY(log, "main")
+    
 int main(int argc, char *argv[])
 {
 #if defined (_DEBUG)
@@ -43,6 +46,15 @@ int main(int argc, char *argv[])
 #ifdef RABBITCOMMON
     RabbitCommon::CTools::Instance()->Init();
 #endif
+    qInfo(log) << QObject::tr("SerialPortAssistant version: %1 ").arg(a.applicationVersion())
+#ifdef SerialPortAssistant_Revision
+                      + QObject::tr("(Revision:")
+                      + " [" + SerialPortAssistant_Revision
+                      + "](http://github.com/KangLin/RabbitCommon/tree/"
+                      + SerialPortAssistant_Revision + ")"
+#endif
+               + "); "
+               + QObject::tr("RabbitCommon:") + RabbitCommon::CTools::Version();
     
     CMainWindow *w = new CMainWindow();
     a.setApplicationDisplayName(w->windowTitle());

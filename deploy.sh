@@ -56,19 +56,18 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
 sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 sed -i "s/          \"version\":[[:blank:]]*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
-if [ -f ${SOURCE_DIR}/vcpkg.json ]; then
-    sed -i "s/  \"version-string\":.*\"[0-9]\+\.[0-9]\+\.[0-9]\+\",/  \"version-string\": \"${DEBIAN_VERSION}\",/g" ${SOURCE_DIR}/vcpkg.json
-fi
-
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
 sed -i "s/serialportassistant_[0-9]\+\.[0-9]\+\.[0-9]\+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
 sed -i "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml
+if [ -f ${SOURCE_DIR}/vcpkg.json ]; then
+    sed -i "s/  \"version-string\":.*\"[0-9]\+\.[0-9]\+\.[0-9]\+\",/  \"version-string\": \"${DEBIAN_VERSION}\",/g" ${SOURCE_DIR}/vcpkg.json
+fi
+
 MAJOR_VERSION=`echo ${DEBIAN_VERSION}|cut -d "." -f 1`
 sed -i "s/android:versionCode=.*android/android:versionCode=\"${MAJOR_VERSION}\" android/g"  ${SOURCE_DIR}/App/android/AndroidManifest.xml
 sed -i "s/android:versionName=.*>/android:versionName=\"${DEBIAN_VERSION}\" >/g"  ${SOURCE_DIR}/App/android/AndroidManifest.xml
-
 
 CHANGLOG_TMP=${SOURCE_DIR}/debian/changelog.tmp
 CHANGLOG_FILE=${SOURCE_DIR}/debian/changelog

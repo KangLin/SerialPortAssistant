@@ -1,9 +1,21 @@
-serialportassistant (0.5.20) stable; urgency=medium
+serialportassistant (0.5.21) stable; urgency=medium
 
+    * CI: fix arm64_v8a to arm64-v8a in android.yml
+    * CI: run program in macos.yml
+    * Modify debian/rules
+    * Use etc replace ${CMAKE_INSTALL_SYSCONFDIR}
+    * Modify translations
+    * Modify deploy.sh
+    * Modify Change log etc documents install position.
     * Modify deploy.sh to vcpkg.json
-    * CI: modify appveyor.yml to rename winxp to windows_xp
-    * CI: modify macos.yml
-    * CI: update qt version 6.6.1 to 6.6.2
+    * CI: copy vcpkg dll to install\bin in msvc.yml
+    * CI: use QT_CHAINLOAD_TOOLCHAIN_FILE in android.yml
+    * CI: modify ANDROID_ABI
+    * Android: modify resource
+    * CI: modify android.yml
+    * Modify README
+    * Android: modify string translation in resource
+    * FIX: deploy.sh modify version bug
 
- -- Kang Lin <kl222@126.com>  Thu, 22 Feb 2024 14:37:02 +0800
+ -- Kang Lin <kl222@126.com>  Fri, 15 Mar 2024 11:34:08 +0800
 
