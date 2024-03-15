@@ -17,5 +17,5 @@ serialportassistant (0.5.21) stable; urgency=medium
     * Android: modify string translation in resource
     * FIX: deploy.sh modify version bug
 
- -- Kang Lin <kl222@126.com>  Fri, 15 Mar 2024 11:34:08 +0800
+ -- Kang Lin <kl222@126.com>  Fri, 15 Mar 2024 15:02:17 +0800
 
