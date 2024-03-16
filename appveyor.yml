@@ -58,7 +58,7 @@ install:
 
   - cd %OTHER_SOURCE%
   - set VCPKG_DIR=%OTHER_SOURCE%\vcpkg
-  - if not exist %VCPKG_DIR% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_DIR%" && git checkout -b a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 && bootstrap-vcpkg.bat) 
+  - if not exist %VCPKG_DIR% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_DIR%" && git checkout -b a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 && bootstrap-vcpkg.bat)
 
 before_build:
 
@@ -94,19 +94,19 @@ artifacts:
 test: off
 
 #See:https://www.appveyor.com/docs/deployment/github/
-deploy:
-  - provider: GitHub
-    #release: SerialPortAssistant-$(SerialPortAssistant_VERSION)
-    #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
-    #token: https://github.com/settings/tokens
-    #password encrypt: https://ci.appveyor.com/tools/encrypt
-    auth_token:
-      secure: uuBaDAE/gzmEF9G4r9IwPf75qjC93JfzDcSElphUXRg0N2+emQ1Wc1ZRs2oZiw3E
-    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(SerialPortAssistant_VERSION)
-    draft: true
-    prerelease: true
-    on:
-      TOOLCHAIN_VERSION: 14
-      QT_VERSION: 5.6.3
-      BUILD_ARCH: x86
-      appveyor_repo_tag: true        # deploy on tag push only
+#deploy:
+#  - provider: GitHub
+#    #release: SerialPortAssistant-$(SerialPortAssistant_VERSION)
+#    #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
+#    #token: https://github.com/settings/tokens
+#    #password encrypt: https://ci.appveyor.com/tools/encrypt
+#    auth_token:
+#      secure: uuBaDAE/gzmEF9G4r9IwPf75qjC93JfzDcSElphUXRg0N2+emQ1Wc1ZRs2oZiw3E
+#    #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(SerialPortAssistant_VERSION)
+#    draft: true
+#    prerelease: true
+#    on:
+#      TOOLCHAIN_VERSION: 14
+#      QT_VERSION: 5.6.3
+#      BUILD_ARCH: x86
+#      appveyor_repo_tag: true        # deploy on tag push only
