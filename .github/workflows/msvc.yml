@@ -26,12 +26,14 @@ jobs:
             VCPKG_PLATFORM_TOOLSET: v142
             qt_arch: win64_msvc2019_64
             CMAKE_GENERATOR_PLATFORM: x64
+            VCPKG_MANIFEST_DIR: "vcpkg/manifests"
 
           - qt_version: 5.12.12
             VCPKG_TARGET_TRIPLET: x86-windows
             VCPKG_PLATFORM_TOOLSET: v141
             qt_arch: win32_msvc2017
             CMAKE_GENERATOR_PLATFORM: Win32
+            VCPKG_MANIFEST_DIR: "vcpkg/manifests"
 
     runs-on: windows-latest
 
@@ -41,6 +43,7 @@ jobs:
       INSTALL_DIR: ${{github.workspace}}\.cache\install_${{matrix.qt_arch}}_${{matrix.BUILD_TYPE}}
       CMAKE_GENERATOR: "Visual Studio 17 2022"
       VCPKG_PLATFORM_TOOLSET: ${{matrix.VCPKG_PLATFORM_TOOLSET}}
+      VCPKG_MANIFEST_DIR: "${{github.workspace}}/${{matrix.VCPKG_MANIFEST_DIR}}"
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
       SerialPortAssistant_VERSION: v0.5.21
       VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6

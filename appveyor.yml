@@ -58,7 +58,7 @@ install:
 
   - cd %OTHER_SOURCE%
   - set VCPKG_DIR=%OTHER_SOURCE%\vcpkg
-  - if not exist %VCPKG_DIR% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_DIR%" && git checkout -b a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6 && bootstrap-vcpkg.bat)
+  - if not exist %VCPKG_DIR% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_DIR%" && git checkout -b 995451296a8237ff0ea4213b9deda73bb3f5229a 995451296a8237ff0ea4213b9deda73bb3f5229a && bootstrap-vcpkg.bat)
 
 before_build:
 
@@ -74,6 +74,7 @@ build_script:
         -DCMAKE_BUILD_TYPE=Release ^
         -DCMAKE_INSTALL_PREFIX=%CD%/install ^
         -DCMAKE_TOOLCHAIN_FILE=%OTHER_SOURCE%/vcpkg/scripts/buildsystems/vcpkg.cmake ^
+        -DVCPKG_MANIFEST_DIR="%APPVEYOR_BUILD_FOLDER%/vcpkg/manifests" ^
         -DVCPKG_VERBOSE=ON ^
         -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON ^
         -DVCPKG_APPLOCAL_DEPS=ON ^
