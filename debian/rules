@@ -37,14 +37,14 @@ PACKAGE_DIR = "debian/serialportassistant"
 # See: man debhelper
 # This is example for Cmake ( See https://bugs.debian.org/641051 )
 override_dh_auto_configure:
-    # See: man dh_auto_configure an debhelper
+	# See: man dh_auto_configure an debhelper
 	dh_auto_configure -B$(BUILD_DIR) -- \
 	    -DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant \
         ${PARAS}
 
 override_dh_auto_build:
-	dh_auto_build --parallel -B$(BUILD_DIR)
+	cmake --build $(BUILD_DIR) --config Release --parallel
 
 override_dh_auto_install:
 	cmake --install $(BUILD_DIR) --config Release --prefix $(PACKAGE_DIR)/opt/SerialPortAssistant
