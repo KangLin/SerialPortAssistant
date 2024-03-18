@@ -50,12 +50,12 @@ ADD_TARGET(NAME ${PROJECT_NAME}
 
 INSTALL_FILE(SOURCES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
     DESTINATION etc
-        COMPONENT Runtime)
+        COMPONENT Application)
 
 iF(WIN32)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/Install/Install.nsi
         DESTINATION "${CMAKE_BINARY_DIR}"
-            COMPONENT Runtime)
+            COMPONENT Application)
 endif()
 
 # Install other files
@@ -67,20 +67,20 @@ set(OTHER_FILES
     ${CMAKE_SOURCE_DIR}/ChangeLog_zh_CN.md)
 INSTALL_FILE(SOURCES ${OTHER_FILES}
     DESTINATION ${CMAKE_INSTALL_DOCDIR}
-        COMPONENT Runtime)
+        COMPONENT Application)
 
 INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
     DESTINATION "."
-        COMPONENT Runtime)
+        COMPONENT Application)
 
 if(UNIX AND NOT ANDROID)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
-            COMPONENT Runtime)
+            COMPONENT Application)
     INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
-            COMPONENT Runtime)
+            COMPONENT Application)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
         DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps"
-            COMPONENT Runtime)
+            COMPONENT Application)
 endif()
