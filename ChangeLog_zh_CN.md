@@ -1,4 +1,7 @@
-+ 版本: v0.5.21
+- 版本: v0.5.22
+  - 使用 VCPKG_MANIFEST_DIR 重载 openssl 1.1
+
+- 版本: v0.5.21
   - 修复 deploy.sh 错误
   - 修复在 windows 下复制 openssl 库错误。详见：https://github.com/KangLin/RabbitCommon/commit/673aa9198ec1f88eb1f9f265d0b85f613ee86418
   - 修复 android 资源错误
@@ -6,107 +9,107 @@
   - 使用 RabbitCommon v2.1.0
   - 增加版本输出到日志
 
-+ 版本: v0.5.20
+- 版本: v0.5.20
   - 修改 deploy.sh
 
-+ 版本: v0.5.19
+- 版本: v0.5.19
   - 修改自动化编译生成 windows xp 版本
 
-+ 版本: v0.5.18
+- 版本: v0.5.18
   - 修改界面
 
-+ 版本: v0.5.17
+- 版本: v0.5.17
   - 在　SerialPortAssistant.desktop　中修改　MimeType　的值
   - 修改 debian 打包
   - 删除 pro
-  + 使用 RabbitCommon v2.0.0 新的更新
+  - 使用 RabbitCommon v2.0.0 新的更新
 
-+ 版本: v0.5.16
+- 版本: v0.5.16
   - 修复 DockDebugLog 崩溃. 详见:  https://github.com/KangLin/RabbitCommon/commit/af2e434e39af35876113436ead2a946efcf74199
 
-+ 版本: v0.5.15
+- 版本: v0.5.15
   - 使用 RabbitCommon v2
   - 使用 CMake 管理工程
 
-+ 版本: v0.5.14
+- 版本: v0.5.14
   - 修复日志输出到文件
 
-+ 版本: v0.5.13
+- 版本: v0.5.13
   - 修复在 LINUX 下有不同版本依赖库时,不能加载正确的依赖库
   - 增加关闭窗口时,保存窗口状态
 
-+ 版本: v0.5.12
+- 版本: v0.5.12
   - 修复拼写错误
   - github actions:
-    + msvc.yml 能够工作
+    - msvc.yml 能够工作
   - 关于对话框中增加校订版本,并能直接从主库中打开.
 
-+ 版本: v0.5.11
+- 版本: v0.5.11
   - 更新与 RabbitCommon 相关的代码
   - 支持 Qt6
   - 修改 github actions
   - 重命名 tag.sh 到 deploy.sh
   
-+ 版本: v0.5.10
+- 版本: v0.5.10
   - 修复除 0 引起的崩溃。影响前面所有发行版本。此错误是 RabbitCommon 引起的。
     详见： https://github.com/KangLin/RabbitCommon/commit/7ed300a206d8a36c30003b6c19ad181682d0ff5f
 
-+ 版本: v0.5.9
+- 版本: v0.5.9
   - 增加镜像库
   - 修改自动化编译
-    + 增加 github actions
+    - 增加 github actions
   
-+ 版本: v0.5.8
+- 版本: v0.5.8
   - 用更新后的 RabbitCommon::CStyle
   
-+ 版本: v0.5.7
+- 版本: v0.5.7
   - 修改样式实现，用RabbitCommon::CStyle
   - 增加 QUIWidget 实现窗口
   
-+ 版本: v0.5.6
+- 版本: v0.5.6
   - 修改界面：增加收缩按钮
   - 增加状态指示
   - 自动化编译: 增加 github actions
   
-+ 版本: v0.5.5
+- 版本: v0.5.5
   - 修改一些杂项
   
-+ 版本: v0.5.4
+- 版本: v0.5.4
   - 修改一些 BUG
   - 增加打开保存文件和打开发送文件
 
-+ 版本: v0.5.3
+- 版本: v0.5.3
   - 修改界面
-    + 增加流动界面
-    + 修改编码
-    + 修改十六进制发送
-    + 修改发送文件
+    - 增加流动界面
+    - 修改编码
+    - 修改十六进制发送
+    - 修改发送文件
 
-+ 版本: v0.5.2
+- 版本: v0.5.2
   - 修改安装
   
-+ 版本: v0.5.1
+- 版本: v0.5.1
   - 修改自动化编译
   - 更新 RabbitCommon 接口
   - 修改更新
   - 增加 android 签名
 
-+ 版本: v0.5.0
+- 版本: v0.5.0
   - 修改捐赠
 
-+ 版本: v0.4.9
+- 版本: v0.4.9
   - 修改文档
   
-+ 版本: v0.4.8
+- 版本: v0.4.8
   - 修改 build
   
-+ 版本: v0.4.7
+- 版本: v0.4.7
   - 修改工程结构
 
-+ 版本: v0.4.6
+- 版本: v0.4.6
   - 修改 ci appimage
 
-+ 版本: v0.4.5
+- 版本: v0.4.5
   - 修改 RabbitCommon 语言 BUG
   
 * 版本: v0.4.4
@@ -204,7 +207,7 @@
   - 修改显示时间格式
 
 * 版本: v0.0.4
-  - 修改安装包乱码错误（Install.nsi 必须是UTF8+[utf8 BOM]编码）
+  - 修改安装包乱码错误（Install.nsi 必须是UTF8-[utf8 BOM]编码）
 
 * 版本: v0.0.3
   - 保存设置
