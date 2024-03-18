@@ -25,8 +25,8 @@ case "$1" in
         rm -fr $INSTALL_ROOT/log $INSTALL_ROOT/bin/log
         rm -fr /usr/share/applications/SerialPortAssistant.desktop
         rm -fr /usr/share/pixmaps/SerialPortAssistant.png
-        rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
-	ldconfig
+        #rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
+    	#ldconfig
     ;;
 
     *)
