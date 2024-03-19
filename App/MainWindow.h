@@ -44,25 +44,6 @@ public:
     explicit CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
 
-    void InitMenu();
-    void ClearMenu();
-    // Language menu    
-private:
-    struct _MENU{
-        QString icon;
-        QString text;
-    };
-    int LoadTranslate(QString szLocale = QString());
-    int ClearTranslate();
-    int InitMenuTranslate();
-    int ClearMenuTranslate();
-    QMap<QString, QAction*> m_ActionTranslator;
-    QActionGroup m_ActionGroupTranslator;
-    QSharedPointer<QTranslator> m_TranslatorQt;
-    QSharedPointer<QTranslator> m_TranslatorApp;
-private Q_SLOTS:
-    void slotActionGroupTranslateTriggered(QAction* pAct);
-
 private Q_SLOTS:
     void changeEvent(QEvent *e);
     void slotRead();

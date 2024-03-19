@@ -1092,15 +1092,6 @@
     <property name="title">
      <string>Tools(&amp;T)</string>
     </property>
-    <widget class="QMenu" name="menuLanguage_A">
-     <property name="title">
-      <string>Language(&amp;A)</string>
-     </property>
-     <property name="icon">
-      <iconset resource="Resource/Resource.qrc">
-       <normaloff>:/icon/Language</normaloff>:/icon/Language</iconset>
-     </property>
-    </widget>
     <addaction name="actionOpen"/>
     <addaction name="actionRefresh_R"/>
     <addaction name="separator"/>
@@ -1114,7 +1105,6 @@
     <addaction name="actionOpen_send_file"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
-    <addaction name="menuLanguage_A"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
     <addaction name="separator"/>

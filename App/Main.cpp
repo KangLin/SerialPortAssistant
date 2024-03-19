@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     
 #ifdef RABBITCOMMON
     RabbitCommon::CTools::Instance()->Init();
+    RabbitCommon::CTools::Instance()->InstallTranslator("SerialPortAssistant");
 #endif
     qInfo(log) << QObject::tr("SerialPortAssistant version: %1 ").arg(a.applicationVersion())
 #ifdef SerialPortAssistant_Revision

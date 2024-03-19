@@ -44,7 +44,6 @@ Q_LOGGING_CATEGORY(Logger, "MainWindow");
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    m_ActionGroupTranslator(this),
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
     m_nSend(0),    
@@ -68,10 +67,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->actionUpdate_U->setIcon(updater.windowIcon());
 #endif
 
-    LoadTranslate();
-
-    InitMenu();
-    
     RabbitCommon::CTools::InsertStyleMenu(ui->menuTools_T,
                                           ui->actionOpen_save_file);
     ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
@@ -146,8 +141,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 CMainWindow::~CMainWindow()
 {
     on_pbOpen_clicked();
-    ClearMenu();
-    ClearTranslate();
+
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::SaveWidget(this);
 #endif
@@ -875,152 +869,6 @@ void CMainWindow::on_actionAbout_A_triggered()
             about->exec();
     #endif
 #endif
-}
-
-int CMainWindow::InitMenuTranslate()
-{
-    QMap<QString, _MENU> m;
-    m["Default"] = {QLocale::system().name(), tr("Default")};
-    m["en"] = {":/icon/English", tr("English")};
-    m["zh_CN"] = {":/icon/China", tr("Chinese")};
-    m["zh_TW"] = {":/icon/China", tr("Chinese(TaiWan)")};
-    if(m.end() != m.find(QLocale::system().name()))
-        m["Default"].icon = m[QLocale::system().name()].icon;
-    
-    QMap<QString, _MENU>::iterator itMenu;
-    for(itMenu = m.begin(); itMenu != m.end(); itMenu++)
-    {
-        _MENU v = itMenu.value();
-        m_ActionTranslator[itMenu.key()] =
-                ui->menuLanguage_A->addAction(
-                    QIcon(v.icon), v.text);
-    }
-    
-    QMap<QString, QAction*>::iterator it;
-    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
-    {
-        it.value()->setCheckable(true);
-        m_ActionGroupTranslator.addAction(it.value());
-    }
-
-    qDebug(Logger) << "MainWindow::InitMenuTranslate m_ActionTranslator size:"
-                    <<m_ActionTranslator.size();
-
-    bool check = connect(&m_ActionGroupTranslator, SIGNAL(triggered(QAction*)),
-                        SLOT(slotActionGroupTranslateTriggered(QAction*)));
-    Q_ASSERT(check);
-
-    QString szLocale = CGlobal::Instance()->GetLanguage();
-    QAction* pAct = m_ActionTranslator[szLocale];
-    if(pAct)
-    {
-        qDebug(Logger) << "MainWindow::InitMenuTranslate setchecked locale:"
-                       << szLocale.toStdString().c_str();
-        pAct->setChecked(true);
-        ui->menuLanguage_A->setIcon(pAct->icon());
-        qDebug(Logger) << "MainWindow::InitMenuTranslate setchecked end";
-    }
-    
-    return 0;
-}
-
-int CMainWindow::ClearMenuTranslate()
-{
-    QMap<QString, QAction*>::iterator it;
-    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
-    {
-        m_ActionGroupTranslator.removeAction(it.value());
-    }
-    m_ActionGroupTranslator.disconnect();
-    m_ActionTranslator.clear();
-    ui->menuLanguage_A->clear();    
-
-    qDebug(Logger) << "MainWindow::ClearMenuTranslate m_ActionTranslator size:"
-                   << m_ActionTranslator.size();
-
-    return 0;
-}
-
-int CMainWindow::ClearTranslate()
-{
-    if(!m_TranslatorQt.isNull())
-    {
-        qApp->removeTranslator(m_TranslatorQt.data());
-        m_TranslatorQt.clear();
-    }
-
-    if(m_TranslatorApp.isNull())
-    {
-        qApp->removeTranslator(m_TranslatorApp.data());
-        m_TranslatorApp.clear();
-    }
-    return 0;
-}
-
-int CMainWindow::LoadTranslate(QString szLocale)
-{
-    if(szLocale.isEmpty())
-    {
-        szLocale = CGlobal::Instance()->GetLanguage();
-    }
-
-    if("Default" == szLocale)
-    {
-        szLocale = QLocale::system().name();
-    }
-
-    qDebug(Logger) << "locale language:"
-                   << szLocale;
-
-    ClearTranslate();
-    qDebug(Logger) << "Translate dir:" 
-          << qPrintable(RabbitCommon::CDir::Instance()->GetDirTranslations());
-
-    m_TranslatorQt = QSharedPointer<QTranslator>(new QTranslator(this));
-    if(m_TranslatorQt->load("qt_" + szLocale + ".qm",
-                            RabbitCommon::CDir::Instance()->GetDirApplication()
-                            + QDir::separator() + "translations"))
-        qApp->installTranslator(m_TranslatorQt.data());
-
-    m_TranslatorApp = QSharedPointer<QTranslator>(new QTranslator(this));
-
-    if(m_TranslatorApp->load("SerialPortAssistant_" + szLocale + ".qm",
-                             RabbitCommon::CDir::Instance()->GetDirTranslations()
-                             ))
-        qApp->installTranslator(m_TranslatorApp.data());
-
-    ui->retranslateUi(this);
-    return 0;
-}
-
-void CMainWindow::slotActionGroupTranslateTriggered(QAction *pAct)
-{
-    qDebug(Logger) << "MainWindow::slotActionGroupTranslateTriggered";
-    QMap<QString, QAction*>::iterator it;
-    for(it = m_ActionTranslator.begin(); it != m_ActionTranslator.end(); it++)
-    {
-        if(it.value() == pAct)
-        {
-            QString szLocale = it.key();
-            CGlobal::Instance()->SetLanguage(szLocale);
-            LoadTranslate(it.key());
-            pAct->setChecked(true);
-            QMessageBox::information(this, tr("Close"),
-                   tr("Language changes, close the program, and please restart the program."));
-            this->close();
-            return;
-        }
-    }
-}
-
-void CMainWindow::InitMenu()
-{
-    InitMenuTranslate();
-}
-
-void CMainWindow::ClearMenu()
-{
-    ClearMenuTranslate();
 }
 
 void CMainWindow::changeEvent(QEvent *e)
