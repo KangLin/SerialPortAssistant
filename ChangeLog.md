@@ -1,5 +1,6 @@
 - Version: v0.5.22
   - Use VCPKG_MANIFEST_DIR overlay openssl 1.1
+  - Use [RabbitCommon v2.2.0](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.0)
 
 - Version: v0.5.21
   - Fix deploy.sh bug
