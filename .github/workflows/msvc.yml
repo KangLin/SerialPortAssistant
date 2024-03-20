@@ -117,8 +117,8 @@ jobs:
               -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake ^
               -DVCPKG_MANIFEST_DIR=${{env.VCPKG_MANIFEST_DIR}} ^
               -DVCPKG_VERBOSE=ON ^
-              -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON ^
-              -DVCPKG_APPLOCAL_DEPS=ON ^
+              -DX_VCPKG_APPLOCAL_DEPS_INSTALL=OFF ^
+              -DVCPKG_APPLOCAL_DEPS=OFF ^
               -DINSTALL_QT=ON
           cmake --build . --config ${{matrix.BUILD_TYPE}}
 
@@ -130,6 +130,8 @@ jobs:
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=Runtime
           cmake --install . --config ${{matrix.BUILD_TYPE}} --component=DependLibraries
           copy /Y vcpkg_installed\${{matrix.VCPKG_TARGET_TRIPLET}}\bin\*.dll install\bin
+          copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
+          copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
           makensis Install.nsi
           copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
 
