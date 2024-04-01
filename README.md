@@ -30,6 +30,7 @@ Author: Kang Lin (kl222@126.com)
     - https://sourceforge.net/projects/serialportassistant/
     - https://gitee.com/kl222/SerialPortAssistant
     - https://invent.kde.org/kanglin/SerialPortAssistant
+    - https://bitbucket.org/kl222/serialportassistant
 - [Project home](http://kanglin.github.io/SerialPortAssistant)
 - This project is a cross-platform serial assistant.
   It can run on:
