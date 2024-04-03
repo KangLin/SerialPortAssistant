@@ -1,21 +1,19 @@
-serialportassistant (0.5.21) stable; urgency=medium
+serialportassistant (0.5.22) stable; urgency=medium
 
-    * CI: fix arm64_v8a to arm64-v8a in android.yml
-    * CI: run program in macos.yml
-    * Modify debian/rules
-    * Use etc replace ${CMAKE_INSTALL_SYSCONFDIR}
-    * Modify translations
-    * Modify deploy.sh
-    * Modify Change log etc documents install position.
-    * Modify deploy.sh to vcpkg.json
-    * CI: copy vcpkg dll to install\bin in msvc.yml
-    * CI: use QT_CHAINLOAD_TOOLCHAIN_FILE in android.yml
-    * CI: modify ANDROID_ABI
-    * Android: modify resource
-    * CI: modify android.yml
-    * Modify README
-    * Android: modify string translation in resource
-    * FIX: deploy.sh modify version bug
+    * Modify Change log
+    * CI: rename INSTALL_QT to RABBIT_ENABLE_INSTALL_QT
+    * Add https://bitbucket.org/kl222/serialportassistant
+    * CI: modify msvc.yml to disable vcpkg install depend library
+    * debian/rules: use static cmark
+    * Use RabbitCommon::CTools::Instance()->InstallTranslator
+    * Remove ldconfig in postinst and postrm
+    * Fix: Application component
+    * Modify debian/postinst
+    * CI: modify VCPKG_MANIFEST_DIR in msvc.yml
+    * vcpkg: use VCPKG_MANIFEST_DIR manifests
+    * debian: add --parallel
+    * vcpkg.json: remove baselineg
+    * Fix deploy.sh modify App/CMakeListst.txt
 
- -- Kang Lin <kl222@126.com>  Fri, 15 Mar 2024 15:02:17 +0800
+ -- Kang Lin <kl222@126.com>  Wed, 03 Apr 2024 21:03:42 +0800
 
