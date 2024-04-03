@@ -79,7 +79,9 @@ build_script:
         -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON ^
         -DVCPKG_APPLOCAL_DEPS=ON ^
         -DBUILD_QUIWidget=OFF ^
-        -DINSTALL_QT=ON ^
+        -DRABBIT_ENABLE_INSTALL_DEPENDENT=ON ^
+        -DRABBIT_ENABLE_INSTALL_QT=ON ^
+        -DRABBIT_ENABLE_INSTALL_TO_BUILD_PATH=OFF ^
         -DQT_DIR=%QT_ROOT%/lib/cmake/qt5 ^
         -DQt5_DIR=%QT_ROOT%/lib/cmake/qt5
   - cmake --build . --config Release

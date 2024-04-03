@@ -17,7 +17,7 @@ SetCompressor lzma
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "Install/SerialPortAssistant.ico"
+!define MUI_ICON "install/SerialPortAssistant.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; Language Selection Dialog Settings
@@ -28,7 +28,7 @@ SetCompressor lzma
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "share\doc\SerialPortAssistant\LICENSE.md"
+!insertmacro MUI_PAGE_LICENSE "@CMAKE_INSTALL_PREFIX@\share\doc\SerialPortAssistant\License.md"
 ; Components page
 !insertmacro MUI_PAGE_COMPONENTS
 ; Directory page

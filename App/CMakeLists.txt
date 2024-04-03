@@ -53,9 +53,9 @@ INSTALL_FILE(SOURCES ${CMAKE_SOURCE_DIR}/etc/SerialPortAssistant_logqt.ini
         COMPONENT Application)
 
 iF(WIN32)
-    INSTALL(FILES ${CMAKE_SOURCE_DIR}/Install/Install.nsi
-        DESTINATION "${CMAKE_BINARY_DIR}"
-            COMPONENT Application)
+    # 替换 Install.nsi 中的 CMAKE_INSTALL_PREFIX 等
+    configure_file(${CMAKE_SOURCE_DIR}/Install/Install.nsi
+        ${CMAKE_BINARY_DIR}/Install.nsi @ONLY)
 endif()
 
 # Install other files

@@ -119,7 +119,9 @@ jobs:
               -DVCPKG_VERBOSE=ON ^
               -DX_VCPKG_APPLOCAL_DEPS_INSTALL=OFF ^
               -DVCPKG_APPLOCAL_DEPS=OFF ^
-              -DINSTALL_QT=ON
+              -DRABBIT_ENABLE_INSTALL_DEPENDENT=ON ^
+              -DRABBIT_ENABLE_INSTALL_QT=ON ^
+              -DRABBIT_ENABLE_INSTALL_TO_BUILD_PATH=OFF
           cmake --build . --config ${{matrix.BUILD_TYPE}}
 
       - name: Package
