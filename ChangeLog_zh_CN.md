@@ -1,6 +1,6 @@
 - 版本: v0.5.22
   - 使用 VCPKG_MANIFEST_DIR 重载 openssl 1.1
-  - 使用 [RabbitCommon v2.2.0](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.0)
+  - 使用 [RabbitCommon v2.2.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.1)
 
 - 版本: v0.5.21
   - 修复 deploy.sh 错误
