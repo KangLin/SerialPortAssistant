@@ -1,4 +1,4 @@
-serialportassistant (0.5.22) stable; urgency=medium
+serialportassistant (0.5.22) unstable; urgency=medium
 
     * Modify Change log
     * CI: rename INSTALL_QT to RABBIT_ENABLE_INSTALL_QT
