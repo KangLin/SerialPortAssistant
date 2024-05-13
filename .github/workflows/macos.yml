@@ -29,7 +29,7 @@ jobs:
 
           - qt_version: 5.12.12
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     env:
       BUILD_TYPE:  ${{ matrix.BUILD_TYPE }}
