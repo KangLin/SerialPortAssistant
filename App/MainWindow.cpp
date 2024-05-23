@@ -40,7 +40,7 @@ Abstract:
     #include "QUIWidget.h"
 #endif
 
-Q_LOGGING_CATEGORY(Logger, "MainWindow");
+Q_LOGGING_CATEGORY(Logger, "MainWindow")
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -133,6 +133,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     Q_ASSERT(check);
 
     InitPinout();
+
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::RestoreWidget(this);
 #endif
@@ -781,17 +782,17 @@ int CMainWindow::SetSaveFileName()
 
     while(QFile::exists(szFile))
     {
-        int nPos = szFile.lastIndexOf("-");
+        int nPos = szFile.lastIndexOf("_");
         if(-1 != nPos)
         {
             QString szNum = szFile.mid(nPos + 1);
             int nPosNum = szNum.indexOf(".");
             szNum = szNum.left(nPosNum);
             szNum = QString::number(szNum.toInt() + 1);
-            szFile = szFile.left(nPos) + "-" + szNum + ".txt";
+            szFile = szFile.left(nPos) + "_" + szNum + ".txt";
         } else {
             nPos = szFile.lastIndexOf(".");
-            szFile = szFile.left(nPos) + "-1.txt";
+            szFile = szFile.left(nPos) + "_1.txt";
         }
     }
     ui->leSaveToFile->setText(szFile);

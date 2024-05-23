@@ -1,3 +1,6 @@
+- Version: v0.5.23
+  - Added auto-save setting
+
 - Version: v0.5.22
   - Use VCPKG_MANIFEST_DIR overlay openssl 1.1
   - Use [RabbitCommon v2.2.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.1)

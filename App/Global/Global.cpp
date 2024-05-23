@@ -22,11 +22,6 @@ CGlobal::CGlobal(QObject *parent) :
 {
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
-    m_szLanguage = conf.value("Global/Language",
-                              QLocale::system().name()).toString();
-    m_szStyleFile = conf.value(
-                "UI/StyleSheet", "").toString();
-    m_szStyleMenu = conf.value("UI/MenuStyleSheet", "System").toString();
     m_StatusbarVisible = conf.value("UI/Visible/Statusbar", "true").toBool();
     m_ToolbarVisible = conf.value("UI/Visible/Toolbar", "true").toBool();
     m_LeftBarVisible = conf.value("UI/Visible/LeftBar", "true").toBool();
@@ -50,27 +45,6 @@ CGlobal* CGlobal::Instance()
     if(!p)
         p = new CGlobal;
     return p;
-}
-
-QString CGlobal::GetStyle()
-{
-    return m_szStyleFile;
-}
-
-QString CGlobal::GetStyleMenu()
-{
-    return m_szStyleMenu;
-}
-
-int CGlobal::SetStyleMenu(QString szMenu, QString szFile)
-{
-    m_szStyleMenu = szMenu;
-    m_szStyleFile = szFile;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
-    conf.setValue("UI/MenuStyleSheet", szMenu);
-    conf.setValue("UI/StyleSheet", szFile);
-    return 0;
 }
 
 bool CGlobal::GetStatusbarVisible()
@@ -112,20 +86,6 @@ int CGlobal::SetLeftBarVisible(bool bVisible)
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/Visible/LeftBar", m_LeftBarVisible);
-    return 0;
-}
-
-QString CGlobal::GetLanguage()
-{
-    return m_szLanguage;
-}
-
-int CGlobal::SetLanguage(QString szLanguage)
-{
-    m_szLanguage = szLanguage;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
-    conf.setValue("Global/Language", m_szLanguage);
     return 0;
 }
 

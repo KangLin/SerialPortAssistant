@@ -1,7 +1,8 @@
 #include "SendFile.h"
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(logSendFile, "SendFile");
+Q_LOGGING_CATEGORY(logSendFile, "SendFile")
+
 CSendFile::CSendFile(const QString &szFile, QObject *parent) : QObject(parent)
 {
     Open(szFile);

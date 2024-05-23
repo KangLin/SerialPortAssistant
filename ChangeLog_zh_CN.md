@@ -1,3 +1,6 @@
+- 版本: v0.5.23
+  - 增加自动保存设置
+
 - 版本: v0.5.22
   - 使用 VCPKG_MANIFEST_DIR 重载 openssl 1.1
   - 使用 [RabbitCommon v2.2.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.1)
