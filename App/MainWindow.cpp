@@ -1049,6 +1049,10 @@ void CMainWindow::on_actionUpdate_U_triggered()
 {
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater();
+    if(!pUpdater) {
+        qCritical(Logger) << "new CFrmUpdater fail";
+        return;
+    }
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
     #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
         QUIWidget* quiwidget = new QUIWidget(nullptr, true);

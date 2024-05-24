@@ -58,15 +58,22 @@ int main(int argc, char *argv[])
                + QObject::tr("RabbitCommon:") + RabbitCommon::CTools::Version();
     
     CMainWindow *w = new CMainWindow();
+    if(!w)
+    {
+        qCritical(log) << "new CMainWindow fail";
+        return -1;
+    }
     a.setApplicationDisplayName(w->windowTitle());
 
 #ifdef RABBITCOMMON
-    CFrmUpdater *pUpdater = new CFrmUpdater(); 
-    pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-    if(a.arguments().length() > 1) {
-        pUpdater->GenerateUpdateJson();
-        pUpdater->GenerateUpdateXml();
-        return 0;
+    CFrmUpdater *pUpdater = new CFrmUpdater();
+    if(pUpdater) {
+        pUpdater->SetTitle(QImage(":/icon/AppIcon"));
+        if(a.arguments().length() > 1) {
+            pUpdater->GenerateUpdateJson();
+            pUpdater->GenerateUpdateXml();
+            return 0;
+        }
     }
 #endif
 
@@ -81,12 +88,14 @@ int main(int argc, char *argv[])
 #endif
 
     int nRet = a.exec();
-    
+
 #ifndef BUILD_QUIWidget
     delete w;
 #endif
-    
+
 #ifdef RABBITCOMMON
+    if(pUpdater)
+        delete pUpdater;
     RabbitCommon::CTools::Instance()->Clean();
 #endif
 #if defined (_DEBUG)
