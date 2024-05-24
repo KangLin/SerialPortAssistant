@@ -46,7 +46,7 @@ jobs:
       VCPKG_MANIFEST_DIR: "${{github.workspace}}${{matrix.VCPKG_MANIFEST_DIR}}"
       CMAKE_GENERATOR_PLATFORM: ${{matrix.CMAKE_GENERATOR_PLATFORM}}
       SerialPortAssistant_VERSION: v0.5.22
-      VCPKGGITCOMMITID: a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
+      VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
       VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
       qt_modules: qtwebengine ${{matrix.qt_modules}}
       artifact_name: build_msvc
