@@ -2,7 +2,7 @@
 Copyright (c) Kang Lin studio, All Rights Reserved
 
 Author:
-	Kang Lin(kl222@126.com）
+	Kang Lin <kl222@126.com>
 
 Module Name:
 
@@ -27,8 +27,8 @@ Abstract:
  */
 
 /**
-  * @defgroup RABBITGIS_GLOBAL 全局变更类模块  
-  * @brief 全局变量模块  
+  * @defgroup RABBITGIS_GLOBAL 全局变量类模块
+  * @brief 全局变量模块
   */
 
 /**
