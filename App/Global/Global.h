@@ -19,6 +19,7 @@ Abstract:
 #include "RabbitCommonDir.h"
 
 #include <QObject>
+#include <QSerialPort>
 
 /** 
  * @mainpage

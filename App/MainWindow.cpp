@@ -87,22 +87,22 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbBoudRate->setCurrentIndex(
                 ui->cmbBoudRate->findText(
                     QString::number(m_SerialPort.baudRate())));
-    
-    ui->cmbParity->addItem(tr("None"), QSerialPort::NoParity);
-    ui->cmbParity->addItem(tr("Even"), QSerialPort::EvenParity);
-    ui->cmbParity->addItem(tr("Odd"), QSerialPort::OddParity);
-    ui->cmbParity->addItem(tr("Space"), QSerialPort::SpaceParity);
-    ui->cmbParity->addItem(tr("Mark"), QSerialPort::MarkParity);
 
-    ui->cmbDataBit->addItem("8");
-    ui->cmbDataBit->addItem("7");
-    ui->cmbDataBit->addItem("6");
-    ui->cmbDataBit->addItem("5");
+    ui->cmbDataBit->addItem("8", QSerialPort::DataBits::Data8);
+    ui->cmbDataBit->addItem("7", QSerialPort::DataBits::Data7);
+    ui->cmbDataBit->addItem("6", QSerialPort::DataBits::Data6);
+    ui->cmbDataBit->addItem("5", QSerialPort::DataBits::Data5);
 
-    ui->cmbStopBit->addItem("1");
-    ui->cmbStopBit->addItem("1.5");
-    ui->cmbStopBit->addItem("2");
-    
+    ui->cmbParity->addItem(tr("None"), QSerialPort::Parity::NoParity);
+    ui->cmbParity->addItem(tr("Even"), QSerialPort::Parity::EvenParity);
+    ui->cmbParity->addItem(tr("Odd"), QSerialPort::Parity::OddParity);
+    ui->cmbParity->addItem(tr("Space"), QSerialPort::Parity::SpaceParity);
+    ui->cmbParity->addItem(tr("Mark"), QSerialPort::Parity::MarkParity);
+
+    ui->cmbStopBit->addItem("1", QSerialPort::StopBits::OneStop);
+    ui->cmbStopBit->addItem("1.5", QSerialPort::StopBits::OneAndHalfStop);
+    ui->cmbStopBit->addItem("2", QSerialPort::StopBits::TwoStop);
+
     ui->cmbFlowControl->addItem(tr("None"), QSerialPort::FlowControl::NoFlowControl);
     ui->cmbFlowControl->addItem(tr("HardWare"), QSerialPort::FlowControl::HardwareControl);
     ui->cmbFlowControl->addItem(tr("SoftWare"), QSerialPort::FlowControl::SoftwareControl);
@@ -325,17 +325,15 @@ void CMainWindow::on_pbOpen_clicked()
     m_SerialPort.setPort(info);
 //#endif
     m_SerialPort.setBaudRate(ui->cmbBoudRate->currentText().toInt());
-    QSerialPort::Parity parity = (QSerialPort::Parity)ui->cmbParity->currentData(Qt::UserRole).toInt();
+    QSerialPort::Parity parity =
+        (QSerialPort::Parity)ui->cmbParity->currentData().toInt();
     m_SerialPort.setParity(parity);
     m_SerialPort.setDataBits(
-                (QSerialPort::DataBits)ui->cmbDataBit->currentText().toInt());
-    int stopBit = 0;
-    if("1.5" == ui->cmbStopBit->currentText())
-        stopBit = 3;
-    else
-        stopBit = ui->cmbStopBit->currentText().toInt();
-    m_SerialPort.setStopBits((QSerialPort::StopBits)stopBit);
-    m_SerialPort.setFlowControl((QSerialPort::FlowControl)ui->cmbFlowControl->currentData(Qt::UserRole).toInt());
+        (QSerialPort::DataBits)ui->cmbDataBit->currentData().toInt());
+    m_SerialPort.setStopBits(
+        (QSerialPort::StopBits)ui->cmbStopBit->currentData().toInt());
+    m_SerialPort.setFlowControl(
+        (QSerialPort::FlowControl)ui->cmbFlowControl->currentData().toInt());
     bCheck = m_SerialPort.open(QIODevice::ReadWrite);
     if(!bCheck)
     {
@@ -389,12 +387,17 @@ int CMainWindow::SetStatusInfo(QString szText, QColor color)
 
 QString CMainWindow::GetSerialPortSettingInfo()
 {
-    return ui->cmbPort->currentText() + tr(" Open. ")
-            + ui->cmbBoudRate->currentText() + "|"
+    QString szInfo = ui->cmbPort->currentText();
+    if(m_SerialPort.isOpen())
+        szInfo = szInfo + tr(" is opened. ");
+    else
+        szInfo = szInfo + tr(" is closed. ");
+    szInfo = szInfo + ui->cmbBoudRate->currentText() + "|"
             + ui->cmbDataBit->currentText() + "|"
             + ui->cmbParity->currentText() + "|"
             + ui->cmbStopBit->currentText() + "|"
             + ui->cmbFlowControl->currentText();
+    return szInfo;
 }
 
 //限制QTextEdit内容的长度  
@@ -939,68 +942,82 @@ void CMainWindow::on_cmbBoudRate_currentTextChanged(const QString &szText)
     bRet = m_SerialPort.setBaudRate(szText.toInt());
     if(bRet)
         SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+                  m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
     else
-        SetStatusInfo(tr("Set baud rate fail"), Qt::red);
+        SetStatusInfo(tr("Set baud rate fail. error: ")
+                          + QString::number(m_SerialPort.error()), Qt::red);
 }
 
-void CMainWindow::on_cmbDataBit_currentTextChanged(const QString &szText)
+void CMainWindow::on_cmbDataBit_currentIndexChanged(int index)
 {
+    if(-1 == index)
+        return;
     if(!m_SerialPort.isOpen())
         return;
-    bool bRet;
-    bRet = m_SerialPort.setDataBits((QSerialPort::DataBits)szText.toInt());
-    if(bRet)
+    bool bRet = false;
+    bRet = m_SerialPort.setDataBits(
+        (QSerialPort::DataBits)ui->cmbDataBit->itemData(index).toInt());
+    if(bRet) {
         SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+                      m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
+    }
     else
-        SetStatusInfo(tr("Set data bits fail"), Qt::red);
+        SetStatusInfo(tr("Set data bits fail. error: ")
+                          + QString::number(m_SerialPort.error()), Qt::red);
 }
 
 void CMainWindow::on_cmbParity_currentIndexChanged(int index)
 {
     if(-1 == index)
         return;
-
     if(!m_SerialPort.isOpen())
         return;
-
     bool bRet = false;
-    bRet = m_SerialPort.setParity((QSerialPort::Parity)ui->cmbParity->itemData(index).toInt());
-    if(bRet)
+    bRet = m_SerialPort.setParity(
+        (QSerialPort::Parity)ui->cmbParity->itemData(index).toInt());
+    if(bRet) {
         SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+                  m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
+    }
     else
-        SetStatusInfo(tr("Set parity fail"), Qt::red);
+        SetStatusInfo(tr("Set parity fail. error: ")
+                          + QString::number(m_SerialPort.error()), Qt::red);
 }
 
-void CMainWindow::on_cmbStopBit_currentTextChanged(const QString &szText)
+void CMainWindow::on_cmbStopBit_currentIndexChanged(int index)
 {
+    if(-1 == index)
+        return;
     if(!m_SerialPort.isOpen())
         return;
-    
-    bool bRet;
-    bRet = m_SerialPort.setStopBits((QSerialPort::StopBits)szText.toInt());
-    if(bRet)
+    bool bRet = false;
+    bRet = m_SerialPort.setStopBits(
+        (QSerialPort::StopBits)ui->cmbStopBit->itemData(index).toInt());
+    if(bRet) {
         SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+                  m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
+    }
     else
-        SetStatusInfo(tr("Set stop bits fail"), Qt::red);
+        SetStatusInfo(tr("Set stop bits fail. error: ")
+                          + QString::number(m_SerialPort.error()), Qt::red);
 }
 
 void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
 {
-    if(!m_SerialPort.isOpen())
-        return;
     if(-1 == index)
         return;
-    bool bRet;
-    bRet = m_SerialPort.setFlowControl((QSerialPort::FlowControl)ui->cmbFlowControl->itemData(index).toInt());
-    if(bRet)
+    if(!m_SerialPort.isOpen())
+        return;
+    bool bRet = false;
+    bRet = m_SerialPort.setFlowControl(
+        (QSerialPort::FlowControl)ui->cmbFlowControl->itemData(index).toInt());
+    if(bRet) {
         SetStatusInfo(GetSerialPortSettingInfo(),
-                  Qt::green);
+                  m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
+    }
     else
-        SetStatusInfo(tr("Set Flow Control fail"), Qt::red);
+        SetStatusInfo(tr("Set Flow Control fail. error: ")
+                          + QString::number(m_SerialPort.error()), Qt::red);
 }
 
 void CMainWindow::on_actionLoad_File_F_triggered()
@@ -1216,5 +1233,3 @@ int CMainWindow::setPinoutStatus()
     
     return 0;
 }
-
-

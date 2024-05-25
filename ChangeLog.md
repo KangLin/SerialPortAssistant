@@ -1,5 +1,10 @@
 - Version: v0.5.23
   - Added left bar dockwidget
+  - Add save settings:
+    - Data bit
+    - Parity
+    - Stop bit
+    - Flow control
 
 - Version: v0.5.22
   - Use VCPKG_MANIFEST_DIR overlay openssl 1.1

@@ -70,9 +70,9 @@ private Q_SLOTS:
     void on_cbDisplayTime_clicked(bool checked);
     void on_cbSaveToFile_clicked(bool checked);
     void on_cmbBoudRate_currentTextChanged(const QString &szText);
-    void on_cmbDataBit_currentTextChanged(const QString &szText);
+    void on_cmbDataBit_currentIndexChanged(int index);
     void on_cmbParity_currentIndexChanged(int index);
-    void on_cmbStopBit_currentTextChanged(const QString &szText);
+    void on_cmbStopBit_currentIndexChanged(int index);
     void on_cmbFlowControl_currentIndexChanged(int index);
     void on_cmbRecent_activated(const QString &szText);
     void on_actionLoad_File_F_triggered();
@@ -116,7 +116,7 @@ private Q_SLOTS:
     
     void slotDataTerminalReadyChanged(bool set);
     void slotRequestToSendChanged(bool set);
-
+    
 private:
     int InitPinout();
     int setPinoutStatus();
