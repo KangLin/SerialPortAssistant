@@ -1,5 +1,5 @@
 - Version: v0.5.23
-  - Added auto-save setting
+  - Added left bar dockwidget
 
 - Version: v0.5.22
   - Use VCPKG_MANIFEST_DIR overlay openssl 1.1

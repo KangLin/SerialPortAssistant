@@ -17,7 +17,7 @@ Abstract:
 #include "ui_MainWindow.h"
 
 #include "Global/Global.h"
-#include "Common/Tool.h"
+#include <QDockWidget>
 #include <QMessageBox>
 #include <QTime>
 #include <QFile>
@@ -33,7 +33,6 @@ Abstract:
 #ifdef RABBITCOMMON
     #include "DlgAbout.h"
     #include "FrmUpdater.h"
-    #include "RabbitCommonDir.h"
     #include "RabbitCommonTools.h"
 #endif
 #ifdef BUILD_QUIWidget
@@ -203,7 +202,6 @@ int CMainWindow::InitToolBar()
 
 int CMainWindow::InitLeftBar()
 {
-    bool bVisible = false;
     m_bInitEncodeCombox = true;
     InitEncodeComboBox(ui->cbReceiveEncoded);
     InitEncodeComboBox(ui->cbSendEncode);
@@ -212,10 +210,18 @@ int CMainWindow::InitLeftBar()
     ui->cbReceiveEncoded->setCurrentIndex(ui->cbReceiveEncoded->findData(c));
     c = CGlobal::Instance()->GetSendEncode();
     ui->cbSendEncode->setCurrentIndex(ui->cbSendEncode->findData(c));
+    m_dockLeft = new QDockWidget(this);
+    if(m_dockLeft)
+    {
+        m_dockLeft->setWindowTitle(tr("LeftBar(&L)"));
+        m_dockLeft->setWidget(ui->frmLeftBar);
+        // Must set ObjectName then restore it. See: saveState help document
+        m_dockLeft->setObjectName("dockLeftBar");
+        //m_dockLeft->hide();
+        ui->menuView_V->addAction(m_dockLeft->toggleViewAction());
+        addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, m_dockLeft);
+    }
 
-    bVisible = CGlobal::Instance()->GetLeftBarVisible();
-    ui->actionLeftBar_L->setChecked(bVisible);
-    ui->frmLeftBar->setVisible(bVisible);
     return 0;
 }
 
@@ -891,14 +897,6 @@ void CMainWindow::on_actionStatusBar_S_triggered()
 {
     this->statusBar()->setVisible(ui->actionStatusBar_S->isChecked());
     CGlobal::Instance()->SetStatusbarVisible(ui->actionStatusBar_S->isChecked());
-}
-
-void CMainWindow::on_actionLeftBar_L_triggered()
-{
-    bool bVisible = false;
-    bVisible = ui->actionLeftBar_L->isChecked();
-    ui->frmLeftBar->setVisible(bVisible);
-    CGlobal::Instance()->SetLeftBarVisible(bVisible);
 }
 
 void CMainWindow::on_sbLoopTime_valueChanged(int v)

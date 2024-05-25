@@ -57,12 +57,6 @@ public:
     int SetToolbarVisible(bool bVisible);
 private:
     bool m_ToolbarVisible;
-
-public:
-    bool GetLeftBarVisible();
-    int SetLeftBarVisible(bool bVisible);
-private:
-    bool m_LeftBarVisible;
     
 public:
     bool GetSendLoop();

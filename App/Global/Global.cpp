@@ -24,7 +24,6 @@ CGlobal::CGlobal(QObject *parent) :
                    QSettings::IniFormat);
     m_StatusbarVisible = conf.value("UI/Visible/Statusbar", "true").toBool();
     m_ToolbarVisible = conf.value("UI/Visible/Toolbar", "true").toBool();
-    m_LeftBarVisible = conf.value("UI/Visible/LeftBar", "true").toBool();
     m_bSendLoop = conf.value("Settings/Send/Loop", "false").toBool();
     m_nSendLoopTime = conf.value("Settings/Send/LoopTime", 1000).toInt();
     m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", 0).toInt();
@@ -72,20 +71,6 @@ int CGlobal::SetToolbarVisible(bool bVisible)
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
                    QSettings::IniFormat);
     conf.setValue("UI/Visible/Toolbar", m_ToolbarVisible);
-    return 0;
-}
-
-bool CGlobal::GetLeftBarVisible()
-{
-    return m_LeftBarVisible;
-}
-
-int CGlobal::SetLeftBarVisible(bool bVisible)
-{
-    m_LeftBarVisible = bVisible;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
-    conf.setValue("UI/Visible/LeftBar", m_LeftBarVisible);
     return 0;
 }
 

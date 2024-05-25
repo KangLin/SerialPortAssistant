@@ -66,7 +66,7 @@
          <x>0</x>
          <y>0</y>
          <width>617</width>
-         <height>662</height>
+         <height>669</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1085,7 +1085,7 @@
      <x>0</x>
      <y>0</y>
      <width>617</width>
-     <height>27</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools_T">
@@ -1122,7 +1122,6 @@
     </property>
     <addaction name="actionToolBar_T"/>
     <addaction name="actionStatusBar_S"/>
-    <addaction name="actionLeftBar_L"/>
    </widget>
    <addaction name="menuTools_T"/>
    <addaction name="menuView_V"/>
