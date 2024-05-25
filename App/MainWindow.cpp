@@ -213,10 +213,10 @@ int CMainWindow::InitLeftBar()
     m_dockLeft = new QDockWidget(this);
     if(m_dockLeft)
     {
-        m_dockLeft->setWindowTitle(tr("LeftBar(&L)"));
+        m_dockLeft->setWindowTitle(tr("Setting"));
         m_dockLeft->setWidget(ui->frmLeftBar);
         // Must set ObjectName then restore it. See: saveState help document
-        m_dockLeft->setObjectName("dockLeftBar");
+        m_dockLeft->setObjectName("dockSetting");
         //m_dockLeft->hide();
         ui->menuView_V->addAction(m_dockLeft->toggleViewAction());
         addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, m_dockLeft);

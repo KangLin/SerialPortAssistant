@@ -55,8 +55,8 @@ int main(int argc, char *argv[])
                       + SerialPortAssistant_Revision + ")"
 #endif
                + "); "
-               + QObject::tr("RabbitCommon:") + RabbitCommon::CTools::Version();
-    
+               + QObject::tr("RabbitCommon") + RabbitCommon::CTools::Version();
+
     CMainWindow *w = new CMainWindow();
     if(!w)
     {
