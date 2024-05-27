@@ -16,6 +16,10 @@ Abstract:
 #include "Global.h"
 #include <QSettings>
 #include <QLocale>
+#include <QSerialPortInfo>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(log, "Global")
 
 CGlobal::CGlobal(QObject *parent) :
     QObject(parent)
@@ -184,4 +188,67 @@ int CGlobal::SetSendEncode(ENCODE code)
                    QSettings::IniFormat);
     conf.setValue("Settings/Receive/DisplaySendCode", m_SendDisplayCode);
     return 0; 
+}
+
+int CGlobal::SaveSerialPort(const QSerialPort &port, int nIndex)
+{
+    if(-1 == nIndex)
+        return -1;
+    QSerialPortInfo info = QSerialPortInfo::availablePorts().at(nIndex);
+    if(info.portName() != port.portName())
+    {
+        qCritical(log) << "The port name is different:"
+                       << info.portName() << "!=" << port.portName();
+        return -2;
+    }
+
+    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
+                   QSettings::IniFormat);
+    conf.setValue("SerialPort/Name", port.portName());
+    conf.setValue("SerialPort/Default", port.portName());
+    conf.beginGroup("SerialPort/" + port.portName());
+    conf.setValue("BaudRate", port.baudRate());
+    conf.setValue("DataBit", port.dataBits());
+    conf.setValue("Parity", port.parity());
+    conf.setValue("StopBits", port.stopBits());
+    conf.setValue("FlowControl", port.flowControl());
+    conf.endGroup();
+    return 0;
+}
+
+int CGlobal::LoadSerialPort(Para &para, int nIndex)
+{
+    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
+                   QSettings::IniFormat);
+    QSerialPort port;
+    QString szName;
+
+    if(-1 == nIndex)
+    {
+        szName = conf.value("SerialPort/Default").toString();
+    } else {
+        if(QSerialPortInfo::availablePorts().count() <= 0) {
+            qCritical(log) << "There are not serial port";
+            return -1;
+        }
+        QSerialPortInfo info = QSerialPortInfo::availablePorts().at(nIndex);
+        szName = info.portName();
+        port.setPort(info);
+    }
+
+    if(szName.isEmpty()) {
+        qWarning(log) << "No default port in configure file:"
+                      << RabbitCommon::CDir::Instance()->GetFileUserConfigure();
+        return -2;
+    }
+
+    para.name = szName;
+    conf.beginGroup("SerialPort/" + szName);
+    para.baudRate = conf.value("BaudRate", port.baudRate()).toInt();
+    para.dataBit = (QSerialPort::DataBits)conf.value("DataBit", port.dataBits()).toInt();
+    para.parity = (QSerialPort::Parity)conf.value("Parity", port.parity()).toInt();
+    para.stopBits = (QSerialPort::StopBits)conf.value("StopBits", port.stopBits()).toInt();
+    para.flowControl = (QSerialPort::FlowControl)conf.value("FlowControl", port.flowControl()).toInt();
+    conf.endGroup();
+    return 0;
 }

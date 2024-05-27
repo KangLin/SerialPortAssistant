@@ -75,18 +75,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitStatusBar();
     InitToolBar();
     InitLeftBar();
-    
-    RefreshSerialPorts();
-    SetSaveFileName();
-    
+
     foreach(const qint32 &baudRate, QSerialPortInfo::standardBaudRates())
     {
         ui->cmbBoudRate->addItem(QString::number(baudRate));
     }
-    
-    ui->cmbBoudRate->setCurrentIndex(
-                ui->cmbBoudRate->findText(
-                    QString::number(m_SerialPort.baudRate())));
 
     ui->cmbDataBit->addItem("8", QSerialPort::DataBits::Data8);
     ui->cmbDataBit->addItem("7", QSerialPort::DataBits::Data7);
@@ -106,6 +99,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->cmbFlowControl->addItem(tr("None"), QSerialPort::FlowControl::NoFlowControl);
     ui->cmbFlowControl->addItem(tr("HardWare"), QSerialPort::FlowControl::HardwareControl);
     ui->cmbFlowControl->addItem(tr("SoftWare"), QSerialPort::FlowControl::SoftwareControl);
+    
+    RefreshSerialPorts();
+    SetSaveFileName();
 
     ui->cmbRecent->setDuplicatesEnabled(false);
 
@@ -140,7 +136,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 CMainWindow::~CMainWindow()
 {
-    on_pbOpen_clicked();
+    if(m_SerialPort.isOpen())
+        on_pbOpen_clicked();
 
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::SaveWidget(this);
@@ -151,8 +148,24 @@ CMainWindow::~CMainWindow()
 int CMainWindow::RefreshSerialPorts()
 {
     ui->cmbPort->clear();
+
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
+        /*
+        qDebug(Logger())
+                 << "Port:" << info.portName() << " "
+                 << "Location:" << info.systemLocation() << " "
+                 << "Description:" << info.description() << " "
+                 << "Manufacturer:" << info.manufacturer() << " "
+                 << "Serial number:" << info.serialNumber() << " "
+                 << "Vendor Identifier:"
+                 << (info.hasVendorIdentifier()
+                         ? QByteArray::number(info.vendorIdentifier(), 16)
+                         : QByteArray()) << " "
+                 << "Product Identifier:"
+                 << (info.hasProductIdentifier()
+                         ? QByteArray::number(info.productIdentifier(), 16)
+                         : QByteArray()); //*/
         QString szPort;
         szPort = info.portName();
         //szPort = info.systemLocation();
@@ -162,6 +175,56 @@ int CMainWindow::RefreshSerialPorts()
         }
         ui->cmbPort->addItem(szPort);
     }
+
+    CGlobal::Para para;
+    bool bRet = CGlobal::Instance()->LoadSerialPort(para);
+
+    int nIndex = -1;
+    if(!bRet) {
+        foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+        {
+            nIndex++;
+            if(info.portName() != para.name)
+                continue;
+            
+            ui->cmbPort->setCurrentIndex(nIndex);
+            return InitSerialPortPara(para);
+        }
+    }
+
+    nIndex = ui->cmbPort->currentIndex();
+    if(-1 == nIndex)
+        return -1;
+    bRet = CGlobal::Instance()->LoadSerialPort(para, nIndex);
+
+    return InitSerialPortPara(para);
+}
+
+int CMainWindow::InitSerialPortPara(CGlobal::Para &para)
+{
+    int idx = ui->cmbBoudRate->findText(QString::number(para.baudRate));
+    if(-1 == idx) {
+        ui->cmbBoudRate->addItem(QString::number(para.baudRate));
+        ui->cmbBoudRate->setCurrentText(QString::number(para.baudRate));
+    } else
+        ui->cmbBoudRate->setCurrentIndex(idx);
+    
+    idx = ui->cmbDataBit->findData(para.dataBit);
+    if(-1 < idx)
+        ui->cmbDataBit->setCurrentIndex(idx);
+    
+    idx = ui->cmbParity->findData(para.parity);
+    if(-1 < idx)
+        ui->cmbParity->setCurrentIndex(idx);
+    
+    idx = ui->cmbStopBit->findData(para.stopBits);
+    if(-1 < idx)
+        ui->cmbStopBit->setCurrentIndex(idx);
+    
+    idx = ui->cmbFlowControl->findData(para.flowControl);
+    if(-1 < idx)
+        ui->cmbFlowControl->setCurrentIndex(idx);
+    
     return 0;
 }
 
@@ -210,6 +273,7 @@ int CMainWindow::InitLeftBar()
     ui->cbReceiveEncoded->setCurrentIndex(ui->cbReceiveEncoded->findData(c));
     c = CGlobal::Instance()->GetSendEncode();
     ui->cbSendEncode->setCurrentIndex(ui->cbSendEncode->findData(c));
+    /* TODO: add dock widget
     m_dockLeft = new QDockWidget(this);
     if(m_dockLeft)
     {
@@ -220,7 +284,7 @@ int CMainWindow::InitLeftBar()
         //m_dockLeft->hide();
         ui->menuView_V->addAction(m_dockLeft->toggleViewAction());
         addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, m_dockLeft);
-    }
+    }//*/
 
     return 0;
 }
@@ -316,9 +380,15 @@ void CMainWindow::on_pbOpen_clicked()
 
     if(QSerialPortInfo::availablePorts().isEmpty())
         return;
+    
+    m_cmbPortIndex = ui->cmbPort->currentIndex();
+    if(-1 == m_cmbPortIndex) {
+        qCritical(Logger) << "The port index is invalid: " << m_cmbPortIndex;
+        return;
+    }
 
     QSerialPortInfo info = QSerialPortInfo::availablePorts()
-            .at(ui->cmbPort->currentIndex());
+            .at(m_cmbPortIndex);
 //#if defined(Q_OS_WIN32)
 //    m_SerialPort.setPortName("\\\\.\\" + info.portName());
 //#else
@@ -345,6 +415,9 @@ void CMainWindow::on_pbOpen_clicked()
         SetStatusInfo(szError, Qt::red);
         return;
     }
+
+    CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
+
     bCheck = connect(&m_SerialPort, SIGNAL(readyRead()), this, SLOT(slotRead()));
     Q_ASSERT(bCheck);
     /*bCheck = connect(&m_SerialPort, SIGNAL(readChannelFinished()),
@@ -370,9 +443,9 @@ void CMainWindow::on_pbOpen_clicked()
         m_nLoopNumber = ui->sbLoopNumber->value();
         m_Timer.start(ui->sbLoopTime->value());
     }
-    
+
     ui->actionRefresh_R->setVisible(false);
-    
+
     setPinoutStatus();
 }
 
@@ -765,16 +838,30 @@ void CMainWindow::on_cmbPort_currentIndexChanged(int index)
             ui->cmbPort->setCurrentIndex(m_cmbPortIndex);
             return;
         }
-        
-        on_pbOpen_clicked();
+
+        on_pbOpen_clicked();   
     }
+
     m_cmbPortIndex = index;
+    CGlobal::Para para;
+    bool bRet = CGlobal::Instance()->LoadSerialPort(para, m_cmbPortIndex);
+    if(!bRet)
+        InitSerialPortPara(para);
+
     SetSaveFileName();
 }
 
 int CMainWindow::SetSaveFileName()
 {
     int nRet = 0;
+    int nIndex = ui->cmbPort->currentIndex();
+    if(nIndex < 0 || nIndex >= QSerialPortInfo::availablePorts().count())
+    {
+        qCritical(Logger) << "The index out of range. nIndex:" << nIndex
+                          << "; Serial port count:"
+                          << QSerialPortInfo::availablePorts().count();
+        return -1;
+    }
     QString szFile = QStandardPaths::writableLocation(
                 QStandardPaths::TempLocation)
             + QDir::separator() + "SerialAssistantReceive.txt";
@@ -940,9 +1027,11 @@ void CMainWindow::on_cmbBoudRate_currentTextChanged(const QString &szText)
     
     bool bRet;
     bRet = m_SerialPort.setBaudRate(szText.toInt());
-    if(bRet)
+    if(bRet) {
+        CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
         SetStatusInfo(GetSerialPortSettingInfo(),
                   m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
+    }
     else
         SetStatusInfo(tr("Set baud rate fail. error: ")
                           + QString::number(m_SerialPort.error()), Qt::red);
@@ -958,6 +1047,7 @@ void CMainWindow::on_cmbDataBit_currentIndexChanged(int index)
     bRet = m_SerialPort.setDataBits(
         (QSerialPort::DataBits)ui->cmbDataBit->itemData(index).toInt());
     if(bRet) {
+        CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
         SetStatusInfo(GetSerialPortSettingInfo(),
                       m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
     }
@@ -976,6 +1066,7 @@ void CMainWindow::on_cmbParity_currentIndexChanged(int index)
     bRet = m_SerialPort.setParity(
         (QSerialPort::Parity)ui->cmbParity->itemData(index).toInt());
     if(bRet) {
+        CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
         SetStatusInfo(GetSerialPortSettingInfo(),
                   m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
     }
@@ -994,6 +1085,7 @@ void CMainWindow::on_cmbStopBit_currentIndexChanged(int index)
     bRet = m_SerialPort.setStopBits(
         (QSerialPort::StopBits)ui->cmbStopBit->itemData(index).toInt());
     if(bRet) {
+        CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
         SetStatusInfo(GetSerialPortSettingInfo(),
                   m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
     }
@@ -1012,6 +1104,7 @@ void CMainWindow::on_cmbFlowControl_currentIndexChanged(int index)
     bRet = m_SerialPort.setFlowControl(
         (QSerialPort::FlowControl)ui->cmbFlowControl->itemData(index).toInt());
     if(bRet) {
+        CGlobal::Instance()->SaveSerialPort(m_SerialPort, m_cmbPortIndex);
         SetStatusInfo(GetSerialPortSettingInfo(),
                   m_SerialPort.isOpen() ? Qt::green : Qt::yellow);
     }

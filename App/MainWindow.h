@@ -32,6 +32,7 @@ Abstract:
 #include <QDockWidget>
 #include "SendFile.h"
 #include <lightbutton.h>
+#include "Global/Global.h"
 
 namespace Ui {
 class CMainWindow;
@@ -102,6 +103,7 @@ private:
     bool CheckHexChar(QChar c);
     int SendHexChar(QString szText, int &nLength);
     int RefreshSerialPorts();
+    int InitSerialPortPara(CGlobal::Para& para);
     /**
      * @brief SendInput
      * @return int: Returns the number of bytes sent.

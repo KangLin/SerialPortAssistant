@@ -46,6 +46,16 @@ private:
 
 public:
     static CGlobal* Instance();
+    int SaveSerialPort(const QSerialPort &port, int nIndex = -1);
+    struct Para {
+        QString name;
+        qint32 baudRate;
+        QSerialPort::DataBits dataBit;
+        QSerialPort::Parity parity;
+        QSerialPort::StopBits stopBits;
+        QSerialPort::FlowControl flowControl;
+    };
+    int LoadSerialPort(Para &para, int nIndex = -1);
 
 public:
     bool GetStatusbarVisible();
