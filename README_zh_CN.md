@@ -1,4 +1,4 @@
-＃ 串口助手
+# 串口助手
 
 作者：康林（kl222@126.com)
 
@@ -38,7 +38,7 @@
   + [x] Linux
   + [x] Android
   + [x] mac、os
-    - 本人没有mac设备，请有些设备的同学自行编译和测试
+    - 本人没有mac设备，请有设备的朋友自行编译和测试
     - 当前可以成功编译，但是没有正确设置加载动态库路径。请会设置的朋友帮助设置。
   
   详见：[Qt5 支持平台](https://doc.qt.io/qt-5/supported-platforms.html)、[Qt6 支持平台](https://doc.qt.io/qt-6/supported-platforms.html)。
@@ -46,10 +46,9 @@
   + 多语言
     - 中文  
     ![中文](Docs/ui-zh.jpg "中文")
-    - 英语      
+    - 英语  
     ![英文](Docs/ui-en.jpg "英文")
 - 多样式
-
 
 ### 下载
 
@@ -59,7 +58,7 @@
 
 - 安装说明：
   - ubuntu
-  
+
         sudo apt install ./serialportassistant_0.5.23_amd64.deb
         # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
         # sudo dpkg -i serialportassistant_0.5.23_amd64.deb
@@ -79,7 +78,6 @@
 
       git clone https://github.com/KangLin/RabbitCommon.git
 
-
 #### 编译  
 
 - 下载源码
@@ -89,7 +87,7 @@
 - 下载 RabbitCommon
 
       git clone https://github.com/KangLin/RabbitCommon.git
-      
+
 - 用 QtCreator 编译
   * 直接用 QtCreator 打开工程文件 [CMakeLists.txt](CMakeLists.txt)
   * 如果 RabbitCommon 不在本项目同级目录中，设置参数 RabbitCommon_DIR 指定其位置。 
