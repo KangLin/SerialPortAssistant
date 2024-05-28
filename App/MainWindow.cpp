@@ -139,10 +139,15 @@ CMainWindow::~CMainWindow()
     if(m_SerialPort.isOpen())
         on_pbOpen_clicked();
 
+    delete ui;
+}
+
+void CMainWindow::closeEvent(QCloseEvent *event)
+{
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::SaveWidget(this);
 #endif
-    delete ui;
+    QMainWindow::closeEvent(event);
 }
 
 int CMainWindow::RefreshSerialPorts()
