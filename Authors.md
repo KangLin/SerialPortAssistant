@@ -1,4 +1,4 @@
-Kang Lin (QQ:16614119 email:kl222@126.com)
+Kang Lin <kl222@126.com>
 
 The third project:
 

@@ -1,3 +1,7 @@
+- 版本: v0.5.24
+  - 修改关于对话框拼写错误。详见： https://github.com/KangLin/RabbitCommon/tree/25e00a2d98488fa2d63f54b34ac9628603cab448
+  - 修改保存窗口状态
+  
 - 版本: v0.5.23
   - 增加左栏停泊条
   - 增加保存设置
