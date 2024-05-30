@@ -118,7 +118,11 @@
 
   + 用系统自带的 QT
 
-        sudo apt-get install -y -qq qttools5-dev qttools5-dev-tools \
-                 libqt5serialport5-dev qtbase5-dev qtbase5-dev-tools
+        sudo apt-get install \
+            qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
+            qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
+            qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev
+
+    详见: [ubuntu.yml](.github/workflows/ubuntu.yml)
 
 - deploy.sh: 此脚本用于产生新的发行版本号和标签。仅程序发布者使用。
