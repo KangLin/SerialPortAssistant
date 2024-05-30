@@ -26,7 +26,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}\.cache\source
       TOOSL_DIR:   ${{github.workspace}}\.cache\tools
       INSTALL_DIR: ${{github.workspace}}\.cache\install_mingw
-      SerialPortAssistant_VERSION: v0.5.23
+      SerialPortAssistant_VERSION: v0.5.24
       artifact_name: build_mingw
 
     # Map the job outputs to step outputs

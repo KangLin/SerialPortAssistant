@@ -1,21 +1,13 @@
-serialportassistant (0.5.23) stable; urgency=medium
+serialportassistant (0.5.24) stable; urgency=medium
 
-    * Modify etc/SerialPortAssistant_logqt.ini
-    * Save port settings
-    * Use QSerialPort enum
+    * Modify debian/rules
+    * Modify Change log
     * Modify translations
-    * Add left bar dockwidget
-    * Modify set parity and flow control
-    * CI: add documents
-    * CI: update vcpkg version to a1a1cbc975abf909a6c8985a6a2b8fe20bbd9bd6
-    * CI: update VCPKG_PLATFORM_TOOLSET to v143
-    * Fix: delete pointer when exit
-    * Convert dos to unix
-    * Delete unused code
-    * CI: update macos.yml
-    * debian: modify changelog
-    * fix(debian): typo
-    * Modify appveyor.yml
+    * CMakeLists: modify find RabbitCommon
+    * Modify debian/rules
+    * Modify documents
+    * Modify save windows state
+    * Modify README_zh_CN.md
 
- -- Kang Lin <kl222@126.com>  Tue, 28 May 2024 09:33:49 +0800
+ -- Kang Lin <kl222@126.com>  Thu, 30 May 2024 13:46:15 +0800
 

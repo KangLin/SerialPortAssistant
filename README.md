@@ -65,9 +65,9 @@ Author: Kang Lin (kl222@126.com)
 - Install
   - ubuntu
 
-        sudo apt install ./serialportassistant_0.5.23_amd64.deb
+        sudo apt install ./serialportassistant_0.5.24_amd64.deb
         # If you're on an older Linux distribution, you will need to run this instead:         
-        # sudo dpkg -i serialportassistant_0.5.23_amd64.deb
+        # sudo dpkg -i serialportassistant_0.5.24_amd64.deb
         # sudo apt-get install -f # Install dependencies
 
 ## Donate
