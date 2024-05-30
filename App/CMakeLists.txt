@@ -74,7 +74,7 @@ INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
         COMPONENT Application)
 
 if(UNIX AND NOT ANDROID)
-    INSTALL(FILES ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.desktop
+    INSTALL(FILES ${CMAKE_SOURCE_DIR}/share/org.Rabbit.SerialPortAssistant.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
             COMPONENT Application)
     INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh

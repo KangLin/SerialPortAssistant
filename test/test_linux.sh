@@ -8,13 +8,13 @@ if [ -n "$1" ]; then
 	PROJECT_NAME=$1
 fi
 
-if [ ! -f /opt/${PROJECT_NAME}/share/applications/${PROJECT_NAME}.desktop ]; then
-	echo "There are not /opt/share/applications/${PROJECT_NAME}.desktop"
+if [ ! -f /opt/${PROJECT_NAME}/share/applications/org.Rabbit.${PROJECT_NAME}.desktop ]; then
+	echo "There are not /opt/share/applications/org.Rabbit.${PROJECT_NAME}.desktop"
 	EXIT_CODE=$[EXIT_CODE+1]
 fi
 
-if [ ! -f /usr/share/applications/${PROJECT_NAME}.desktop ]; then
-	echo "There are not /usr/share/applications/${PROJECT_NAME}.desktop"
+if [ ! -f /usr/share/applications/org.Rabbit.${PROJECT_NAME}.desktop ]; then
+	echo "There are not /usr/share/applications/org.Rabbit.${PROJECT_NAME}.desktop"
 	EXIT_CODE=$[EXIT_CODE+1]
 fi
 
@@ -23,8 +23,8 @@ if [ ! -f /opt/${PROJECT_NAME}/share/pixmaps/${PROJECT_NAME}.png ]; then
 	EXIT_CODE=$[EXIT_CODE+1]
 fi
 
-if [ ! -f /usr/share/pixmaps/${PROJECT_NAME}.png ]; then
-    echo "There are not /usr/share/pixmaps/${PROJECT_NAME}.png"
+if [ ! -f /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png ]; then
+    echo "There are not /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png"
     EXIT_CODE=$[EXIT_CODE+1]
 fi
 
