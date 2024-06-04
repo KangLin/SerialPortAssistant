@@ -49,15 +49,17 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: \"${VERSIO
 #sed -i "s/export VERSION=.*/export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 #sed -i "s/^\  - export VERSION=.*/\  - export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
-sed -i "s/    SET(SerialPortAssistant_VERSION.*\"v[0-9]\+\.[0-9]\+\.[0-9]\+\")/    SET(SerialPortAssistant_VERSION \"${VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
-sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
-sed -i "s/          \"version\":[[:blank:]]*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
+#sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
+
+sed -i "s/    SET(SerialPortAssistant_VERSION .*)/    SET(SerialPortAssistant_VERSION \"${DEBIAN_VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
+sed -i "s/          \"version\":[[:blank:]]*\"v\?[0-9]\+\.[0-9]\+\.[0-9]\+\"/          \"version\":\"${DEBIAN_VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
+
 sed -i "s/serialportassistant_[0-9]\+\.[0-9]\+\.[0-9]\+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
 sed -i "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml

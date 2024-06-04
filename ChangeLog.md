@@ -1,3 +1,7 @@
+- Version: v0.5.25
+  - Use [RabbitCommon v2.2.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.4)
+  - Rename share/SerialPortAssistant.desktop -> share/org.Rabbit.SerialPortAssistant.desktop
+
 - Version: v0.5.24
   - Fix about typo. See: https://github.com/KangLin/RabbitCommon/tree/25e00a2d98488fa2d63f54b34ac9628603cab448
   - Modify save windows state

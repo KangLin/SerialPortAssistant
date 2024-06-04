@@ -1,3 +1,7 @@
+- 版本: v0.5.25
+  - 使用 [RabbitCommon v2.2.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.4)
+  - 重命名 share/SerialPortAssistant.desktop -> share/org.Rabbit.SerialPortAssistant.desktop
+
 - 版本: v0.5.24
   - 修改关于对话框拼写错误。详见： https://github.com/KangLin/RabbitCommon/tree/25e00a2d98488fa2d63f54b34ac9628603cab448
   - 修改保存窗口状态
