@@ -98,7 +98,7 @@ private:
     bool isExistSaveFileName(const QString &szFile);
     int InitEncodeComboBox(QComboBox *comboBox);
     void AddReceive(const QString &szText, bool bReceive = false);
-    int SetStatusInfo(QString szText, QColor color = Qt::black);
+    int SetStatusInfo(QString szText, QColor color = QPalette().color(QPalette::WindowText));
     QString GetSerialPortSettingInfo();
     bool CheckHexChar(QChar c);
     int SendHexChar(QString szText, int &nLength);

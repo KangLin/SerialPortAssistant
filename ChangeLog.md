@@ -1,3 +1,6 @@
+- Version: v0.5.26
+  - Modify SetStatusInfo the default color
+
 - Version: v0.5.25
   - Use [RabbitCommon v2.2.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.4)
   - Rename share/SerialPortAssistant.desktop -> share/org.Rabbit.SerialPortAssistant.desktop
