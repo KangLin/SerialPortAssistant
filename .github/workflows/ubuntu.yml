@@ -98,7 +98,7 @@ jobs:
                 --md5 ${MD5} \
                 -m "${{env.SerialPortAssistant_VERSION}}" \
                 -p serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb \
-                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb"
+                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/files/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb"
 
       - name: Update version configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
