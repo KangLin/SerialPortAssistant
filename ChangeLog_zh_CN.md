@@ -1,6 +1,8 @@
 - 版本: v0.5.26
   - 修改 SetStatusInfo 默认颜色
-
+  - 修改 debian
+  - 修复版本号错误
+  
 - 版本: v0.5.25
   - 使用 [RabbitCommon v2.2.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.4)
   - 重命名 share/SerialPortAssistant.desktop -> share/org.Rabbit.SerialPortAssistant.desktop

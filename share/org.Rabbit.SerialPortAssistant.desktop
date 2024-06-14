@@ -1,3 +1,6 @@
+# https://specifications.freedesktop.org/menu-spec/latest/index.html
+
+# https://specifications.freedesktop.org/desktop-entry-spec/latest/
 [Desktop Entry]
 Type=Application
 Name=Serial Port Assistant
@@ -10,5 +13,10 @@ Icon=org.Rabbit.SerialPortAssistant
 Exec=/opt/SerialPortAssistant/bin/SerialPortAssistant.sh
 Terminal=false
 StartupNotify=true
-Categories=Application;Development;Tools
+
+# https://specifications.freedesktop.org/menu-spec/latest/apa.html
+Categories=Utility;Development;Debugger
+
+# https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/
+# https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/
 MimeType=application/octet-stream;text/plain;
