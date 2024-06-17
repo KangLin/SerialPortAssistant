@@ -59,20 +59,20 @@
 - 安装说明：
   - ubuntu
 
-    [serialportassistant_0.5.25_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/serialportassistant_0.5.25_amd64.deb)
+    [serialportassistant_0.5.26_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/serialportassistant_0.5.26_amd64.deb)
 
-        sudo apt install ./serialportassistant_0.5.25_amd64.deb
+        sudo apt install ./serialportassistant_0.5.26_amd64.deb
         # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-        # sudo dpkg -i serialportassistant_0.5.25_amd64.deb
+        # sudo dpkg -i serialportassistant_0.5.26_amd64.deb
         # sudo apt-get install -f # Install dependencies
 
   - Windows
 
-    [SerialPortAssistant_v0.5.25_win64_msvc2019_64_qt6.6.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_win64_msvc2019_64_qt6.6.2_Setup.exe)
+    [SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe)
   
   - Andoird
-    - [SerialPortAssistant_v0.5.25_android_arm64_v8a_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_android_arm64_v8a_qt6.6.2_Release.apk)
-    - [SerialPortAssistant_v0.5.25_android_x86_64_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_android_x86_64_qt6.6.2_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

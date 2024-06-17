@@ -1,11 +1,11 @@
-serialportassistant (0.5.25) stable; urgency=medium
+serialportassistant (0.5.26) stable; urgency=medium
 
-    * Modify change log
-    * Modify version
-    * Modify find RabbitCommon. first source code
-    * Rename share/SerialPortAssistant.desktop -> share/org.Rabbit.SerialPortAssistant.desktop
-    * Modify README
-    * Modify control
+    * Modify documents
+    * Modify CMakeLists.txt
+    * Modify share/org.Rabbit.SerialPortAssistant.desktop to Categories
+    * debian: modify control and format
+    * CI: fix version bug
+    * Modify SetStatusInfo the default color
 
- -- Kang Lin <kl222@126.com>  Sun, 09 Jun 2024 11:12:16 +0800
+ -- Kang Lin <kl222@126.com>  Mon, 17 Jun 2024 16:09:54 +0800
 

@@ -65,20 +65,20 @@ Author: Kang Lin (kl222@126.com)
 - Install
   - ubuntu
   
-    [serialportassistant_0.5.25_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/serialportassistant_0.5.25_amd64.deb)
+    [serialportassistant_0.5.26_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/serialportassistant_0.5.26_amd64.deb)
 
-        sudo apt install ./serialportassistant_0.5.25_amd64.deb
+        sudo apt install ./serialportassistant_0.5.26_amd64.deb
         # If you're on an older Linux distribution, you will need to run this instead:         
-        # sudo dpkg -i serialportassistant_0.5.25_amd64.deb
+        # sudo dpkg -i serialportassistant_0.5.26_amd64.deb
         # sudo apt-get install -f # Install dependencies
 
   - Windows
 
-    [SerialPortAssistant_v0.5.25_win64_msvc2019_64_qt6.6.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_win64_msvc2019_64_qt6.6.2_Setup.exe)
+    [SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe)
     
   - Andoird
-    - [SerialPortAssistant_v0.5.25_android_arm64_v8a_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_android_arm64_v8a_qt6.6.2_Release.apk)
-    - [SerialPortAssistant_v0.5.25_android_x86_64_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.25/SerialPortAssistant_v0.5.25_android_x86_64_qt6.6.2_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk)
 
 ## Donate
 
