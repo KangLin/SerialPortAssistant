@@ -54,7 +54,7 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
-#sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
+sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
 

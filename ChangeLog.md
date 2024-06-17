@@ -2,6 +2,7 @@
   - Modify SetStatusInfo the default color
   - Modify debian
   - CI: fix version bug
+  - Use [RabbitCommon v2.2.5](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.5)
 
 - Version: v0.5.25
   - Use [RabbitCommon v2.2.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.2.4)
