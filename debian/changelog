@@ -1,4 +1,4 @@
-serialportassistant (0.5.26) stable; urgency=medium
+serialportassistant (0.5.26) unstable; urgency=medium
 
     * Modify documents
     * Modify CMakeLists.txt
