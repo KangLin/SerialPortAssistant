@@ -1,11 +1,5 @@
 serialportassistant (0.5.26) unstable; urgency=medium
 
-    * Modify documents
-    * Modify CMakeLists.txt
-    * Modify share/org.Rabbit.SerialPortAssistant.desktop to Categories
-    * debian: modify control and format
-    * CI: fix version bug
-    * Modify SetStatusInfo the default color
+  * New upstream version 0.5.26
 
  -- Kang Lin <kl222@126.com>  Mon, 17 Jun 2024 16:09:54 +0800
-

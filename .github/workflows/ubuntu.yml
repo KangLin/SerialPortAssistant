@@ -53,7 +53,8 @@ jobs:
               qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
               qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev \
               libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
-              libx11-dev libxfixes-dev
+              libx11-dev libxfixes-dev \
+              libcmark-dev cmark
 
       - name: Cache installed
         uses: actions/cache@v3

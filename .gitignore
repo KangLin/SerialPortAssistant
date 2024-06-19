@@ -3,6 +3,8 @@ debian/files
 debian/.debhelper/
 debian/debhelper-build-stamp
 debian/serialportassistant/
+debian/patches/
+.pc/
 CMakeLists.txt.user*
 .qmake.stash
 Translations.qrc

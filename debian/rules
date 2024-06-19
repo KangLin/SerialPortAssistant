@@ -34,7 +34,6 @@ PACKAGE_DIR = "debian/serialportassistant"
 
 # Debian 维护者指南: https://www.debian.org/doc/manuals/debmake-doc/index.zh-cn.html
 # Debian 新维护者手册: https://www.debian.org/doc/manuals/maint-guide/dreq.zh-cn.html#rules
-# https://www.debian.org/doc/manuals/maint-guide/dreq.zh-cn.html#rules
 # See: man debhelper
 # This is example for Cmake ( See https://bugs.debian.org/641051 )
 override_dh_auto_configure:
