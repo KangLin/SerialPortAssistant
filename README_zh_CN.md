@@ -15,7 +15,7 @@
 [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 [![sourceforge 最后发行版本下载](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
-[![github 下载量](https://img.shields.io/github/downloads/KangLin/SerialPortAssistant/total?label=Github%20下载量)](https://github.com/KangLin/SerialPortAssistant/releases)
+[![github 下载量](https://img.shields.io/github/downloads/KangLin/SerialPortAssistant/total?label=Github%20下载量)](http://gra.caldis.me/?user=KangLin&repo=SerialPortAssistant)
 [![Download SerialPortAssistant](https://img.shields.io/sourceforge/dt/serialportassistant.svg?label=Sourceforge%20下载量)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
 [![build](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml/badge.svg)](https://github.com/KangLin/SerialPortAssistant/actions/workflows/build.yml)
