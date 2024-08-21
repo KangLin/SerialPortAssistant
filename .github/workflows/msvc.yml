@@ -35,6 +35,8 @@ jobs:
             CMAKE_GENERATOR_PLATFORM: Win32
             VCPKG_MANIFEST_DIR: "\\vcpkg\\manifests"
 
+    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: https://github.com/actions/runner-images/
     runs-on: windows-latest
 
     env:

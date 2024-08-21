@@ -1,3 +1,6 @@
+- Version: v0.5.27
+  - Add snap
+
 - Version: v0.5.26
   - Modify SetStatusInfo the default color
   - Modify debian

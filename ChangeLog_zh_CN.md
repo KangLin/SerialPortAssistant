@@ -1,3 +1,6 @@
+- 版本: v0.5.27
+  - 增加 snap
+
 - 版本: v0.5.26
   - 修改 SetStatusInfo 默认颜色
   - 修改 debian

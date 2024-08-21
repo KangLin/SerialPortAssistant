@@ -1,4 +1,5 @@
 debian/files
+*.snap
 *.substvars
 debian/.debhelper/
 debian/debhelper-build-stamp

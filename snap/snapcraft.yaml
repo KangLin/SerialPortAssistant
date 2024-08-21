@@ -1,0 +1,132 @@
+# How Snapcraft builds snaps: https://snapcraft.io/docs/how-snapcraft-builds
+# Snapcraft.yaml schema: https://snapcraft.io/docs/snapcraft-yaml-schema
+# Debug snaps with snap try: https://snapcraft.io/docs/snap-try
+# Debugging snaps: https://snapcraft.io/docs/debug-snaps
+name: serialportassistant
+base: core22 # the base snap is the execution environment for this snap
+version: '0.5.26' # just for humans, typically '1.2+git' or '1.3.2'
+license: GPL-3.0+
+contact: kl222@126.com
+donation:
+  - https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
+issues: https://github.com/KangLin/SerialPortAssistant/issues
+summary: Serial Port Assistant # 79 char long summary
+description: |
+  Serial port assistant
+  .
+  Author: Kang Lin <kl222@126.com>
+  .
+  Donation:
+  .
+  https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+  .
+  https://gitee.com/kl222/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+  .
+  https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+# Confinement levels: https://snapcraft.io/docs/classic-confinement#heading--levels
+# Classic confinement: https://snapcraft.io/docs/classic-confinement
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+# lifecycle: https://snapcraft.io/docs/parts-lifecycle
+# Iterating over a build: https://snapcraft.io/docs/iterating-over-a-build
+# Part directives: https://snapcraft.io/docs/snapcraft-yaml-schema#part-directives
+parts:
+  rabbitcommon:
+    # see: https://snapcraft.io/docs/supported-plugins
+    # See 'snapcraft plugins'
+    plugin: dump # See: https://snapcraft.io/docs/dump-plugin
+    source: https://github.com/KangLin/RabbitCommon.git
+    source-type: git
+    source-branch: master
+    source-depth: 1
+    organize:
+      '*': RabbitCommon/
+    prime:
+      - -*
+
+  serialportassistant:
+    after: [rabbitcommon]
+    # see: https://snapcraft.io/docs/supported-plugins
+    # See 'snapcraft plugins'
+    plugin: cmake # See: https://snapcraft.io/docs/cmake-plugin
+    cmake-parameters:
+      # See: https://snapcraft.io/docs/parts-environment-variables
+      - -DRabbitCommon_DIR=$CRAFT_STAGE/RabbitCommon/
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant
+    source: .
+    build-packages:
+      - libcmark-dev
+      - cmark
+      - libssl-dev
+      - libcrypt-dev
+      - qttools5-dev
+      - qtbase5-dev
+      - libqt5scxml5-dev
+      - libqt5serialport5-dev
+      - qtwebengine5-dev
+      - qtwebengine5-dev-tools
+      - qtwebengine5-private-dev
+      - libqt5svg5-dev
+    stage-packages:
+      - libcmark0.30.2
+      - libopengl0
+      - libgl1
+      - libglx0
+      - libglu1-mesa
+      - libssl3
+      - libcrypt1
+      - libqt5scxml5
+      - libqt5serialport5
+      - libqt5webengine5
+      - libqt5webenginewidgets5
+      - libqt5svg5
+      - libqt5xml5
+      - libc6
+      - libgcc-s1
+      - libstdc++6
+      - zlib1g
+    # See: https://snapcraft.io/docs/overrides
+    override-stage: |
+      cd $CRAFT_PART_INSTALL/opt/SerialPortAssistant/bin
+      if [ ! -f serialportassistant ]; then
+          ln -s SerialPortAssistant serialportassistant
+      fi
+      sed -i 's|Icon=org\.Rabbit\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
+      snapcraftctl stage
+    # organize:
+    #   usr/share/qt5/resources: opt/SerialPortAssistant/bin
+    #   usr/share/qt5/translations: opt/SerialPortAssistant/bin
+    prime:
+     - -usr/bin/cmark
+     - -opt/SerialPortAssistant/bin/cmark
+     - -opt/SerialPortAssistant/include
+     - -opt/SerialPortAssistant/lib/cmake
+     - -opt/SerialPortAssistant/lib/pkgconfig
+     - -opt/SerialPortAssistant/lib/*.a
+
+# App directives: https://snapcraft.io/docs/snapcraft-yaml-schema#app-directives
+apps:
+ serialportassistant:
+   command: opt/SerialPortAssistant/bin/SerialPortAssistant
+   # See: https://snapcraft.io/docs/desktop-menu-support#heading--desktop-key
+   desktop: opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
+   environment:
+     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/SerialPortAssistant/lib/$SNAPCRAFT_ARCH_TRIPLET
+     QTWEBENGINEPROCESS_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/libexec
+     #QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt6/plugins/
+     PATH: $SNAP/opt/SerialPortAssistant/bin:$PATH
+   # List extensions, run `snapcraft extensions`
+   extensions:
+     - kde-neon
+   # See: https://snapcraft.io/docs/supported-interfaces
+   plugs:
+     - network
+     - network-status
+     - network-control
+     - network-bind
+     - network-manager
+     - serial-port
+     - home

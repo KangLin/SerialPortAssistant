@@ -23,6 +23,8 @@ jobs:
             VCPKG_TARGET_TRIPLET: x64-android
             ANDROID_ABI: x86_64
 
+    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: https://github.com/actions/runner-images/
     runs-on: ubuntu-latest
 
     env:

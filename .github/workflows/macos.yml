@@ -30,7 +30,7 @@ jobs:
           - qt_version: 5.12.12
 
     # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
-    # See: https://github.com/actions/runner-images/tree/main
+    # See: https://github.com/actions/runner-images/
     runs-on: macos-13
 
     env:

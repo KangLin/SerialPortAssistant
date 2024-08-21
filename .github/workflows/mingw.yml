@@ -20,6 +20,8 @@ jobs:
       run:
         shell: cmd
 
+    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: https://github.com/actions/runner-images/
     runs-on: windows-latest
 
     env:
@@ -56,8 +58,7 @@ jobs:
               mingw-w64-x86_64-nsis ^
               mingw-w64-x86_64-gcc ^
               mingw-w64-x86_64-qt5 ^
-              mingw-w64-x86_64-qtwebkit ^
-              mingw-w64-x86_64-qt5-serialport ^
+              mingw-w64-x86_64-cmark ^
               mingw-w64-x86_64-zlib ^
               mingw-w64-x86_64-openssl ^
               git base-devel
