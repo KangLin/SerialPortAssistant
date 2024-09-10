@@ -74,11 +74,11 @@ Author: Kang Lin (kl222@126.com)
 
   - Windows
 
-    [SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.2_Setup.exe)
+    [SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.3_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_win64_msvc2019_64_qt6.6.3_Setup.exe)
     
   - Andoird
-    - [SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.2_Release.apk)
-    - [SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.2_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.3_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_arm64_v8a_qt6.6.3_Release.apk)
+    - [SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.3_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.26/SerialPortAssistant_v0.5.26_android_x86_64_qt6.6.3_Release.apk)
 
 ## Donate
 

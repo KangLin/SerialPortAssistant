@@ -39,7 +39,7 @@ jobs:
       ANDROID_ABI: ${{matrix.ANDROID_ABI}}
       ANDROID_PLATFORM: android-23
       ANDROID_NATIVE_API_LEVEL: 23
-      qt_modules: 'qtscxml qtserialport qtwebchannel qtwebsockets qtwebview'
+      qt_modules: 'qtscxml qtserialport qtwebchannel qtpositioning qtwebview'
 
     # Map the job outputs to step outputs
     outputs:
