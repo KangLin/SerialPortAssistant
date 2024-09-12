@@ -96,7 +96,7 @@ If it cannot be displayed, please open:
 + [Qt (LGPL v2.1)](http://qt.io/)
 + RabbitCommon: https://github.com/KangLin/RabbitCommon  
   It can be downloaded to the same directory of the project.
-  If it is a different directory, set the environment variable RabbitCommon_DIR 
+  If it is a different directory, set the environment variable `RabbitCommon_DIR`
 
         git clone https://github.com/KangLin/RabbitCommon.git
 
@@ -109,7 +109,7 @@ If it cannot be displayed, please open:
 - Compiled with QtCreator
   + Open the project file [CMakeLists.txt](CMakeLists.txt) with QtCreator
   + The RabbitCommon can be downloaded to the same directory of the project.
-    If it is a different directory, Set the parameter RabbitCommon_DIR
+    If it is a different directory, Set the parameter `RabbitCommon_DIR`
   + Direct compilation can generate programs
 - Compile with the command line
   + Download source code and the deplendence in same directory
@@ -134,16 +134,23 @@ If it cannot be displayed, please open:
   + This script generates the deb package under linux.
     Before use, please make sure the following programs are installed
   
-        sudo apt-get install debhelper fakeroot 
-    
-  + Use system qt
+        sudo apt-get install debhelper fakeroot build-essential cmake
 
-        sudo apt-get install \
+  + Use system qt
+    - qt6
+
+          sudo apt-get install \
             qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
             qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
             qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev
 
     See: [ubuntu.yml](.github/workflows/ubuntu.yml)
+    - qt5
+    
+          sudo apt-get install qttools5-dev qttools5-dev-tools \
+              qtbase5-dev qtbase5-dev-tools qttranslations5-l10n \
+              libqt5scxml5-dev libqt5svg5-dev libqt5serialport5-dev \
+              qtwebengine5-dev qtwebengine5-dev-tools qtwebengine5-private-dev
 
 - deploy.sh: This script is used to generate new release version numbers and tag.
   Used only by the program publisher.

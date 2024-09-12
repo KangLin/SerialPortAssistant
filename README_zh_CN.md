@@ -84,7 +84,7 @@
 
 - [Qt (LGPL v2.1)](http://qt.io/)
 - RabbitCommon: https://github.com/KangLin/RabbitCommon  
-  RabbitCommon 下载到与本项目同级目录中。如果不在同级目录，则需要指定环境变量： RabbitCommon_DIR
+  RabbitCommon 下载到与本项目同级目录中。如果不在同级目录，则需要指定环境变量： `RabbitCommon_DIR`
 
       git clone https://github.com/KangLin/RabbitCommon.git
 
@@ -100,7 +100,7 @@
 
 - 用 QtCreator 编译
   * 直接用 QtCreator 打开工程文件 [CMakeLists.txt](CMakeLists.txt)
-  * 如果 RabbitCommon 不在本项目同级目录中，设置参数 RabbitCommon_DIR 指定其位置。 
+  * 如果 RabbitCommon 不在本项目同级目录中，设置参数 `RabbitCommon_DIR` 指定其位置。 
   * 直接编译就可以生成程序
 - 用命令行编译
   * 在同一目录中下载源码与依赖
@@ -124,15 +124,22 @@
 - build_debpackage.sh
   + 此脚本是 linux 下生成 deb 包的。使用前，请确保安装了下面程序
 
-        sudo apt-get install debhelper fakeroot
+        sudo apt-get install debhelper fakeroot build-essential cmake
 
   + 用系统自带的 QT
-
-        sudo apt-get install \
-            qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
-            qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
-            qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev
+    - qt5
+    
+          sudo apt-get install \
+              qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
+              qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
+              qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev
 
     详见: [ubuntu.yml](.github/workflows/ubuntu.yml)
+    - qt5
+    
+          sudo apt-get install qttools5-dev qttools5-dev-tools \
+              qtbase5-dev qtbase5-dev-tools qttranslations5-l10n \
+              libqt5scxml5-dev libqt5svg5-dev libqt5serialport5-dev \
+              qtwebengine5-dev qtwebengine5-dev-tools qtwebengine5-private-dev
 
 - deploy.sh: 此脚本用于产生新的发行版本号和标签。仅程序发布者使用。
