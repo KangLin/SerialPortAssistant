@@ -103,8 +103,8 @@ jobs:
           makensis ${{github.workspace}}\build\Install.nsi
 
       - name: update artifact
-        if: false
-        uses: actions/upload-artifact@v3
+        if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.artifact_name }}
           path: |
