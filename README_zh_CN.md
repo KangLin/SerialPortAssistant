@@ -127,7 +127,7 @@
         sudo apt-get install debhelper fakeroot build-essential cmake
 
   + 用系统自带的 QT
-    - qt5
+    - qt6
     
           sudo apt-get install \
               qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
