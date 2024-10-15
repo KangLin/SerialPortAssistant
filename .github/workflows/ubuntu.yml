@@ -77,7 +77,7 @@ jobs:
           PKG_CONFIG_PATH: ${{env.INSTALL_DIR}}/lib/pkgconfig
         run: |
           cd ${{github.workspace}}
-          ./build_debpackage.sh
+          ./build_debpackage.sh /usr/lib/`uname -a`-linux-gnu/cmake/Qt6
           cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
 
       - name: update configure file
