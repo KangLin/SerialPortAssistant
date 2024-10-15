@@ -1,15 +1,11 @@
 #!/bin/bash
 
-if [ -f /usr/bin/qmake -a -z "$QT_ROOT" ]; then
-    QMAKE=qmake
+if [ -n "$1" -a -z "$QT_ROOT" ]; then
+	QT_ROOT=$1
 fi
 
-if [ -n "$1" ]; then
-	QMAKE=$1
-fi
-
-if [ ! -f /usr/bin/qmake -a -z "$QT_ROOT" ]; then
-	echo "$0 QMAKE RabbitCommon_DIR"
+if [ -z "$QT_ROOT" ]; then
+	echo "$0 QT_ROOT RabbitCommon_DIR"
     exit -1
 fi
 
@@ -22,7 +18,7 @@ if [ -z "$RabbitCommon_DIR" ]; then
 fi
 
 if [ ! -d "$RabbitCommon_DIR" ]; then
-	echo "$0 QMAKE RabbitCommon_DIR"
+	echo "$0 QT_ROOT RabbitCommon_DIR"
 fi
 
 
