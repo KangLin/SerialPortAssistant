@@ -1,5 +1,6 @@
 - Version: v0.5.27
   - Add snap
+  - Greater than Android 9
 
 - Version: v0.5.26
   - Modify SetStatusInfo the default color

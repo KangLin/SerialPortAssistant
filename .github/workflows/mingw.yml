@@ -1,3 +1,5 @@
+# Author：Kang Lin <kl222@126.com>
+
 name: build_mingw
 
 on:
@@ -52,12 +54,13 @@ jobs:
         env:
           PATH: C:\msys64\usr\bin
         run: | 
+          C:\msys64\usr\bin\pacman.exe -Syu --noconfirm
           C:\msys64\usr\bin\pacman.exe -S --noconfirm ^
               mingw-w64-x86_64-cmake ^
               mingw-w64-x86_64-make ^
               mingw-w64-x86_64-nsis ^
               mingw-w64-x86_64-gcc ^
-              mingw-w64-x86_64-qt5 ^
+              mingw-w64-x86_64-qt6 ^
               mingw-w64-x86_64-cmark ^
               mingw-w64-x86_64-zlib ^
               mingw-w64-x86_64-openssl ^
@@ -90,17 +93,17 @@ jobs:
             -DCMARK_STATIC=ON ^
             -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} ^
             -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/build/install ^
-            -DRABBIT_ENABLE_INSTALL_DEPENDENT=ON ^
-            -DRABBIT_ENABLE_INSTALL_QT=ON ^
+            -DRABBIT_ENABLE_INSTALL_DEPENDENT=OFF ^
+            -DRABBIT_ENABLE_INSTALL_QT=OFF ^
             -DRABBIT_ENABLE_INSTALL_TO_BUILD_PATH=OFF ^
             -DBUILD_FREERDP=ON ^
             -DCMAKE_PREFIX_PATH=${{env.INSTALL_DIR}}
           cmake --build . --config ${{ matrix.BUILD_TYPE }}
-          cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
-          copy /Y C:\msys64\mingw64\bin\*.dll install\bin
-          copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
-          copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
-          makensis ${{github.workspace}}\build\Install.nsi
+          ;cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
+          ;copy /Y C:\msys64\mingw64\bin\*.dll install\bin
+          ;copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
+          ;copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
+          ;makensis ${{github.workspace}}\build\Install.nsi
 
       - name: update artifact
         if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
