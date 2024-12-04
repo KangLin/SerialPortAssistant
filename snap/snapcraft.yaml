@@ -5,6 +5,7 @@
 name: serialportassistant
 base: core22 # the base snap is the execution environment for this snap
 version: '0.5.26' # just for humans, typically '1.2+git' or '1.3.2'
+type: app
 license: GPL-3.0+
 contact: kl222@126.com
 donation:
@@ -24,9 +25,13 @@ description: |
   .
   https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 
+# - devel
+# - stable
 grade: stable # must be 'stable' to release into candidate/stable channels
 # Confinement levels: https://snapcraft.io/docs/classic-confinement#heading--levels
 # Classic confinement: https://snapcraft.io/docs/classic-confinement
+# - devmode
+# - strict
 confinement: strict # use 'strict' once you have the right plugs and slots
 
 # lifecycle: https://snapcraft.io/docs/parts-lifecycle
@@ -47,29 +52,17 @@ parts:
       - -*
 
   serialportassistant:
-    after: [rabbitcommon]
     # see: https://snapcraft.io/docs/supported-plugins
     # See 'snapcraft plugins'
     plugin: cmake # See: https://snapcraft.io/docs/cmake-plugin
-    cmake-parameters:
-      # See: https://snapcraft.io/docs/parts-environment-variables
-      - -DRabbitCommon_DIR=$CRAFT_STAGE/RabbitCommon/
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant
     source: .
+    after:
+      - rabbitcommon
     build-packages:
       - libcmark-dev
       - cmark
       - libssl-dev
       - libcrypt-dev
-      - qttools5-dev
-      - qtbase5-dev
-      - libqt5scxml5-dev
-      - libqt5serialport5-dev
-      - qtwebengine5-dev
-      - qtwebengine5-dev-tools
-      - qtwebengine5-private-dev
-      - libqt5svg5-dev
     stage-packages:
       - libcmark0.30.2
       - libopengl0
@@ -78,27 +71,24 @@ parts:
       - libglu1-mesa
       - libssl3
       - libcrypt1
-      - libqt5scxml5
-      - libqt5serialport5
-      - libqt5webengine5
-      - libqt5webenginewidgets5
-      - libqt5svg5
-      - libqt5xml5
       - libc6
       - libgcc-s1
       - libstdc++6
       - zlib1g
+    cmake-parameters:
+      # See: https://snapcraft.io/docs/parts-environment-variables
+      - -DRabbitCommon_DIR=$CRAFT_STAGE/RabbitCommon/
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant
     # See: https://snapcraft.io/docs/overrides
     override-stage: |
       cd $CRAFT_PART_INSTALL/opt/SerialPortAssistant/bin
-      if [ ! -f serialportassistant ]; then
-          ln -s SerialPortAssistant serialportassistant
-      fi
+      #  if [ ! -f serialportassistant ]; then
+      #      ln -s SerialPortAssistant serialportassistant
+      #  fi
       sed -i 's|Icon=org\.Rabbit\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
+      sed -i 's|Path=/opt/SerialPortAssistant/bin|Path=\$\{SNAP\}/opt/SerialPortAssistant/bin|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
       snapcraftctl stage
-    # organize:
-    #   usr/share/qt5/resources: opt/SerialPortAssistant/bin
-    #   usr/share/qt5/translations: opt/SerialPortAssistant/bin
     prime:
      - -usr/bin/cmark
      - -opt/SerialPortAssistant/bin/cmark
@@ -114,13 +104,12 @@ apps:
    # See: https://snapcraft.io/docs/desktop-menu-support#heading--desktop-key
    desktop: opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
    environment:
-     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/SerialPortAssistant/lib/$SNAPCRAFT_ARCH_TRIPLET
-     QTWEBENGINEPROCESS_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/libexec
+     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/SerialPortAssistant/lib
      #QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt6/plugins/
      PATH: $SNAP/opt/SerialPortAssistant/bin:$PATH
    # List extensions, run `snapcraft extensions`
    extensions:
-     - kde-neon
+     - kde-neon-6
    # See: https://snapcraft.io/docs/supported-interfaces
    plugs:
      - network
@@ -128,5 +117,8 @@ apps:
      - network-control
      - network-bind
      - network-manager
+     - opengl
      - serial-port
      - home
+     - ssh-keys
+     - ssh-public-keys

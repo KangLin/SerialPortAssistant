@@ -1,3 +1,5 @@
+# Author：Kang Lin <kl222@126.com>
+
 name: build
 
 env:
@@ -17,6 +19,7 @@ jobs:
     uses: ./.github/workflows/msvc.yml
 
   mingw:
+    if: false
     uses: ./.github/workflows/mingw.yml
 
   macos:

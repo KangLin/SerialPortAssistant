@@ -46,8 +46,7 @@ override_dh_auto_configure:
         ${PARAS}
 
 override_dh_auto_build:
-	cmake --build $(BUILD_DIR) --config Release \
-	  --parallel $(if "`cat /proc/cpuinfo |grep 'processor' |wc -l`", `cat /proc/cpuinfo |grep 'processor' |wc -l`, 1)
+	cmake --build $(BUILD_DIR) --config Release --parallel $(nproc)
 
 override_dh_auto_install:
 	cmake --install $(BUILD_DIR) --config Release \

@@ -37,6 +37,10 @@ function_config()
         fi
         ln -s ${INSTALL_ROOT}/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/org.Rabbit.SerialPortAssistant.png
     fi
+    if [ ! -f /usr/bin/serialportassistant ]; then
+        ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant
+    fi
+
     #echo "${INSTALL_ROOT}/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
     #echo "${INSTALL_ROOT}/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
     #export QT_VERSION_DIR=

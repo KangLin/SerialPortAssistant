@@ -3,14 +3,10 @@
 # https://specifications.freedesktop.org/desktop-entry-spec/latest/
 [Desktop Entry]
 Type=Application
-Name=Serial Port Assistant
-GenericName=Serial Port Assistant
-Comment=Serial Port Assistant
-Name[zh_CN]=串口助手
-GenericName[zh_CN]=串口助手
-Comment[zh_CN]=串口助手
+
 Icon=org.Rabbit.SerialPortAssistant
-Exec=/opt/SerialPortAssistant/bin/SerialPortAssistant.sh
+Exec=SerialPortAssistant
+Path=@CMAKE_INSTALL_PREFIX@/bin
 Terminal=false
 StartupNotify=true
 
@@ -20,3 +16,15 @@ Categories=Utility;Development;Debugger
 # https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/
 # https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/
 MimeType=application/octet-stream;text/plain;
+
+Name=Serial Port Assistant
+GenericName=Serial Port Assistant
+Comment=Serial Port Assistant
+
+Name[zh_CN]=串口助手
+GenericName[zh_CN]=串口助手
+Comment[zh_CN]=串口助手
+
+Name[zh_TW]=串口助手
+GenericName[zh_TW]=串口助手
+Comment[zh_TW]=串口助手
