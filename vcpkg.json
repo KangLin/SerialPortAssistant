@@ -5,6 +5,7 @@
   "homepage": "https://github.com/KangLin/SerialPortAssistant",
 
   "dependencies": [
-    "openssl"
+    "openssl",
+    "cmark"
   ]
 }

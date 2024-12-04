@@ -10,7 +10,8 @@
 
   "builtin-baseline": "9259a0719d94c402aae2ab7975bc096afdec15df",
   "overrides": [
-      { "name": "openssl", "version-string": "1.1.1n" }
+      { "name": "openssl", "version-string": "1.1.1n" },
+      { "name": "cmark", "version-string": "0.30.1" }
    ]
 
 }
