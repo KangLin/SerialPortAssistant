@@ -1,5 +1,18 @@
-serialportassistant (0.5.26) unstable; urgency=medium
+serialportassistant (0.5.27) stable; urgency=medium
 
-  * New upstream version 0.5.26
+    * Modify change log
+    * Modify snap
+    * vcpkg: add cmark
+    * Modify build_debpackage.sh
+    * Merge pull request #23 from KangLin/develop
+    * Fix typo
+    * CI: actions/upload-artifact@v4
+    * Modify README
+    * CI: update qt version
+    * SNAP: Add snap/snapcraft.yaml
+    * Modify README
+    * Modify debian package
+    * CI: modify android.yml
 
- -- Kang Lin <kl222@126.com>  Mon, 17 Jun 2024 16:09:54 +0800
+ -- Kang Lin <kl222@126.com>  Fri, 06 Dec 2024 14:37:28 +0800
+
