@@ -1,6 +1,7 @@
 - Version: v0.5.27
   - Add snap
   - Greater than Android 9
+  - Use [RabbitCommon v2.3.0](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.0)
 
 - Version: v0.5.26
   - Modify SetStatusInfo the default color

@@ -1,6 +1,7 @@
 - 版本: v0.5.27
   - 增加 snap
   - 大于 Android 9
+  - 使用 [RabbitCommon v2.3.0](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.0)
 
 - 版本: v0.5.26
   - 修改 SetStatusInfo 默认颜色
