@@ -14,5 +14,5 @@ serialportassistant (0.5.27) stable; urgency=medium
     * Modify debian package
     * CI: modify android.yml
 
- -- Kang Lin <kl222@126.com>  Fri, 06 Dec 2024 14:37:28 +0800
+ -- Kang Lin <kl222@126.com>  Fri, 06 Dec 2024 15:24:34 +0800
 
