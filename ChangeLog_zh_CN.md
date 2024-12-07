@@ -1,3 +1,6 @@
+- 版本: v0.5.28
+  - 使用 [RabbitCommon v2.3.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.1)
+
 - 版本: v0.5.27
   - 增加 snap
   - 大于 Android 9

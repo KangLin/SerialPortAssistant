@@ -1,3 +1,6 @@
+- Version: v0.5.28
+  - Use [RabbitCommon v2.3.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.1)
+
 - Version: v0.5.27
   - Add snap
   - Greater than Android 9

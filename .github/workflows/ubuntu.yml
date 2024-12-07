@@ -26,7 +26,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_ubuntu_${{matrix.BUILD_TYPE}}
-      SerialPortAssistant_VERSION: 0.5.27
+      SerialPortAssistant_VERSION: 0.5.28
       artifact_name: build_ubuntu
 
     # Map the job outputs to step outputs
