@@ -60,23 +60,23 @@
 - 安装说明：
   - ubuntu
 
-    [serialportassistant_0.5.27_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/serialportassistant_0.5.27_amd64.deb)
+    [serialportassistant_0.5.28_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/serialportassistant_0.5.28_amd64.deb)
 
-        sudo apt install ./serialportassistant_0.5.27_amd64.deb
+        sudo apt install ./serialportassistant_0.5.28_amd64.deb
         # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-        # sudo dpkg -i serialportassistant_0.5.27_amd64.deb
+        # sudo dpkg -i serialportassistant_0.5.28_amd64.deb
         # sudo apt-get install -f # Install dependencies
 
   - Windows
     - Windows xp
-      - [SerialPortAssistant_v0.5.27_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/SerialPortAssistant_v0.5.27_windows_xp_x86_Setup.exe)
+      - [SerialPortAssistant_v0.5.28_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_windows_xp_x86_Setup.exe)
     - Windows 7 及以后
-      - [SerialPortAssistant_v0.5.27_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/SerialPortAssistant_v0.5.27_win32_msvc2017_qt5.12.12_Setup.exe)
-      - [SerialPortAssistant_v0.5.27_win64_msvc2022_64_qt6.8.1_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/SerialPortAssistant_v0.5.27_win64_msvc2022_64_qt6.8.1_Setup.exe)
+      - [SerialPortAssistant_v0.5.28_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_win32_msvc2017_qt5.12.12_Setup.exe)
+      - [SerialPortAssistant_v0.5.28_win64_msvc2022_64_qt6.8.1_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_win64_msvc2022_64_qt6.8.1_Setup.exe)
 
   - Andoird 9 及以后
-    - [SerialPortAssistant_v0.5.27_android_arm64_v8a_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/SerialPortAssistant_v0.5.27_android_arm64_v8a_qt6.8.1_Release.apk)
-    - [SerialPortAssistant_v0.5.27_android_x86_64_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.27/SerialPortAssistant_v0.5.27_android_x86_64_qt6.8.1_Release.apk)
+    - [SerialPortAssistant_v0.5.28_android_arm64_v8a_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_android_arm64_v8a_qt6.8.1_Release.apk)
+    - [SerialPortAssistant_v0.5.28_android_x86_64_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_android_x86_64_qt6.8.1_Release.apk)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

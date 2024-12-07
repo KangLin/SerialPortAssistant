@@ -1,4 +1,4 @@
-version: 'v0.5.27.{build}'
+version: 'v0.5.28.{build}'
 
 cache:
   - ..\other_source
@@ -6,7 +6,7 @@ cache:
 # https://www.appveyor.com/docs/build-cache/#cleaning-up-cache
 
 environment:
-  SerialPortAssistant_VERSION: "v0.5.27"
+  SerialPortAssistant_VERSION: "v0.5.28"
   STOREPASS:
     secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
   QT_USER:
