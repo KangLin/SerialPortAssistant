@@ -99,11 +99,11 @@ jobs:
             -DBUILD_FREERDP=ON ^
             -DCMAKE_PREFIX_PATH=${{env.INSTALL_DIR}}
           cmake --build . --config ${{ matrix.BUILD_TYPE }}
-          ;cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
-          ;copy /Y C:\msys64\mingw64\bin\*.dll install\bin
-          ;copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
-          ;copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
-          ;makensis ${{github.workspace}}\build\Install.nsi
+          cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
+          copy /Y C:\msys64\mingw64\bin\*.dll install\bin
+          copy /Y ${{env.INSTALL_DIR}}\bin\*.dll install\bin
+          copy /Y ${{env.INSTALL_DIR}}\lib\*.dll install\bin
+          makensis ${{github.workspace}}\build\Install.nsi
 
       - name: update artifact
         if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
