@@ -88,11 +88,16 @@ Author: Kang Lin (kl222@126.com)
 
 If you are satisfied, you can donate to me
 
-[![donation](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation")](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png "donation") 
+[![donation](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute_en.png "donation")](https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute_en.png "donation") 
 
 If it cannot be displayed, please open:
 - https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 - https://sourceforge.net/p/rabbitcommon/code/ci/master/tree/Src/Resource/image/Contribute.png
+
+Bitcoin:
+
+- Address: bc1qvlmsp9agt035h7kue0v8eae4wcjhj93zdzmuqp
+- [![bitcoin](Docs/bitcoin.png "bitcoin")](docs/Image/Screenshot/bitcoin.png "bitcoin")
 
 ## Developer  
 ### Dependence  
