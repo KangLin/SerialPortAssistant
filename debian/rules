@@ -17,17 +17,6 @@
 %:
 	dh $@
 
-ifdef WITH_CMARK_GFM
-    PARAS += WITH_CMARK_GFM=$(WITH_CMARK_GFM)
-    ifdef cmark-gfm_DIR
-        PARAS += cmark-gfm_DIR=$(cmark-gfm_DIR)
-    endif
-endif
-
-ifdef INSTALL_DIR
-    LIB_PARAS += $(INSTALL_DIR)/lib
-endif
-
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 BUILD_DIR = "build_$(DEB_HOST_MULTIARCH)"
 PACKAGE_DIR = "debian/serialportassistant"
@@ -55,9 +44,6 @@ override_dh_auto_install:
 	cmake --install $(BUILD_DIR) --config Release \
 		--component Application \
 		--prefix $(PACKAGE_DIR)/opt/SerialPortAssistant
-
-#override_dh_shlibdeps:
-#	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -l`pwd`/$(BUILD_DIR)/lib:$(LIB_PARAS)
 
 override_dh_builddeb:
 	dh_builddeb --package=serialportassistant -P$(PACKAGE_DIR)

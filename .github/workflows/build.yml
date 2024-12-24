@@ -81,6 +81,8 @@ jobs:
           echo "[:us: Change log](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog.md)" >> ${{github.workspace}}/Release.md
           echo "" >> ${{github.workspace}}/Release.md
           echo "File checksum:" >> ${{github.workspace}}/Release.md
+          echo "|File|Checksum(md5)|" >> ${{github.workspace}}/Release.md
+          echo "| :- |    :-       |" >> ${{github.workspace}}/Release.md
           cd ${{ env.artifact_path }}
           for file in *
           do
@@ -88,7 +90,7 @@ jobs:
               if [ -f $file ]; then
                   if [ "${file##*.}" != "xml" ] && [ "${file##*.}" != "json" ]; then
                       md5sum $file > $file.md5sum
-                      cat $file.md5sum >> ${{github.workspace}}/Release.md
+                      awk '{print  "|", $2, "|", $1, "|"}' ${file}.md5sum >> ${{github.workspace}}/Release.md
                   fi
               else
                  rm -fr $file
