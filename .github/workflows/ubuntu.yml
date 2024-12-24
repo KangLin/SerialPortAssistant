@@ -16,7 +16,7 @@ jobs:
   build_ubuntu:
     strategy:
       matrix:
-        BUILD_TYPE: [Release]
+        BUILD_TYPE: [Release, Debug]
 
     # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
     # See: https://github.com/actions/runner-images/
@@ -48,14 +48,14 @@ jobs:
 
       - name: Install apt packages
         run: |
-          sudo apt update
-          sudo apt upgrade
+          sudo apt update -y
+          sudo apt upgrade -y
           sudo apt install -y -q cmake build-essential xvfb xpra \
               libglu1-mesa-dev libpulse-mainloop-glib0 \
               cmake debhelper fakeroot \
               qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
               qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
-              qt6-webengine-dev qt6-webengine-dev-tools libqt6serialport6-dev \
+              libqt6serialport6-dev \
               libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
               libx11-dev libxfixes-dev \
               libcmark-dev cmark
@@ -75,11 +75,10 @@ jobs:
 
       - name: build SerialPortAssistant
         env:
-          RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
-          PKG_CONFIG_PATH: ${{env.INSTALL_DIR}}/lib/pkgconfig
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
           cd ${{github.workspace}}
-          ./build_debpackage.sh /usr/lib/`uname -a`-linux-gnu/cmake/Qt6
+          ./build_debpackage.sh
           cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
 
       - name: update configure file

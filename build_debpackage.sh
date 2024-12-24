@@ -1,26 +1,29 @@
 #!/bin/bash
 
+function help()
+{
+    echo "Usage: $0 QT_ROOT RabbitCommon_ROOT"
+}
+
 if [ -n "$1" -a -z "$QT_ROOT" ]; then
 	QT_ROOT=$1
 fi
 
-if [ -z "$QT_ROOT" ]; then
-	echo "$0 QT_ROOT RabbitCommon_DIR"
-    exit -1
+if [ -n "$QT_ROOT" ]; then
+    export QT_ROOT=$QT_ROOT
 fi
 
-if [ -n "$2" -a -z "$RabbitCommon_DIR" ]; then
-	RabbitCommon_DIR=$2
+if [ -n "$2" -a -z "$RabbitCommon_ROOT" ]; then
+	RabbitCommon_ROOT=$2
 fi
 
-if [ -z "$RabbitCommon_DIR" ]; then
-	RabbitCommon_DIR=`pwd`/../RabbitCommon
+if [ -z "$RabbitCommon_ROOT" ]; then
+	RabbitCommon_ROOT=`pwd`/../RabbitCommon
 fi
 
-if [ ! -d "$RabbitCommon_DIR" ]; then
-	echo "$0 QT_ROOT RabbitCommon_DIR"
+if [ -d "$RabbitCommon_ROOT" ]; then
+    export RabbitCommon_ROOT=$RabbitCommon_ROOT
 fi
-
 
 #fakeroot debian/rules binary
 
@@ -64,4 +67,3 @@ dpkg-buildpackage -us -uc -b -d
 #dpkg-buildpackage -us -uc 
 
 #dpkg-buildpackage
-
