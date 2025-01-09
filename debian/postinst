@@ -35,7 +35,7 @@ function_config()
         if [ ! -d /usr/share/pixmaps ]; then
             mkdir -p /usr/share/pixmaps
         fi
-        ln -s ${INSTALL_ROOT}/share/pixmaps/SerialPortAssistant.png /usr/share/pixmaps/org.Rabbit.SerialPortAssistant.png
+        ln -s ${INSTALL_ROOT}/share/pixmaps/org.Rabbit.SerialPortAssistant.png /usr/share/pixmaps/org.Rabbit.SerialPortAssistant.png
     fi
     if [ ! -f /usr/bin/serialportassistant ]; then
         ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant

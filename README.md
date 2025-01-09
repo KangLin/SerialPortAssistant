@@ -80,7 +80,7 @@ Author: Kang Lin (kl222@126.com)
       - [SerialPortAssistant_v0.5.28_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_win32_msvc2017_qt5.12.12_Setup.exe)
       - [SerialPortAssistant_v0.5.28_win64_msvc2022_64_qt6.8.1_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_win64_msvc2022_64_qt6.8.1_Setup.exe)
 
-  - Andoird 9 or later
+  - Android 9 or later
     - [SerialPortAssistant_v0.5.28_android_arm64_v8a_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_android_arm64_v8a_qt6.8.1_Release.apk)
     - [SerialPortAssistant_v0.5.28_android_x86_64_qt6.8.1_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.28/SerialPortAssistant_v0.5.28_android_x86_64_qt6.8.1_Release.apk)
 

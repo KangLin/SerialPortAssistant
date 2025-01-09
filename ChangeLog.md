@@ -1,5 +1,9 @@
 ## Change log
 
+- Version: v0.5.29
+  - Use [RabbitCommon v2.3.2](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.2)
+  - build AppImage
+
 - Version: v0.5.28
   - Use [RabbitCommon v2.3.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.1)
 

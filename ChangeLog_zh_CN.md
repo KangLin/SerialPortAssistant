@@ -1,5 +1,9 @@
 ## 修改日志
 
+- 版本: v0.5.29
+  - 使用 [RabbitCommon v2.3.2](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.2)
+  - 建立 AppImage
+
 - 版本: v0.5.28
   - 使用 [RabbitCommon v2.3.1](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.1)
 
