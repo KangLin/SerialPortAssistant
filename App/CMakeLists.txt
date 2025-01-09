@@ -84,5 +84,6 @@ if(UNIX AND NOT ANDROID)
             COMPONENT Application)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
         DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps"
-            COMPONENT Application)
+            COMPONENT Application
+        RENAME org.Rabbit.${PROJECT_NAME}.png)
 endif()

@@ -28,6 +28,8 @@ PACKAGE_DIR = "debian/serialportassistant"
 override_dh_auto_configure:
 	# See: man dh_auto_configure an debhelper
 	dh_auto_configure -B$(BUILD_DIR) -- \
+        -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant \
+        -DRabbitCommon_ROOT=${RabbitCommon_ROOT} \
 	    -DCMAKE_BUILD_TYPE=Release \
 		-DCMARK_SHARED=OFF \
         -DCMARK_TESTS=OFF \

@@ -1,0 +1,169 @@
+name: appimage
+
+on:
+  workflow_call:
+    outputs:
+      name:
+        description: "The artifact name"
+        value: ${{ jobs.build_appimage.outputs.name }}
+
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+  build_appimage:
+    strategy:
+      matrix:
+        BUILD_TYPE: [Release]
+        qt_version: [6.8.1]
+        qt_arch: [linux_gcc_64]
+
+    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: https://github.com/actions/runner-images/
+    runs-on: ubuntu-24.04
+
+    env:
+      BUILD_TYPE:  ${{matrix.BUILD_TYPE}}
+      SOURCE_DIR:  ${{github.workspace}}/.cache/source
+      TOOSL_DIR:   ${{github.workspace}}/.cache/tools
+      INSTALL_DIR: ${{github.workspace}}/.cache/install
+      SerialPortAssistant_VERSION: v0.0.31
+      artifact_name: build_appimage
+
+    # Map the job outputs to step outputs
+    outputs:
+      name: ${{ env.artifact_name }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Make directories
+        run: |
+          cmake -E make_directory ${{github.workspace}}/build
+          cmake -E make_directory ${{env.SOURCE_DIR}}
+          cmake -E make_directory ${{env.TOOSL_DIR}}
+          cmake -E make_directory ${{env.INSTALL_DIR}}
+
+      - name: git clone RabbitCommon
+        working-directory: ${{env.SOURCE_DIR}}
+        run: |
+            git clone https://github.com/KangLin/RabbitCommon.git
+
+      - name: Install apt packages
+        run: |
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
+          sudo apt install -y -q cmake build-essential xvfb xpra \
+              libgl1-mesa-dev libglx-dev libglu1-mesa-dev libvulkan-dev \
+              cmake debhelper fakeroot graphviz \
+              libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
+              libx11-dev libxfixes-dev libxcb-randr0-dev libxcb-shm0-dev \
+              libxcb-xinerama0-dev libxcb-composite0-dev libxcomposite-dev \
+              libxinerama-dev libxcb1-dev libx11-xcb-dev libxcb-xfixes0-dev \
+              libxcb-cursor-dev libxcb-xkb-dev libxcb-keysyms1-dev  \
+              libxcb-* libxcb-cursor0 \
+              libwayland-dev libwayland-egl-backend-dev waylandpp-dev \
+              libxkbcommon-dev mesa-common-dev \
+              libcmark-dev cmark
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          dir: '${{env.TOOSL_DIR}}/qt'
+          aqtversion: '==3.1.*'
+          version: ${{matrix.qt_version}}
+          host: 'linux'
+          target: 'desktop'
+          arch: ${{matrix.qt_arch}}
+          # See: https://ddalcino.github.io/aqt-list-server/
+          modules: 'qtscxml qtmultimedia qtimageformats qtserialport qt5compat'
+          cache: true
+          cache-key-prefix: cached-qt
+
+      - name: Cache installed
+        uses: actions/cache@v3
+        id: cache-installed
+        with:
+          path: |
+            ${{env.INSTALL_DIR}}
+            ${{env.TOOSL_DIR}}
+          key: install_ubuntu_${{matrix.BUILD_TYPE}}
+
+      - name: linuxdeploy
+        run: |
+            cd ${{env.TOOSL_DIR}}
+            if [ ! -f linuxdeploy-`uname -m`.AppImage ]; then
+                wget https://github.com/linuxdeploy/linuxdeploy/releases/download/2.0.0-alpha-1-20241106/linuxdeploy-`uname -m`.AppImage
+                chmod u+x linuxdeploy-`uname -m`.AppImage
+            fi
+            if [ ! -f linuxdeploy-plugin-qt-`uname -m`.AppImage ]; then
+                wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/2.0.0-alpha-1-20241106/linuxdeploy-plugin-qt-`uname -m`.AppImage
+                chmod u+x linuxdeploy-plugin-qt-`uname -m`.AppImage
+            fi
+
+      - name: build appimage
+        working-directory: ${{github.workspace}}/build
+        env:
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
+        run: |
+          cmake ${{github.workspace}} \
+              -DCMARK_SHARED=OFF \
+              -DCMARK_TESTS=OFF \
+              -DCMARK_STATIC=ON \
+              -DCMAKE_BUILD_TYPE=${{ matrix.BUILD_TYPE }} \
+              -DCMAKE_INSTALL_PREFIX=/usr
+          cmake --build . --parallel $(nproc)
+          cmake --install . --config Release --component DependLibraries --prefix AppDir/usr
+          cmake --install . --config Release --component Runtime --prefix AppDir/usr
+          cmake --install . --config Release --component Application --prefix AppDir/usr
+          # See: https://github.com/linuxdeploy/linuxdeploy-plugin-qt
+          export QMAKE=$Qt6_DIR/bin/qmake
+          export EXTRA_PLATFORM_PLUGINS="libqxcb.so"
+          # Icons from theme are not displayed in QtWidgets Application: https://github.com/linuxdeploy/linuxdeploy-plugin-qt/issues/17
+          export EXTRA_QT_MODULES="svg"
+          ${{env.TOOSL_DIR}}/linuxdeploy-`uname -m`.AppImage --appdir=AppDir -v0 \
+              --deploy-deps-only=AppDir/usr/lib/`uname -m`-linux-gnu \
+              --plugin qt \
+              --output appimage
+          mv Serial_Port_Assistant-`uname -m`.AppImage ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage
+          chmod a+x ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage
+          md5sum ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage > ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage.md5sum
+
+      - name: update configure file
+        if: ${{ matrix.BUILD_TYPE == 'Release'}}
+        #continue-on-error: true
+        run: |
+          #sudo apt update -y -qq
+          #sudo apt-get install -y -qq xvfb xpra
+          sudo Xvfb :99 -ac &
+          export DISPLAY=:99.0
+          echo "Update update_linux.json ......"
+          export QT_XCB_GL_INTEGRATION=none
+          export QT_DEBUG_PLUGINS=1
+          ARCH=`uname -m`
+          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage.md5sum|awk '{print $1}'`
+          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage: ${MD5SUM}"
+          #echo "Enable core dump ......"
+          #ulimit -c unlimited
+          #echo "# sudo sysctl -w kernel.core_pattern=core"
+          #sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
+          echo "Generate update configure file ......"
+          ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage \
+            -f "${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json" \
+            --foc 1 \
+            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage" \
+            --md5 "${MD5SUM}" \
+            -m "v${{env.SerialPortAssistant_VERSION}}"
+
+      - name: Update artifact
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.artifact_name }}
+          path: |
+            ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_*.AppImage
+            ${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json
