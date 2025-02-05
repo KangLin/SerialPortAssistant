@@ -1,6 +1,13 @@
-serialportassistant (0.5.28) stable; urgency=medium
+serialportassistant (0.5.29) stable; urgency=medium
 
-    * Modify README
+    * CI: update qt6.8.1 to qt6.8.2
+    * CI: modify ci
+    * CMake: replace RabbitCommon_DIR with RabbitCommon_ROOT
+    * CMake: Add RabbitCommon dependencies
+    * CI: add build appimage
+    * CI: modify build.yml
+    * Donate: add bitcoin
+    * CI: modify mingw
 
- -- Kang Lin <kl222@126.com>  Sat, 07 Dec 2024 11:29:01 +0800
+ -- Kang Lin <kl222@126.com>  Wed, 05 Feb 2025 16:04:29 +0800
 
