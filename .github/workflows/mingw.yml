@@ -82,7 +82,7 @@ jobs:
       - name: build SerialPortAssistant
         working-directory: ${{github.workspace}}\build
         env:
-          RabbitCommon_DIR: ${{env.SOURCE_DIR}}\RabbitCommon
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}\RabbitCommon
           MSYSTEM: MINGW64
           PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin
           PKG_CONFIG_PATH: ${{env.INSTALL_DIR}}/lib/pkgconfig

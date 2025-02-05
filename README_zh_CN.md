@@ -97,7 +97,7 @@
 
 - [Qt (LGPL v2.1)](http://qt.io/)
 - RabbitCommon: https://github.com/KangLin/RabbitCommon  
-  RabbitCommon 下载到与本项目同级目录中。如果不在同级目录，则需要指定环境变量： `RabbitCommon_DIR`
+  RabbitCommon 下载到与本项目同级目录中。如果不在同级目录，则需要指定环境变量： `RabbitCommon_ROOT`
 
       git clone https://github.com/KangLin/RabbitCommon.git
 
@@ -113,7 +113,7 @@
 
 - 用 QtCreator 编译
   * 直接用 QtCreator 打开工程文件 [CMakeLists.txt](CMakeLists.txt)
-  * 如果 RabbitCommon 不在本项目同级目录中，设置参数 `RabbitCommon_DIR` 指定其位置。 
+  * 如果 RabbitCommon 不在本项目同级目录中，设置参数 `RabbitCommon_ROOT` 指定其位置。 
   * 直接编译就可以生成程序
 - 用命令行编译
   * 在同一目录中下载源码与依赖
@@ -127,7 +127,7 @@
         mkdir build
         cd build
         # cmake 配置
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_DIR=...]
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_ROOT=...]
         # 编译
         cmake --build . --config Release --target install
         cd install  # 程序安装在 install/bin 目录下

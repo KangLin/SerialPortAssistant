@@ -93,7 +93,7 @@ jobs:
       - name: build SerialPortAssistant
         working-directory: ${{github.workspace}}/build
         env:
-          RabbitCommon_DIR: ${{env.SOURCE_DIR}}/RabbitCommon
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
           cmake ${{github.workspace}} \
               -DCMARK_SHARED=OFF \

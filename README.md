@@ -105,7 +105,7 @@ Bitcoin:
 + [Qt (LGPL v2.1)](http://qt.io/)
 + RabbitCommon: https://github.com/KangLin/RabbitCommon  
   It can be downloaded to the same directory of the project.
-  If it is a different directory, set the environment variable `RabbitCommon_DIR`
+  If it is a different directory, set the environment variable `RabbitCommon_ROOT`
 
         git clone https://github.com/KangLin/RabbitCommon.git
 
@@ -118,7 +118,7 @@ Bitcoin:
 - Compiled with QtCreator
   + Open the project file [CMakeLists.txt](CMakeLists.txt) with QtCreator
   + The RabbitCommon can be downloaded to the same directory of the project.
-    If it is a different directory, Set the parameter `RabbitCommon_DIR`
+    If it is a different directory, Set the parameter `RabbitCommon_ROOT`
   + Direct compilation can generate programs
 - Compile with the command line
   + Download source code and the deplendence in same directory
@@ -132,7 +132,7 @@ Bitcoin:
         mkdir build
         cd build
         # cmake configure
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_DIR=...]
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=`pwd`/install [-DRabbitCommon_ROOT=...]
         # compiling
         cmake --build . --config Release --target install
         cd install  # The program is installed in the install/bin directory
