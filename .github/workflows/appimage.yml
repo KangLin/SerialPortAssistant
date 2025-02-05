@@ -67,7 +67,7 @@ jobs:
               libxcb-* libxcb-cursor0 \
               libwayland-dev libwayland-egl-backend-dev waylandpp-dev \
               libxkbcommon-dev mesa-common-dev \
-              libcmark-dev cmark
+              libcmark-dev cmark libfuse-dev libfuse3-dev
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
