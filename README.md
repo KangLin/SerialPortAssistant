@@ -30,7 +30,6 @@ Author: Kang Lin (kl222@126.com)
     - https://gitlab.com/kl222/SerialPortAssistant
     - https://sourceforge.net/projects/serialportassistant/
     - https://gitee.com/kl222/SerialPortAssistant
-    - https://invent.kde.org/kanglin/SerialPortAssistant
     - https://bitbucket.org/kl222/serialportassistant
 - [Project home](http://kanglin.github.io/SerialPortAssistant)
 - This project is a cross-platform serial assistant.
@@ -64,7 +63,7 @@ Author: Kang Lin (kl222@126.com)
   - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 
 - Install
-  - ubuntu
+  - ubuntu, debian
     - [serialportassistant_0.5.29_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/serialportassistant_0.5.29_amd64.deb)
 
           sudo apt install ./serialportassistant_0.5.29_amd64.deb
@@ -72,8 +71,12 @@ Author: Kang Lin (kl222@126.com)
           # sudo dpkg -i serialportassistant_0.5.29_amd64.deb
           # sudo apt-get install -f # Install dependencies
 
-  - AppImage
+  - Other linux(AppImage)
     - [SerialPortAssistant_v0.5.29_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_x86_64.AppImage)
+    
+          sudo chmod a+x SerialPortAssistant_v0.5.29_x86_64.AppImage
+          sudo ./SerialPortAssistant_v0.5.29_x86_64.AppImage
+
   - Windows
     - Windows xp
       - [SerialPortAssistant_v0.5.29_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_windows_xp_x86_Setup.exe)
@@ -162,6 +165,10 @@ Bitcoin:
               qtbase5-dev qtbase5-dev-tools qttranslations5-l10n \
               libqt5scxml5-dev libqt5svg5-dev libqt5serialport5-dev \
               qtwebengine5-dev qtwebengine5-dev-tools qtwebengine5-private-dev
+
+- build_appimage.sh
+
+  build AppImage. See: https://github.com/linuxdeploy/linuxdeploy/
 
 - deploy.sh: This script is used to generate new release version numbers and tag.
   Used only by the program publisher.
