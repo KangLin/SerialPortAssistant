@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author: Kang Lin <kl222@126.com>
 
 set -e
 
@@ -22,8 +23,7 @@ if [ -n "$1" ]; then
     echo "Please check the follow list:"
     echo "    - Test is ok ?"
     echo "    - Translation is ok ?"
-    echo "    - Setup file is ok ?"
-    echo "    - Update_*.xml is ok ?"
+    echo "    - Change log is ok ?"
     
     read -t 30 -p "Be sure to input Y, not input N: " INPUT
     if [ "$INPUT" != "Y" -a "$INPUT" != "y" ]; then
@@ -51,6 +51,7 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: \"${VERSIO
 #sed -i "s/^\  - export VERSION=.*/\  - export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
+sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/appimage.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml

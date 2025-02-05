@@ -34,7 +34,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOSL_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.28
+      SerialPortAssistant_VERSION: v0.5.29
       VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
       VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
       VCPKG_DEFAULT_HOST_TRIPLET: x64-linux
