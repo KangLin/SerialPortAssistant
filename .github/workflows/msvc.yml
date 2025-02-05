@@ -14,9 +14,9 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
-        qt_version: [6.8.1, 5.15.2, 5.12.12]
+        qt_version: [6.8.2, 5.15.2, 5.12.12]
         include:
-          - qt_version: 6.8.1
+          - qt_version: 6.8.2
             VCPKG_TARGET_TRIPLET: x64-windows
             VCPKG_PLATFORM_TOOLSET: v143
             qt_arch: win64_msvc2022_64
@@ -142,7 +142,7 @@ jobs:
           copy /Y SerialPortAssistant_Setup_${{env.SerialPortAssistant_VERSION}}.exe SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe
 
       - name: Update configure file
-        if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '6.8.1' }}
+        if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '6.8.2' }}
         working-directory: ${{github.workspace}}\build
         run: |
           .\install\bin\SerialPortAssistant.exe ^
