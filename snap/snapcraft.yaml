@@ -77,7 +77,7 @@ parts:
       - zlib1g
     cmake-parameters:
       # See: https://snapcraft.io/docs/parts-environment-variables
-      - -DRabbitCommon_DIR=$CRAFT_STAGE/RabbitCommon/
+      - -DRabbitCommon_ROOT=$CRAFT_STAGE/RabbitCommon/
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant
     # See: https://snapcraft.io/docs/overrides
