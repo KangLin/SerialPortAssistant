@@ -18,11 +18,6 @@ if [ ! -f /usr/share/applications/org.Rabbit.${PROJECT_NAME}.desktop ]; then
 	EXIT_CODE=$[EXIT_CODE+1]
 fi
 
-if [ ! -f /opt/${PROJECT_NAME}/share/pixmaps/${PROJECT_NAME}.png ]; then
-    echo "There are not /opt/${PROJECT_NAME}/share/pixmaps/${PROJECT_NAME}.png"
-	EXIT_CODE=$[EXIT_CODE+1]
-fi
-
 if [ ! -f /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png ]; then
     echo "There are not /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png"
     EXIT_CODE=$[EXIT_CODE+1]

@@ -1,4 +1,4 @@
-# Author：Kang Lin <kl222@126.com>
+# Author: Kang Lin <kl222@126.com>
 
 name: build_ubuntu
 
@@ -54,7 +54,7 @@ jobs:
               libglu1-mesa-dev libpulse-mainloop-glib0 \
               cmake debhelper fakeroot \
               qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
-              qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev \
+              qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev libqt6svg6-dev \
               libqt6serialport6-dev \
               libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
               libx11-dev libxfixes-dev \
