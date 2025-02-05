@@ -32,6 +32,19 @@ IF(NOT SerialPortAssistant_VERSION)
 ENDIF()
 message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
 
+set(APP_QT_COMPONENTS Core Gui Widgets Network Svg Xml)
+if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
+    list(APPEND APP_QT_COMPONENTS StateMachine)
+endif()
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${APP_QT_COMPONENTS})
+if(Qt${QT_VERSION_MAJOR}_FOUND)
+    FOREACH(_COMPONENT ${APP_QT_COMPONENTS})
+        list(APPEND QT_LIBRARIES Qt${QT_VERSION_MAJOR}::${_COMPONENT})
+    ENDFOREACH()
+else()
+    message(FATAL_ERROR "Qt${QT_VERSION_MAJOR} don't found")
+endif()
+
 ADD_TARGET(NAME ${PROJECT_NAME}
     ISEXE
     ISWINDOWS
