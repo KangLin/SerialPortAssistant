@@ -150,7 +150,7 @@ jobs:
                --foc 1 ^
                -p ${{github.workspace}}\build\SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ^
                -m "${{env.SerialPortAssistant_VERSION}}" ^
-               -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe"
+               -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe ;https://sourceforge.net/projects/rabbitSerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{ matrix.qt_arch}}_qt${{matrix.qt_version}}_Setup.exe?viasf=1"
 
       - name: Update artifact
         if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version != '5.15.2' }}
