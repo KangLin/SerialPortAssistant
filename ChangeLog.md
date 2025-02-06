@@ -1,4 +1,6 @@
 ## Change log
+- Version: v0.5.30
+  - Remove donate bitcoin
 
 - Version: v0.5.29
   - Use [RabbitCommon v2.3.2](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.2)

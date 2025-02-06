@@ -1,4 +1,6 @@
 ## 修改日志
+- 版本: v0.5.30
+  - 移除捐赠比特币
 
 - 版本: v0.5.29
   - 使用 [RabbitCommon v2.3.2](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.2)

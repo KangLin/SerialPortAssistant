@@ -99,11 +99,6 @@ If it cannot be displayed, please open:
 - https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 - https://sourceforge.net/p/rabbitcommon/code/ci/master/tree/Src/Resource/image/Contribute.png
 
-Bitcoin:
-
-- Address: bc1qvlmsp9agt035h7kue0v8eae4wcjhj93zdzmuqp
-- [![bitcoin](Docs/bitcoin.png "bitcoin")](docs/Image/Screenshot/bitcoin.png "bitcoin")
-
 ## Developer  
 ### Dependence  
 
