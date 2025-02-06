@@ -155,7 +155,7 @@ jobs:
             -f "${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json" \
             --foc 1 \
             --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage \
-            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage;https://sourceforge.net/projects/SerialPortAssistant/files/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage" \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage?viasf=1" \
             --md5 "${MD5SUM}" \
             -m "v${{env.SerialPortAssistant_VERSION}}"
 
