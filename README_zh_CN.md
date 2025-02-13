@@ -52,36 +52,36 @@
 
 ### 下载
 
-- 从以下位置下载：
-  - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-  - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
-
 - 安装说明：
   - ubuntu、debian
-    -  [serialportassistant_0.5.29_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/serialportassistant_0.5.29_amd64.deb)
+    -  [serialportassistant_0.5.30_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/serialportassistant_0.5.30_amd64.deb)
 
-           sudo apt install ./serialportassistant_0.5.29_amd64.deb
+           sudo apt install ./serialportassistant_0.5.30_amd64.deb
            # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-           # sudo dpkg -i serialportassistant_0.5.29_amd64.deb
+           # sudo dpkg -i serialportassistant_0.5.30_amd64.deb
            # sudo apt-get install -f # Install dependencies
         
   - 其它 linux(AppImage)
-    - [SerialPortAssistant_v0.5.29_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_x86_64.AppImage)
+    - [SerialPortAssistant_v0.5.30_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_x86_64.AppImage)
     
-           sudo chmod a+x SerialPortAssistant_v0.5.29_x86_64.AppImage
-           sudo ./SerialPortAssistant_v0.5.29_x86_64.AppImage
+           sudo chmod a+x SerialPortAssistant_v0.5.30_x86_64.AppImage
+           sudo ./SerialPortAssistant_v0.5.30_x86_64.AppImage
 
   - Windows
     - Windows xp
-      - [SerialPortAssistant_v0.5.29_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_windows_xp_x86_Setup.exe)
+      - [SerialPortAssistant_v0.5.30_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_windows_xp_x86_Setup.exe)
     - Windows 7 及以后
-      - [SerialPortAssistant_v0.5.29_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_win32_msvc2017_qt5.12.12_Setup.exe)
+      - [SerialPortAssistant_v0.5.30_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_win32_msvc2017_qt5.12.12_Setup.exe)
     - Windows 10 (1809 及以后)
-      - [SerialPortAssistant_v0.5.29_win64_msvc2022_64_qt6.8.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_win64_msvc2022_64_qt6.8.2_Setup.exe)
+      - [SerialPortAssistant_v0.5.30_win64_msvc2022_64_qt6.8.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_win64_msvc2022_64_qt6.8.2_Setup.exe)
 
   - Android 9 及以后
-    - [SerialPortAssistant_v0.5.29_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_android_arm64_v8a_qt6.8.2_Release.apk)
-    - [SerialPortAssistant_v0.5.29_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.29/SerialPortAssistant_v0.5.29_android_x86_64_qt6.8.2_Release.apk)
+    - [SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk)
+    - [SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk)
+
+  - 所有版本下载位置：
+    - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
+    - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

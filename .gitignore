@@ -1,4 +1,5 @@
 debian/files
+*.AppImage
 *.snap
 *.substvars
 debian/.debhelper/

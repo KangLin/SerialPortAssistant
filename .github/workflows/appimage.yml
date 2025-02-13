@@ -1,3 +1,5 @@
+# Author: Kang Lin <kl222@126.com>
+
 name: appimage
 
 on:
@@ -16,19 +18,27 @@ jobs:
       matrix:
         BUILD_TYPE: [Release]
         qt_version: [6.8.2]
-        qt_arch: [linux_gcc_64]
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+        include:
+          - os: ubuntu-24.04
+            qt_arch: "linux_gcc_64"
+          - os: ubuntu-24.04-arm
+            qt_arch: "linux_gcc_arm64"
 
-    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
+    # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
     # See: https://github.com/actions/runner-images/
-    runs-on: ubuntu-24.04
+    runs-on: ${{matrix.os}}
 
     env:
       BUILD_TYPE:  ${{matrix.BUILD_TYPE}}
+      BUILD_DIR:   ${{github.workspace}}/build
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
-      TOOSL_DIR:   ${{github.workspace}}/.cache/tools
-      INSTALL_DIR: ${{github.workspace}}/.cache/install
-      SerialPortAssistant_VERSION: v0.5.29
+      TOOLS_DIR:   ${{github.workspace}}/.cache/tools
+      INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.os}}_${{matrix.qt_arch}}_${{matrix.BUILD_TYPE}}
       artifact_name: build_appimage
+      qt_modules: 'qtscxml'
+      SerialPortAssistant_VERSION: v0.5.30
 
     # Map the job outputs to step outputs
     outputs:
@@ -38,50 +48,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
 
       - name: Make directories
         run: |
-          cmake -E make_directory ${{github.workspace}}/build
+          cmake -E make_directory ${{env.BUILD_DIR}}
           cmake -E make_directory ${{env.SOURCE_DIR}}
-          cmake -E make_directory ${{env.TOOSL_DIR}}
+          cmake -E make_directory ${{env.TOOLS_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
-
-      - name: git clone RabbitCommon
-        working-directory: ${{env.SOURCE_DIR}}
-        run: |
-            git clone https://github.com/KangLin/RabbitCommon.git
-
-      - name: Install apt packages
-        run: |
-          sudo apt-get update -y
-          sudo apt-get upgrade -y
-          sudo apt install -y -q cmake build-essential xvfb xpra \
-              libgl1-mesa-dev libglx-dev libglu1-mesa-dev libvulkan-dev \
-              cmake debhelper fakeroot graphviz \
-              libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
-              libx11-dev libxfixes-dev libxcb-randr0-dev libxcb-shm0-dev \
-              libxcb-xinerama0-dev libxcb-composite0-dev libxcomposite-dev \
-              libxinerama-dev libxcb1-dev libx11-xcb-dev libxcb-xfixes0-dev \
-              libxcb-cursor-dev libxcb-xkb-dev libxcb-keysyms1-dev  \
-              libxcb-* libxcb-cursor0 \
-              libwayland-dev libwayland-egl-backend-dev waylandpp-dev \
-              libxkbcommon-dev mesa-common-dev \
-              libcmark-dev cmark libfuse-dev libfuse3-dev
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          dir: '${{env.TOOSL_DIR}}/qt'
-          aqtversion: '==3.1.*'
-          version: ${{matrix.qt_version}}
-          host: 'linux'
-          target: 'desktop'
-          arch: ${{matrix.qt_arch}}
-          # See: https://ddalcino.github.io/aqt-list-server/
-          modules: 'qtscxml qtmultimedia qtimageformats qtserialport qt5compat'
-          cache: true
-          cache-key-prefix: cached-qt
 
       - name: Cache installed
         uses: actions/cache@v3
@@ -89,48 +63,80 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-            ${{env.TOOSL_DIR}}
-          key: install_ubuntu_${{matrix.BUILD_TYPE}}
+            ${{env.TOOLS_DIR}}/linuxdeploy-*
+          key: install_appimage
 
-      - name: linuxdeploy
+      - name: git clone RabbitCommon
+        working-directory: ${{env.SOURCE_DIR}}
         run: |
-            cd ${{env.TOOSL_DIR}}
-            if [ ! -f linuxdeploy-`uname -m`.AppImage ]; then
-                wget https://github.com/linuxdeploy/linuxdeploy/releases/download/2.0.0-alpha-1-20241106/linuxdeploy-`uname -m`.AppImage
-                chmod u+x linuxdeploy-`uname -m`.AppImage
-            fi
-            if [ ! -f linuxdeploy-plugin-qt-`uname -m`.AppImage ]; then
-                wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/2.0.0-alpha-1-20241106/linuxdeploy-plugin-qt-`uname -m`.AppImage
-                chmod u+x linuxdeploy-plugin-qt-`uname -m`.AppImage
-            fi
+            git clone https://github.com/KangLin/RabbitCommon.git
+
+      - name: Install base dependency libraries
+        run: |
+          sudo ./Script/build_depend.sh --apt_update --base --default \
+              --install ${{env.INSTALL_DIR}} \
+              --source ${{env.SOURCE_DIR}} \
+              --tools ${{env.TOOLS_DIR}} \
+              --build ${{env.BUILD_DIR}}
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        if: false
+        with:
+          dir: '${{env.TOOLS_DIR}}/qt'
+          version: ${{matrix.qt_version}}
+          target: 'desktop'
+          arch: ${{matrix.qt_arch}}
+          # See: https://ddalcino.github.io/aqt-list-server/
+          modules: ${{env.qt_modules}}
+          cache: true
+          cache-key-prefix: cached-qt_${{matrix.qt_arch}}
 
       - name: build appimage
-        working-directory: ${{github.workspace}}/build
         env:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
-          cmake ${{github.workspace}} \
-              -DCMARK_SHARED=OFF \
-              -DCMARK_TESTS=OFF \
-              -DCMARK_STATIC=ON \
-              -DCMAKE_BUILD_TYPE=${{ matrix.BUILD_TYPE }} \
-              -DCMAKE_INSTALL_PREFIX=/usr
-          cmake --build . --parallel $(nproc)
-          cmake --install . --config Release --component DependLibraries --prefix AppDir/usr
-          cmake --install . --config Release --component Runtime --prefix AppDir/usr
-          cmake --install . --config Release --component Application --prefix AppDir/usr
-          # See: https://github.com/linuxdeploy/linuxdeploy-plugin-qt
-          export QMAKE=$Qt6_DIR/bin/qmake
-          export EXTRA_PLATFORM_PLUGINS="libqxcb.so"
-          # Icons from theme are not displayed in QtWidgets Application: https://github.com/linuxdeploy/linuxdeploy-plugin-qt/issues/17
-          export EXTRA_QT_MODULES="svg"
-          ${{env.TOOSL_DIR}}/linuxdeploy-`uname -m`.AppImage --appdir=AppDir -v0 \
-              --deploy-deps-only=AppDir/usr/lib/`uname -m`-linux-gnu \
-              --plugin qt \
-              --output appimage
-          mv Serial_Port_Assistant-`uname -m`.AppImage ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage
-          chmod a+x ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage
-          md5sum ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage > ../SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage.md5sum
+          export QMAKE=/usr/bin/qmake6
+          ${{github.workspace}}/Script/build_appimage.sh
+          md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage.md5sum
+
+      - name: core dump infomations
+        if: false
+        run: |
+          echo "# ulimit -a"
+          ulimit -a
+          echo "# cat /proc/sys/kernel/core_pattern"
+          cat /proc/sys/kernel/core_pattern
+          echo "# ulimit -c unlimited"
+          ulimit -c unlimited
+          echo "# sudo sysctl -w kernel.core_pattern=core"
+          sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
+          echo "# ulimit -a"
+          ulimit -a
+          echo "# cat /proc/sys/kernel/core_pattern"
+          cat /proc/sys/kernel/core_pattern
+
+#        See: https://www.cnblogs.com/cong-wang/p/15026524.html
+#        Naming of core dump files
+#               By default, a core dump file is named core, but the /proc/sys/kernel/core_pattern file (since  Linux  2.6  and
+#               2.4.21)  can  be  set  to  define a template that is used to name core dump files.  The template can contain %
+#               specifiers which are substituted by the following values when a core file is created:
+#
+#                   %%  a single % character
+#                   %c  core file size soft resource limit of crashing process (since Linux 2.6.24)
+#                   %d  dump mode—same as value returned by prctl(2) PR_GET_DUMPABLE (since Linux 3.7)
+#                   %e  executable filename (without path prefix)
+#                   %E  pathname of executable, with slashes ('/') replaced by exclamation marks ('!') (since Linux 3.0).
+#                   %g  (numeric) real GID of dumped process
+#                   %h  hostname (same as nodename returned by uname(2))
+#                   %i  TID of thread that triggered core dump, as seen in the PID  namespace  in  which  the  thread  resides
+#                       (since Linux 3.18)
+#                   %I  TID of thread that triggered core dump, as seen in the initial PID namespace (since Linux 3.18)
+#                   %p  PID of dumped process, as seen in the PID namespace in which the process resides
+#                   %P  PID of dumped process, as seen in the initial PID namespace (since Linux 3.12)
+#                   %s  number of signal causing dump
+#                   %t  time of dump, expressed as seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)
+#                   %u  (numeric) real UID of dumped process
 
       - name: update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
@@ -138,32 +144,42 @@ jobs:
         run: |
           #sudo apt update -y -qq
           #sudo apt-get install -y -qq xvfb xpra
-          sudo Xvfb :99 -ac &
-          export DISPLAY=:99.0
-          echo "Update update_linux.json ......"
-          export QT_XCB_GL_INTEGRATION=none
-          export QT_DEBUG_PLUGINS=1
-          ARCH=`uname -m`
-          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage.md5sum|awk '{print $1}'`
-          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage: ${MD5SUM}"
+          sudo Xvfb :96 -ac -screen 0 1200x900x24 &
+          export DISPLAY=:96.0
+
           #echo "Enable core dump ......"
+          #sudo apt install gdb -y -qq
           #ulimit -c unlimited
           #echo "# sudo sysctl -w kernel.core_pattern=core"
           #sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
+          #echo "# cat /proc/sys/kernel/core_pattern"
+          #cat /proc/sys/kernel/core_pattern
+
+          echo "Update update_linux.json ......"
+          export QT_XCB_GL_INTEGRATION=none
+          #export QT_DEBUG_PLUGINS=1
+          ARCH=`uname -m`
+          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage.md5sum|awk '{print $1}'`
+          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage: ${MD5SUM}"
           echo "Generate update configure file ......"
-          ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage \
+          ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
             -f "${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json" \
             --foc 1 \
-            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_$ARCH.AppImage \
+            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
             -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage?viasf=1" \
             --md5 "${MD5SUM}" \
             -m "v${{env.SerialPortAssistant_VERSION}}"
+
+          #if [ -f core ]; then
+          #  echo "Dump core ......"
+          #  gdb ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage core
+          #fi
 
       - name: Update artifact
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}
+          name: ${{ env.artifact_name }}_${{matrix.os}}
           path: |
             ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_*.AppImage
             ${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json

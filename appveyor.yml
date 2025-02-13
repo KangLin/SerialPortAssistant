@@ -1,4 +1,4 @@
-version: 'v0.5.29.{build}'
+version: 'v0.5.30.{build}'
 
 cache:
   - ..\other_source
@@ -6,7 +6,7 @@ cache:
 # https://www.appveyor.com/docs/build-cache/#cleaning-up-cache
 
 environment:
-  SerialPortAssistant_VERSION: "v0.5.29"
+  SerialPortAssistant_VERSION: "v0.5.30"
   STOREPASS:
     secure: l9BZEU39F1a4vSkhwl0CHR+yh6CD1c7byGzMv+1NUa4=
   QT_USER:
@@ -89,9 +89,11 @@ build_script:
   - if "%BUILD_ARCH%" == "x64" (copy /Y c:\OpenSSL-Win64\bin\ssleay32.dll install\bin && copy /Y c:\OpenSSL-Win64\bin\libeay32.dll install\bin)
   - makensis Install.nsi
   - copy /Y SerialPortAssistant_Setup_%SerialPortAssistant_VERSION%.exe SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
+  - md5sum SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe > SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe.md5sum
 
 artifacts:
   - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
+  - path: SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe.md5sum
 
 test: off
 
@@ -105,8 +107,9 @@ deploy:
     auth_token:
       secure: uuBaDAE/gzmEF9G4r9IwPf75qjC93JfzDcSElphUXRg0N2+emQ1Wc1ZRs2oZiw3E
     #artifact: SerialPortAssistant-$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(BUILD_ARCH)_$(QT_VERSION)_$(SerialPortAssistant_VERSION)
-    draft: true
-    prerelease: true
+    #draft: true
+    #prerelease: true
+    force_update: true
     on:
       TOOLCHAIN_VERSION: 14
       QT_VERSION: 5.6.3

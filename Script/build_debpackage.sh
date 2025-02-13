@@ -1,20 +1,24 @@
 #!/bin/bash
+# Author: Kang Lin <kl222@126.com>
 
-function help()
+#See: https://blog.csdn.net/alwaysbefine/article/details/114187380
+set -x
+set -e
+#set -v
+
+# store repo root as variable
+REPO_ROOT=$(readlink -f $(dirname $(dirname $(readlink -f $0))))
+OLD_CWD=$(readlink -f .)
+
+pushd "$REPO_ROOT"
+
+function usage()
 {
-    echo "Usage: $0 QT_ROOT RabbitCommon_ROOT"
+    echo "Usage: $0 RabbitCommon_ROOT"
 }
 
-if [ -n "$1" -a -z "$QT_ROOT" ]; then
-	QT_ROOT=$1
-fi
-
-if [ -n "$QT_ROOT" ]; then
-    export QT_ROOT=$QT_ROOT
-fi
-
 if [ -n "$2" -a -z "$RabbitCommon_ROOT" ]; then
-	RabbitCommon_ROOT=$2
+	RabbitCommon_ROOT=$1
 fi
 
 if [ -z "$RabbitCommon_ROOT" ]; then
@@ -23,6 +27,11 @@ fi
 
 if [ -d "$RabbitCommon_ROOT" ]; then
     export RabbitCommon_ROOT=$RabbitCommon_ROOT
+fi
+
+if [ ! -d "$RabbitCommon_ROOT" ]; then
+    usage
+    exit -1
 fi
 
 #fakeroot debian/rules binary

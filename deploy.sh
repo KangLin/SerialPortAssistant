@@ -102,5 +102,5 @@ if [ -n "$1" ]; then
     git tag -d $1
     git tag -a $1 -m "Release $1"
     #git push origin :refs/tags/$1 # Remove remote tag
-    git push origin $1  #Push tag
+    git push origin $1  #Push tag    
 fi

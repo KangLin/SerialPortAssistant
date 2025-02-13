@@ -1,4 +1,10 @@
 #!/bin/bash
+# Author: Kang Lin <kl222@126.com>
+
+#See: https://blog.csdn.net/alwaysbefine/article/details/114187380
+set -x
+set -e
+#set -v
 
 EXIT_CODE=0
 PROJECT_NAME="SerialPortAssistant"
@@ -22,15 +28,5 @@ if [ ! -f /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png ]; then
     echo "There are not /usr/share/pixmaps/org.Rabbit.${PROJECT_NAME}.png"
     EXIT_CODE=$[EXIT_CODE+1]
 fi
-
-if [ ! -f "/opt/${PROJECT_NAME}/bin/${PROJECT_NAME}.sh" ]; then
-    echo "/opt/${PROJECT_NAME}/bin/${PROJECT_NAME}.sh"
-    EXIT_CODE=$[EXIT_CODE+1]
-fi
-
-#if [ ! -f /etc/ld.so.conf.d/${PROJECT_NAME}.conf ]; then
-#	echo "There are not /etc/ld.so.conf.d/${PROJECT_NAME}.conf"
-#	EXIT_CODE=$[EXIT_CODE+1]
-#fi
 
 exit $EXIT_CODE

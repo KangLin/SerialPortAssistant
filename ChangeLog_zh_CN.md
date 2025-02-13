@@ -1,6 +1,9 @@
 ## 修改日志
+
 - 版本: v0.5.30
   - 移除捐赠比特币
+  - 增加编译脚本
+  - 增加 arm64(aarch4)
 
 - 版本: v0.5.29
   - 使用 [RabbitCommon v2.3.2](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.2)

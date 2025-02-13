@@ -36,13 +36,14 @@ jobs:
 
     env:
       BUILD_TYPE:  ${{ matrix.BUILD_TYPE }}
+      BUILD_DIR:   ${{github.workspace}}/build
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
-      TOOSL_DIR:   ${{github.workspace}}/.cache/tools
+      TOOLS_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_macos
       qt_modules:  ${{matrix.qt_modules}}
-      SerialPortAssistant_VERSION: 0.5.29
       artifact_name: build_macos
       VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
+      SerialPortAssistant_VERSION: 0.5.30
 
     # Map the job outputs to step outputs
     outputs:
@@ -57,9 +58,9 @@ jobs:
       - name: Make directories
         run: |
           cmake -E make_directory ${{env.SOURCE_DIR}}
-          cmake -E make_directory ${{env.TOOSL_DIR}}
+          cmake -E make_directory ${{env.TOOLS_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
-          cmake -E make_directory ${{github.workspace}}/build
+          cmake -E make_directory ${{env.BUILD_DIR}}
 
       - name: Cache installed
         uses: actions/cache@v3
@@ -78,7 +79,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          dir: '${{env.TOOSL_DIR}}/qt' # optional
+          dir: '${{env.TOOLS_DIR}}/qt' # optional
           version: '${{matrix.qt_version}}' # optional, default is 5.15.2
           arch: '${{matrix.qt_arch}}' # optional
           modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/

@@ -17,17 +17,20 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
+        os: [ubuntu-24.04, ubuntu-24.04-arm, ubuntu-22.04-arm]
 
-    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
+    # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
     # See: https://github.com/actions/runner-images/
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
 
     env:
+      BUILD_DIR:   ${{github.workspace}}/build
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
-      TOOSL_DIR:   ${{github.workspace}}/.cache/tools
-      INSTALL_DIR: ${{github.workspace}}/.cache/install_ubuntu_${{matrix.BUILD_TYPE}}
-      SerialPortAssistant_VERSION: 0.5.29
+      TOOLS_DIR:   ${{github.workspace}}/.cache/tools
+      INSTALL_DIR: ${{github.workspace}}/.cache/install_${{matrix.os}}_${{matrix.BUILD_TYPE}}
       artifact_name: build_ubuntu
+      SerialPortAssistant_VERSION: 0.5.30
 
     # Map the job outputs to step outputs
     outputs:
@@ -37,28 +40,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: recursive
 
       - name: Make directories
         run: |
-          cmake -E make_directory ${{github.workspace}}/build
+          cmake -E make_directory ${{env.BUILD_DIR}}
           cmake -E make_directory ${{env.SOURCE_DIR}}
-          cmake -E make_directory ${{env.TOOSL_DIR}}
+          cmake -E make_directory ${{env.TOOLS_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
 
-      - name: Install apt packages
+      - name: Install dependency libraries
         run: |
-          sudo apt update -y
-          sudo apt upgrade -y
-          sudo apt install -y -q cmake build-essential xvfb xpra \
-              libglu1-mesa-dev libpulse-mainloop-glib0 \
-              cmake debhelper fakeroot \
-              qt6-tools-dev qt6-tools-dev-tools qt6-base-dev qt6-base-dev-tools \
-              qt6-l10n-tools qt6-translations-l10n qt6-scxml-dev libqt6svg6-dev \
-              libqt6serialport6-dev \
-              libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libx11-xcb-dev \
-              libx11-dev libxfixes-dev \
-              libcmark-dev cmark
+          sudo ./Script/build_depend.sh --apt_update --base --default \
+              --install ${{env.INSTALL_DIR}} \
+              --source ${{env.SOURCE_DIR}} \
+              --tools ${{env.TOOLS_DIR}} \
+              --build ${{env.BUILD_DIR}}
+          if [ "ubuntu-22.04-arm" != ${{matrix.os}} ]; then
+              sudo apt install -y -q qt6-5compat-dev
+          fi
 
       - name: Cache installed
         uses: actions/cache@v3
@@ -66,78 +66,63 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: cache-installed-ubuntu
+          key: install_ubuntu_${{matrix.os}}_${{matrix.BUILD_TYPE}}
 
       - name: git clone RabbitCommon
         working-directory: ${{env.SOURCE_DIR}}
         run: |
           git clone https://github.com/KangLin/RabbitCommon.git
 
-      - name: build SerialPortAssistant
+      - name: build_debpackage.sh
+        working-directory: ${{github.workspace}}
         env:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
-          cd ${{github.workspace}}
-          ./build_debpackage.sh
-          cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
+          ./Script/build_debpackage.sh
 
       - name: update configure file
         working-directory: ${{github.workspace}}
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
         run: |
-          sudo Xvfb :99 -ac &
-          export DISPLAY=:99.0
-          sudo apt install ./serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
+          sudo Xvfb :97 -ac -screen 0 1200x900x24 &
+          export DISPLAY=:97.0
+          export ARCH=`dpkg --print-architecture`
+          export OS_NAME="ubuntu-`lsb_release -s -r`"
+          cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
+          sudo apt install ./serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
           echo "test ......"
-          ./test/test_linux.sh
+          ./Script/test_linux.sh
           echo "Update configure file ......"
-          MD5=`md5sum serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb | awk '{print $1}'`
+          MD5=`md5sum serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb | awk '{print $1}'`
           export QT_XCB_GL_INTEGRATION=none
           ulimit -c unlimited
           echo "# sudo sysctl -w kernel.core_pattern=core"
           sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
           /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
-                -f "`pwd`/update_ubuntu.json" \
+                -f "`pwd`/update_ubuntu_${OS_NAME}_${ARCH}.json" \
                 --foc 1 \
                 --md5 ${MD5} \
                 -m "${{env.SerialPortAssistant_VERSION}}" \
-                -p serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb \
-                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb;https://sourceforge.net/projects/SerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb?viasf=1"
+                -p serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb \
+                -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb;https://sourceforge.net/projects/SerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb?viasf=1"
 
       - name: Update version configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
         working-directory: ${{github.workspace}}
         run: |
-          sudo Xvfb :99 -ac &
-          export DISPLAY=:99.0
+          sudo Xvfb :98 -ac &
+          export DISPLAY=:98.0
           /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
                -f "${{github.workspace}}/version.json" \
                --foc 0 \
                --pv ${{env.SerialPortAssistant_VERSION}}
 
-      - name: dump core
-        if: false
-        working-directory: ${{github.workspace}}
-        run: |
-          gdb /opt/SerialPortAssistant/bin/SerialPortAssistant core
-
-      #- name: Generate appimage
-      #  run: |
-      #    cd debian/serialportassistant/opt
-      #    URL_LINUXDEPLOYQT=https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-      #    wget -c -nv ${URL_LINUXDEPLOYQT} -O linuxdeployqt.AppImage
-      #    chmod a+x linuxdeployqt.AppImage
-      #    cd SerialPortAssistant
-      #    ../linuxdeployqt.AppImage share/applications/*.desktop \
-      #          -qmake=qmake -appimage -verbose
-      #    cp SerialPort_Assistant-${VERSION}-x86_64.AppImage ${{github.workspace}}/.
-
-      - name: update
+      - name: Update artifact
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}
+          name: ${{ env.artifact_name }}_${{matrix.os}}
           path: |
-            ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_amd64.deb
-            ${{github.workspace}}/update_ubuntu.json
+            ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
+            ${{github.workspace}}/update_*.json
             ${{github.workspace}}/version.json
