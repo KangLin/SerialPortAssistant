@@ -97,10 +97,11 @@ artifacts:
 
 test: off
 
-#See:https://www.appveyor.com/docs/deployment/github/
+# See: https://www.appveyor.com/docs/deployment/github/
 deploy:
   - provider: GitHub
-    #release: SerialPortAssistant-$(SerialPortAssistant_VERSION)
+    tag: $(SerialPortAssistant_VERSION)_windows_xp
+    release: $(SerialPortAssistant_VERSION)
     #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
     #token: https://github.com/settings/tokens
     #password encrypt: https://ci.appveyor.com/tools/encrypt

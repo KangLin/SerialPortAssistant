@@ -140,7 +140,7 @@ jobs:
 
       - name: update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
-        #continue-on-error: true
+        continue-on-error: true
         run: |
           #sudo apt update -y -qq
           #sudo apt-get install -y -qq xvfb xpra
