@@ -1,25 +1,10 @@
 serialportassistant (0.5.30) stable; urgency=medium
 
+    * CI: modify artifact name
     * Script: Add build_depend.sh
     * Remove bitcoin
     * CI: modify sourceforge.net download urls
     * Modify README
-    * Release v0.5.29
-    * CI: update qt6.8.1 to qt6.8.2
-    * CI: modify ci
-    * CMake: replace RabbitCommon_DIR with RabbitCommon_ROOT
-    * CMake: Add RabbitCommon dependencies
-    * CI: add build appimage
-    * CI: modify build.yml
-    * Donate: add bitcoin
-    * CI: modify mingw
-    * Release v0.5.28
-    * Modify README
-    * Release v0.5.27
-    * Modify change log
-    * Modify snap
-    * vcpkg: add cmark
-    * Modify build_debpackage.sh
 
- -- Kang Lin <kl222@126.com>  Fri, 21 Feb 2025 16:35:59 +0800
+ -- Kang Lin <kl222@126.com>  Mon, 24 Feb 2025 11:32:58 +0800
 

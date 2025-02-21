@@ -69,7 +69,7 @@ fi
 pushd "${TOOLS_DIR}"
 if [ ! -f linuxdeploy-`uname -m`.AppImage ]; then
     wget https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20250213-2/linuxdeploy-`uname -m`.AppImage
-	chmod u+x linuxdeploy-`uname -m`.AppImage
+    chmod u+x linuxdeploy-`uname -m`.AppImage
 fi
 if [ ! -f linuxdeploy-plugin-qt-`uname -m`.AppImage ]; then
     wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/1-alpha-20250213-1/linuxdeploy-plugin-qt-`uname -m`.AppImage

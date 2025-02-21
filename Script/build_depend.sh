@@ -228,8 +228,11 @@ if [ $BASE_LIBS -eq 1 ]; then
     echo "Install base libraries ......"
     apt install -y -q build-essential \
         git cmake gcc g++ debhelper fakeroot graphviz gettext \
-        xvfb xpra xserver-xorg-input-mouse xserver-xorg-input-kbd \
+        xserver-xorg-input-mouse xserver-xorg-input-kbd \
         libglu1-mesa-dev libpulse-mainloop-glib0
+    if [ -z "$SerialPortAssistant_VERSION" ]; then
+        apt install -y -q xvfb xpra
+    fi
     # Base dependency
     apt install -y -q libssl-dev libcrypt-dev libicu-dev zlib1g-dev
     # RabbitCommon dependency

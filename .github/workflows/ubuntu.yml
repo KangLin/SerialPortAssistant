@@ -80,7 +80,7 @@ jobs:
         run: |
           ./Script/build_debpackage.sh
 
-      - name: update configure file
+      - name: Update configure file
         working-directory: ${{github.workspace}}
         if: ${{ matrix.BUILD_TYPE == 'Release' }}
         run: |
@@ -107,7 +107,7 @@ jobs:
                 -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb;https://sourceforge.net/projects/SerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb?viasf=1"
 
       - name: Update version configure file
-        if: ${{ matrix.BUILD_TYPE == 'Release'}}
+        if: ${{ matrix.BUILD_TYPE == 'Release' }}
         working-directory: ${{github.workspace}}
         run: |
           sudo Xvfb :98 -ac &
@@ -123,6 +123,6 @@ jobs:
         with:
           name: ${{ env.artifact_name }}_${{matrix.os}}
           path: |
-            ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
+            ${{github.workspace}}/serialportassistant_${{env.SerialPortAssistant_VERSION}}*.deb
             ${{github.workspace}}/update_*.json
             ${{github.workspace}}/version.json

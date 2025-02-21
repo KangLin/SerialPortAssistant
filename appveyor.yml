@@ -93,14 +93,15 @@ build_script:
 
 artifacts:
   - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe
-  - path: SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe.md5sum
+  - path: build/SerialPortAssistant_%SerialPortAssistant_VERSION%_windows_xp_%BUILD_ARCH%_Setup.exe.md5sum
 
 test: off
 
-#See:https://www.appveyor.com/docs/deployment/github/
+# See: https://www.appveyor.com/docs/deployment/github/
 deploy:
   - provider: GitHub
-    #release: SerialPortAssistant-$(SerialPortAssistant_VERSION)
+    #tag: $(SerialPortAssistant_VERSION)_windows_xp
+    #release: $(SerialPortAssistant_VERSION)_windows_xp
     #description: 'Release SerialPortAssistant-$(APPVEYOR_REPO_TAG_NAME) on windows'
     #token: https://github.com/settings/tokens
     #password encrypt: https://ci.appveyor.com/tools/encrypt

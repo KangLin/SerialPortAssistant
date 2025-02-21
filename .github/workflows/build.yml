@@ -31,9 +31,9 @@ jobs:
   android:
     uses: ./.github/workflows/android.yml
     secrets: inherit
-  
+
   deploy:
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+    #if: ${{ startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
     needs: [ubuntu, appimage, msvc, android, macos]
     steps:
@@ -45,14 +45,14 @@ jobs:
       - name: Download ubuntu
         uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.ubuntu.outputs.name }}
+          pattern: ${{ needs.ubuntu.outputs.name }}*
           path: ${{ env.artifact_path }}
           merge-multiple: true
 
       - name: Download appimage
         uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.appimage.outputs.name }}
+          pattern: ${{ needs.appimage.outputs.name }}*
           path: ${{ env.artifact_path }}
           merge-multiple: true
 
@@ -84,7 +84,7 @@ jobs:
               "${{ github.workspace }}/update.json" \
               "${{ env.artifact_path }}" "${{ env.artifact_path }}/version.json"
           rm ${{ env.artifact_path }}/*.json
-      
+
       - name: Make relase file
         run: |
           echo "[:cn: 修改日志](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog_zh_CN.md)" > ${{github.workspace}}/Release.md
@@ -111,7 +111,7 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         continue-on-error: true
         run: |
-          gh release create ${{ github.ref_name }} --title ${{ github.ref_name }} --notes-file ${{github.workspace}}/Release.md || \
+          gh release create ${{ github.ref_name }} --title ${{ github.ref_name }} --notes-file ${{github.workspace}}/Release.md
 
       - name: Upload To Github Release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}

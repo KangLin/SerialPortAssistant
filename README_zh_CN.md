@@ -54,18 +54,18 @@
 
 - 安装说明：
   - ubuntu、debian
-    -  [serialportassistant_0.5.30_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/serialportassistant_0.5.30_amd64.deb)
+    -  [serialportassistant_0.5.30_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/serialportassistant_0.5.30_ubuntu-24.04_amd64.deb)
 
-           sudo apt install ./serialportassistant_0.5.30_amd64.deb
+           sudo apt install ./serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
            # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
-           # sudo dpkg -i serialportassistant_0.5.30_amd64.deb
+           # sudo dpkg -i serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
            # sudo apt-get install -f # Install dependencies
         
   - 其它 linux(AppImage)
-    - [SerialPortAssistant_v0.5.30_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_x86_64.AppImage)
+    - [SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage)
     
-           sudo chmod a+x SerialPortAssistant_v0.5.30_x86_64.AppImage
-           sudo ./SerialPortAssistant_v0.5.30_x86_64.AppImage
+           sudo chmod a+x SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage
+           sudo ./SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage
 
   - Windows
     - Windows xp
