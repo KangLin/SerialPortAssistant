@@ -6,5 +6,5 @@ serialportassistant (0.5.30) stable; urgency=medium
     * CI: modify sourceforge.net download urls
     * Modify README
 
- -- Kang Lin <kl222@126.com>  Mon, 24 Feb 2025 11:32:58 +0800
+ -- Kang Lin <kl222@126.com>  Mon, 24 Feb 2025 14:28:23 +0800
 
