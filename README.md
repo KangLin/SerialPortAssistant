@@ -59,7 +59,7 @@ Author: Kang Lin (kl222@126.com)
 ## Download
 
 - Install
-  - ubuntu, debian
+  - Ubuntu, Debian
     - [serialportassistant_0.5.30_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/serialportassistant_0.5.30_ubuntu-24.04_amd64.deb)
 
           sudo apt install ./serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
@@ -67,7 +67,7 @@ Author: Kang Lin (kl222@126.com)
           # sudo dpkg -i serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
           # sudo apt-get install -f # Install dependencies
 
-  - Other linux(AppImage)
+  - Other Linux(AppImage)
     - [SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage)
     
           sudo chmod a+x SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage
@@ -85,7 +85,7 @@ Author: Kang Lin (kl222@126.com)
     - [SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk)
     - [SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk)
 
-  - Other:
+  - Other OS:
     - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
     - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 

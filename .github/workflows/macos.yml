@@ -109,7 +109,7 @@ jobs:
               -DINSTALL_QT=ON \
               -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
           cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
-          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip install/.
+          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip install/.
 
       - name: test run
         if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
@@ -123,9 +123,9 @@ jobs:
         run: |
           ${{env.SOURCE_DIR}}/RabbitCommon/Install/GenerateJsonFile.sh \
                "${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json" \
-               "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip" \
+               "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip" \
                macos ${{matrix.config_arch}} \
-               "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip?viasf=1"
+               "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip?viasf=1"
       
       - name: Update artifact
         if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '6.8.2' }}
@@ -133,5 +133,5 @@ jobs:
         with:
           name: ${{ env.artifact_name }}_${{matrix.qt_version}}_${{matrix.qt_arch}}
           path: |
-            ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_qt${{matrix.qt_version}}_macos.zip
+            ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip
             ${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json
