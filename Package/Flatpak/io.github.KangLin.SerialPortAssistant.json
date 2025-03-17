@@ -1,0 +1,92 @@
+{
+    "id": "io.github.KangLin.SerialPortAssistant",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "6.8",
+    "sdk": "org.kde.Sdk",
+    "command": "SerialPortAssistant",
+    "build-options": {
+        "env": {
+            "V": "1"
+        }
+    },
+    "modules": [
+        {
+            "name": "cmark",
+            "disabled": false,
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/commonmark/cmark/archive/refs/tags/0.31.1.tar.gz",
+                    "sha256": "3da93db5469c30588cfeb283d9d62edfc6ded9eb0edc10a4f5bbfb7d722ea802"
+                }
+            ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DBUILD_TESTING=OFF"
+            ],
+            "cleanup": [
+                "/bin"
+            ]
+        },
+        {
+            "name": "RabbitCommon",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/KangLin/RabbitCommon.git",
+                    "branch": "master"
+                }
+            ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release"
+            ]
+        },
+        {
+            "name": "SerialPortAssistant",
+            "disabled": false,
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "../.."
+                }
+            ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release"
+            ],
+            "build-options": {
+                "env": {
+                }
+            },
+            "post-install": [
+                "sed -i 's|Path=/app/bin|Path=/bin|' /app/share/applications/io.github.KangLin.SerialPortAssistant.desktop"
+            ],
+            "cleanup": [
+            ]
+        }
+    ],
+    "cleanup": [
+        "*.la",
+        "*.a",
+        "/include",
+        "/lib/cmake",
+        "/lib/pkgconfig"
+    ],
+    "cleanup-commands": [
+    ],
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--socket=x11",
+        "--device=all",
+        "--filesystem=xdg-documents",
+        "--talk-name=org.freedesktop.Notifications",
+        "--talk-name=org.freedesktop.secrets",
+        "--talk-name=org.kde.StatusNotifierWatcher",
+        "--system-talk-name=org.freedesktop.Avahi"
+    ]
+}

@@ -1,5 +1,10 @@
 ## Change log
 
+- Version: v0.5.31
+  - Package
+    - Add Flatpak
+  - Rename org.Rabbit.SerialPortAssistant to io.github.KangLin.SerialPortAssistant
+
 - Version: v0.5.30
   - Remove donate bitcoin
   - Add build script

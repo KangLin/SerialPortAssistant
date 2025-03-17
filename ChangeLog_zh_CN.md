@@ -1,5 +1,10 @@
 ## 修改日志
 
+- 版本: v0.5.31
+  - 打包
+    - 增加 Flatpak
+  - 重命名 org.Rabbit.SerialPortAssistant 为 io.github.KangLin.SerialPortAssistant
+
 - 版本: v0.5.30
   - 移除捐赠比特币
   - 增加编译脚本

@@ -4,7 +4,7 @@
 [Desktop Entry]
 Type=Application
 
-Icon=org.Rabbit.@PROJECT_NAME@
+Icon=io.github.KangLin.SerialPortAssistant
 Exec=SerialPortAssistant
 Path=@CMAKE_INSTALL_PREFIX@/bin
 Terminal=false

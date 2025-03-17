@@ -18,6 +18,10 @@ jobs:
   appimage:
     uses: ./.github/workflows/appimage.yml
 
+  flatpak:
+    uses: ./.github/workflows/flatpak.yml
+    secrets: inherit
+  
   msvc:
     uses: ./.github/workflows/msvc.yml
 
@@ -53,6 +57,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: ${{ needs.appimage.outputs.name }}*
+          path: ${{ env.artifact_path }}
+          merge-multiple: true
+
+      - name: Download flatpak
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ needs.flatpak.outputs.name }}*
           path: ${{ env.artifact_path }}
           merge-multiple: true
 

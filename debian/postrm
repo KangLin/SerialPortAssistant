@@ -23,8 +23,8 @@ INSTALL_ROOT=/opt/SerialPortAssistant
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
         rm -fr $INSTALL_ROOT/log $INSTALL_ROOT/bin/log
-        rm -fr /usr/share/applications/org.Rabbit.SerialPortAssistant.desktop
-        rm -fr /usr/share/pixmaps/org.Rabbit.SerialPortAssistant.png
+        rm -fr /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+        rm -fr /usr/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png
         rm -fr /usr/bin/serialportassistant
         #rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
     	#ldconfig

@@ -86,8 +86,8 @@ parts:
       #  if [ ! -f serialportassistant ]; then
       #      ln -s SerialPortAssistant serialportassistant
       #  fi
-      sed -i 's|Icon=org\.Rabbit\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
-      sed -i 's|Path=/opt/SerialPortAssistant/bin|Path=\$\{SNAP\}/opt/SerialPortAssistant/bin|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
+      sed -i 's|Icon=org\.Rabbit\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+      sed -i 's|Path=/opt/SerialPortAssistant/bin|Path=\$\{SNAP\}/opt/SerialPortAssistant/bin|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
       snapcraftctl stage
     prime:
      - -usr/bin/cmark
@@ -102,7 +102,7 @@ apps:
  serialportassistant:
    command: opt/SerialPortAssistant/bin/SerialPortAssistant
    # See: https://snapcraft.io/docs/desktop-menu-support#heading--desktop-key
-   desktop: opt/SerialPortAssistant/share/applications/org.Rabbit.SerialPortAssistant.desktop
+   desktop: opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
    environment:
      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/SerialPortAssistant/lib
      #QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt6/plugins/
