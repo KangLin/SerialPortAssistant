@@ -87,9 +87,10 @@ INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
         COMPONENT Application)
 
 if(UNIX AND NOT ANDROID)
-    configure_file(${CMAKE_SOURCE_DIR}/share/io.github.KangLin.SerialPortAssistant.desktop.in
-        ${CMAKE_BINARY_DIR}/io.github.KangLin.SerialPortAssistant.desktop @ONLY)
-    INSTALL(FILES ${CMAKE_BINARY_DIR}/io.github.KangLin.SerialPortAssistant.desktop
+    set(APP_ID io.github.KangLin.SerialPortAssistant)
+    configure_file(${CMAKE_SOURCE_DIR}/share/${APP_ID}.desktop.in
+        ${CMAKE_BINARY_DIR}/${APP_ID}.desktop @ONLY)
+    INSTALL(FILES ${CMAKE_BINARY_DIR}/${APP_ID}.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
             COMPONENT Application)
     INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
@@ -98,5 +99,5 @@ if(UNIX AND NOT ANDROID)
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps"
             COMPONENT Application
-        RENAME org.Rabbit.${PROJECT_NAME}.png)
+        RENAME ${APP_ID}.png)
 endif()
