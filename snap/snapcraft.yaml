@@ -86,7 +86,7 @@ parts:
       #  if [ ! -f serialportassistant ]; then
       #      ln -s SerialPortAssistant serialportassistant
       #  fi
-      sed -i 's|Icon=org\.Rabbit\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+      sed -i 's|Icon=io\.github\.KangLin\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/io\.github\.KangLin\.SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
       sed -i 's|Path=/opt/SerialPortAssistant/bin|Path=\$\{SNAP\}/opt/SerialPortAssistant/bin|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
       snapcraftctl stage
     prime:

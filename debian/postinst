@@ -31,11 +31,11 @@ function_config()
     if [ ! -f /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop ]; then
         ln -s ${INSTALL_ROOT}/share/applications/io.github.KangLin.SerialPortAssistant.desktop /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
     fi
-    if [ ! -f /usr/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png ]; then
-        if [ ! -d /usr/share/icons/hicolor/128x128/apps ]; then
-            mkdir -p /usr/share/icons/hicolor/128x128/apps
+    if [ ! -f /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png ]; then
+        if [ ! -d /usr/share/pixmaps ]; then
+            mkdir -p /usr/share/pixmaps
         fi
-        ln -s ${INSTALL_ROOT}/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png /usr/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png
+        ln -s ${INSTALL_ROOT}/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
     fi
     if [ ! -f /usr/bin/serialportassistant ]; then
         ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant
@@ -60,7 +60,7 @@ case "$1" in
     abort-upgrade|abort-remove|abort-deconfigure)
         rm -fr $INSTALL_ROOT/log $INSTALL_ROOT/bin/log
         rm -fr /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
-        rm -fr /usr/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png
+        rm -fr /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
         #rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
     ;;
 

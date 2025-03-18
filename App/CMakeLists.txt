@@ -96,6 +96,17 @@ if(UNIX AND NOT ANDROID)
     INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
             COMPONENT Application)
+    # Icon path
+    # The freedesktop.org standard specifies in which order and directories programs should look for icons:
+    #
+    #    $HOME/.icons (for backwards compatibility)
+    #    $XDG_DATA_DIRS/icons
+    #    /usr/share/pixmaps
+    INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
+        DESTINATION share/pixmaps
+            COMPONENT Application
+        RENAME ${APP_ID}.png)
+    # Flatpak: https://docs.flatpak.org/en/latest/conventions.html#application-icons
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps"
             COMPONENT Application
