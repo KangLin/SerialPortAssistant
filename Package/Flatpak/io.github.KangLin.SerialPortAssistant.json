@@ -83,10 +83,6 @@
         "--share=network",
         "--socket=x11",
         "--device=all",
-        "--filesystem=xdg-documents",
-        "--talk-name=org.freedesktop.Notifications",
-        "--talk-name=org.freedesktop.secrets",
-        "--talk-name=org.kde.StatusNotifierWatcher",
-        "--system-talk-name=org.freedesktop.Avahi"
+        "--filesystem=xdg-documents"
     ]
 }
