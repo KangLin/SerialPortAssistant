@@ -135,6 +135,6 @@ if [ ! -f ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz ]; then
     git archive --format=tar.gz --prefix=SerialPortAssistant/ -o ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz HEAD
 fi
 export RabbitCommon_ROOT=${SOURCE_DIR}/RabbitCommon
-rpmbuild -bb Package/rpm/serialportassistant.spec
+rpmbuild --nodebuginfo -bb Package/rpm/serialportassistant.spec
 
 popd
