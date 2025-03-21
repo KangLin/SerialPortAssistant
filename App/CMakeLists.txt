@@ -88,7 +88,7 @@ INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
 
 if(UNIX AND NOT ANDROID)
     set(APP_ID io.github.KangLin.SerialPortAssistant)
-    configure_file(${CMAKE_SOURCE_DIR}/share/${APP_ID}.desktop.in
+    configure_file(${CMAKE_SOURCE_DIR}/share/applications/${APP_ID}.desktop.in
         ${CMAKE_BINARY_DIR}/${APP_ID}.desktop @ONLY)
     INSTALL(FILES ${CMAKE_BINARY_DIR}/${APP_ID}.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
@@ -111,4 +111,10 @@ if(UNIX AND NOT ANDROID)
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps"
             COMPONENT Application
         RENAME ${APP_ID}.png)
+    string(TIMESTAMP BUILD_DATE "%Y-%m-%d")
+    configure_file(${CMAKE_SOURCE_DIR}/share/metainfo/${APP_ID}.metainfo.xml.in
+        ${CMAKE_BINARY_DIR}/${APP_ID}.metainfo.xml @ONLY)
+    INSTALL(FILES ${CMAKE_BINARY_DIR}/${APP_ID}.metainfo.xml
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/metainfo"
+            COMPONENT Application)
 endif()

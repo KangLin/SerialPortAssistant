@@ -63,7 +63,7 @@
                 }
             },
             "post-install": [
-                "sed -i 's|Path=/app/bin|Path=/bin|' /app/share/applications/io.github.KangLin.SerialPortAssistant.desktop"
+                "desktop-file-edit --set-key=Path --set-value=/bin /app/share/applications/io.github.KangLin.SerialPortAssistant.desktop"
             ],
             "cleanup": [
             ]
