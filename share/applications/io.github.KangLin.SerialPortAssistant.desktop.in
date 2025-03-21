@@ -20,12 +20,12 @@ MimeType=application/octet-stream;text/plain;
 
 Name=Serial Port Assistant
 GenericName=Serial Port Assistant
-Comment=Serial Port Assistant
+Comment=A cross-platform serial communication tool
 
 Name[zh_CN]=串口助手
 GenericName[zh_CN]=串口助手
-Comment[zh_CN]=串口助手
+Comment[zh_CN]=跨平台串口通信工具
 
 Name[zh_TW]=串口助手
 GenericName[zh_TW]=串口助手
-Comment[zh_TW]=串口助手
+Comment[zh_TW]=跨平台串口通訊工具

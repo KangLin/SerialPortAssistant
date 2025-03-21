@@ -26,7 +26,7 @@ BuildRequires: openssl-devel
 
 Requires: openssl cmark
 
-Requires: qt6-qtbase qt6-qtmultimedia qt6-qt5compat qt6-qtmultimedia qt6-qtscxml
+Requires: qt6-qtbase qt6-qtmultimedia qt6-qt5compat qt6-qtscxml
 Requires: qt6-qtserialport qt6-qtsvg
 
 %description
@@ -76,9 +76,28 @@ cmake --install $RPM_BUILD_DIR --config Release \
 
 # 安装后需要做的任务 如：自动启动的任务
 %post
+INSTALL_ROOT=/opt/SerialPortAssistant
+chmod -R a+w $INSTALL_ROOT/etc
+
+if [ ! -f /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop ]; then
+    ln -s ${INSTALL_ROOT}/share/applications/io.github.KangLin.SerialPortAssistant.desktop /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+fi
+if [ ! -f /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png ]; then
+    if [ ! -d /usr/share/pixmaps ]; then
+        mkdir -p /usr/share/pixmaps
+    fi
+    ln -s ${INSTALL_ROOT}/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
+fi
+if [ ! -f /usr/bin/serialportassistant ]; then
+    ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant
+fi
 
 # 卸载前需要做的任务 如：停止任务
 %preun
+INSTALL_ROOT=/opt/SerialPortAssistant
+rm -fr /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+rm -fr /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
+rm -f /usr/bin/serialportassistant
 
 # 卸载后需要做的任务 如：删除用户，删除/备份业务数据
 %postun

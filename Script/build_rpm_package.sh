@@ -120,21 +120,15 @@ echo "INSTALL_DIR: $INSTALL_DIR"
 
 pushd $REPO_ROOT
 
-# Install depend
-dnf install -y make git rpm-build rpmdevtools
-dnf builddep Package/rpm/serialportassistant.spec
-
-pushd "$SOURCE_DIR"
-if [ ! -d RabbitCommon ]; then
-    git clone https://github.com/KangLin/RabbitCommon.git
-fi
-popd
-
 if [ ! -f ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz ]; then
     mkdir -p ~/rpmbuild/SOURCES/
-    git archive --format=tar.gz --prefix=SerialPortAssistant/ -o ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz HEAD
+    if [ -d $REPO_ROOT/.git ]; then
+        git archive --format=tar.gz --prefix=SerialPortAssistant/ -o ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz HEAD
+    fi
 fi
+
 export RabbitCommon_ROOT=${SOURCE_DIR}/RabbitCommon
+#dnf builddep -y ${REPO_ROOT}/Package/rpm/serialportassistant.spec
 rpmbuild --nodebuginfo -bb Package/rpm/serialportassistant.spec
 
 popd

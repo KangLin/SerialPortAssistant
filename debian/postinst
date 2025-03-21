@@ -21,12 +21,7 @@ INSTALL_ROOT=/opt/SerialPortAssistant
 
 function_config()
 {
-    mkdir -p $INSTALL_ROOT/log
-    chmod 777 $INSTALL_ROOT/log
     chmod -R a+w $INSTALL_ROOT/etc
-    if [ ! -d $INSTALL_ROOT/bin/log ]; then
-        ln -s $INSTALL_ROOT/log $INSTALL_ROOT/bin/log
-    fi
 
     if [ ! -f /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop ]; then
         ln -s ${INSTALL_ROOT}/share/applications/io.github.KangLin.SerialPortAssistant.desktop /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
@@ -58,9 +53,9 @@ case "$1" in
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
-        rm -fr $INSTALL_ROOT/log $INSTALL_ROOT/bin/log
         rm -fr /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
         rm -fr /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
+        rm -f /usr/bin/serialportassistant
         #rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
     ;;
 

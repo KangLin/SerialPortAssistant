@@ -6,7 +6,8 @@
 set -e
 #set -v
 
-APT=
+PACKAGE_TOOL=apt
+PACKAGE=
 APT_UPDATE=0
 BASE_LIBS=0
 DEFAULT_LIBS=0
@@ -14,7 +15,7 @@ QT=0
 RabbitCommon=0
 
 usage_long() {
-    echo "$0 [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--apt=<'lib1 lib2 ...'>] [--apt_update=[0|1]] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
+    echo "$0 [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--package=<'package1 package2 ...'>] [--package-tool=<apt|dnf>] [--apt_update=[0|1]] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
     echo "Directory:"
     echo "  --install: Set install directory"
     echo "  --source: Set source directory"
@@ -24,25 +25,10 @@ usage_long() {
     echo "  --base: Install the base libraries with apt"
     echo "  --default: Install the default dependency libraries that comes with the system"
     echo "  --apt_update: Update system"
-    echo "  --apt: Install package with apt"
+    echo "  --package-tool: Package install tool, apk or dnf"
+    echo "  --package: Install package"
     echo "  --qt: Install QT"
     echo "  --rabbitcommon: Install RabbitCommon"
-}
-
-usage() {
-    echo "$0 [-i <install directory>] [-s <source directory>] [-t <tools directory>] [-b <build directory>] [-a <'lib1 lib2 ...'>] [apt_update] [base] [default] [qt] [rabbitcommon]"
-    echo "Directory:"
-    echo "  -i: Set install directory"
-    echo "  -s: Set source directory"
-    echo "  -t: Set tools directory"
-    echo "  -b: set build directory"
-    echo "Depend:"
-    echo "  base: Install then base libraries with apt"
-    echo "  default: Install the default dependency libraries that comes with the system"
-    echo "  apt_update: Update system"
-    echo "  -a: Install package with apt"
-    echo "  qt: Install QT"
-    echo "  rabbitcommon: Install RabbitCommon"
 }
 
 # [如何使用getopt和getopts命令解析命令行选项和参数](https://zhuanlan.zhihu.com/p/673908518)
@@ -55,7 +41,7 @@ if command -V getopt >/dev/null; then
     # 后面没有冒号表示没有参数。后跟有一个冒号表示有参数。跟两个冒号表示有可选参数。
     # -l 或 --long 选项后面是可接受的长选项，用逗号分开，冒号的意义同短选项。
     # -n 选项后接选项解析错误时提示的脚本名字
-    OPTS=help,install:,source:,tools:,build:,apt:,apt_update::,base::,default::,qt::,rabbitcommon::
+    OPTS=help,install:,source:,tools:,build:,package:,package-tool:,apt_update::,base::,default::,qt::,rabbitcommon::
     ARGS=`getopt -o h -l $OPTS -n $(basename $0) -- "$@"`
     if [ $? != 0 ]; then
         echo "exec getopt fail: $?"
@@ -87,8 +73,12 @@ if command -V getopt >/dev/null; then
             BUILD_DIR=$2
             shift 2
             ;;
-        --apt)
-            APT=$2
+        --package)
+            PACKAGE=$2
+            shift 2
+            ;;
+        --package-tool)
+            PACKAGE_TOOL=$2
             shift 2
             ;;
         --apt_update)
@@ -150,30 +140,6 @@ if command -V getopt >/dev/null; then
             ;;
         esac
     done
-else
-    echo "getopt is not exits"
-    if [ $# -eq 0 ]; then
-        usage
-    else
-        for i in "$@"; do
-            case "$i" in
-                "apt_update") APT_UPDATE=1;;
-                "base") BASE_LIBS=1;;
-                "default") DEFAULT_LIBS=1;;
-                "qt") QT=1;;
-                "rabbitcommon") RabbitCommon=1;;
-            esac
-        done
-        while getopts :i:s:t: opt; do
-            case $opt in
-                i) INSTALL_DIR=$OPTARG ;;
-                s) SOURCE_DIR=$OPTARG ;;
-                t) TOOLS_DIR=$OPTARG ;;
-                b) BUILD_DIR=$OPTARG ;;
-                a) APT=$OPTARG ;;
-            esac
-        done
-    fi
 fi
 
 # store repo root as variable
@@ -220,34 +186,49 @@ if [ $APT_UPDATE -eq 1 ]; then
     apt-get upgrade -y
 fi
 
-if [ -n "$APT" ]; then
-    apt install -y -q $APT
+if [ -n "$PACKAGE" ]; then
+    ${PACKAGE_TOOL} install -y -q $PACKAGE
 fi
 
 if [ $BASE_LIBS -eq 1 ]; then
     echo "Install base libraries ......"
-    apt install -y -q build-essential \
-        git cmake gcc g++ debhelper fakeroot graphviz gettext \
-        xserver-xorg-input-mouse xserver-xorg-input-kbd \
-        libglu1-mesa-dev libpulse-mainloop-glib0
-    if [ -z "$SerialPortAssistant_VERSION" ]; then
-        apt install -y -q xvfb xpra
+    if [ "$PACKAGE_TOOL" = "apt" ]; then
+        apt install -y -q build-essential \
+            git cmake gcc g++ debhelper fakeroot graphviz gettext \
+            xserver-xorg-input-mouse xserver-xorg-input-kbd \
+            libglu1-mesa-dev libpulse-mainloop-glib0
+        if [ -z "$SerialPortAssistant_VERSION" ]; then
+            apt install -y -q xvfb xpra
+        fi
+        # Base dependency
+        apt install -y -q libssl-dev libcrypt-dev libicu-dev zlib1g-dev
+        # RabbitCommon dependency
+        apt install -y -q libcmark-dev cmark
+        # AppImage
+        apt install -y -q libfuse-dev libfuse3-dev
     fi
-    # Base dependency
-    apt install -y -q libssl-dev libcrypt-dev libicu-dev zlib1g-dev
-    # RabbitCommon dependency
-    apt install -y -q libcmark-dev cmark
-    # AppImage
-    apt install -y -q libfuse-dev libfuse3-dev
+    
+    if [ "$PACKAGE_TOOL" = "dnf" ]; then
+        dnf install -y make git rpm-build rpmdevtools gcc-c++ util-linux \
+           automake autoconf libtool gettext gettext-autopoint \
+           cmake desktop-file-utils appstream appstream-util curl wget
+    fi
 fi
 
 if [ $DEFAULT_LIBS -eq 1 ]; then
     echo "Install default dependency libraries ......"
-    # Qt6
-    apt-get install -y -q qmake6 qt6-tools-dev qt6-tools-dev-tools \
-        qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins \
-        libqt6svg6-dev qt6-l10n-tools qt6-translations-l10n \
-        qt6-scxml-dev qt6-multimedia-dev libqt6serialport6-dev
+    if [ "$PACKAGE_TOOL" = "apt" ]; then
+        # Qt6
+        apt-get install -y -q qmake6 qt6-tools-dev qt6-tools-dev-tools \
+            qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins \
+            libqt6svg6-dev qt6-l10n-tools qt6-translations-l10n \
+            qt6-scxml-dev qt6-multimedia-dev libqt6serialport6-dev
+    fi
+    if [ "$PACKAGE_TOOL" = "dnf" ]; then
+        dnf install -y qt6-qttools-devel qt6-qtbase-devel qt6-qtmultimedia-devel \
+            qt6-qt5compat-devel qt6-qtmultimedia-devel qt6-qtscxml-devel \
+            qt6-qtserialport-devel qt6-qtsvg-devel
+    fi
 fi
 
 if [ $QT -eq 1 ]; then
@@ -272,6 +253,10 @@ if [ $RabbitCommon -eq 1 ]; then
     pushd "$SOURCE_DIR"
     if [ ! -d RabbitCommon ]; then
         git clone https://github.com/KangLin/RabbitCommon.git
+    else
+        cd RabbitCommon
+        git pull
+        cd ..
     fi
     popd
 fi

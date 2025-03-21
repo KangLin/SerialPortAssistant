@@ -26,7 +26,8 @@
                 "-DBUILD_TESTING=OFF"
             ],
             "cleanup": [
-                "/bin"
+                "/bin",
+                "/share/man"
             ]
         },
         {
@@ -41,7 +42,16 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release"
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_MimeTypeBrowser=OFF",
+                "-DBUILD_APP=OFF",
+                "-DBUILD_TEST=OFF"
+            ],
+            "cleanup": [
+                "/bin",
+                "/etc",
+                "/share/applications",
+                "/share/doc"
             ]
         },
         {
