@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>io.github.KangLin.SerialPortAssistant</id>
+  <launchable type="desktop-id">io.github.KangLin.SerialPortAssistant.desktop</launchable>
 
-  <!-- 默认语言（英语） -->
   <name>Serial Port Assistant</name>
-  <summary>A tool for serial port communication</summary>
-  <description>
-    <p>Serial Port Assistant provides a cross-platform GUI for interacting with serial devices.</p>
-  </description>
-  <developer_name>KangLin</developer_name>
-  <!-- 简体中文 -->
   <name xml:lang="zh_CN">串口助手</name>
-  <summary xml:lang="zh_CN">一个跨平台的串口通信工具</summary>
-  <description xml:lang="zh_CN">
-    <p>串口助手提供跨平台的图形界面，用于与串口设备通信。</p>
-  </description>
-  <developer_name xml:lang="zh_CN">康林</developer_name>
-  <!-- 繁体中文 -->
   <name xml:lang="zh_TW">串口助手</name>
+
+  <summary>A tool for serial port communication</summary>
+  <summary xml:lang="zh_CN">一个跨平台的串口通信工具</summary>
   <summary xml:lang="zh_TW">一個跨平臺的串口通信工具</summary>
-  <description xml:lang="zh_TW">
-    <p>串口助手提供跨平臺的圖形界面，用於與串口設備通信。</p>
+
+  <description >
+    <p>Serial Port Assistant provides a cross-platform GUI for interacting with serial devices.</p>
+    <p xml:lang="zh_CN">串口助手提供跨平台的图形界面，用于与串口设备通信。</p>
+    <p xml:lang="zh_TW">串口助手提供跨平臺的圖形界面，用於與串口設備通信。</p>
   </description>
-  <developer_name xml:lang="zh_TW">康林</developer_name>
-
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0</project_license>
-
-  <url type="homepage">https://github.com/KangLin/SerialPortAssistant</url>
-  <url type="bugtracker">https://github.com/KangLin/SerialPortAssistant/issues</url>
-  <url type="help">https://github.com/KangLin/SerialPortAssistant/discussions</url>
 
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/KangLin/SerialPortAssistant/refs/heads/master/Docs/ui-en.jpg</image>
+      <caption>Interface</caption>
+      <image xml:lang="zh_CN">https://raw.githubusercontent.com/KangLin/SerialPortAssistant/refs/heads/master/Docs/ui-zh.jpg</image>
+      <caption xml:lang="zh_CN">界面</caption>
+      <image xml:lang="zh_TW">https://raw.githubusercontent.com/KangLin/SerialPortAssistant/refs/heads/master/Docs/ui-zh.jpg</image>
+      <caption xml:lang="zh_TW">界面</caption>
     </screenshot>
   </screenshots>
+
+  <developer id="io.github.KangLin">
+    <name>KangLin</name>
+    <name xml:lang="zh_CN">康林</name>
+    <name xml:lang="zh_TW">康林</name>
+  </developer>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <content_rating type="oars-1.1" />
+
+  <url type="homepage">https://github.com/KangLin/SerialPortAssistant</url>
+  <url type="bugtracker">https://github.com/KangLin/SerialPortAssistant/issues</url>
+  <url type="help">https://github.com/KangLin/SerialPortAssistant/discussions</url>
 
   <releases>
     <release version="@SerialPortAssistant_VERSION@" date="@BUILD_DATE@"/>
