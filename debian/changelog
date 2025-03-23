@@ -1,5 +1,8 @@
 serialportassistant (0.5.31) stable; urgency=medium
 
+    * Add keyword in .desktop
+    * Modify README
+    * Release v0.5.31
     * Modify change log
     * Update io.github.KangLin.SerialPortAssistant.metainfo.xml.in
     * RPM: modify Package/rpm/serialportassistant.spec
@@ -13,5 +16,5 @@ serialportassistant (0.5.31) stable; urgency=medium
     * CI: update  actions/cache@v4
     * CI: modify macos.yml
 
- -- Kang Lin <kl222@126.com>  Sun, 23 Mar 2025 19:41:44 +0800
+ -- Kang Lin <kl222@126.com>  Sun, 23 Mar 2025 22:31:38 +0800
 
