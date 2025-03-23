@@ -82,6 +82,7 @@
   - 所有版本下载位置：
     - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
     - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
+    - [Flatpak 下载](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  

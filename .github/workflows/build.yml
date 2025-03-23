@@ -118,6 +118,11 @@ jobs:
               fi
           done
 
+      - name: Make relase file
+        run: |
+          echo "" >> ${{github.workspace}}/Release.md
+          echo "[Flatpak download](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)" >> ${{github.workspace}}/Release.md
+
       - name: Create github Release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         continue-on-error: true
