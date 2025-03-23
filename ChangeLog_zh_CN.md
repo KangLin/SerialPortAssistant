@@ -3,6 +3,7 @@
 - 版本: v0.5.31
   - 打包
     - 增加 Flatpak
+    - 增加 RPM
   - 重命名 org.Rabbit.SerialPortAssistant 为 io.github.KangLin.SerialPortAssistant
 
 - 版本: v0.5.30

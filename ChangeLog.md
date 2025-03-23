@@ -3,6 +3,7 @@
 - Version: v0.5.31
   - Package
     - Add Flatpak
+    - Add rpm
   - Rename org.Rabbit.SerialPortAssistant to io.github.KangLin.SerialPortAssistant
 
 - Version: v0.5.30
