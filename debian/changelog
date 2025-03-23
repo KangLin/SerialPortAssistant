@@ -1,10 +1,17 @@
-serialportassistant (0.5.30) stable; urgency=medium
+serialportassistant (0.5.31) stable; urgency=medium
 
-    * CI: modify artifact name
-    * Script: Add build_depend.sh
-    * Remove bitcoin
-    * CI: modify sourceforge.net download urls
-    * Modify README
+    * Modify change log
+    * Update io.github.KangLin.SerialPortAssistant.metainfo.xml.in
+    * RPM: modify Package/rpm/serialportassistant.spec
+    * Flatpak: add metainfo file
+    * RPM: disable debug information
+    * Modify Package/Flatpak/io.github.KangLin.SerialPortAssistant.json
+    * Add rpm package
+    * Modify desktop icon
+    * Modify test_linux.sh
+    * Add flatpak
+    * CI: update  actions/cache@v4
+    * CI: modify macos.yml
 
- -- Kang Lin <kl222@126.com>  Mon, 24 Feb 2025 14:28:23 +0800
+ -- Kang Lin <kl222@126.com>  Sun, 23 Mar 2025 19:41:44 +0800
 

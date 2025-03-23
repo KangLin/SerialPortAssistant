@@ -60,30 +60,30 @@ Author: Kang Lin (kl222@126.com)
 
 - Install
   - Ubuntu, Debian
-    - [serialportassistant_0.5.30_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/serialportassistant_0.5.30_ubuntu-24.04_amd64.deb)
+    - [serialportassistant_0.5.31_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/serialportassistant_0.5.31_ubuntu-24.04_amd64.deb)
 
-          sudo apt install ./serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
+          sudo apt install ./serialportassistant_0.5.31_ubuntu-24.04_amd64.deb
           # If you're on an older Linux distribution, you will need to run this instead:         
-          # sudo dpkg -i serialportassistant_0.5.30_ubuntu-24.04_amd64.deb
+          # sudo dpkg -i serialportassistant_0.5.31_ubuntu-24.04_amd64.deb
           # sudo apt-get install -f # Install dependencies
 
   - Other Linux(AppImage)
-    - [SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage)
+    - [SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage)
     
-          sudo chmod a+x SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage
-          sudo ./SerialPortAssistant_v0.5.30_Linux_x86_64.AppImage
+          sudo chmod a+x SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage
+          sudo ./SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage
 
   - Windows
     - Windows xp
-      - [SerialPortAssistant_v0.5.30_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_windows_xp_x86_Setup.exe)
+      - [SerialPortAssistant_v0.5.31_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_windows_xp_x86_Setup.exe)
     - Windows 7 or later
-      - [SerialPortAssistant_v0.5.30_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_win32_msvc2017_qt5.12.12_Setup.exe)
+      - [SerialPortAssistant_v0.5.31_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_win32_msvc2017_qt5.12.12_Setup.exe)
     - Windows 10 (1809 or later)
-      - [SerialPortAssistant_v0.5.30_win64_msvc2022_64_qt6.8.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_win64_msvc2022_64_qt6.8.2_Setup.exe)
+      - [SerialPortAssistant_v0.5.31_win64_msvc2022_64_qt6.8.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_win64_msvc2022_64_qt6.8.2_Setup.exe)
 
   - Android 9 or later
-    - [SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_arm64_v8a_qt6.8.2_Release.apk)
-    - [SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.30/SerialPortAssistant_v0.5.30_android_x86_64_qt6.8.2_Release.apk)
+    - [SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk)
+    - [SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk)
 
   - Other OS:
     - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)

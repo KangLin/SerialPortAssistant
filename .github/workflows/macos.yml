@@ -43,7 +43,7 @@ jobs:
       qt_modules:  ${{matrix.qt_modules}}
       artifact_name: build_macos
       VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
-      SerialPortAssistant_VERSION: 0.5.30
+      SerialPortAssistant_VERSION: 0.5.31
 
     # Map the job outputs to step outputs
     outputs:

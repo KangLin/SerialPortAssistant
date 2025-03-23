@@ -28,7 +28,7 @@ endif()
 GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
     OUT_REVISION SerialPortAssistant_Revision)
 IF(NOT SerialPortAssistant_VERSION)
-    SET(SerialPortAssistant_VERSION "0.5.30")
+    SET(SerialPortAssistant_VERSION "0.5.31")
 ENDIF()
 message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
 
