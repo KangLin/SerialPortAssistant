@@ -42,7 +42,7 @@ jobs:
       ANDROID_PLATFORM: android-35
       ANDROID_NATIVE_API_LEVEL: 35
       qt_modules: 'qtscxml qtserialport'
-      SerialPortAssistant_VERSION: v0.5.31
+      SerialPortAssistant_VERSION: v0.5.30
 
     # Map the job outputs to step outputs
     outputs:
