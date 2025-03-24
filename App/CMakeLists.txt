@@ -26,11 +26,12 @@ if(WIN32)
 endif()
 
 GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
-    OUT_REVISION SerialPortAssistant_Revision)
+    OUT_REVISION SerialPortAssistant_Revision
+    OUT_TAG SerialPortAssistantTAG)
 IF(NOT SerialPortAssistant_VERSION)
     SET(SerialPortAssistant_VERSION "0.5.31")
 ENDIF()
-message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision}")
+message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision};Tag:${SerialPortAssistantTAG}")
 
 set(APP_QT_COMPONENTS Core Gui Widgets Network Svg Xml)
 if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)

@@ -52,7 +52,7 @@
 
   <releases>
     <release version="@SerialPortAssistant_VERSION@" date="@BUILD_DATE@"/>
-    <url type="details">https://github.com/KangLin/SerialPortAssistant/blob/@SerialPortAssistant_VERSION@/ChangeLog.md</url>
+    <url type="details">https://github.com/KangLin/SerialPortAssistant/blob/@SerialPortAssistantTAG@/ChangeLog.md</url>
   </releases>
 
 </component>
