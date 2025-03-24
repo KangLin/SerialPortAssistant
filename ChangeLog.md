@@ -1,5 +1,8 @@
 ## Change log
 
+- Version: v0.5.32
+  - Deploy rpm package
+  
 - Version: v0.5.31
   - Package
     - Add Flatpak

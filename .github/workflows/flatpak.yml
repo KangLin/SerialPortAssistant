@@ -43,8 +43,8 @@ jobs:
       - name: Flatpak build
         uses: flathub-infra/flatpak-github-actions/flatpak-builder@master
         with:
-          bundle: SerialPortAssistant.flatpak
+          bundle: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${{ matrix.variant.arch }}.flatpak
           manifest-path: Package/Flatpak/io.github.KangLin.SerialPortAssistant.json
           cache-key: flatpak-builder-${{ github.sha }}
-          arch: ${{ matrix.variant.arch }}
+          arch: ${{ matrix.variant.arch }}_ ${{ matrix.variant.os }}
           verbose: true      

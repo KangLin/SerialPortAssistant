@@ -52,7 +52,26 @@
 
 ### 下载
 
-- 安装说明：
+### 安装包说明
+
+- Windows: 扩展名为 .exe
+- Linux:
+  - deb 包：用于 Debian、Ubuntu 等
+  - rpm 包：用于 RedHat、Fedora、CentOs 等
+  - AppImage 包：用于所有 Linux 系统
+  - Snap 包: 用于所有支持 Snap 的 Linux 系统。Ubuntu 默认使用此安装包。
+  - Flatpak 包：用于所有支持 Flatpak 的 Linux 系统。Fedora 默认使用此安装包。
+- Android: 扩展名为 .apk
+- 苹果操作系统: SerialPortAssistant_0.5.31_macos_qt6.8.2.zip 
+  由于没有相关设备，所以没有进行测试。希望有兴趣的朋友参与开发和测试。
+
+### 所有版本下载位置：
+
+- [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
+- [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
+- [Flatpak 下载](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
+
+### 安装说明：
   - ubuntu、debian
     -  [serialportassistant_0.5.31_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/serialportassistant_0.5.31_ubuntu-24.04_amd64.deb)
 
@@ -60,7 +79,7 @@
            # 如果你是老的 Linux 发行系统。你需要用下列命令替换：
            # sudo dpkg -i serialportassistant_0.5.31_ubuntu-24.04_amd64.deb
            # sudo apt-get install -f # Install dependencies
-        
+
   - 其它 linux(AppImage)
     - [SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage)
     
@@ -78,11 +97,6 @@
   - Android 9 及以后
     - [SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk)
     - [SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk)
-
-  - 所有版本下载位置：
-    - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-    - [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
-    - [Flatpak 下载](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
 
 ### 捐赠  
 如果你用得满意，可以对本人进行捐赠  
