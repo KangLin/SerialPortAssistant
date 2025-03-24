@@ -15,6 +15,10 @@ jobs:
   ubuntu:
     uses: ./.github/workflows/ubuntu.yml
 
+  docker:
+    uses: ./.github/workflows/docker.yml
+    secrets: inherit
+
   appimage:
     uses: ./.github/workflows/appimage.yml
 
@@ -50,6 +54,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: ${{ needs.ubuntu.outputs.name }}*
+          path: ${{ env.artifact_path }}
+          merge-multiple: true
+
+      - name: Download docker
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ needs.docker.outputs.name }}*
           path: ${{ env.artifact_path }}
           merge-multiple: true
 
