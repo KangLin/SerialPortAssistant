@@ -6,6 +6,9 @@
 set -e
 #set -v
 
+if [ -z "$BUILD_VERBOSE" ]; then
+    BUILD_VERBOSE=OFF
+fi
 PACKAGE_TOOL=apt
 PACKAGE=
 APT_UPDATE=0
@@ -14,8 +17,11 @@ DEFAULT_LIBS=0
 QT=0
 RabbitCommon=0
 
+
 usage_long() {
-    echo "$0 [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--package=<'package1 package2 ...'>] [--package-tool=<apt|dnf>] [--apt_update=[0|1]] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
+    echo "$0 [-h|--help]  [-v|--verbose[=0|1]] [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--package=<'package1 package2 ...'>] [--package-tool=<apt|dnf>] [--apt_update=[0|1]] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
+    echo "  -h|--help: show help"
+    echo "  -v|--verbose: Show verbose"
     echo "Directory:"
     echo "  --install: Set install directory"
     echo "  --source: Set source directory"
@@ -41,7 +47,7 @@ if command -V getopt >/dev/null; then
     # 后面没有冒号表示没有参数。后跟有一个冒号表示有参数。跟两个冒号表示有可选参数。
     # -l 或 --long 选项后面是可接受的长选项，用逗号分开，冒号的意义同短选项。
     # -n 选项后接选项解析错误时提示的脚本名字
-    OPTS=help,install:,source:,tools:,build:,package:,package-tool:,apt_update::,base::,default::,qt::,rabbitcommon::
+    OPTS=help,verbose::,install:,source:,tools:,build:,package:,package-tool:,apt_update::,base::,default::,qt::,rabbitcommon::
     ARGS=`getopt -o h -l $OPTS -n $(basename $0) -- "$@"`
     if [ $? != 0 ]; then
         echo "exec getopt fail: $?"
@@ -133,6 +139,15 @@ if command -V getopt >/dev/null; then
         -h | -help)
             usage_long
             shift
+            ;;
+        -v | --verbose)
+            case $2 in
+                "")
+                    BUILD_VERBOSE=ON;;
+                *)
+                    BUILD_VERBOSE=$2;;
+            esac
+            shift 2
             ;;
         *)
             usage_long

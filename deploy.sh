@@ -60,6 +60,7 @@ sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
 
 sed -i "s/    SET(SerialPortAssistant_VERSION .*)/    SET(SerialPortAssistant_VERSION \"${DEBIAN_VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
+sed -i "s/    SET(SerialPortAssistantTAG .*)/    SET(SerialPortAssistantTAG \"${DEBIAN_VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
 sed -i "s/version:.*'[0-9]\+\.[0-9]\+\.[0-9]\+'/version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/snap/snapcraft.yaml
 sed -i "s/Version:.*'[0-9]\+\.[0-9]\+\.[0-9]\+'/Version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/Package/rpm/serialportassistant.spec
 sed -i "s/serialportassistant_[0-9]\+\.[0-9]\+\.[0-9]\+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md

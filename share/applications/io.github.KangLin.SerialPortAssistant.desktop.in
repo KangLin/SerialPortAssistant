@@ -13,7 +13,7 @@ StartupNotify=true
 
 # https://specifications.freedesktop.org/menu-spec/latest/apa.html
 Categories=Utility;Development;Debugger
-Keywords=Serial Port Assistant; 串口助手
+Keywords=Serial Port Assistant; Serial; 串口助手; 串口
 
 # https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/
 # https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/

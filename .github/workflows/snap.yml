@@ -1,5 +1,5 @@
 # Author: Kang Lin<kl222@126.com>
-name: flatpak
+name: snap
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ on:
         value: ${{ jobs.build_android.outputs.name }}
 
 jobs:
-  build_flatpak:
+  build_snap:
     strategy:
       matrix:
         variant:
