@@ -141,7 +141,7 @@ jobs:
       - name: Add flathub download
         run: |
           echo "" >> ${{github.workspace}}/Release.md
-          echo "[Flatpak download](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)" >> ${{github.workspace}}/Release.md
+          echo "[![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)" >> ${{github.workspace}}/Release.md
 
       - name: Add test comment in Release.md file
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}

@@ -77,8 +77,8 @@ Author: Kang Lin (kl222@126.com)
 ### Download position
 
 - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-- [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
-- [Flatpak download](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
+- [![Download from SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
+- [![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
 
 ### Installation Instructions:
 

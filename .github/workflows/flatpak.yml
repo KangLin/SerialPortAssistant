@@ -46,5 +46,5 @@ jobs:
           bundle: SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${{ matrix.variant.arch }}.flatpak
           manifest-path: Package/Flatpak/io.github.KangLin.SerialPortAssistant.json
           cache-key: flatpak-builder-${{ github.sha }}
-          arch: ${{ matrix.variant.arch }}_ ${{ matrix.variant.os }}
+          arch: ${{ matrix.variant.arch }}
           verbose: true      

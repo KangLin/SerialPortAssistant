@@ -65,11 +65,11 @@
 - 苹果操作系统: SerialPortAssistant_0.5.31_macos_qt6.8.2.zip 
   由于没有相关设备，所以没有进行测试。希望有兴趣的朋友参与开发和测试。
 
-### 所有版本下载位置：
+### 下载位置：
 
 - [![github 最后发行版本下载](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20最后发行版本下载)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
-- [![Download SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download) 
-- [Flatpak 下载](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
+- [![从 Sourceforge 下载](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
+- [![从 Flathub 下载](https://flathub.org/api/badge?locale=zh-Hans)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
 
 ### 安装说明：
   - ubuntu、debian

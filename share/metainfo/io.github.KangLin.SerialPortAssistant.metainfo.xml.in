@@ -46,12 +46,13 @@
   <url type="donation">https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png</url>
 
   <branding>
-    <color type="primary" scheme_preference="light">#f9f06b</color>
-    <color type="primary" scheme_preference="dark">#241f31</color>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#a599a5</color>
   </branding>
 
   <releases>
     <release version="@SerialPortAssistant_VERSION@" date="@BUILD_DATE@"/>
+    <url type="details">https://github.com/KangLin/SerialPortAssistant/blob/@SerialPortAssistant_VERSION@/ChangeLog.md</url>
   </releases>
 
 </component>
