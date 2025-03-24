@@ -112,8 +112,19 @@ jobs:
               "${{ github.workspace }}/update.json" \
               "${{ env.artifact_path }}" "${{ env.artifact_path }}/version.json"
           rm ${{ env.artifact_path }}/*.json
+      
+      - name: Add test comment in Release.md file
+        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          echo "**This release is for development and testing purposes only!**" >> ${{github.workspace}}/Release.md
+          echo "Commit: [${{github.sha}}](https://github.com/KangLin/SerialPortAssistant/commit/${{github.sha}})" >> ${{github.workspace}}/Release.md
+          echo "" >> ${{github.workspace}}/Release.md
+          echo "[:us: Change log](ChangeLog.md)" > ${{github.workspace}}/Release.md
+          echo "" >> ${{github.workspace}}/Release.md
+          echo "[Instructions for installing the package](README.md#Instructions-for-installing-the-package)" >> ${{github.workspace}}/Release.md
 
       - name: Make relase file
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
           echo "[:cn: 修改日志](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog_zh_CN.md)" > ${{github.workspace}}/Release.md
           echo "[:us: Change log](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog.md)" >> ${{github.workspace}}/Release.md
@@ -124,6 +135,9 @@ jobs:
           echo "File checksum:" >> ${{github.workspace}}/Release.md
           echo "|File|Checksum(md5)|" >> ${{github.workspace}}/Release.md
           echo "| :- |    :-       |" >> ${{github.workspace}}/Release.md
+    
+      - name: md5
+        run: |
           cd ${{ env.artifact_path }}
           for file in *
           do
@@ -142,17 +156,7 @@ jobs:
         run: |
           echo "" >> ${{github.workspace}}/Release.md
           echo "[![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)" >> ${{github.workspace}}/Release.md
-
-      - name: Add test comment in Release.md file
-        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
-        run: |
-          echo "**This release is for development and testing purposes only!**" >> ${{github.workspace}}/Release.md
-          echo "Commit: [${{github.sha}}](https://github.com/KangLin/SerialPortAssistant/commit/${{github.sha}})" >> ${{github.workspace}}/Release.md
-          echo "" >> ${{github.workspace}}/Release.md
-          echo "[:us: Change log](ChangeLog.md)" > ${{github.workspace}}/Release.md
-          echo "" >> ${{github.workspace}}/Release.md
-          echo "[Instructions for installing the package](README.md#Instructions-for-installing-the-package)" >> ${{github.workspace}}/Release.md
-      
+        
       - name: Create github Release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         continue-on-error: true
