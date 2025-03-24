@@ -7,9 +7,9 @@
   <name xml:lang="zh_CN">串口助手</name>
   <name xml:lang="zh_TW">串口助手</name>
 
-  <summary>A tool for serial port communication</summary>
-  <summary xml:lang="zh_CN">一个跨平台的串口通信工具</summary>
-  <summary xml:lang="zh_TW">一個跨平臺的串口通信工具</summary>
+  <summary>Serial port tool</summary>
+  <summary xml:lang="zh_CN">跨平台的串口工具</summary>
+  <summary xml:lang="zh_TW">跨平臺的串口工具</summary>
 
   <description >
     <p>Serial Port Assistant provides a cross-platform GUI for interacting with serial devices.</p>
@@ -40,7 +40,15 @@
 
   <url type="homepage">https://github.com/KangLin/SerialPortAssistant</url>
   <url type="bugtracker">https://github.com/KangLin/SerialPortAssistant/issues</url>
+  <url type="contribute">https://github.com/KangLin/SerialPortAssistant/pull</url>
   <url type="help">https://github.com/KangLin/SerialPortAssistant/discussions</url>
+  <url type="vcs-browser">https://github.com/KangLin/SerialPortAssistant</url>
+  <url type="donation">https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png</url>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#f9f06b</color>
+    <color type="primary" scheme_preference="dark">#241f31</color>
+  </branding>
 
   <releases>
     <release version="@SerialPortAssistant_VERSION@" date="@BUILD_DATE@"/>
