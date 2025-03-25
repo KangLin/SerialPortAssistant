@@ -2,6 +2,7 @@
 
 - Version: v0.5.32
   - Deploy rpm package
+  - Modify metainfo
   
 - Version: v0.5.31
   - Package
