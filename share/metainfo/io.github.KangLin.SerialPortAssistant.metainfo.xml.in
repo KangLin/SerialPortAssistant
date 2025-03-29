@@ -51,7 +51,7 @@
   </branding>
 
   <releases>
-    <release version="@SerialPortAssistantTAG@" date="@BUILD_DATE@">
+    <release version="@SerialPortAssistant_VERSION@" date="@BUILD_DATE@">
         <url type="details">https://github.com/KangLin/SerialPortAssistant/blob/v@SerialPortAssistantTAG@/ChangeLog.md</url>
     </release>
   </releases>
