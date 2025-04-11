@@ -33,12 +33,13 @@ jobs:
     # Map the job outputs to step outputs
     outputs:
       name: ${{ env.artifact_name }}
-  
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
 
       - name: Flatpak build
         uses: flathub-infra/flatpak-github-actions/flatpak-builder@master
