@@ -3,7 +3,8 @@
 ### Version: v0.5.32
   - Deploy rpm package
   - Modify metainfo
-  
+  - Enable input port name
+
 ### Version: v0.5.31
   - Package
     - Add Flatpak

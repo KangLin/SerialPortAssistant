@@ -382,23 +382,35 @@ void CMainWindow::on_pbOpen_clicked()
         InitPinout();
         return;
     }
-
-    if(QSerialPortInfo::availablePorts().isEmpty())
+    
+    QString szPortName = ui->cmbPort->currentText();
+    if(QSerialPortInfo::availablePorts().isEmpty() && szPortName.isEmpty())
         return;
     
     m_cmbPortIndex = ui->cmbPort->currentIndex();
     if(-1 == m_cmbPortIndex) {
-        qCritical(Logger) << "The port index is invalid: " << m_cmbPortIndex;
-        return;
+        if(szPortName.isEmpty()) {
+            qCritical(Logger) << "The port index is invalid: " << m_cmbPortIndex;
+            return;
+        }
     }
-
+    
     QSerialPortInfo info = QSerialPortInfo::availablePorts()
             .at(m_cmbPortIndex);
-//#if defined(Q_OS_WIN32)
-//    m_SerialPort.setPortName("\\\\.\\" + info.portName());
-//#else
-    m_SerialPort.setPort(info);
-//#endif
+    QString infoName = info.portName();
+    if(!info.description().isEmpty())
+    {
+        infoName += "(" + info.description() + ")";
+    }
+    if(infoName != szPortName) {
+        m_SerialPort.setPortName(szPortName);
+    } else {
+        //#if defined(Q_OS_WIN32)
+        //    m_SerialPort.setPortName("\\\\.\\" + info.portName());
+        //#else
+        m_SerialPort.setPort(info);
+        //#endif
+    }
     m_SerialPort.setBaudRate(ui->cmbBoudRate->currentText().toInt());
     QSerialPort::Parity parity =
         (QSerialPort::Parity)ui->cmbParity->currentData().toInt();
@@ -413,9 +425,10 @@ void CMainWindow::on_pbOpen_clicked()
     if(!bCheck)
     {
         QString szError;
-        szError = tr("Open Serial port %1 fail errNo[%2]: %3").
-                arg(ui->cmbPort->currentText(),
-                    QString::number(m_SerialPort.error()), m_SerialPort.errorString());
+        szError = tr("Open Serial port %1[%2] fail errNo[%3]: %4").
+                  arg(ui->cmbPort->currentText(),
+                      m_SerialPort.portName(),
+                      QString::number(m_SerialPort.error()), m_SerialPort.errorString());
         qCritical(Logger) << szError;
         SetStatusInfo(szError, Qt::red);
         return;

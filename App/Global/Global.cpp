@@ -197,9 +197,8 @@ int CGlobal::SaveSerialPort(const QSerialPort &port, int nIndex)
     QSerialPortInfo info = QSerialPortInfo::availablePorts().at(nIndex);
     if(info.portName() != port.portName())
     {
-        qCritical(log) << "The port name is different:"
+        qWarning(log) << "The port name is different:"
                        << info.portName() << "!=" << port.portName();
-        return -2;
     }
 
     QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
