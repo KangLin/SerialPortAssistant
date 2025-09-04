@@ -16,31 +16,31 @@ jobs:
   build_macos:
     strategy:
       matrix:
-        # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-        BUILD_TYPE: [Release, Debug]
-        qt_version: [6.8.2, 5.15.2, 5.12.12]
-        qt_arch: [clang_64]
-        config_arch: [x86_64]
-        VCPKG_TARGET_TRIPLET: [x64-osx]
         include:
-          - qt_version: 6.8.2
-            qt_modules: qtscxml qtserialport
+          - os: macos-13
+            qt_version: 6.9.2
+            qt_arch: clang_64
+            config_arch: x64
+            VCPKG_TARGET_TRIPLET: x64-osx
 
-          - qt_version: 5.15.2
+          - os: macos-14
+            qt_version: 6.9.2
+            qt_arch: clang_64
+            config_arch: arm64
+            VCPKG_TARGET_TRIPLET: arm64-osx
 
-          - qt_version: 5.12.12
-
-    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+    # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
+    # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
     # See: https://github.com/actions/runner-images/
-    runs-on: macos-13
+    runs-on: ${{matrix.os}}
 
     env:
-      BUILD_TYPE:  ${{ matrix.BUILD_TYPE }}
+      BUILD_TYPE:  Release
       BUILD_DIR:   ${{github.workspace}}/build
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOLS_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install_macos
-      qt_modules:  ${{matrix.qt_modules}}
+      qt_modules: "qtscxml qtmultimedia qtserialport qt5compat qtwebsockets qtpositioning qtwebchannel"
       artifact_name: build_macos
       VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
       SerialPortAssistant_VERSION: 0.5.31
@@ -93,46 +93,48 @@ jobs:
           git clone https://github.com/KangLin/RabbitCommon.git
 
       - name: build SerialPortAssistant
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{env.BUILD_DIR}}
         env:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
+          export PATH=$PATH:${Qt6_DIR}/bin
           cmake ${{github.workspace}} \
               -DCMARK_SHARED=OFF \
               -DCMARK_TESTS=OFF \
               -DCMARK_STATIC=ON \
-              -DCMAKE_BUILD_TYPE=${{ matrix.BUILD_TYPE }} \
-              -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/build/install \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=${{env.BUILD_DIR}}/SerialPortAssistant.App/Contents \
               -DCMAKE_PREFIX_PATH=${{env.INSTALL_DIR}}/lib/cmake \
               -DVCPKG_VERBOSE=ON \
               -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON \
               -DVCPKG_APPLOCAL_DEPS=ON \
               -DINSTALL_QT=ON \
               -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
-          cmake --build . --config ${{ matrix.BUILD_TYPE }} --target install
-          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip install/.
-
-      - name: test run
-        if: false # ${{ matrix.BUILD_TYPE == 'Release' }}
-        working-directory: ${{github.workspace}}/build
-        run: |
-          ./install/bin/SerialPortAssistant
+          cmake --build . --config Release --target install
+          echo "executable bin/macdeployqt `pwd`/SerialPortAssistant.App -dmg -verbose=3"
+          macdeployqt SerialPortAssistant.App -dmg -verbose=3
+          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip SerialPortAssistant.App
+          if [ -f SerialPortAssistant.dmg ]; then
+            cp SerialPortAssistant.dmg SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.dmg
+          fi
       
       - name: Update configure file
-        if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '6.8.2' }}
         working-directory: ${{github.workspace}}/build
         run: |
-          ${{env.SOURCE_DIR}}/RabbitCommon/Install/GenerateJsonFile.sh \
-               "${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json" \
-               "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip" \
-               macos ${{matrix.config_arch}} \
-               "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip?viasf=1"
-      
+          echo "md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip"
+          md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip
+          MD5SUM=`md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip|awk '{print $4}'`
+          echo "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip md5sum: ${MD5SUM}"
+          SerialPortAssistant.App/Contents/MacOS/SerialPortAssistantApp \
+            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip?viasf=1"
+            --md5 "${MD5SUM}"
+
       - name: Update artifact
-        if: ${{ matrix.BUILD_TYPE == 'Release' && matrix.qt_version == '6.8.2' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}_${{matrix.qt_version}}_${{matrix.qt_arch}}
+          name: ${{ env.artifact_name }}_${{matrix.qt_version}}_${{matrix.os}}
           path: |
             ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip
             ${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json
+            ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.dmg

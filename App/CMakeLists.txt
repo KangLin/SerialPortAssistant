@@ -49,6 +49,8 @@ else()
     message(FATAL_ERROR "Qt${QT_VERSION_MAJOR} don't found")
 endif()
 
+set(APP_ID io.github.KangLin.SerialPortAssistant)
+
 ADD_TARGET(NAME ${PROJECT_NAME}
     ISEXE
     ISWINDOWS
@@ -86,12 +88,18 @@ INSTALL_FILE(SOURCES ${OTHER_FILES}
     DESTINATION ${CMAKE_INSTALL_DOCDIR}
         COMPONENT Application)
 
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
-    DESTINATION "."
-        COMPONENT Application)
-
-if(UNIX AND NOT ANDROID)
-    set(APP_ID io.github.KangLin.SerialPortAssistant)
+if(WIN32)
+    INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/SerialPortAssistant.ico
+        DESTINATION "."
+            COMPONENT Application)
+elseif(APPLE)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Resource/App.Info.plist
+        ${CMAKE_CURRENT_BINARY_DIR}/Info.plist
+                 @ONLY)
+    INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/Info.plist
+        DESTINATION "." COMPONENT Application)
+    target_add_resources(${PROJECT_NAME} . "${CMAKE_CURRENT_SOURCE_DIR}/Resource/${APP_ID}.icns")
+elseif(UNIX AND NOT ANDROID)
     configure_file(${CMAKE_SOURCE_DIR}/share/applications/${APP_ID}.desktop.in
         ${CMAKE_BINARY_DIR}/${APP_ID}.desktop @ONLY)
     INSTALL(FILES ${CMAKE_BINARY_DIR}/${APP_ID}.desktop
