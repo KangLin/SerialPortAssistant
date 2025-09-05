@@ -50,11 +50,12 @@ sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: \"${VERSIO
 #sed -i "s/export VERSION=.*/export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 #sed -i "s/^\  - export VERSION=.*/\  - export VERSION=\"${VERSION}\"/g" ${SOURCE_DIR}/.travis.yml
 
-sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/appimage.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
+sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/macos.yml
+sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/flatpak.yml
 sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/${VERSION}/g" ${SOURCE_DIR}/README*.md
 
 DEBIAN_VERSION=`echo ${VERSION}|cut -d "v" -f 2`
@@ -65,8 +66,10 @@ sed -i "s/version:.*'[0-9]\+\.[0-9]\+\.[0-9]\+'/version: '${DEBIAN_VERSION}'/g" 
 sed -i "s/Version:.*'[0-9]\+\.[0-9]\+\.[0-9]\+'/Version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/Package/rpm/serialportassistant.spec
 sed -i "s/serialportassistant_[0-9]\+\.[0-9]\+\.[0-9]\+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
 sed -i "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
+sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
 sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml
-sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/macos.yml
+sed -i "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/docker.yml
+
 if [ -f ${SOURCE_DIR}/vcpkg.json ]; then
     sed -i "s/  \"version-string\":.*\"[0-9]\+\.[0-9]\+\.[0-9]\+\",/  \"version-string\": \"${DEBIAN_VERSION}\",/g" ${SOURCE_DIR}/vcpkg.json
 fi

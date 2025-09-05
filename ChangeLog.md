@@ -4,6 +4,8 @@
   - Deploy rpm package
   - Modify metainfo
   - Enable input port name
+  - Add to deploy macos bundle app package
+  - Add windows arm64
 
 ### Version: v0.5.31
   - Package

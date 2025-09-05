@@ -43,7 +43,7 @@ jobs:
       qt_modules: "qtscxml qtmultimedia qtserialport qt5compat qtwebsockets qtpositioning qtwebchannel"
       artifact_name: build_macos
       VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
-      SerialPortAssistant_VERSION: 0.5.31
+      SerialPortAssistant_VERSION: v0.5.31
 
     # Map the job outputs to step outputs
     outputs:
@@ -69,7 +69,7 @@ jobs:
         with:
           path: |
             ${{env.INSTALL_DIR}}
-          key: Cache-installed-macos_qt${{matrix.qt_version}}_${{matrix.qt_arch}}_${{matrix.BUILD_TYPE}}
+          key: Cache-installed-macos_qt${{matrix.qt_version}}_${{matrix.qt_arch}}_${{matrix.VCPKG_TARGET_TRIPLET}}_Release
 
       - name: run vcpkg
         uses: lukka/run-vcpkg@v11
@@ -108,12 +108,13 @@ jobs:
               -DVCPKG_VERBOSE=ON \
               -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON \
               -DVCPKG_APPLOCAL_DEPS=ON \
+              -DVCPKG_TARGET_TRIPLET=${{matrix.VCPKG_TARGET_TRIPLET}} \
               -DINSTALL_QT=ON \
               -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
           cmake --build . --config Release --target install
           echo "executable bin/macdeployqt `pwd`/SerialPortAssistant.App -dmg -verbose=3"
           macdeployqt SerialPortAssistant.App -dmg -verbose=3
-          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip SerialPortAssistant.App
+          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip SerialPortAssistant.App
           if [ -f SerialPortAssistant.dmg ]; then
             cp SerialPortAssistant.dmg SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.dmg
           fi
@@ -121,20 +122,20 @@ jobs:
       - name: Update configure file
         working-directory: ${{github.workspace}}/build
         run: |
-          echo "md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip"
-          md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip
-          MD5SUM=`md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip|awk '{print $4}'`
-          echo "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip md5sum: ${MD5SUM}"
-          SerialPortAssistant.App/Contents/MacOS/SerialPortAssistantApp \
-            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip \
-            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip?viasf=1"
-            --md5 "${MD5SUM}"
+          echo "md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip"
+          md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip
+          MD5SUM=`md5 SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip|awk '{print $4}'`
+          echo "SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip md5sum: ${MD5SUM}"
+          SerialPortAssistant.App/Contents/MacOS/SerialPortAssistant \
+            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip \
+            --md5 "${MD5SUM}" \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip,https://sourceforge.net/projects/rabbitSerialPortAssistant/v${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip?viasf=1"
 
       - name: Update artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.artifact_name }}_${{matrix.qt_version}}_${{matrix.os}}
           path: |
-            ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_macos_qt${{matrix.qt_version}}.zip
+            ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.zip
             ${{github.workspace}}/build/update_macos_${{matrix.qt_version}}.json
             ${{github.workspace}}/build/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.os}}.dmg

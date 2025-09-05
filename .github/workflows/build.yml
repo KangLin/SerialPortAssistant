@@ -5,7 +5,7 @@ name: build
 env:
   artifact_path: artifact_path
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SerialPortAssistant_VERSION: v0.5.31
+  SerialPortAssistant_VERSION: 0.5.31
 
 on:
   push:
@@ -121,37 +121,63 @@ jobs:
           echo "" >> ${{github.workspace}}/Release.md
           echo "[:us: Change log](ChangeLog.md)" >> ${{github.workspace}}/Release.md
           echo "" >> ${{github.workspace}}/Release.md
-          echo "[Instructions for installing the package](README.md#Instructions-for-installing-the-package)" >> ${{github.workspace}}/Release.md
 
       - name: Make relase file
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
-          echo "[:cn: 修改日志](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog_zh_CN.md)" > ${{github.workspace}}/Release.md
-          echo "[:us: Change log](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/ChangeLog.md)" >> ${{github.workspace}}/Release.md
+          echo "[:cn: 修改日志](https://github.com/KangLin/SerialPortAssistant/blob/v${{env.SerialPortAssistant_VERSION}}/ChangeLog_zh_CN.md)" > ${{github.workspace}}/Release.md
+          echo "[:us: Change log](https://github.com/KangLin/SerialPortAssistant/blob/v${{env.SerialPortAssistant_VERSION}}/ChangeLog.md)" >> ${{github.workspace}}/Release.md
           echo "" >> ${{github.workspace}}/Release.md
-          echo "[Instructions for installing the package](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/README.md#Instructions-for-installing-the-package)" >> ${{github.workspace}}/Release.md
-          echo "[安装包说明](https://github.com/KangLin/SerialPortAssistant/blob/${{env.SerialPortAssistant_VERSION}}/README_zh_CN.md#安装包说明)" >> ${{github.workspace}}/Release.md
-          
+
       - name: md5
         run: |
           echo "" >> ${{github.workspace}}/Release.md
-          echo "File checksum:" >> ${{github.workspace}}/Release.md
-          echo "|File|Checksum(md5)|" >> ${{github.workspace}}/Release.md
-          echo "| :- |    :-       |" >> ${{github.workspace}}/Release.md
-    
+          echo "## File checksum:" >> ${{github.workspace}}/CheckSum.md
+          echo "" >> ${{github.workspace}}/CheckSum.md
+          echo "|File|Checksum(md5)|Checksum(sha256)|" >> ${{github.workspace}}/CheckSum.md
+          echo "| :- |    :-       |:-|" >> ${{github.workspace}}/CheckSum.md
           cd ${{ env.artifact_path }}
           for file in *
           do
               echo "$file"
               if [ -f $file ]; then
                   if [ "${file##*.}" != "xml" ] && [ "${file##*.}" != "json" ]; then
-                      md5sum $file > $file.md5sum
-                      awk '{print  "|", $2, "|", $1, "|"}' ${file}.md5sum >> ${{github.workspace}}/Release.md
+                      SumMd5=`md5sum $file | awk '{print  "|", $2, "|", $1, "|"}'`
+                      Sum256=`sha256sum $file | awk '{print $1, "|"}'`
+                      echo "${SumMd5}${Sum256}" >> ${{github.workspace}}/CheckSum.md
                   fi
               else
                  rm -fr $file
               fi
           done
+
+      - name: Add download
+        run: |
+          export BRANCH_NAME=${{ github.ref_name }}
+          if [ "${{ github.ref_name }}" == "master" ]; then
+              export BRANCH_NAME=test_${{ github.ref_name }}
+          fi
+          echo "## Download:" >> ${{github.workspace}}/Release.md
+          echo "" >> ${{github.workspace}}/Release.md
+          echo "|       | x86-64 (64-bit) | x86-32 (32-bit) | AArch64 (ARM64) | ARMv7 (32-bit) |Remark|" >> ${{github.workspace}}/Release.md
+          echo "|:-     | :-------------- | :-------------- | :-------------- | :------------- |:-----|" >> ${{github.workspace}}/Release.md
+          echo "|Windows xp SP3| |[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_windows_xp_x86_Setup.exe)||||" >> ${{github.workspace}}/Release.md
+          echo "|Windows 7 SP1 or later|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_64_qt6.9.2_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win32_msvc2019_qt5.15.2_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_arm64_qt6.9.2_Setup.exe) | ||" >> ${{github.workspace}}/Release.md
+          echo "|Android|[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_x86_64_qt6.9.2_Release.apk) | |[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_arm64_v8a_qt6.9.2_Release.apk)| |Experiment|" >> ${{github.workspace}}/Release.md
+          echo "|Macos|[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-13.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-13.dmg)||[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.dmg)||Experiment|" >> ${{github.workspace}}/Release.md
+          echo "|Linux|[AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_x86_64.AppImage)| |[AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_aarch64.AppImage)| |sudo chmod u+x SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_x86_64.AppImage|" >> ${{github.workspace}}/Release.md
+          echo "|Ubuntu 24.04|[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-24.04_amd64.deb)| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-24.04_arm64.deb)| |sudo apt install \"deb file\" |" >> ${{github.workspace}}/Release.md
+          echo "|Ubuntu 22.04|| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-22.04_arm64.deb)| |sudo apt install \"deb file\" |" >> ${{github.workspace}}/Release.md
+          echo "|Fedora 42|[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant-${{env.SerialPortAssistant_VERSION}}-1.fc42.x86_64.rpm)| |[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant-${{env.SerialPortAssistant_VERSION}}-1.fc42.aarch64.rpm)| |sudo dnf install \"rpm file\" |" >> ${{github.workspace}}/Release.md
+
+      - name: Add download in test
+        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          export BRANCH_NAME=${{ github.ref_name }}
+          if [ "${{ github.ref_name }}" == "master" ]; then
+            export BRANCH_NAME=test_${{ github.ref_name }}
+          fi
+          echo "|Flatpak|[flatpak](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_x86_64.flatpak)| |[flatpak](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_aarch64.flatpak)||flatpak install \"flatpak File\" [--user] |" >> ${{github.workspace}}/Release.md
 
       - name: Add flathub download
         run: |
@@ -167,11 +193,11 @@ jobs:
       - name: Upload To Github Release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: |
-          gh release upload ${{ github.ref_name }} ${{github.workspace}}/${{env.artifact_path}}/* ${{github.workspace}}/Release.md ${{ github.workspace }}/update.json
+          gh release upload ${{ github.ref_name }} ${{github.workspace}}/${{env.artifact_path}}/* ${{github.workspace}}/Release.md ${{github.workspace}}/CheckSum.md ${{ github.workspace }}/update.json
 
       - name: Upload test tag To Github Release
         if: ${{ startsWith(github.ref, 'refs/heads/master') }}
         run: |
           gh release create test_${{ github.ref_name }} --prerelease --latest=false --title "Recently developed build - ${{ github.ref_name }}" --notes-file ${{github.workspace}}/Release.md
-          gh release upload test_${{ github.ref_name }} --clobber ${{github.workspace}}/${{ env.artifact_path }}/* ${{github.workspace}}/Release.md ${{github.workspace}}/update.json --clobber
+          gh release upload test_${{ github.ref_name }} --clobber ${{github.workspace}}/${{ env.artifact_path }}/* ${{github.workspace}}/Release.md ${{github.workspace}}/CheckSum.md ${{github.workspace}}/update.json --clobber
       
