@@ -95,6 +95,7 @@ cmake --install . --config Release --component Application --prefix ${INSTALL_AP
 export EXTRA_PLATFORM_PLUGINS="libqxcb.so"
 # Icons from theme are not displayed in QtWidgets Application: https://github.com/linuxdeploy/linuxdeploy-plugin-qt/issues/17
 export EXTRA_QT_MODULES="svg"
+export DEPLOY_PLATFORM_THEMES=true
 ${TOOLS_DIR}/linuxdeploy-`uname -m`.AppImage --appdir=AppDir -v0 \
     --plugin qt \
     --output appimage
