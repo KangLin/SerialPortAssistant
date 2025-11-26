@@ -35,7 +35,7 @@ jobs:
       SOURCE_DIR:  ${{github.workspace}}/.cache/source
       TOOLS_DIR:   ${{github.workspace}}/.cache/tools
       INSTALL_DIR: ${{github.workspace}}/.cache/install
-      VCPKGGITCOMMITID: 59aeb8fe8fe1c980de6bd5ba634cf21024522d81
+      VCPKGGITCOMMITID: 4c5ae6b55f3e3e39d291679f89822f496cf190ee
       VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
       VCPKG_DEFAULT_HOST_TRIPLET: x64-linux
       ANDROID_ABI: ${{matrix.ANDROID_ABI}}

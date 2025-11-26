@@ -188,7 +188,15 @@ if [ $DOCKER -eq 1 ]; then
             bash -e -x -c "
             tar -C ~ -xf /home/build/SerialPortAssistant.tar.gz
             ~/SerialPortAssistant/Script/build_linux.sh --appimage --verbose ${BUILD_VERBOSE}
-            cp ~/SerialPortAssistant/SerialPortAssistant_`uname -m`.AppImage /home/build/
+            mkdir -p /home/build/install
+            pushd /home/build/install
+            cp ~/SerialPortAssistant/SerialPortAssistant_`uname -m`.AppImage .
+            chmod a+rx SerialPortAssistant_`uname -m`.AppImage
+            cp ~/SerialPortAssistant/build_appimage/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
+            cp ~/SerialPortAssistant/build_appimage/AppDir/usr/share/icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg .
+            cp ~/SerialPortAssistant/Script/install.sh .
+            chmod a+rx install.sh
+            popd
             "
     fi
     if [ $RPM -eq 1 ]; then

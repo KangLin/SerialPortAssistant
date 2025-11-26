@@ -11,6 +11,11 @@ Path=@CMAKE_INSTALL_PREFIX@/bin
 Terminal=false
 StartupNotify=true
 
+# Find WM_CLASS:
+# Open terminal, run `xprop WM_CLASS` .
+# Your mouse cursor will change to a crosshair. Click on any window of SerialPortAssistant.
+StartupWMClass=SerialPortAssistant
+
 # https://specifications.freedesktop.org/menu-spec/latest/apa.html
 Categories=Utility;Development;Debugger
 Keywords=Serial Port Assistant; Serial; 串口助手; 串口

@@ -49,9 +49,11 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
+
       - name: run docker
         run: |
           ./Script/build_linux.sh --docker --docker-image="${{matrix.variant.image}}" --${{matrix.variant.PACKAGE}}
+
       - name: Update artifact
         if: ${{matrix.variant.PACKAGE == 'rpm'}}
         uses: actions/upload-artifact@v4

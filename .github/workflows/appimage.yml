@@ -98,8 +98,22 @@ jobs:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
           export QMAKE=/usr/bin/qmake6
-          ${{github.workspace}}/Script/build_appimage.sh
+          ${{github.workspace}}/Script/build_appimage.sh \
+            --install ${{env.INSTALL_DIR}} \
+            --source ${{env.SOURCE_DIR}} \
+            --tools ${{env.TOOLS_DIR}} \
+            --build ${{env.BUILD_DIR}}
           md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage.md5sum
+          mkdir -p SetupSerialPortAssistantAppImage
+          pushd SetupSerialPortAssistantAppImage
+          cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage .
+          chmod a+rx SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
+          cp ${{github.workspace}}/Script/install.sh .
+          chmod a+rx install.sh
+          cp ${{env.BUILD_DIR}}/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
+          cp ${{env.BUILD_DIR}}/AppDir/usr/share/icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg .
+          popd
+          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip SetupSerialPortAssistantAppImage
 
       - name: core dump infomations
         if: false
@@ -166,8 +180,8 @@ jobs:
           ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
             -f "${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json" \
             --foc 1 \
-            --file-name SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
-            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.AppImage?viasf=1" \
+            --file-name ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip?viasf=1" \
             --md5 "${MD5SUM}" \
             -m "v${{env.SerialPortAssistant_VERSION}}"
 
@@ -177,10 +191,11 @@ jobs:
           #fi
 
       - name: Update artifact
-        if: ${{ matrix.BUILD_TYPE == 'Release' }}
+        if: ${{matrix.BUILD_TYPE == 'Release'}}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}_${{matrix.os}}
+          name: ${{env.artifact_name}}_${{matrix.os}}
           path: |
             ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_*.AppImage
+            ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}*.zip
             ${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json

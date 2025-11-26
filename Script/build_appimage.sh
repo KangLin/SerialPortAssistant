@@ -105,7 +105,7 @@ chmod a+x Serial_Port_Assistant-`uname -m`.AppImage
 if [ -z "$SerialPortAssistant_VERSION" ]; then
     cp Serial_Port_Assistant-`uname -m`.AppImage $REPO_ROOT
 else
-    mv Serial_Port_Assistant-`uname -m`.AppImage ../SerialPortAssistant_${SerialPortAssistant_VERSION}_Linux_`uname -m`.AppImage
+    cp Serial_Port_Assistant-`uname -m`.AppImage ../SerialPortAssistant_${SerialPortAssistant_VERSION}_Linux_`uname -m`.AppImage
 fi
 
 popd
