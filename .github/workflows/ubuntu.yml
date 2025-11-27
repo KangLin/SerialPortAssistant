@@ -99,7 +99,7 @@ jobs:
           ulimit -c unlimited
           echo "# sudo sysctl -w kernel.core_pattern=core"
           sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
-          /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
+          /opt/SerialPortAssistant/bin/SerialPortAssistant \
                 -f "`pwd`/update_ubuntu_${OS_NAME}_${ARCH}.json" \
                 --foc 1 \
                 --md5 ${MD5} \
@@ -113,7 +113,7 @@ jobs:
         run: |
           sudo Xvfb :98 -ac &
           export DISPLAY=:98.0
-          /opt/SerialPortAssistant/bin/SerialPortAssistant.sh \
+          /opt/SerialPortAssistant/bin/SerialPortAssistant \
                -f "${{github.workspace}}/version.json" \
                --foc 0 \
                --pv ${{env.SerialPortAssistant_VERSION}}

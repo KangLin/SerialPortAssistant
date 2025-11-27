@@ -17,13 +17,10 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release]
-        qt_version: [6.8.2]
         os: [ubuntu-24.04, ubuntu-24.04-arm]
         include:
           - os: ubuntu-24.04
-            qt_arch: "linux_gcc_64"
           - os: ubuntu-24.04-arm
-            qt_arch: "linux_gcc_arm64"
 
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
@@ -74,84 +71,24 @@ jobs:
 
       - name: Install base dependency libraries
         run: |
-          sudo ./Script/build_depend.sh --apt_update --base --default \
-              --install ${{env.INSTALL_DIR}} \
-              --source ${{env.SOURCE_DIR}} \
-              --tools ${{env.TOOLS_DIR}} \
-              --build ${{env.BUILD_DIR}}
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        if: false
-        with:
-          dir: '${{env.TOOLS_DIR}}/qt'
-          version: ${{matrix.qt_version}}
-          target: 'desktop'
-          arch: ${{matrix.qt_arch}}
-          # See: https://ddalcino.github.io/aqt-list-server/
-          modules: ${{env.qt_modules}}
-          cache: true
-          cache-key-prefix: cached-qt_${{matrix.qt_arch}}
+          sudo ./Script/build_depend.sh --apt_update --base --default
 
       - name: build appimage
         env:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
           export QMAKE=/usr/bin/qmake6
-          ${{github.workspace}}/Script/build_appimage.sh \
-            --install ${{env.INSTALL_DIR}} \
-            --source ${{env.SOURCE_DIR}} \
-            --tools ${{env.TOOLS_DIR}} \
-            --build ${{env.BUILD_DIR}}
-          md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage.md5sum
+          ${{github.workspace}}/Script/build_appimage.sh
           mkdir -p SetupSerialPortAssistantAppImage
           pushd SetupSerialPortAssistantAppImage
           cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage .
           chmod a+rx SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
-          cp ${{github.workspace}}/Script/install.sh .
+          cp ${{github.workspace}}/Script/install_appimage.sh install.sh
           chmod a+rx install.sh
           cp ${{env.BUILD_DIR}}/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
-          cp ${{env.BUILD_DIR}}/AppDir/usr/share/icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg .
+          cp ${{env.BUILD_DIR}}/AppDir/usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png .
           popd
           7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip SetupSerialPortAssistantAppImage
-
-      - name: core dump infomations
-        if: false
-        run: |
-          echo "# ulimit -a"
-          ulimit -a
-          echo "# cat /proc/sys/kernel/core_pattern"
-          cat /proc/sys/kernel/core_pattern
-          echo "# ulimit -c unlimited"
-          ulimit -c unlimited
-          echo "# sudo sysctl -w kernel.core_pattern=core"
-          sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
-          echo "# ulimit -a"
-          ulimit -a
-          echo "# cat /proc/sys/kernel/core_pattern"
-          cat /proc/sys/kernel/core_pattern
-
-#        See: https://www.cnblogs.com/cong-wang/p/15026524.html
-#        Naming of core dump files
-#               By default, a core dump file is named core, but the /proc/sys/kernel/core_pattern file (since  Linux  2.6  and
-#               2.4.21)  can  be  set  to  define a template that is used to name core dump files.  The template can contain %
-#               specifiers which are substituted by the following values when a core file is created:
-#
-#                   %%  a single % character
-#                   %c  core file size soft resource limit of crashing process (since Linux 2.6.24)
-#                   %d  dump mode—same as value returned by prctl(2) PR_GET_DUMPABLE (since Linux 3.7)
-#                   %e  executable filename (without path prefix)
-#                   %E  pathname of executable, with slashes ('/') replaced by exclamation marks ('!') (since Linux 3.0).
-#                   %g  (numeric) real GID of dumped process
-#                   %h  hostname (same as nodename returned by uname(2))
-#                   %i  TID of thread that triggered core dump, as seen in the PID  namespace  in  which  the  thread  resides
-#                       (since Linux 3.18)
-#                   %I  TID of thread that triggered core dump, as seen in the initial PID namespace (since Linux 3.18)
-#                   %p  PID of dumped process, as seen in the PID namespace in which the process resides
-#                   %P  PID of dumped process, as seen in the initial PID namespace (since Linux 3.12)
-#                   %s  number of signal causing dump
-#                   %t  time of dump, expressed as seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC)
-#                   %u  (numeric) real UID of dumped process
 
       - name: update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
@@ -162,33 +99,21 @@ jobs:
           sudo Xvfb :96 -ac -screen 0 1200x900x24 &
           export DISPLAY=:96.0
 
-          #echo "Enable core dump ......"
-          #sudo apt install gdb -y -qq
-          #ulimit -c unlimited
-          #echo "# sudo sysctl -w kernel.core_pattern=core"
-          #sudo sysctl -w kernel.core_pattern=${{github.workspace}}/core
-          #echo "# cat /proc/sys/kernel/core_pattern"
-          #cat /proc/sys/kernel/core_pattern
-
           echo "Update update_linux.json ......"
           export QT_XCB_GL_INTEGRATION=none
           #export QT_DEBUG_PLUGINS=1
           ARCH=`uname -m`
-          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage.md5sum|awk '{print $1}'`
-          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage: ${MD5SUM}"
+          md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum
+          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum|awk '{print $1}'`
+          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip: ${MD5SUM}"
           echo "Generate update configure file ......"
           ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
-            -f "${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json" \
+            -f "${{github.workspace}}/update_appimage_${{matrix.os}}.json" \
             --foc 1 \
             --file-name ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip \
             -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip?viasf=1" \
             --md5 "${MD5SUM}" \
             -m "v${{env.SerialPortAssistant_VERSION}}"
-
-          #if [ -f core ]; then
-          #  echo "Dump core ......"
-          #  gdb ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage core
-          #fi
 
       - name: Update artifact
         if: ${{matrix.BUILD_TYPE == 'Release'}}
@@ -198,4 +123,4 @@ jobs:
           path: |
             ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_*.AppImage
             ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}*.zip
-            ${{github.workspace}}/update_appimage_${{matrix.qt_arch}}_qt${{matrix.qt_version}}.json
+            ${{github.workspace}}/update_appimage_${{matrix.os}}.json

@@ -30,7 +30,7 @@ function_config()
         if [ ! -d /usr/share/pixmaps ]; then
             mkdir -p /usr/share/pixmaps
         fi
-        ln -s ${INSTALL_ROOT}/share/icons/hicolor/128x128/apps/io.github.KangLin.SerialPortAssistant.png /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
+        ln -s ${INSTALL_ROOT}/share/pixmaps/io.github.KangLin.SerialPortAssistant.png /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
     fi
     if [ ! -f /usr/bin/serialportassistant ]; then
         ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant

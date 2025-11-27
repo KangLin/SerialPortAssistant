@@ -100,7 +100,7 @@ ${TOOLS_DIR}/linuxdeploy-`uname -m`.AppImage --appdir=AppDir -v0 \
     --plugin qt \
     --output appimage
 
-chmod a+x Serial_Port_Assistant-`uname -m`.AppImage
+chmod a+rx Serial_Port_Assistant-`uname -m`.AppImage
 
 if [ -z "$SerialPortAssistant_VERSION" ]; then
     cp Serial_Port_Assistant-`uname -m`.AppImage $REPO_ROOT

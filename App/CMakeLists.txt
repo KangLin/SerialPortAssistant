@@ -105,24 +105,21 @@ elseif(UNIX AND NOT ANDROID)
     INSTALL(FILES ${CMAKE_BINARY_DIR}/${APP_ID}.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
             COMPONENT Application)
-    INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
-        DESTINATION "${CMAKE_INSTALL_BINDIR}"
-            COMPONENT Application)
-    # Icon path
+    # INSTALL(PROGRAMS ${CMAKE_SOURCE_DIR}/share/SerialPortAssistant.sh
+    #     DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    #         COMPONENT Application)
+    # Icon path: http://freedesktop.org/wiki/Standards/icon-theme-spec
     # The freedesktop.org standard specifies in which order and directories programs should look for icons:
     #
     #    $HOME/.icons (for backwards compatibility)
     #    $XDG_DATA_DIRS/icons
     #    /usr/share/pixmaps
-    INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
-        DESTINATION share/pixmaps
-            COMPONENT Application
-        RENAME ${APP_ID}.png)
     # Flatpak: https://docs.flatpak.org/en/latest/conventions.html#application-icons
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
-        DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps"
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/pixmaps
             COMPONENT Application
         RENAME ${APP_ID}.png)
+
     string(TIMESTAMP BUILD_DATE "%Y-%m-%d")
     configure_file(${CMAKE_SOURCE_DIR}/share/metainfo/${APP_ID}.metainfo.xml.in
         ${CMAKE_BINARY_DIR}/${APP_ID}.metainfo.xml @ONLY)

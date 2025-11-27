@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# Setup appimage shell script
+# Setup AppImage shell script
 # Author: Kang Lin <kl222@126.com>
 
 #set -v
 set -e
 #set -x
 
-INSTALL_DIR=~/AppImage/io.github.KangLin.SerialPortAssistant
+APP_ID=io.github.KangLin.SerialPortAssistant
+INSTALL_DIR=$HOME/AppImage/$APP_ID
+DESKTOP_FILE_DIR=$HOME/.local/share/applications
+DESKTOP_FILE=$DESKTOP_FILE_DIR/$APP_ID.AppImage.desktop
+
 usage_long() {
     echo "$0 [-h|--help] [--install=<install directory>]"
     echo "  -h|--help: show help"
@@ -15,6 +19,7 @@ usage_long() {
     echo "  --install: Set install directory"
     exit
 }
+
 # [如何使用getopt和getopts命令解析命令行选项和参数](https://zhuanlan.zhihu.com/p/673908518)
 # [【Linux】Shell命令 getopts/getopt用法详解](https://blog.csdn.net/arpospf/article/details/103381621)
 if command -V getopt >/dev/null; then
@@ -61,10 +66,10 @@ if command -V getopt >/dev/null; then
     done
 fi
 
-if [ -f ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop ]; then
-    OLD_UNINSTALL=$(dirname $(readlink -f ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop))
+if [ -f $DESKTOP_FILE ]; then
+    OLD_UNINSTALL=$(dirname $(readlink -f $DESKTOP_FILE))
     if [ -f $OLD_UNINSTALL/uninstall.sh ]; then
-        echo ""
+        #echo "Run $OLD_UNINSTALL/uninstall.sh"
         $OLD_UNINSTALL/uninstall.sh
     fi
 fi
@@ -72,11 +77,12 @@ fi
 INSTALL_DIR=$(readlink -f $INSTALL_DIR)
 if [ ! -d $INSTALL_DIR ]; then
     mkdir -p $INSTALL_DIR
+    CREATE_INSTALL_DIR=1
 fi
 
 ROOT_DIR=$(dirname $(readlink -f $0))
-if [ ! -d /usr/share/icons/hicolor/scalable/apps ]; then
-    mkdir -p /usr/share/icons/hicolor/scalable/apps
+if [ ! -d $DESKTOP_FILE_DIR ]; then
+    mkdir -p $DESKTOP_FILE_DIR
 fi
 
 pushd $ROOT_DIR > /dev/null 
@@ -84,35 +90,36 @@ pushd $ROOT_DIR > /dev/null
 APPIMAGE_FILE=`ls SerialPortAssistant_*.AppImage`
 if [ $INSTALL_DIR != $ROOT_DIR ]; then
     cp $APPIMAGE_FILE $INSTALL_DIR/$APPIMAGE_FILE
-    cp io.github.KangLin.SerialPortAssistant.svg $INSTALL_DIR/io.github.KangLin.SerialPortAssistant.svg
-    cp io.github.KangLin.SerialPortAssistant.desktop $INSTALL_DIR/io.github.KangLin.SerialPortAssistant.desktop
+    cp $APP_ID.png $INSTALL_DIR/$APP_ID.png
+    cp $APP_ID.desktop $INSTALL_DIR/$APP_ID.desktop
 fi
 
-sed -i "s#Exec=.*#Exec=${INSTALL_DIR}/${APPIMAGE_FILE}#g" $INSTALL_DIR/io.github.KangLin.SerialPortAssistant.desktop
-if [ ! -f ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop ]; then
-    ln -s $INSTALL_DIR/io.github.KangLin.SerialPortAssistant.desktop ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop
-fi
-if [ ! -d ~/.icons/hicolor/scalable/apps ]; then
-    mkdir -p ~/.icons/hicolor/scalable/apps
-fi
-if [ ! -f ~/.icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg ]; then
-    ln -s $INSTALL_DIR/io.github.KangLin.SerialPortAssistant.svg ~/.icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg
+# 修改执行文件
+sed -i "s#Exec=.*#Exec=${APPIMAGE_FILE}#g" $INSTALL_DIR/$APP_ID.desktop
+# 修改路径
+sed -i "s#Path=.*#Path=${INSTALL_DIR}#g" $INSTALL_DIR/$APP_ID.desktop
+if [ ! -f $DESKTOP_FILE ]; then
+    CREATE_DESKTOP_FILE=1
+    ln -s ${INSTALL_DIR}/$APP_ID.desktop $DESKTOP_FILE
+    # ICON 使用绝对路径
+    sed -i "s#^Icon=.*#Icon=$INSTALL_DIR/$APP_ID.png#" $INSTALL_DIR/$APP_ID.desktop
 fi
 
-update-desktop-database ~/.local/share/applications
-
-echo "echo \"Uninstall rabbit remote control in $(dirname $(readlink -f ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop))\"" > $INSTALL_DIR/uninstall.sh
-echo "rm ~/.local/share/applications/io.github.KangLin.SerialPortAssistant.AppImage.desktop" >> $INSTALL_DIR/uninstall.sh
-echo "rm ~/.icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg" >> $INSTALL_DIR/uninstall.sh
-echo "rm -fr $INSTALL_DIR" >> $INSTALL_DIR/uninstall.sh
+echo "echo \"Uninstall \\\"Serial Port Assistant\\\" AppImage from \\\"$(dirname $(readlink -f $DESKTOP_FILE))\\\"\"" > $INSTALL_DIR/uninstall.sh
+if [ -n $CREATE_DESKTOP_FILE ]; then
+    echo "rm $DESKTOP_FILE" >> $INSTALL_DIR/uninstall.sh
+fi
+if [ -n $CREATE_INSTALL_DIR ]; then
+    echo "rm -fr $INSTALL_DIR" >> $INSTALL_DIR/uninstall.sh
+fi
 chmod u+x $INSTALL_DIR/uninstall.sh
 chmod u+x $INSTALL_DIR/$APPIMAGE_FILE
 
 echo ""
-echo "Install rabbit remote control AppImage to \"$INSTALL_DIR\"."
+echo "Install \"Serial Port Assistant\" AppImage to \"$INSTALL_DIR\"."
 echo ""
 echo "If you want to uninstall it. Please execute:"
-echo "    $INSTALL_DIR/unistasll.sh"
+echo "    $INSTALL_DIR/uninstall.sh"
 echo ""
 
 popd > /dev/null
