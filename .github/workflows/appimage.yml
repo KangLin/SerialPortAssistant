@@ -79,16 +79,16 @@ jobs:
         run: |
           export QMAKE=/usr/bin/qmake6
           ${{github.workspace}}/Script/build_appimage.sh
-          mkdir -p SetupSerialPortAssistantAppImage
-          pushd SetupSerialPortAssistantAppImage
-          cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage .
-          chmod a+rx SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
-          cp ${{github.workspace}}/Script/install_appimage.sh install.sh
-          chmod a+rx install.sh
-          cp ${{env.BUILD_DIR}}/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
-          cp ${{env.BUILD_DIR}}/AppDir/usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png .
-          popd
-          7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip SetupSerialPortAssistantAppImage
+          # mkdir -p SetupSerialPortAssistantAppImage
+          # pushd SetupSerialPortAssistantAppImage
+          # cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage .
+          # chmod a+rx SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
+          # cp ${{github.workspace}}/Script/install_appimage.sh install.sh
+          # chmod a+rx install.sh
+          # cp ${{env.BUILD_DIR}}/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
+          # cp ${{env.BUILD_DIR}}/AppDir/usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png .
+          # popd
+          # 7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip SetupSerialPortAssistantAppImage
 
       - name: update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
@@ -103,17 +103,29 @@ jobs:
           export QT_XCB_GL_INTEGRATION=none
           #export QT_DEBUG_PLUGINS=1
           ARCH=`uname -m`
-          md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum
-          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum|awk '{print $1}'`
-          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip: ${MD5SUM}"
+          md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage.md5sum
+          MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage.md5sum|awk '{print $1}'`
+          echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage: ${MD5SUM}"
           echo "Generate update configure file ......"
           ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
             -f "${{github.workspace}}/update_appimage_${{matrix.os}}.json" \
             --foc 1 \
-            --file-name ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip \
-            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip?viasf=1" \
+            --file-name ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
+            -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage?viasf=1" \
             --md5 "${MD5SUM}" \
             -m "v${{env.SerialPortAssistant_VERSION}}"
+
+          # md5sum SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip > SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum
+          # MD5SUM=`cat SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip.md5sum|awk '{print $1}'`
+          # echo "MD5SUM SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip: ${MD5SUM}"
+          # echo "Generate update configure file ......"
+          # ./SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_$ARCH.AppImage \
+          #   -f "${{github.workspace}}/update_appimage_${{matrix.os}}.json" \
+          #   --foc 1 \
+          #   --file-name ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip \
+          #   -u "https://github.com/KangLin/SerialPortAssistant/releases/download/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip;https://sourceforge.net/projects/SerialPortAssistant/${{env.SerialPortAssistant_VERSION}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip?viasf=1" \
+          #   --md5 "${MD5SUM}" \
+          #   -m "v${{env.SerialPortAssistant_VERSION}}"
 
       - name: Update artifact
         if: ${{matrix.BUILD_TYPE == 'Release'}}
