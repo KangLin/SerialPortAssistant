@@ -29,17 +29,15 @@ Abstract:
 #include <QDesktopServices>
 #include <QLoggingCategory>
 #include <QFileDialog>
+#include <QFontDatabase>
 
 #ifdef RABBITCOMMON
     #include "DlgAbout.h"
     #include "FrmUpdater.h"
     #include "RabbitCommonTools.h"
 #endif
-#ifdef BUILD_QUIWidget
-    #include "QUIWidget.h"
-#endif
 
-Q_LOGGING_CATEGORY(Logger, "MainWindow")
+static Q_LOGGING_CATEGORY(log, "MainWindow")
 
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -129,6 +127,19 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     InitPinout();
 
+    // Add fixed font. See: https://github.com/KangLin/SerialPortAssistant/issues/26
+    QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    //qDebug(log) << "fixedFont:" << fixedFont;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if(QFontDatabase::isFixedPitch(fixedFont.family(), fixedFont.styleName()))
+#else
+    QFontDatabase fd;
+    if(fd.isFixedPitch(fixedFont.family(), fixedFont.styleName()))
+#endif
+    {
+        ui->teReceive->setFont(fixedFont);
+    }
+
 #ifdef HAVE_RABBITCOMMON_GUI
     RabbitCommon::CTools::RestoreWidget(this);
 #endif
@@ -157,7 +168,7 @@ int CMainWindow::RefreshSerialPorts()
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
         /*
-        qDebug(Logger())
+        qDebug(log)
                  << "Port:" << info.portName() << " "
                  << "Location:" << info.systemLocation() << " "
                  << "Description:" << info.description() << " "
@@ -390,7 +401,7 @@ void CMainWindow::on_pbOpen_clicked()
     m_cmbPortIndex = ui->cmbPort->currentIndex();
     if(-1 == m_cmbPortIndex) {
         if(szPortName.isEmpty()) {
-            qCritical(Logger) << "The port index is invalid: " << m_cmbPortIndex;
+            qCritical(log) << "The port index is invalid: " << m_cmbPortIndex;
             return;
         }
     }
@@ -429,7 +440,7 @@ void CMainWindow::on_pbOpen_clicked()
                   arg(ui->cmbPort->currentText(),
                       m_SerialPort.portName(),
                       QString::number(m_SerialPort.error()), m_SerialPort.errorString());
-        qCritical(Logger) << szError;
+        qCritical(log) << szError;
         SetStatusInfo(szError, Qt::red);
         return;
     }
@@ -505,7 +516,7 @@ void CMainWindow::slotQTextEditMaxLength()
         cursor.removeSelectedText();
         cursor.movePosition(QTextCursor::End);  //把光标移动到文档最后  
         //ui->teReceive->setTextCursor(cursor);
-        qDebug(Logger) << "slotQTextEditMaxLength";
+        qDebug(log) << "slotQTextEditMaxLength";
     }
 }
 
@@ -545,14 +556,14 @@ void CMainWindow::slotRead()
 {
     if(!m_SerialPort.isOpen())
     {
-        qCritical(Logger) << "SerialPort don't open!";
+        qCritical(log) << "SerialPort don't open!";
         return;
     }
 
     QByteArray d = m_SerialPort.readAll();
     if(d.isEmpty())
     {
-        qCritical(Logger) << "read data fail";   
+        qCritical(log) << "read data fail";
         return;
     }
     m_nReceive += d.length();
@@ -645,7 +656,7 @@ bool CMainWindow::CheckHexChar(QChar c)
         QString szErr;
         szErr = "Invalid symbol: ";
         szErr += c;
-        qCritical(Logger) << szErr;
+        qCritical(log) << szErr;
         //m_statusInfo.setText(szErr);
         SetStatusInfo(szErr, Qt::red);
         return false;
@@ -724,7 +735,7 @@ int CMainWindow::SendInput()
     int nRet = 0;
     if(ui->teSend->toPlainText().isEmpty())
     {
-        qWarning(Logger) << "Send text is empty";
+        qWarning(log) << "Send text is empty";
         return -1;
     }
     QString szText = ui->teSend->toPlainText();
@@ -755,13 +766,13 @@ int CMainWindow::SendInput()
     {
         //m_statusInfo.setText(tr("Send fail"));
         SetStatusInfo(tr("Send fail"), Qt::red);
-        qCritical(Logger) << "Write fail: nRet:" << nRet << "; Serial error["
+        qCritical(log) << "Write fail: nRet:" << nRet << "; Serial error["
                  << m_SerialPort.error() << "]：" << m_SerialPort.errorString();
                         
         on_pbOpen_clicked(); //close serial port  
         return nRet;
     }
-    qInfo(Logger) << "Send" << nRet << "bytes";
+    qInfo(log) << "Send" << nRet << "bytes";
 
     m_nTransmissions++;
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
@@ -791,7 +802,7 @@ int CMainWindow::SendFile()
     
     if(m_SendFile.isOpen())
     {
-        qWarning(Logger) << "There is send file";
+        qWarning(log) << "There is send file";
         return 0;
     }
     
@@ -875,7 +886,7 @@ int CMainWindow::SetSaveFileName()
     int nIndex = ui->cmbPort->currentIndex();
     if(nIndex < 0 || nIndex >= QSerialPortInfo::availablePorts().count())
     {
-        qCritical(Logger) << "The index out of range. nIndex:" << nIndex
+        qCritical(log) << "The index out of range. nIndex:" << nIndex
                           << "; Serial port count:"
                           << QSerialPortInfo::availablePorts().count();
         return -1;
@@ -968,18 +979,13 @@ void CMainWindow::on_actionAbout_A_triggered()
     about->m_szCopyrightStartTime = "2017";
     #ifdef SerialPortAssistant_Revision
         about->m_szVersionRevision = SerialPortAssistant_Revision;
-    #endif
-    #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
-        QUIWidget* quiwidget = new QUIWidget(nullptr, true);
-        quiwidget->setMainWidget(about);
-        quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
-        quiwidget->exec();
-    #else
-        #if defined (Q_OS_ANDROID)
-            about->showMaximized();
-        #endif
-            about->exec();
-    #endif
+#endif
+
+#if defined (Q_OS_ANDROID)
+    about->showMaximized();
+#endif
+    about->exec();
+
 #endif
 }
 
@@ -1169,22 +1175,17 @@ void CMainWindow::on_actionUpdate_U_triggered()
 #ifdef RABBITCOMMON
     CFrmUpdater *pUpdater = new CFrmUpdater();
     if(!pUpdater) {
-        qCritical(Logger) << "new CFrmUpdater fail";
+        qCritical(log) << "new CFrmUpdater fail";
         return;
     }
     pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-    #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
-        QUIWidget* quiwidget = new QUIWidget(nullptr, true);
-        quiwidget->setMainWidget(pUpdater);
-        //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
-        quiwidget->show();
-    #else
-        #if defined (Q_OS_ANDROID)
-            pUpdater->showMaximized();
-        #else
-            pUpdater->show();
-        #endif
-    #endif
+
+#if defined (Q_OS_ANDROID)
+    pUpdater->showMaximized();
+#else
+    pUpdater->show();
+#endif
+
 #endif
 }
 
