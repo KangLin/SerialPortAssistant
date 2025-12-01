@@ -58,7 +58,7 @@ install:
 
   - cd %OTHER_SOURCE%
   - set VCPKG_ROOT=%OTHER_SOURCE%\vcpkg
-  - if not exist %VCPKG_ROOT% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_ROOT%" && git checkout -b 995451296a8237ff0ea4213b9deda73bb3f5229a 995451296a8237ff0ea4213b9deda73bb3f5229a && bootstrap-vcpkg.bat)
+  - if not exist %VCPKG_ROOT% (git clone "https://github.com/microsoft/vcpkg.git" && cd "%VCPKG_ROOT%" && git checkout -b 4c5ae6b55f3e3e39d291679f89822f496cf190ee 4c5ae6b55f3e3e39d291679f89822f496cf190ee && bootstrap-vcpkg.bat)
 
 before_build:
 
