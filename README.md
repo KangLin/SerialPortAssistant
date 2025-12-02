@@ -37,8 +37,8 @@ Author: Kang Lin (kl222@126.com)
   + [x] WINDOWS
   + [x] linux
   + [x] Android
-  + [x] mac, os  
-    - Mac os, I don't have the corresponding equipment,
+  + [x] macOS  
+    - macOS, I don't have the corresponding equipment,
     please compile and test the user with the corresponding equipment.
     - Currently compiles successfully.
     but the loading dynamic library path is not set correctly.
@@ -58,56 +58,9 @@ Author: Kang Lin (kl222@126.com)
 
 ## Download
 
-### Instructions for installing the package
-
-- Windows: The extension is .exe
-- Linux:
-  - deb package: for Debian, Ubuntu, etc
-  - rpm package: for RedHat, Fedora, CentOS, etc
-- AppImage package: for all Linux systems
-- Snap Package: Used on all Linux systems that support Snap.
-  Ubuntu uses this installation package by default.
-- Flatpak Package: For all Linux systems that support Flatpak.
-  Fedora uses this installation package by default.
-- Android: The extension is .apk
-- Apple OS: SerialPortAssistant_0.5.31_macos_qt6.8.2.zip 
-  No tests were carried out as there was no relevant equipment.
-  We hope that interested friends will participate in the development and testing.
-
-### Download position
-
 - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download from SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 - [![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
-
-### Installation Instructions:
-
-- Linux
-  - Ubuntu, Debian
-    - [serialportassistant_0.5.31_ubuntu-24.04_amd64.deb](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/serialportassistant_0.5.31_ubuntu-24.04_amd64.deb)
-
-          sudo apt install ./serialportassistant_0.5.31_ubuntu-24.04_amd64.deb
-          # If you're on an older Linux distribution, you will need to run this instead:         
-          # sudo dpkg -i serialportassistant_0.5.31_ubuntu-24.04_amd64.deb
-          # sudo apt-get install -f # Install dependencies
-
-  - Other Linux(AppImage)
-    - [SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage)
-    
-          sudo chmod a+x SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage
-          sudo ./SerialPortAssistant_v0.5.31_Linux_x86_64.AppImage
-
-- Windows
-  - Windows xp
-    - [SerialPortAssistant_v0.5.31_windows_xp_x86_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_windows_xp_x86_Setup.exe)
-  - Windows 7 or later
-    - [SerialPortAssistant_v0.5.31_win32_msvc2017_qt5.12.12_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_win32_msvc2017_qt5.12.12_Setup.exe)
-  - Windows 10 (1809 or later)
-    - [SerialPortAssistant_v0.5.31_win64_msvc2022_64_qt6.8.2_Setup.exe](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_win64_msvc2022_64_qt6.8.2_Setup.exe)
-
-- Android 9 or later
-  - [SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_arm64_v8a_qt6.8.2_Release.apk)
-  - [SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk](https://github.com/KangLin/SerialPortAssistant/releases/download/v0.5.31/SerialPortAssistant_v0.5.31_android_x86_64_qt6.8.2_Release.apk)
 
 ## Donate
 
