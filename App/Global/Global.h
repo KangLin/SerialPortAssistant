@@ -112,6 +112,12 @@ private:
     bool m_bReceiveDisplaySend;
     
 public:
+    bool GetDisplayRate();
+    int SetDisplayRate(bool bDisplay);
+private:
+    bool m_bDisplayRate;
+
+public:
     enum ENCODE{
         ASCII = 0,
         HEX,
@@ -130,8 +136,6 @@ public:
 private:
     ENCODE m_SendDisplayCode;
 
-signals:
-
-public slots:
+    QString m_szFile;
 };
 #endif // GLOBAL_H

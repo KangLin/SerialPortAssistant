@@ -7,6 +7,7 @@
   - Add to deploy macos bundle app package
   - Add windows arm64
   - Use [RabbitCommon v2.3.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.4)
+  - Add CStats
 
 ### Version: v0.5.31
   - Package

@@ -7,6 +7,7 @@
   - 增加 macos 分发捆绑包
   - 增加 windows arm64 发行版本
   - 使用 [RabbitCommon v2.3.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.4)
+  - 增加 CStats
 
 ### 版本: v0.5.31
   - 打包

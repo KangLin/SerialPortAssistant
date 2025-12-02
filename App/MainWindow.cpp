@@ -43,19 +43,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow),
     m_SerialPort(this),
-    m_nSend(0),    
-    m_nReceive(0),
-    m_nDrop(0),
     m_cmbPortIndex(-1),
     m_Timer(this),    
     m_nTransmissions(0)
 {
     bool check = false;
-    /*QDir d;
-    if(!d.exists(QStandardPaths::writableLocation(
-                      QStandardPaths::DataLocation)))
-        d.mkdir(QStandardPaths::writableLocation(
-                  QStandardPaths::DataLocation));*/
 
     ui->setupUi(this);
 
@@ -69,6 +61,14 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
                              RabbitCommon::CTools::GetLogMenu(this));
     ui->menuTools_T->addSeparator();
+    
+    check = connect(&m_Stats, &CStats::sigCalculationComplete,
+                    this, &CMainWindow::slotCalculationComplete);
+    Q_ASSERT(check);
+    CStats::StringTypes types(CStats::Counting);
+    if(ui->cbDisplayRate->isChecked())
+        types |= CStats::Rate;
+    m_Stats.SetStringType(types);
 
     InitStatusBar();
     InitToolBar();
@@ -115,6 +115,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     
     ui->cbDisplaySend->setChecked(CGlobal::Instance()->GetReceiveDisplaySend());
     ui->cbDisplayTime->setChecked(CGlobal::Instance()->GetReceiveDisplayTime());
+    ui->cbDisplayRate->setChecked(CGlobal::Instance()->GetDisplayRate());
     ui->cbSaveToFile->setChecked(CGlobal::Instance()->GetSaveFile());
     
     check = connect(&m_SerialPort, SIGNAL(dataTerminalReadyChanged(bool)),
@@ -255,23 +256,15 @@ int CMainWindow::InitStatusBar()
     statusBar()->setVisible(CGlobal::Instance()->GetStatusbarVisible());
 
     SetStatusInfo(tr("Ready"));
-    m_statusRx.setText(tr("Rx: 0 Bytes"));
-    m_statusTx.setText(tr("Tx: 0 Bytes"));
-    m_statusDrop.setText(tr("Drop: 0 Bytes"));
+    m_lbStatus.setText(m_Stats.ToString());
     m_statusInfo.setSizePolicy(QSizePolicy::Policy::Expanding,
                                QSizePolicy::Policy::Preferred);
-    m_statusTx.setSizePolicy(QSizePolicy::Policy::Preferred,
-                             QSizePolicy::Policy::Preferred);
-    m_statusRx.setSizePolicy(QSizePolicy::Policy::Preferred,
-                             QSizePolicy::Policy::Preferred);
-    m_statusDrop.setSizePolicy(QSizePolicy::Policy::Preferred,
+    m_lbStatus.setSizePolicy(QSizePolicy::Policy::Preferred,
                              QSizePolicy::Policy::Preferred);
     
     this->statusBar()->addWidget(&m_statusInfo);
-    this->statusBar()->addWidget(&m_statusRx);
-    this->statusBar()->addWidget(&m_statusTx);
-    this->statusBar()->addWidget(&m_statusDrop);
-    
+    this->statusBar()->addWidget(&m_lbStatus);
+
     return 0;
 }
 
@@ -463,13 +456,10 @@ void CMainWindow::on_pbOpen_clicked()
     ui->pbSend->setEnabled(true);
 
     SetStatusInfo(GetSerialPortSettingInfo(), Qt::green);
-    m_nSend = 0;
-    m_nReceive = 0;
-    m_nDrop = 0;
     m_nTransmissions = 0;
-    m_statusRx.setText(tr("Rx: 0 Bytes"));
-    m_statusTx.setText(tr("Tx: 0 Bytes"));
-    m_statusDrop.setText(tr("Drop: 0 Bytes"));
+    m_Stats.Reset();
+    m_Stats.SetInterval();
+    m_lbStatus.setText(m_Stats.ToString());
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
     if(ui->gpSendLoop->isChecked())
     {
@@ -570,7 +560,7 @@ void CMainWindow::slotRead()
         qCritical(log) << "read data fail";
         return;
     }
-    m_nReceive += d.length();
+
     qDebug() << "slotRead: length:" << d.size() <<  d;
     
     if(ui->cbSaveToFile->isChecked())
@@ -647,7 +637,8 @@ void CMainWindow::slotRead()
     //显示接收
     AddReceive(szText, true);
 
-    m_statusRx.setText(tr("Rx: ") + QString::number(m_nReceive) + tr(" Bytes"));
+    m_Stats.AddReceives(d.length());
+    m_lbStatus.setText(m_Stats.ToString());
 }
 
 bool CMainWindow::CheckHexChar(QChar c)
@@ -780,14 +771,13 @@ int CMainWindow::SendInput()
 
     m_nTransmissions++;
     ui->lbTransmissions->setText(QString::number(m_nTransmissions));
-    m_nSend += nRet;
-    m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
+    m_Stats.AddSends(nRet);
     if(nSendLength != nRet)
     {
-        m_nDrop += (nSendLength - nRet);
-        m_statusDrop.setText(tr("Drop: ") + QString::number(m_nDrop) + tr(" Bytes"));
+        m_Stats.AddDrops(nSendLength - nRet);
     }
-
+    m_lbStatus.setText(m_Stats.ToString());
+    
     //display send
     if(ui->cbDisplaySend->isChecked())
         AddReceive(szText, false);
@@ -826,9 +816,8 @@ int CMainWindow::SendFile()
 
 int CMainWindow::CloseSendFile()
 {
-    bool check = disconnect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
-                            this, SLOT(slotSendFile(qint64)));
-    Q_ASSERT(check);
+    disconnect(&m_SerialPort, SIGNAL(bytesWritten(qint64)),
+               this, SLOT(slotSendFile(qint64)));
     m_SendFile.Close();
     ui->pbSend->setEnabled(true);
     return 0;
@@ -846,8 +835,8 @@ void CMainWindow::slotSendFile(qint64 bytes)
         return;
     }
 
-    m_nSend += nRet;
-    m_statusTx.setText(tr("Tx: ") + QString::number(m_nSend) + tr(" Bytes"));
+    m_Stats.AddSends(nRet);
+    m_lbStatus.setText(m_Stats.ToString());
 }
 
 void CMainWindow::on_cmbPort_currentIndexChanged(int index)
@@ -1343,4 +1332,19 @@ int CMainWindow::setPinoutStatus()
         ui->ltSRD->setGray();
     
     return 0;
+}
+
+void CMainWindow::on_cbDisplayRate_stateChanged(int state)
+{
+    CStats::StringTypes types(CStats::Counting);
+    CGlobal::Instance()->SetDisplayRate(Qt::Checked == state);
+    if(Qt::CheckState::Checked == state)
+        types |= CStats::Rate;
+    m_Stats.SetStringType(types);
+    slotCalculationComplete();
+}
+
+void CMainWindow::slotCalculationComplete()
+{
+    m_lbStatus.setText(m_Stats.ToString());
 }

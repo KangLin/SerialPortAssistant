@@ -2,11 +2,21 @@
 
 project(SerialPortAssistant)
 
+if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    # 32 位系统
+    #add_definitions(QT_NO_64BIT_ATOMICS)
+    set(SerialPortAssistant_DEFINED QT_NO_64BIT_ATOMICS)
+    message(STATUS "Building for 32-bit, disabling 64-bit atomics")
+else()
+    message(STATUS "Building for 64-bit")
+endif()
+
 set(HEADER_FILES
     MainWindow.h
     Global/Global.h
     Common/Tool.h
     SendFile.h
+    Stats.h
     ${CMAKE_SOURCE_DIR}/3th_lib/Control/lightbutton.h
     )
 set(SOURCE_FILES
@@ -15,6 +25,7 @@ set(SOURCE_FILES
     Global/Global.cpp
     Common/Tool.cpp
     SendFile.cpp
+    Stats.cpp
     ${CMAKE_SOURCE_DIR}/3th_lib/Control/lightbutton.cpp
     )
 set(SOURCE_UI_FILES
@@ -63,7 +74,7 @@ ADD_TARGET(NAME ${PROJECT_NAME}
     PRIVATE_LIBS RabbitCommon ${QT_LIBRARIES}
     PRIVATE_DEFINITIONS SerialPortAssistant_VERSION="${SerialPortAssistant_VERSION}"
         SerialPortAssistant_Revision="${SerialPortAssistant_Revision}"
-        RABBITCOMMON
+        RABBITCOMMON ${SerialPortAssistant_DEFINED}
     VERSION ${SerialPortAssistant_VERSION}
     )
 

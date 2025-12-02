@@ -33,6 +33,7 @@ Abstract:
 #include "SendFile.h"
 #include <lightbutton.h>
 #include "Global/Global.h"
+#include "Stats.h"
 
 namespace Ui {
 class CMainWindow;
@@ -115,9 +116,12 @@ private:
     int CloseSendFile();
 private Q_SLOTS:
     void slotSendFile(qint64 bytes);
-    
+
     void slotDataTerminalReadyChanged(bool set);
     void slotRequestToSendChanged(bool set);
+
+    void on_cbDisplayRate_stateChanged(int state);
+    void slotCalculationComplete();
     
 private:
     int InitPinout();
@@ -128,15 +132,15 @@ private:
     QDockWidget* m_dockLeft;
 
     QSerialPort m_SerialPort;
-    qint64 m_nSend, m_nReceive, m_nDrop;
     int m_cmbPortIndex;
     QTimer m_Timer;
     int m_nLoopNumber;
     int m_nTransmissions; //已发送次数  
 
     QLabel m_statusInfo;
-    QLabel m_statusRx, m_statusTx, m_statusDrop;
-    
+    QLabel m_lbStatus;
+    CStats m_Stats;
+
     bool m_bInitEncodeCombox;
 
     CSendFile m_SendFile;

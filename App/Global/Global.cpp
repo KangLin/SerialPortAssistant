@@ -24,16 +24,21 @@ Q_LOGGING_CATEGORY(log, "Global")
 CGlobal::CGlobal(QObject *parent) :
     QObject(parent)
 {
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
-    m_StatusbarVisible = conf.value("UI/Visible/Statusbar", "true").toBool();
-    m_ToolbarVisible = conf.value("UI/Visible/Toolbar", "true").toBool();
-    m_bSendLoop = conf.value("Settings/Send/Loop", "false").toBool();
+    m_szFile = RabbitCommon::CDir::Instance()->GetFileUserConfigure();
+    QSettings conf(m_szFile, QSettings::IniFormat);
+    m_StatusbarVisible = conf.value("UI/Visible/Statusbar", true).toBool();
+    m_ToolbarVisible = conf.value("UI/Visible/Toolbar", true).toBool();
+    m_bSendLoop = conf.value("Settings/Send/Loop", false).toBool();
     m_nSendLoopTime = conf.value("Settings/Send/LoopTime", 1000).toInt();
     m_SendRN = (CGlobal::SEND_R_N)conf.value("Settings/Send/SendRN", 0).toInt();
-    m_bReceiveDisplayTime = conf.value("Settings/Receive/DisplayTime", "false").toBool();
-    m_bReceiveDisplaySend = conf.value("Settings/Receive/DisplaySend", "false").toBool();
-    m_bSaveFile = conf.value("Settings/Receive/SaveFile", "false").toBool();
+    m_bReceiveDisplayTime = conf.value("Settings/Receive/DisplayTime", false).toBool();
+    m_bReceiveDisplaySend = conf.value("Settings/Receive/DisplaySend", false).toBool();
+    bool rate = true;
+#if defined(Q_OS_ANDROID)
+    rate = false;
+#endif
+    m_bDisplayRate = conf.value("Settings/Receive/DisplayRate", rate).toBool();
+    m_bSaveFile = conf.value("Settings/Receive/SaveFile", false).toBool();
     m_ReceiveDisplayCode = (ENCODE)conf.value("Settings/Receive/DisplayReceiveCode", 0).toInt();
     m_SendDisplayCode = (ENCODE)conf.value("Settings/Receive/DisplaySendCode", 0).toInt();
 }
@@ -58,7 +63,7 @@ bool CGlobal::GetStatusbarVisible()
 int CGlobal::SetStatusbarVisible(bool bVisible)
 {
     m_StatusbarVisible = bVisible;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
+    QSettings conf(m_szFile,
                    QSettings::IniFormat);
     conf.setValue("UI/Visible/Statusbar", m_StatusbarVisible);
     return 0;
@@ -72,8 +77,7 @@ bool CGlobal::GetToolbarVisible()
 int CGlobal::SetToolbarVisible(bool bVisible)
 {
     m_ToolbarVisible = bVisible;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("UI/Visible/Toolbar", m_ToolbarVisible);
     return 0;
 }
@@ -86,8 +90,7 @@ bool CGlobal::GetSendLoop()
 int CGlobal::SetSendLoop(bool bLoop)
 {
     m_bSendLoop = bLoop;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Send/Loop", m_bSendLoop);
     return 0;   
 }
@@ -100,8 +103,7 @@ int CGlobal::GetSendLoopTime()
 int CGlobal::SetSendLoopTime(int nTime)
 {
     m_nSendLoopTime = nTime;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Send/LoopTime", m_nSendLoopTime);
     return 0;   
 }
@@ -114,8 +116,7 @@ CGlobal::SEND_R_N CGlobal::GetSendRN()
 int CGlobal::SetSendRN(SEND_R_N v)
 {
     m_SendRN = v;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Send/SendRN", m_SendRN);
     return 0;  
 }
@@ -128,8 +129,7 @@ bool CGlobal::GetReceiveDisplayTime()
 int CGlobal::SetReceiveDisplayTime(bool bDisplay)
 {
     m_bReceiveDisplayTime = bDisplay;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Receive/DisplayTime", m_bReceiveDisplayTime);
     return 0; 
 }
@@ -142,10 +142,22 @@ bool CGlobal::GetReceiveDisplaySend()
 int CGlobal::SetReceiveDisplaySend(bool bDisplay)
 {
     m_bReceiveDisplaySend = bDisplay;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Receive/DisplaySend", m_bReceiveDisplaySend);
     return 0; 
+}
+
+bool CGlobal::GetDisplayRate()
+{
+    return m_bDisplayRate;
+}
+
+int CGlobal::SetDisplayRate(bool bDisplay)
+{
+    m_bDisplayRate = bDisplay;
+    QSettings conf(m_szFile, QSettings::IniFormat);
+    conf.setValue("Settings/Receive/DisplayRate", m_bDisplayRate);
+    return 0;
 }
 
 bool CGlobal::GetSaveFile()
@@ -156,8 +168,7 @@ bool CGlobal::GetSaveFile()
 int CGlobal::SetSaveFile(bool bSaveFile)
 {
     m_bSaveFile = bSaveFile;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Receive/SaveFile", m_bSaveFile);
     return 0;
 }
@@ -170,8 +181,7 @@ CGlobal::ENCODE CGlobal::GetReceiveEncode()
 int CGlobal::SetReceiveEncode(ENCODE code)
 {
     m_ReceiveDisplayCode = code;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("Settings/Receive/DisplayReceiveCode", m_ReceiveDisplayCode);
     return 0; 
 }
@@ -184,7 +194,7 @@ CGlobal::ENCODE CGlobal::GetSendEncode()
 int CGlobal::SetSendEncode(ENCODE code)
 {
     m_SendDisplayCode = code;
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
+    QSettings conf(m_szFile,
                    QSettings::IniFormat);
     conf.setValue("Settings/Receive/DisplaySendCode", m_SendDisplayCode);
     return 0; 
@@ -201,8 +211,7 @@ int CGlobal::SaveSerialPort(const QSerialPort &port, int nIndex)
                        << info.portName() << "!=" << port.portName();
     }
 
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     conf.setValue("SerialPort/Name", port.portName());
     conf.setValue("SerialPort/Default", port.portName());
     conf.beginGroup("SerialPort/" + port.portName());
@@ -217,8 +226,7 @@ int CGlobal::SaveSerialPort(const QSerialPort &port, int nIndex)
 
 int CGlobal::LoadSerialPort(Para &para, int nIndex)
 {
-    QSettings conf(RabbitCommon::CDir::Instance()->GetFileUserConfigure(),
-                   QSettings::IniFormat);
+    QSettings conf(m_szFile, QSettings::IniFormat);
     QSerialPort port;
     QString szName;
 
@@ -237,7 +245,7 @@ int CGlobal::LoadSerialPort(Para &para, int nIndex)
 
     if(szName.isEmpty()) {
         qWarning(log) << "No default port in configure file:"
-                      << RabbitCommon::CDir::Instance()->GetFileUserConfigure();
+                      << m_szFile;
         return -2;
     }
 
