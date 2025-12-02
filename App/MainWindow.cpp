@@ -128,16 +128,20 @@ CMainWindow::CMainWindow(QWidget *parent) :
     InitPinout();
 
     // Add fixed font. See: https://github.com/KangLin/SerialPortAssistant/issues/26
+    QFont receiverFont = ui->teReceive->font();
     QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     //qDebug(log) << "fixedFont:" << fixedFont;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    if(QFontDatabase::isFixedPitch(fixedFont.family(), fixedFont.styleName()))
+    if(!QFontDatabase::isFixedPitch(receiverFont.family(), receiverFont.styleName())
+        && QFontDatabase::isFixedPitch(fixedFont.family(), fixedFont.styleName()))
 #else
     QFontDatabase fd;
-    if(fd.isFixedPitch(fixedFont.family(), fixedFont.styleName()))
+    if(!fd.isFixedPitch(receiverFont.family(), receiverFont.styleName())
+        && fd.isFixedPitch(fixedFont.family(), fixedFont.styleName()))
 #endif
     {
         ui->teReceive->setFont(fixedFont);
+        ui->teSend->setFont(fixedFont);
     }
 
 #ifdef HAVE_RABBITCOMMON_GUI

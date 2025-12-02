@@ -94,8 +94,6 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef RABBITCOMMON
-    if(pUpdater)
-        delete pUpdater;
     RabbitCommon::CTools::Instance()->Clean();
 #endif
 #if defined (_DEBUG)
