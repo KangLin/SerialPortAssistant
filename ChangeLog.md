@@ -1,5 +1,10 @@
 ## Change log
 
+### Version: v0.5.33
+- Modify status bar
+- Modify README
+- Fix flatpak build bug import from v0.5.32
+
 ### Version: v0.5.32
   - Deploy rpm package
   - Modify metainfo
