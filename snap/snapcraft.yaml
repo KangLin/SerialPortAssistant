@@ -4,7 +4,7 @@
 # Debugging snaps: https://snapcraft.io/docs/debug-snaps
 name: serialportassistant
 base: core22 # the base snap is the execution environment for this snap
-version: '0.5.32'
+version: '0.5.33'
 type: app
 license: GPL-3.0+
 contact: kl222@126.com

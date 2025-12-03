@@ -44,7 +44,7 @@ jobs:
     runs-on: ${{matrix.os}}
 
     env:
-      SerialPortAssistant_VERSION: v0.5.32
+      SerialPortAssistant_VERSION: v0.5.33
       BUILD_DIR:   ${{github.workspace}}\build
       SOURCE_DIR:  ${{github.workspace}}\.cache\source
       TOOLS_DIR:   ${{github.workspace}}\.cache\tools

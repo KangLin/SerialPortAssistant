@@ -46,7 +46,7 @@ jobs:
       qt_modules: "qtscxml qtmultimedia qtserialport qt5compat qtwebsockets qtpositioning qtwebchannel"
       artifact_name: build_macos
       VCPKGGITCOMMITID: 4c5ae6b55f3e3e39d291679f89822f496cf190ee
-      SerialPortAssistant_VERSION: v0.5.32
+      SerialPortAssistant_VERSION: v0.5.33
 
     # Map the job outputs to step outputs
     outputs:
