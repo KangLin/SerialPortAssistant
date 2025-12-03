@@ -261,17 +261,14 @@ int CMainWindow::InitStatusBar()
                                QSizePolicy::Policy::Preferred);
     m_lbStatus.setSizePolicy(QSizePolicy::Policy::Preferred,
                              QSizePolicy::Policy::Preferred);
-    
     this->statusBar()->addWidget(&m_statusInfo);
-    this->statusBar()->addWidget(&m_lbStatus);
-
+    this->statusBar()->addPermanentWidget(&m_lbStatus);
     return 0;
 }
 
 int CMainWindow::InitToolBar()
 {
-    ui->actionToolBar_T->setChecked(
-                CGlobal::Instance()->GetToolbarVisible());
+    ui->actionToolBar_T->setChecked(CGlobal::Instance()->GetToolbarVisible());
     ui->mainToolBar->setVisible(CGlobal::Instance()->GetToolbarVisible());
     return 0;
 }
@@ -477,6 +474,10 @@ int CMainWindow::SetStatusInfo(QString szText, QColor color)
     QPalette pe;
     pe.setColor(QPalette::WindowText, color);
     m_statusInfo.setPalette(pe);
+    m_statusInfo.setToolTip(szText);
+    //QFontMetrics metrics(m_statusInfo.font());
+    // int w = ui->statusBar->width() - m_lbStatus.frameWidth();
+    // szText = metrics.elidedText(szText, Qt::ElideRight, w);
     m_statusInfo.setText(szText);
     return 0;
 }
