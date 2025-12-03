@@ -125,9 +125,13 @@ elseif(UNIX AND NOT ANDROID)
     #    $HOME/.icons (for backwards compatibility)
     #    $XDG_DATA_DIRS/icons
     #    /usr/share/pixmaps
-    # Flatpak: https://docs.flatpak.org/en/latest/conventions.html#application-icons
     INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
         DESTINATION ${CMAKE_INSTALL_DATADIR}/pixmaps
+            COMPONENT Application
+        RENAME ${APP_ID}.png)
+    # Flatpak: https://docs.flatpak.org/en/latest/conventions.html#application-icons
+    INSTALL(FILES ${CMAKE_SOURCE_DIR}/App/Resource/png/SerialPortAssistant.png
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/128x128/apps
             COMPONENT Application
         RENAME ${APP_ID}.png)
 
