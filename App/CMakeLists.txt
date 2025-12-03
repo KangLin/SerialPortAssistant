@@ -40,10 +40,10 @@ GET_VERSION(OUT_VERSION SerialPortAssistant_VERSION
     OUT_REVISION SerialPortAssistant_Revision
     OUT_TAG SerialPortAssistantTAG)
 IF(NOT SerialPortAssistant_VERSION)
-    SET(SerialPortAssistant_VERSION "0.5.31")
+    SET(SerialPortAssistant_VERSION "0.5.32")
 ENDIF()
 IF(NOT SerialPortAssistantTAG)
-    SET(SerialPortAssistantTAG "0.5.31")
+    SET(SerialPortAssistantTAG "0.5.32")
 ENDIF()
 message("SerialPortAssistant_VERSION:${SerialPortAssistant_VERSION};Revision:${SerialPortAssistant_Revision};Tag:${SerialPortAssistantTAG}")
 

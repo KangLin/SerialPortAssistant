@@ -1,20 +1,25 @@
-serialportassistant (0.5.31) stable; urgency=medium
+serialportassistant (0.5.32) stable; urgency=medium
 
-    * Add keyword in .desktop
+    * Add CStats
     * Modify README
-    * Release v0.5.31
-    * Modify change log
-    * Update io.github.KangLin.SerialPortAssistant.metainfo.xml.in
-    * RPM: modify Package/rpm/serialportassistant.spec
-    * Flatpak: add metainfo file
-    * RPM: disable debug information
-    * Modify Package/Flatpak/io.github.KangLin.SerialPortAssistant.json
-    * Add rpm package
-    * Modify desktop icon
-    * Modify test_linux.sh
-    * Add flatpak
-    * CI: update  actions/cache@v4
+    * CMakeLists: modify CMAKE_CXX_STANDARD
+    * Modify monospaced font
+    * Modify about show
+    * CI: modify appveyor.yml to update vcpkg to 4c5ae6b55f3e3e39d291679f89822f496cf190ee
+    * Add fixed font. #26
     * CI: modify macos.yml
+    * CI: modify appimage.yml
+    * Script: add install_appimage.sh
+    * Fix task bar icon bug in linux
+    * Update build_appimage.sh
+    * CI: add arm64 in msvc.yml
+    * Add bundle app in macos.yml
+    * Enable input port name
+    * CI: add fetch-depth: 0
+    * Modify share/metainfo/io.github.KangLin.SerialPortAssistant.metainfo.xml.in
+    * Modify change log
+    * Android: modify app id to org.KangLinStudio.SerialPortAssistant in AndroidManifest .xml
+    * Modify share/metainfo/io.github.KangLin.SerialPortAssistant.metainfo.xml.in
 
- -- Kang Lin <kl222@126.com>  Sun, 23 Mar 2025 22:31:38 +0800
+ -- Kang Lin <kl222@126.com>  Wed, 03 Dec 2025 12:35:23 +0800
 

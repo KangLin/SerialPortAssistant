@@ -3,7 +3,7 @@
     package="io.github.KangLin.SerialPortAssistant"
     android:installLocation="auto"
     android:versionCode="0"
-    android:versionName="0.5.31" >
+    android:versionName="0.5.32" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
