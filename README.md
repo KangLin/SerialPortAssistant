@@ -140,3 +140,43 @@ If it cannot be displayed, please open:
 
 - deploy.sh: This script is used to generate new release version numbers and tag.
   Used only by the program publisher.
+
+#### Test
+
+- Ubuntu
+  - Install `socat`
+
+        $ sudo apt update
+        $ sudo apt install socat
+
+  - Create a pair of virtual serial ports
+
+        $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
+
+    - After running, it will display:
+
+          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
+          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
+          2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
+
+    - Create symbolic links (optional, for better naming).
+
+          $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
+          $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
+
+    - The above two steps can be combined into the following command.
+
+          $ sudo socat -d -d pty,link=/dev/ttyVCOM0,raw,echo=0 pty,link=/dev/ttyVCOM1,raw,echo=0 
+
+  - You can now use this program to open the serial port. `/dev/pts/5`(/dev/ttyVCOM0) and　`/dev/pts/6`(/dev/ttyVCOM1).  
+    Because these serial port names are non-standard, this program cannot find them.
+    You can enter the following in the "Serial Port" field: `/dev/pts/5`  
+    Because the virtual serial port was created with root privileges, this program also needs to be run with root privileges.
+
+        $ sudo serialportassistant
+
+    Alternatively, authorize the serial port to the current user:
+
+        $ sudo chown $USER:tty /dev/pts/5
+        $ sudo chown $USER:tty /dev/pts/6
+        $ serialportassistant

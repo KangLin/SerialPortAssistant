@@ -133,3 +133,42 @@
   此脚本生成 AppImage 可执行文件。 详见：https://github.com/linuxdeploy/linuxdeploy/
 
 - deploy.sh: 此脚本用于产生新的发行版本号和标签。仅程序发布者使用。
+
+#### 测试
+
+- 在 Ubuntu 上
+  - 安装 `socat`
+
+        $ sudo apt update
+        $ sudo apt install socat
+
+  - 创建一对虚拟串口
+
+        $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
+
+    - 运行后会显示：
+
+          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
+          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
+          2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
+
+    - 创建符号链接（可选，为了更好的命名）
+
+          $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
+          $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
+
+    - 可以把上面两步合成以下一条命令
+
+          $ sudo socat -d -d pty,link=/dev/ttyVCOM0,raw,echo=0 pty,link=/dev/ttyVCOM1,raw,echo=0 
+
+  - 现在可以用本程序打开串口　`/dev/pts/5`(/dev/ttyVCOM0) 和　`/dev/pts/6`(/dev/ttyVCOM1)。  
+　　因为这些串口命名为非标准串口命名，本程序可以找不到它。你可以在"串口"输入：　/dev/pts/5  
+　　因为虚拟串口建立时，是以 root 权限建立的，所以也需要使用　root 权限运行本程序。
+
+        $ sudo serialportassistant
+
+    或者把串口授权为当前用户。
+
+        $ sudo chown $USER:tty /dev/pts/5
+        $ sudo chown $USER:tty /dev/pts/6
+        $ serialportassistant
