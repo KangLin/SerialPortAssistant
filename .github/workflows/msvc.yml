@@ -18,7 +18,7 @@ jobs:
             VCPKG_TARGET_TRIPLET: x64-windows
             VCPKG_PLATFORM_TOOLSET: v143
             os: windows-2022
-            qt_version: 6.9.2
+            qt_version: 6.9.3
             qt_arch: win64_msvc2022_64
             qt_modules: qtscxml qtserialport
 
@@ -33,7 +33,7 @@ jobs:
           - CMAKE_GENERATOR_PLATFORM: arm64
             VCPKG_TARGET_TRIPLET: arm64-windows
             VCPKG_PLATFORM_TOOLSET: v143
-            qt_version: 6.9.2
+            qt_version: 6.9.3
             qt_arch: win64_msvc2022_arm64
             qt_modules: qtscxml qtserialport
             os: windows-11-arm  
