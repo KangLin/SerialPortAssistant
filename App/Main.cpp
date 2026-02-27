@@ -65,17 +65,32 @@ int main(int argc, char *argv[])
     }
     a.setApplicationDisplayName(w->windowTitle());
 
-#ifdef RABBITCOMMON
-    CFrmUpdater *pUpdater = new CFrmUpdater();
-    if(pUpdater) {
-        pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-        if(a.arguments().length() > 1) {
-            pUpdater->GenerateUpdateJson();
-            pUpdater->GenerateUpdateXml();
-            return 0;
+#ifdef HAVE_UPDATE
+    QSharedPointer<CFrmUpdater> pUpdater;
+    // Check update version
+    if(qEnvironmentVariable("SNAP").isEmpty()
+        && qEnvironmentVariable("FLATPAK_ID").isEmpty()) {
+        pUpdater = QSharedPointer<CFrmUpdater>(new CFrmUpdater());
+        if(pUpdater) {
+            pUpdater->setAttribute(Qt::WA_DeleteOnClose, false);
+            pUpdater->SetTitle(QImage(":/icon/AppIcon"));
+            if(a.arguments().length() > 1) {
+                try {
+                    pUpdater->GenerateUpdateJson();
+                    pUpdater->GenerateUpdateXml();
+                } catch(...) {
+                    qCritical(log) << "Generate update fail";
+                }
+                qInfo(log) << a.applicationName() + " " + a.applicationVersion()
+                                  + " " + QObject::tr("Generate update json file End");
+                return 0;
+            }
+        } else {
+            qCritical(log) << "new CFrmUpdater() fail";
         }
     }
 #endif
+
 
 #if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
     QUIWidget* quiwidget = new QUIWidget(nullptr, true);
