@@ -13,22 +13,24 @@ Abstract:
     This file contains main implement.
  */
 
-#ifdef RABBITCOMMON
-    #include "RabbitCommonTools.h"
-    #include "FrmUpdater.h"
-#endif
-#include "MainWindow.h"
+#include <QtGlobal>
 #include <QApplication>
 #include <QDir>
-#include "Global/Global.h"
+#include <QLoggingCategory>
 #if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    #include <QtAndroidExtras/QtAndroid>
+#include <QtAndroidExtras/QtAndroid>
 #endif
+
+#include "Global/Global.h"
 #ifdef BUILD_QUIWidget
     #include "QUIWidget/QUIWidget.h"
 #endif
+#ifdef RABBITCOMMON
+#include "RabbitCommonTools.h"
+#include "FrmUpdater.h"
+#endif
+#include "MainWindow.h"
 
-#include <QLoggingCategory>
 static Q_LOGGING_CATEGORY(log, "main")
     
 int main(int argc, char *argv[])
@@ -68,8 +70,14 @@ int main(int argc, char *argv[])
 #ifdef HAVE_UPDATE
     QSharedPointer<CFrmUpdater> pUpdater;
     // Check update version
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     if(qEnvironmentVariable("SNAP").isEmpty()
-        && qEnvironmentVariable("FLATPAK_ID").isEmpty()) {
+        && qEnvironmentVariable("FLATPAK_ID").isEmpty())
+#else
+    if(qgetenv("SNAP").isEmpty()
+        && qgetenv("FLATPAK_ID").isEmpty())
+#endif
+    {
         pUpdater = QSharedPointer<CFrmUpdater>(new CFrmUpdater());
         if(pUpdater) {
             pUpdater->setAttribute(Qt::WA_DeleteOnClose, false);
