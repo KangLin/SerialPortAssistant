@@ -1,9 +1,10 @@
-serialportassistant (0.5.33) stable; urgency=medium
+serialportassistant (0.5.34-dev) stable; urgency=medium
 
-    * Modify change log
-    * Modify CMakeLists.txt
-    * Modify README
-    * Modify status bar
+    * CI: add snap.yml
+    * App: fix compile error
+    * Modify deploy.sh
+    * CI: update qt6.9.2 to 6.9.3
+    * CMake: fix version bug
 
- -- Kang Lin <kl222@126.com>  Wed, 03 Dec 2025 15:55:35 +0800
+ -- Kang Lin <kl222@126.com>  Sat, 13 Jun 2026 06:17:36 +0800
 

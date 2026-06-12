@@ -1,6 +1,6 @@
 ## Change log
 
-### Version: v0.5.34
+### Version: v0.5.34-dev
 - CI: add snap
 
 ### Version: v0.5.33
