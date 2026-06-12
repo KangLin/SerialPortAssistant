@@ -1,5 +1,8 @@
 ## Change log
 
+### Version: v0.5.34
+- CI: add snap
+
 ### Version: v0.5.33
 - Modify status bar
 - Modify README

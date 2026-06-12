@@ -25,7 +25,11 @@ jobs:
   flatpak:
     uses: ./.github/workflows/flatpak.yml
     secrets: inherit
-  
+
+  snap:
+    uses: ./.github/workflows/snap.yml
+    secrets: inherit
+
   msvc:
     uses: ./.github/workflows/msvc.yml
 
@@ -80,6 +84,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: ${{ needs.flatpak.outputs.name }}*
+          path: ${{ env.artifact_path }}
+          merge-multiple: true
+
+      - name: Download snap
+        uses: actions/download-artifact@v7
+        with:
+          pattern: ${{ needs.snap.outputs.name }}*
           path: ${{ env.artifact_path }}
           merge-multiple: true
 
