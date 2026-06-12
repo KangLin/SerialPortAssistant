@@ -210,10 +210,9 @@ if [ $BASE_LIBS -eq 1 ]; then
     if [ "$PACKAGE_TOOL" = "apt" ]; then
         apt install -y -q build-essential \
             git cmake gcc g++ debhelper fakeroot graphviz gettext \
-            xserver-xorg-input-mouse xserver-xorg-input-kbd \
             libglu1-mesa-dev libpulse-mainloop-glib0
         if [ -z "$SerialPortAssistant_VERSION" ]; then
-            apt install -y -q xvfb xpra
+            apt install -y -q xvfb #xpra
         fi
         # Base dependency
         apt install -y -q libssl-dev libcrypt-dev libicu-dev zlib1g-dev
@@ -226,7 +225,7 @@ if [ $BASE_LIBS -eq 1 ]; then
     if [ "$PACKAGE_TOOL" = "dnf" ]; then
         dnf install -y make git rpm-build rpmdevtools gcc-c++ util-linux \
            automake autoconf libtool gettext gettext-autopoint \
-           cmake desktop-file-utils appstream appstream-util curl wget
+           cmake desktop-file-utils curl wget
     fi
 fi
 
@@ -234,14 +233,14 @@ if [ $DEFAULT_LIBS -eq 1 ]; then
     echo "Install default dependency libraries ......"
     if [ "$PACKAGE_TOOL" = "apt" ]; then
         # Qt6
-        apt-get install -y -q qmake6 qt6-tools-dev qt6-tools-dev-tools \
+        package_install qmake6 qt6-tools-dev qt6-tools-dev-tools \
             qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins \
-            libqt6svg6-dev qt6-l10n-tools qt6-translations-l10n \
-            qt6-scxml-dev qt6-multimedia-dev libqt6serialport6-dev
+            qt6-svg-dev qt6-l10n-tools qt6-translations-l10n \
+            qt6-scxml-dev qt6-serialport-dev
     fi
     if [ "$PACKAGE_TOOL" = "dnf" ]; then
-        dnf install -y qt6-qttools-devel qt6-qtbase-devel qt6-qtmultimedia-devel \
-            qt6-qt5compat-devel qt6-qtmultimedia-devel qt6-qtscxml-devel \
+        package_install qt6-qttools-devel qt6-qtbase-devel \
+            qt6-qt5compat-devel qt6-qtscxml-devel \
             qt6-qtserialport-devel qt6-qtsvg-devel
     fi
 fi

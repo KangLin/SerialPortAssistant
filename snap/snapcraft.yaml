@@ -1,9 +1,9 @@
+# https://snapcraft.io/docs/the-snap-format
 # How Snapcraft builds snaps: https://snapcraft.io/docs/how-snapcraft-builds
-# Snapcraft.yaml schema: https://snapcraft.io/docs/snapcraft-yaml-schema
-# Debug snaps with snap try: https://snapcraft.io/docs/snap-try
-# Debugging snaps: https://snapcraft.io/docs/debug-snaps
+# Snapcraft.yaml schema: https://documentation.ubuntu.com/snapcraft/stable/reference/project-file/snapcraft-yaml
+
 name: serialportassistant
-base: core22 # the base snap is the execution environment for this snap
+title: Serial Port Assistant
 version: '0.5.34-dev'
 type: app
 license: GPL-3.0+
@@ -13,7 +13,7 @@ donation:
 issues: https://github.com/KangLin/SerialPortAssistant/issues
 summary: Serial Port Assistant # 79 char long summary
 description: |
-  Serial port assistant
+  Serial Port Assistant
   .
   Author: Kang Lin <kl222@126.com>
   .
@@ -25,6 +25,9 @@ description: |
   .
   https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 
+# See: https://snapcraft.io/docs/reference-architectures
+# See: https://snapcraft.io/docs/architectures
+base: core24 # the base snap is the execution environment for this snap
 # - devel
 # - stable
 grade: stable # must be 'stable' to release into candidate/stable channels
@@ -63,6 +66,8 @@ parts:
       - cmark
       - libssl-dev
       - libcrypt-dev
+      - libpulse-dev
+      - pulseaudio-dev
     stage-packages:
       - libcmark0.30.2
       - libopengl0
@@ -71,42 +76,41 @@ parts:
       - libglu1-mesa
       - libssl3
       - libcrypt1
-      - libc6
-      - libgcc-s1
-      - libstdc++6
       - zlib1g
+      - libpulse0
+      - pulseaudio
     cmake-parameters:
       # See: https://snapcraft.io/docs/parts-environment-variables
       - -DRabbitCommon_ROOT=$CRAFT_STAGE/RabbitCommon/
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant
+      - -DCMAKE_PREFIX_PATH=$CRAFT_STAGE/usr/local/
     # See: https://snapcraft.io/docs/overrides
     override-stage: |
-      cd $CRAFT_PART_INSTALL/opt/SerialPortAssistant/bin
+      cd $CRAFT_PART_INSTALL/usr/local/bin
       #  if [ ! -f serialportassistant ]; then
       #      ln -s SerialPortAssistant serialportassistant
       #  fi
-      sed -i 's|Icon=io\.github\.KangLin\.SerialPortAssistant|Icon=/opt/SerialPortAssistant/share/pixmaps/io\.github\.KangLin\.SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
-      sed -i 's|Path=/opt/SerialPortAssistant/bin|Path=\$\{SNAP\}/opt/SerialPortAssistant/bin|' $CRAFT_PART_INSTALL/opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+      sed -i 's|Icon=io\.github\.KangLin\.SerialPortAssistant|Icon=/usr/local/share/pixmaps/io\.github\.KangLin\.SerialPortAssistant\.png|' $CRAFT_PART_INSTALL/usr/local/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+      sed -i 's|Path=/usr/local/bin|Path=\$\{SNAP\}/usr/local/bin|' $CRAFT_PART_INSTALL/usr/local/share/applications/io.github.KangLin.SerialPortAssistant.desktop
       snapcraftctl stage
     prime:
      - -usr/bin/cmark
-     - -opt/SerialPortAssistant/bin/cmark
-     - -opt/SerialPortAssistant/include
-     - -opt/SerialPortAssistant/lib/cmake
-     - -opt/SerialPortAssistant/lib/pkgconfig
-     - -opt/SerialPortAssistant/lib/*.a
+     - -usr/local/bin/cmark
+     - -usr/local/include
+     - -usr/local/lib/cmake
+     - -usr/local/lib/pkgconfig
+     - -usr/local/lib/*.a
 
 # App directives: https://snapcraft.io/docs/snapcraft-yaml-schema#app-directives
 apps:
  serialportassistant:
-   command: opt/SerialPortAssistant/bin/SerialPortAssistant
+   command: usr/local/bin/SerialPortAssistant
    # See: https://snapcraft.io/docs/desktop-menu-support#heading--desktop-key
-   desktop: opt/SerialPortAssistant/share/applications/io.github.KangLin.SerialPortAssistant.desktop
+   desktop: usr/local/share/applications/io.github.KangLin.SerialPortAssistant.desktop
    environment:
-     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/SerialPortAssistant/lib
+     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/local/lib
      #QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt6/plugins/
-     PATH: $SNAP/opt/SerialPortAssistant/bin:$PATH
+     PATH: $SNAP/usr/local/bin:$PATH
    # List extensions, run `snapcraft extensions`
    extensions:
      - kde-neon-6
@@ -120,5 +124,3 @@ apps:
      - opengl
      - serial-port
      - home
-     - ssh-keys
-     - ssh-public-keys
