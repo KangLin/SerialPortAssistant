@@ -19,17 +19,63 @@ jobs:
         variant:
           - PACKAGE: deb
             image: ubuntu
+            lable: "25.04"
             os: ubuntu-24.04
           - PACKAGE: deb
             image: ubuntu
+            lable: "25.04"
+            os: ubuntu-24.04-arm
+          - PACKAGE: deb
+            image: ubuntu
+            lable: "26.04"
+            os: ubuntu-24.04
+          - PACKAGE: deb
+            image: ubuntu
+            lable: "26.04"
+            os: ubuntu-24.04-arm
+
+          - PACKAGE: deb
+            image: debian
+            lable: "12"
+            os: ubuntu-24.04
+          - PACKAGE: deb
+            image: debian
+            lable: "12"
+            os: ubuntu-24.04-arm
+          - PACKAGE: deb
+            image: debian
+            lable: "13"
+            os: ubuntu-24.04
+          - PACKAGE: deb
+            image: debian
+            lable: "13"
+            os: ubuntu-24.04-arm
+
+          - PACKAGE: rpm
+            image: fedora
+            lable: "43"
+            os: ubuntu-24.04
+          - PACKAGE: rpm
+            image: fedora
+            lable: "43"
             os: ubuntu-24.04-arm
           - PACKAGE: rpm
             image: fedora
+            lable: "42"
             os: ubuntu-24.04
           - PACKAGE: rpm
-            image: "fedora"
+            image: fedora
+            lable: "42"
             os: ubuntu-24.04-arm
-  
+          - PACKAGE: rpm
+            image: fedora
+            lable: "41"
+            os: ubuntu-24.04
+          - PACKAGE: rpm
+            image: fedora
+            lable: "41"
+            os: ubuntu-24.04-arm
+
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
     # See: https://github.com/actions/runner-images/
@@ -38,6 +84,11 @@ jobs:
     env:
       SerialPortAssistant_VERSION: 0.5.34-dev
       artifact_name: build_docker
+      BUILD_DIR:   ${{github.workspace}}/build
+      SOURCE_DIR:  ${{github.workspace}}/.cache/source
+      TOOLS_DIR:   ${{github.workspace}}/.cache/tools_${{matrix.variant.os}}
+      INSTALL_DIR: ${{github.workspace}}/.cache/install_docker_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${{matrix.variant.os}}
+      BUILD_VERBOSE: ${{matrix.variant.BUILD_VERBOSE}}
 
     # Map the job outputs to step outputs
     outputs:
@@ -50,9 +101,21 @@ jobs:
           submodules: true
           fetch-depth: 0
 
+      - name: Make directories
+        run: |
+          cmake -E make_directory ${{env.BUILD_DIR}}
+          cmake -E make_directory ${{env.SOURCE_DIR}}
+          cmake -E make_directory ${{env.TOOLS_DIR}}
+          cmake -E make_directory ${{env.INSTALL_DIR}}
+
       - name: run docker
         run: |
-          ./Script/build_linux.sh --docker --docker-image="${{matrix.variant.image}}" --${{matrix.variant.PACKAGE}}
+          if [ -n "${{matrix.variant.lable}}" ]; then
+            docker_image="${{matrix.variant.image}}:${{matrix.variant.lable}}"
+          else
+            docker_image="${{matrix.variant.image}}"
+          fi
+          ./Script/build_linux.sh --docker --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
 
       - name: Update artifact
         if: ${{matrix.variant.PACKAGE == 'rpm'}}

@@ -8,6 +8,8 @@ version: '0.5.34-dev'
 type: app
 license: GPL-3.0+
 contact: kl222@126.com
+website: https://github.com/KangLin/SerialPortAssistant
+source-code: https://github.com/KangLin/SerialPortAssistant
 donation:
   - https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 issues: https://github.com/KangLin/SerialPortAssistant/issues
@@ -63,27 +65,25 @@ parts:
       - rabbitcommon
     build-packages:
       - libcmark-dev
-      - cmark
       - libssl-dev
       - libcrypt-dev
-      - libpulse-dev
-      - pulseaudio-dev
     stage-packages:
       - libcmark0.30.2
-      - libopengl0
-      - libgl1
-      - libglx0
-      - libglu1-mesa
       - libssl3
       - libcrypt1
       - zlib1g
-      - libpulse0
-      - pulseaudio
     cmake-parameters:
       # See: https://snapcraft.io/docs/parts-environment-variables
       - -DRabbitCommon_ROOT=$CRAFT_STAGE/RabbitCommon/
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_PREFIX_PATH=$CRAFT_STAGE/usr/local/
+      - -DENABLE_UPDATE_TRANSLATIONS=ON
+      - -DCMAKE_VERBOSE_MAKEFILE=OFF
+      - -DCMARK_SHARED=OFF
+      - -DCMARK_TESTS=OFF
+      - -DCMARK_STATIC=ON
+      - -DWITH_CMARK=OFF
+      - -DWITH_CMARK_GFM=OFF
     # See: https://snapcraft.io/docs/overrides
     override-stage: |
       cd $CRAFT_PART_INSTALL/usr/local/bin
@@ -108,7 +108,7 @@ apps:
    # See: https://snapcraft.io/docs/desktop-menu-support#heading--desktop-key
    desktop: usr/local/share/applications/io.github.KangLin.SerialPortAssistant.desktop
    environment:
-     LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/local/lib
+     LD_LIBRARY_PATH: ${SNAP}/usr/local/lib::${LD_LIBRARY_PATH}
      #QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt6/plugins/
      PATH: $SNAP/usr/local/bin:$PATH
    # List extensions, run `snapcraft extensions`
@@ -121,6 +121,5 @@ apps:
      - network-control
      - network-bind
      - network-manager
-     - opengl
      - serial-port
      - home

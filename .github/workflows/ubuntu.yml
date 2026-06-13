@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
-        os: [ubuntu-24.04, ubuntu-24.04-arm, ubuntu-22.04-arm]
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
 
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
@@ -52,7 +52,7 @@ jobs:
 
       - name: Install dependency libraries
         run: |
-          sudo ./Script/build_depend.sh --apt_update --base --default \
+          sudo ./Script/build_depend.sh --system_update --base --default \
               --install ${{env.INSTALL_DIR}} \
               --source ${{env.SOURCE_DIR}} \
               --tools ${{env.TOOLS_DIR}} \

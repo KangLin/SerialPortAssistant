@@ -12,7 +12,7 @@
   - Deploy rpm package
   - Modify metainfo
   - Enable input port name
-  - Add to deploy macos bundle app package
+  - Add to deploy macOS bundle app package
   - Add windows arm64
   - Use [RabbitCommon v2.3.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.4)
   - Add CStats
@@ -74,7 +74,7 @@
   - Fix deploy.sh bug
   - CI: copy openssl dll in windows. See: https://github.com/KangLin/RabbitCommon/commit/673aa9198ec1f88eb1f9f265d0b85f613ee86418
   - Fix android resource
-  - MacOS can now be successfully compiled in CI.
+  - macOS can now be successfully compiled in CI.
     but the loading dynamic library path is not set correctly.
     Please help you set it.
   - Use RabbitCommon v2.1.0

@@ -6,20 +6,34 @@
 set -e
 #set -v
 
+
 if [ -z "$BUILD_VERBOSE" ]; then
     BUILD_VERBOSE=OFF
 fi
-PACKAGE_TOOL=apt
+
+source $(dirname $(readlink -f $0))/common.sh
+
+install_gnu_getopt
+if [ "$DISTRO" = "macOS" ]; then
+    MACOS=1
+    setup_macos
+else
+    MACOS=0
+fi
+
+if [ -z "$PACKAGE_TOOL" ]; then
+    PACKAGE_TOOL=apt
+fi
+
 PACKAGE=
-APT_UPDATE=0
+SYSTEM_UPDATE=0
 BASE_LIBS=0
 DEFAULT_LIBS=0
 QT=0
 RabbitCommon=0
 
-
 usage_long() {
-    echo "$0 [-h|--help]  [-v|--verbose[=0|1]] [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--package=<'package1 package2 ...'>] [--package-tool=<apt|dnf>] [--apt_update=[0|1]] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
+    echo "$0 [-h|--help]  [-v|--verbose[=0|1]] [--install=<install directory>] [--source=<source directory>] [--tools=<tools directory>] [--build=<build directory>] [--package=<'package1 package2 ...'>] [--package-tool=<apt|dnf>] [--base[=0|1]] [--default[=0|1]] [--qt[=0|1]] [--rabbitcommon[=0|1]]"
     echo "  -h|--help: show help"
     echo "  -v|--verbose: Show verbose"
     echo "Directory:"
@@ -30,136 +44,234 @@ usage_long() {
     echo "Depend:"
     echo "  --base: Install the base libraries with apt"
     echo "  --default: Install the default dependency libraries that comes with the system"
-    echo "  --apt_update: Update system"
     echo "  --package-tool: Package install tool, apk or dnf"
     echo "  --package: Install package"
     echo "  --qt: Install QT"
     echo "  --rabbitcommon: Install RabbitCommon"
 }
 
+# Parse arguments using getopt (more powerful)
 # [如何使用getopt和getopts命令解析命令行选项和参数](https://zhuanlan.zhihu.com/p/673908518)
 # [【Linux】Shell命令 getopts/getopt用法详解](https://blog.csdn.net/arpospf/article/details/103381621)
-if command -V getopt >/dev/null; then
-    echo "getopt is exits"
-    #echo "original parameters=[$@]"
+#
+# 注意：在 macOS 上，本地 getopt 不支持长格式参数，所以需要先在系统上安装 GNU getopt，并设置环境变量 PATH
+#  brew install gnu-getopt
+#  export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+parse_with_getopt() {
+    local OPTS ARGS
+
+    echo_status "Using getopt to parse command line arguments ....."
+
+    # Define supported options
+    # Format: long_option_name: (colon indicates required argument)
+    # :: means optional argument, no colon means no argument
     # -o 或 --options 选项后面是可接受的短选项，如 ab:c:: ，表示可接受的短选项为 -a -b -c ，
     # 其中 -a 选项不接参数，-b 选项后必须接参数，-c 选项的参数为可选的
     # 后面没有冒号表示没有参数。后跟有一个冒号表示有参数。跟两个冒号表示有可选参数。
     # -l 或 --long 选项后面是可接受的长选项，用逗号分开，冒号的意义同短选项。
     # -n 选项后接选项解析错误时提示的脚本名字
-    OPTS=help,verbose::,install:,source:,tools:,build:,package:,package-tool:,apt_update::,base::,default::,qt::,rabbitcommon::
-    ARGS=`getopt -o h -l $OPTS -n $(basename $0) -- "$@"`
+    OPTS=help,install:,source:,tools:,build:,verbose::,package:,package-tool:,system_update::,system-update::,base::,default::,macos::,qt::,rabbitcommon::
+
+    # Parse arguments using getopt
+    # -o: short options
+    # -l: long options
+    # -n: script name for error messages
+    ARGS=$(getopt -o h,v:: -l "$OPTS" -n "$(basename "$0")" -- "$@")
     if [ $? != 0 ]; then
-        echo "exec getopt fail: $?"
-        exit 1
+        echo_error "Error: Command line argument parsing failed" >&2
+        usage_long
     fi
-    #echo "ARGS=[$ARGS]"
+
+    # Set positional parameters to parsed arguments
     #将规范化后的命令行参数分配至位置参数（$1,$2,......)
-    eval set -- "${ARGS}"
+    eval set -- "$ARGS"
     #echo "formatted parameters=[$@]"
 
-    while [ $1 ]
-    do
-        #echo "\$1: $1"
-        #echo "\$2: $2"
-        case $1 in
+    # Process options
+    while true; do
+        case "$1" in
         --install)
-            INSTALL_DIR=$2
+            validate_directory "$2" "Installation"
+            INSTALL_DIR="$2"
             shift 2
             ;;
         --source)
-            SOURCE_DIR=$2
+            validate_directory "$2" "Source code"
+            SOURCE_DIR="$2"
             shift 2
             ;;
         --tools)
-            TOOLS_DIR=$2
+            validate_directory "$2" "Tools"
+            TOOLS_DIR="$2"
             shift 2
             ;;
         --build)
-            BUILD_DIR=$2
+            validate_directory "$2" "Build"
+            BUILD_DIR="$2"
             shift 2
             ;;
         --package)
-            PACKAGE=$2
+            PACKAGE="$2"
             shift 2
             ;;
         --package-tool)
-            PACKAGE_TOOL=$2
+            PACKAGE_TOOL="$2"
             shift 2
             ;;
-        --apt_update)
-            case $2 in
+        -v|--verbose)
+            case "$2" in
                 "")
-                    APT_UPDATE=1;;
+                    BUILD_VERBOSE="ON"
+                    ;;
                 *)
-                    APT_UPDATE=$2;;
+                    BUILD_VERBOSE="$2"
+                    ;;
+            esac
+            shift 2
+            ;;
+        --system_update|--system-update)
+            case "$2" in
+                "")
+                    SYSTEM_UPDATE=1
+                    ;;
+                *)
+                    SYSTEM_UPDATE="$2"
+                    ;;
             esac
             shift 2
             ;;
         --base)
-            case $2 in
+            case "$2" in
                 "")
-                    BASE_LIBS=1;;
+                    BASE_LIBS=1
+                    ;;
                 *)
-                    BASE_LIBS=$2;;
+                    BASE_LIBS="$2"
+                    ;;
             esac
             shift 2
             ;;
         --default)
-            case $2 in
+            case "$2" in
                 "")
-                    DEFAULT_LIBS=1;;
+                    DEFAULT_LIBS=1
+                    ;;
                 *)
-                    DEFAULT_LIBS=$2;;
+                    DEFAULT_LIBS="$2"
+                    ;;
             esac
             shift 2
             ;;
         --qt)
-            case $2 in
+            case "$2" in
                 "")
-                    QT=1;;
+                    QT=1
+                    ;;
+                1|0)
+                    QT="$2"
+                    ;;
                 *)
-                    QT=$2;;
+                    QT_VERSION="$2"
+                    QT=1
+                    ;;
+            esac
+            shift 2
+            ;;
+        --macos)
+            case "$2" in
+                "")
+                    MACOS=1
+                    ;;
+                *)
+                    MACOS="$2"
+                    ;;
             esac
             shift 2
             ;;
         --rabbitcommon)
-            case $2 in
+            case "$2" in
                 "")
-                    RabbitCommon=1;;
+                    RabbitCommon=1
+                    ;;
                 *)
-                    RabbitCommon=$2;;
+                    RabbitCommon="$2"
+                    ;;
             esac
             shift 2
             ;;
-        --) # 当解析到“选项和参数“与“non-option parameters“的分隔符时终止
+        --) # End of options
             shift
             break
             ;;
-        -h | -help)
+        -h|--help)
             usage_long
-            shift
-            ;;
-        -v | --verbose)
-            case $2 in
-                "")
-                    BUILD_VERBOSE=ON;;
-                *)
-                    BUILD_VERBOSE=$2;;
-            esac
-            shift 2
             ;;
         *)
+            echo_error "Error: Unknown option '$1'" >&2
             usage_long
-            break
             ;;
         esac
     done
-fi
+
+    # Handle remaining non-option arguments (if any)
+    if [ $# -gt 0 ]; then
+        echo_warn "Warning: Ignoring unknown arguments: $*" >&2
+    fi
+}
+
+# Parse command line arguments
+parse_command_line() {
+    # Use getopt if available, otherwise fall back to getopts
+    if command -v getopt >/dev/null 2>&1; then
+        parse_with_getopt "$@"
+    else
+        echo_error "Please install GNU getopt"
+        exit 1
+    fi
+}
+
+# Display current configuration
+show_configuration() {
+    if [ "$BUILD_VERBOSE" = "ON" ]; then
+        echo "=== Current Configuration ==="
+        echo "Directory Configuration:"
+        echo "  Install Directory: ${INSTALL_DIR:-Not set (using default)}"
+        echo "  Source Directory: ${SOURCE_DIR:-Not set (using default)}"
+        echo "  Tools Directory: ${TOOLS_DIR:-Not set (using default)}"
+        echo "  Build Directory: ${BUILD_DIR:-Not set (using default)}"
+        echo "  Build Depend Directory: ${BUILD_DEPEND_DIR:-Not set (using default)}"
+        echo ""
+        echo "Package Management:"
+        echo "  System Update: $SYSTEM_UPDATE"
+        echo "  Package Installation: ${PACKAGE:-None}"
+        echo "  Package Tool: ${PACKAGE_TOOL:-Auto-detected}"
+        echo ""
+        echo "Dependency Installation:"
+        echo "  Base Libraries: $BASE_LIBS"
+        echo "  Default Libraries: $DEFAULT_LIBS"
+        echo "  Qt: $QT (Version: $QT_VERSION)"
+        echo "  macOS Tools: $MACOS"
+        echo ""
+        echo "Component Installation:"
+        echo "  RabbitCommon: $RabbitCommon"
+        echo ""
+        echo "Other Settings:"
+        echo "  Verbose Mode: $BUILD_VERBOSE"
+        echo "========================="
+        echo ""
+    fi
+
+    echo "Repo folder: $REPO_ROOT"
+    echo "Old folder: $OLD_CWD"
+    echo "Current folder: `pwd`"
+}
+
+# Parse command line arguments (will override environment variables)
+parse_command_line "$@"
 
 # store repo root as variable
-REPO_ROOT=$(readlink -f $(dirname $(dirname $(readlink -f $0))))
-OLD_CWD=$(readlink -f .)
+REPO_ROOT=$(safe_readlink $(dirname $(dirname $(safe_readlink $0))))
+OLD_CWD=$(safe_readlink .)
 
 pushd "$REPO_ROOT"
 
@@ -195,22 +307,37 @@ echo "TOOLS_DIR: $TOOLS_DIR"
 echo "SOURCE_DIR: $SOURCE_DIR"
 echo "INSTALL_DIR: $INSTALL_DIR"
 
-if [ $APT_UPDATE -eq 1 ]; then
-    echo "apt update ......"
-    apt-get update -y
-    apt-get upgrade -y
+if [ $SYSTEM_UPDATE -eq 1 ]; then
+    echo_status "System update ......"
+    case "$PACKAGE_TOOL" in
+        brew)
+            brew update -q
+            ;;
+        apt)
+            if [ "$BUILD_VERBOSE" = "ON" ]; then
+                apt update -y
+            else
+                apt update -y -qq
+            fi
+            ;;
+        *)
+            "$PACKAGE_TOOL" update -y
+            ;;
+    esac
 fi
 
 if [ -n "$PACKAGE" ]; then
-    ${PACKAGE_TOOL} install -y -q $PACKAGE
+    echo_status "Install package: $PACKAGE"
+    package_install $PACKAGE
 fi
 
 if [ $BASE_LIBS -eq 1 ]; then
     echo "Install base libraries ......"
     if [ "$PACKAGE_TOOL" = "apt" ]; then
-        apt install -y -q build-essential \
-            git cmake gcc g++ debhelper fakeroot graphviz gettext \
-            libglu1-mesa-dev libpulse-mainloop-glib0
+        # Build tools
+        package_install build-essential devscripts equivs debhelper \
+            fakeroot graphviz gettext wget curl git cmake ninja-build doxygen \
+            dh-make lintian quilt git-buildpackage dctrl-tools
         if [ -z "$SerialPortAssistant_VERSION" ]; then
             apt install -y -q xvfb #xpra
         fi
@@ -223,9 +350,9 @@ if [ $BASE_LIBS -eq 1 ]; then
     fi
     
     if [ "$PACKAGE_TOOL" = "dnf" ]; then
-        dnf install -y make git rpm-build rpmdevtools gcc-c++ util-linux \
-           automake autoconf libtool gettext gettext-autopoint \
-           cmake desktop-file-utils curl wget
+        package_install make git rpm-build rpmdevtools gcc-c++ util-linux \
+            automake autoconf libtool gettext gettext-autopoint \
+            cmake desktop-file-utils curl wget dnf-plugins-core
     fi
 fi
 
@@ -246,31 +373,43 @@ if [ $DEFAULT_LIBS -eq 1 ]; then
 fi
 
 if [ $QT -eq 1 ]; then
-    echo "Install qt ......"
+    echo_status "Install qt ${QT_VERSION} ......"
     pushd "$TOOLS_DIR"
-    # See: https://ddalcino.github.io/aqt-list-server/
-    apt install -y -q python3-pip python3-pip-whl python3-pipdeptree cpio
-    #pip install -U pip
-    pip install aqtinstall
-    export QTVERSION=6.8.2
-    if [ "`uname -m`" == "x86_64" ]; then
-        aqt install-qt linux desktop ${QTVERSION} linux_gcc_64 -m qtscxml
-        mv ${QTVERSION}/gcc_64 qt
-    elif [ "`uname -m`" == "aarch64" ]; then
-        aqt install-qt linux_arm64 desktop ${QTVERSION} linux_gcc_arm64 -m qtscxml
-        mv ${QTVERSION}/gcc_arm64 qt
+    if [ ! -d qt_`uname -m` ]; then
+        # See: https://ddalcino.github.io/aqt-list-server/
+        #      https://www.cnblogs.com/clark1990/p/17942952
+        #if [ "$PACKAGE_TOOL" = "apt" ]; then
+        #    package_install python3-pip python3-pip-whl python3-pipdeptree cpio
+        #    pip install --upgrade typing-extensions
+        #fi
+
+        #pip install -U pip
+        pip install --ignore-installed aqtinstall
+
+        echo "PATH: $PATH"
+        if [ "`uname -m`" == "x86_64" ]; then
+            aqt install-qt linux desktop ${QT_VERSION} linux_gcc_64 -m qtscxml qtmultimedia qtimageformats qtserialport qt5compat qtwebsockets qtpositioning qtwebchannel qtwebengine qtspeech qtvirtualkeyboard
+            mv ${QT_VERSION}/gcc_64 qt_`uname -m`
+         elif [ "`uname -m`" == "aarch64" ]; then
+            aqt install-qt linux_arm64 desktop ${QT_VERSION} linux_gcc_arm64 -m qtscxml qtmultimedia qtimageformats qtserialport qt5compat qtwebsockets qtpositioning qtwebchannel qtwebengine qtspeech qtvirtualkeyboard
+            mv ${QT_VERSION}/gcc_arm64 qt_`uname -m`
+        fi
     fi
     popd
 fi
 
 if [ $RabbitCommon -eq 1 ]; then
+    echo_status "Install RabbitCommon ......"
     pushd "$SOURCE_DIR"
     if [ ! -d RabbitCommon ]; then
         git clone https://github.com/KangLin/RabbitCommon.git
     else
-        cd RabbitCommon
+        pushd RabbitCommon
         git pull
-        cd ..
+        popd
     fi
     popd
 fi
+
+popd
+popd

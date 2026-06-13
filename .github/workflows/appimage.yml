@@ -71,7 +71,7 @@ jobs:
 
       - name: Install base dependency libraries
         run: |
-          sudo ./Script/build_depend.sh --apt_update --base --default
+          sudo ./Script/build_depend.sh --system_update --base --default
 
       - name: build appimage
         env:

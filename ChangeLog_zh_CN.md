@@ -12,7 +12,7 @@
   - 分发 rpm 包
   - 修改元文件
   - 允许输入端口名
-  - 增加 macos 分发捆绑包
+  - 增加 macOS 分发捆绑包
   - 增加 windows arm64 发行版本
   - 使用 [RabbitCommon v2.3.4](https://github.com/KangLin/RabbitCommon/releases/tag/v2.3.4)
   - 增加 CStats
@@ -72,7 +72,7 @@
   - 修复 deploy.sh 错误
   - 修复在 windows 下复制 openssl 库错误。详见：https://github.com/KangLin/RabbitCommon/commit/673aa9198ec1f88eb1f9f265d0b85f613ee86418
   - 修复 android 资源错误
-  - 当前在自动化编译中能成功编译 macos 。但是未能正确设置动态库的加载路径。请会的朋友帮助我设置。
+  - 当前在自动化编译中能成功编译 macOS 。但是未能正确设置动态库的加载路径。请会的朋友帮助我设置。
   - 使用 RabbitCommon v2.1.0
   - 增加版本输出到日志
 
