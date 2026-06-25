@@ -67,7 +67,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     pTbMenu->setFocusPolicy(Qt::NoFocus);
     pTbMenu->setPopupMode(QToolButton::InstantPopup);
     //m_pTbMenu->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    pTbMenu->setText(tr("menu")); //tr("⋮"));
+    pTbMenu->setText(tr("menu"));
     pTbMenu->setIcon(QIcon::fromTheme("menu"));
     pTbMenu->setToolTip(tr("menu"));
     pTbMenu->setStatusTip(tr("menu"));
