@@ -48,7 +48,7 @@ public:
     ~CMainWindow();
 
 private Q_SLOTS:
-    void changeEvent(QEvent *e);
+    void changeEvent(QEvent *e) override;
     void slotRead();
     void slotTimeOut();
     void slotReadChannelFinished();

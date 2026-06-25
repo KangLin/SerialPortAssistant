@@ -13,16 +13,11 @@ Abstract:
     This file contains main windows implement.
  */
 
-#include "MainWindow.h"
-#include "ui_MainWindow.h"
-
-#include "Global/Global.h"
 #include <QDockWidget>
 #include <QMessageBox>
 #include <QTime>
 #include <QFile>
 #include <QDir>
-#include <QDebug>
 #include <QSettings>
 #include <QFileDevice>
 #include <QStandardPaths>
@@ -30,12 +25,17 @@ Abstract:
 #include <QLoggingCategory>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <QToolButton>
 
 #ifdef RABBITCOMMON
     #include "DlgAbout.h"
     #include "FrmUpdater.h"
     #include "RabbitCommonTools.h"
 #endif
+
+#include "Global/Global.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
 
 static Q_LOGGING_CATEGORY(log, "MainWindow")
 
@@ -61,7 +61,22 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->menuTools_T->insertMenu(ui->actionOpen_save_file,
                              RabbitCommon::CTools::GetLogMenu(this));
     ui->menuTools_T->addSeparator();
-    
+
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    auto pTbMenu = new QToolButton(ui->mainToolBar);
+    pTbMenu->setFocusPolicy(Qt::NoFocus);
+    pTbMenu->setPopupMode(QToolButton::InstantPopup);
+    //m_pTbMenu->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    pTbMenu->setText(tr("menu")); //tr("⋮"));
+    pTbMenu->setIcon(QIcon::fromTheme("menu"));
+    pTbMenu->setToolTip(tr("menu"));
+    pTbMenu->setStatusTip(tr("menu"));
+    QMenu *pMenu = new QMenu(pTbMenu);
+    pMenu->addActions(this->menuBar()->actions());
+    pTbMenu->setMenu(pMenu);
+    ui->mainToolBar->addWidget(pTbMenu);
+#endif
+
     check = connect(&m_Stats, &CStats::sigCalculationComplete,
                     this, &CMainWindow::slotCalculationComplete);
     Q_ASSERT(check);
