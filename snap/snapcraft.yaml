@@ -27,9 +27,17 @@ description: |
   .
   https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
 
+# See: https://documentation.ubuntu.com/snapcraft/stable/reference/bases/
+base: core24 # the base snap is the execution environment for this snap
 # See: https://snapcraft.io/docs/reference-architectures
 # See: https://snapcraft.io/docs/architectures
-base: core24 # the base snap is the execution environment for this snap
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+  arm64:
+    build-on: [arm64]
+    build-for: [arm64]
 # - devel
 # - stable
 grade: stable # must be 'stable' to release into candidate/stable channels
@@ -50,7 +58,7 @@ parts:
     source: https://github.com/KangLin/RabbitCommon.git
     source-type: git
     source-branch: master
-    source-depth: 1
+    #source-depth: 1
     organize:
       '*': RabbitCommon/
     prime:
@@ -64,26 +72,23 @@ parts:
     after:
       - rabbitcommon
     build-packages:
-      - libcmark-dev
       - libssl-dev
       - libcrypt-dev
     stage-packages:
-      - libcmark0.30.2
       - libssl3
       - libcrypt1
-      - zlib1g
     cmake-parameters:
       # See: https://snapcraft.io/docs/parts-environment-variables
       - -DRabbitCommon_ROOT=$CRAFT_STAGE/RabbitCommon/
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_PREFIX_PATH=$CRAFT_STAGE/usr/local/
       - -DENABLE_UPDATE_TRANSLATIONS=ON
-      - -DCMAKE_VERBOSE_MAKEFILE=OFF
+      - -DCMAKE_VERBOSE_MAKEFILE=ON
       - -DCMARK_SHARED=OFF
       - -DCMARK_TESTS=OFF
       - -DCMARK_STATIC=ON
       - -DWITH_CMARK=OFF
-      - -DWITH_CMARK_GFM=OFF
+      - -DWITH_CMARK_GFM=ON
     # See: https://snapcraft.io/docs/overrides
     override-stage: |
       cd $CRAFT_PART_INSTALL/usr/local/bin

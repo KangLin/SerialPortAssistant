@@ -79,16 +79,7 @@ jobs:
         run: |
           export QMAKE=/usr/bin/qmake6
           ${{github.workspace}}/Script/build_appimage.sh
-          # mkdir -p SetupSerialPortAssistantAppImage
-          # pushd SetupSerialPortAssistantAppImage
-          # cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage .
-          # chmod a+rx SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
-          # cp ${{github.workspace}}/Script/install_appimage.sh install.sh
-          # chmod a+rx install.sh
-          # cp ${{env.BUILD_DIR}}/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
-          # cp ${{env.BUILD_DIR}}/AppDir/usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png .
-          # popd
-          # 7z a SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.zip SetupSerialPortAssistantAppImage
+          cp ${{github.workspace}}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_`uname -m`.AppImage SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_`uname -m`.AppImage
 
       - name: update configure file
         if: ${{ matrix.BUILD_TYPE == 'Release'}}
