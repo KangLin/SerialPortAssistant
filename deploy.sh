@@ -108,8 +108,12 @@ init_value() {
     TAG_RELEASE_PATTERN="v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)"
 
     SOURCE_DIR=$(dirname $(safe_readlink $0))
+    if [ -f ${SOURCE_DIR}/Script/common.sh ]; then
+        source ${SOURCE_DIR}/Script/common.sh
+        check_git
+    fi
 
-    CURRENT_VERSION=`git describe --tags`
+    CURRENT_VERSION=`git describe --tags --match "v*"`
     if [ -z "$CURRENT_VERSION" ]; then
         CURRENT_VERSION=`git rev-parse HEAD`
     fi
@@ -270,11 +274,11 @@ parse_with_getopts() {
                 #echo "Message set to: $MESSAGE"
                 ;;
             \?)
-                echo "Invalid option: -$OPTARG" >&2
+                echo_error "Invalid option: -$OPTARG" >&2
                 usage_long
                 ;;
             :)
-                echo "Option -$OPTARG requires an argument." >&2
+                echo_error "Option -$OPTARG requires an argument." >&2
                 usage_long
                 ;;
         esac
@@ -297,9 +301,9 @@ parse_with_getopts() {
     # 参数验证
     if [ -n "$VERSION" ]; then
         if [[ ! "$VERSION" =~ ^${VERSION_PATTERN}$ ]]; then
-            echo "X Invalid SemVer format: $VERSION" >&2
-            echo "  Expected format: [v]X.Y.Z[-prerelease][+build]" >&2
-            echo "  See: https://semver.org/" >&2
+            echo_error "X Invalid SemVer format: $VERSION" >&2
+            echo_error "  Expected format: [v]X.Y.Z[-prerelease][+build]" >&2
+            echo_error "  See: https://semver.org/" >&2
             exit 1
         fi
     fi
@@ -321,6 +325,33 @@ parse_with_getopts() {
     DATE_TIME_UTC=$(date -u +"%Y-%m-%d %H:%M:%S (UTC)")
 }
 
+# 检查版本
+check_version() {
+    local v1=$PRE_TAG
+    local v2=$VERSION
+    local result=`compare_versions "$PRE_TAG" "$VERSION";echo $?`
+    if [[ $result -ne 2 ]]; then
+        echo_error "The version \"$VERSION\" to be set is lower than the latest version \"$PRE_TAG\""
+        exit 1
+    fi
+}
+
+check_chang_log() {
+    echo "  - Modified change log ?"
+    local content=$(<${SOURCE_DIR}/ChangeLog.md)
+    if [[ $content =~ "$VERSION" ]]; then
+        echo_color_success "    √ Modified in \"ChangeLog.md\""
+    else
+        echo_color_warn "    ! Warning: Don't include \"$VERSION\" in the file \"ChangeLog.md\""
+    fi
+    content=$(<${SOURCE_DIR}/ChangeLog_zh_CN.md)
+    if [[ $content =~ "$VERSION" ]]; then
+        echo_color_success "    √ Modified in \"ChangeLog_zh_CN.md\""
+    else
+        echo_color_warn "    ! Warning: Don't include \"$VERSION\" in the file \"ChangeLog_zh_CN.md\""
+    fi
+}
+
 create_tag() {
     if [ "$DEPLOY" = "ON" ]; then
         #PRE_TAG=`git tag --sort=-taggerdate | head -n 1`
@@ -330,15 +361,14 @@ create_tag() {
         echo "  Message: $MESSAGE"
         echo ""
         echo "Please verify:"
-        echo "  √ Tests passed?"
-        echo "  √ Translations updated?"
-        echo "  √ Setup files correct?"
-        echo "  √ Update_*.json files updated?"
+        echo "  - Test is ok ?"
+        echo "  - Translations updated ?"
+        check_chang_log
         echo ""
 
-        read -t 30 -p "? Deploy? (y/N): " INPUT
+        read -t 60 -p "? Deploy? (y/N): " INPUT
         if [ "${INPUT:-N}" != "Y" ] && [ "${INPUT:-N}" != "y" ]; then
-            echo "X Deployment cancelled"
+            echo_error "Deployment cancelled"
             exit 0
         fi
 
@@ -348,14 +378,14 @@ create_tag() {
         if git rev-parse "$VERSION" >/dev/null 2>&1; then
             echo "= Tag $VERSION already exists, deleting ......"
             git tag -d "$VERSION"
-            echo "√ Successfully delete tag $VERSION"
+            echo_success "Successfully delete tag $VERSION"
             echo ""
         fi
 
         # Create new tag
         echo "= Creating tag: $VERSION ......"
         git tag -a "$VERSION" -m "${MESSAGE}"
-        echo "√ Tag created: $VERSION"
+        echo_success "Tag created: $VERSION"
         echo ""
     fi
 }
@@ -367,9 +397,9 @@ commit_code() {
     # Commit if there are changes
     if ! git diff --cached --quiet; then
         git commit -m "$MESSAGE"
-        echo "√ Changes committed"
+        echo_success "Changes committed"
     else
-        echo "X No changes to commit"
+        echo_error "No changes to commit"
         exit 1
     fi
 }
@@ -388,7 +418,7 @@ push_remote_repository() {
         git push origin HEAD
         git push origin "$VERSION"
 
-        echo "√ Push to remote repository successfully!"
+        echo_success "Push to remote repository successfully!"
     fi
 }
 
@@ -400,13 +430,15 @@ parse_with_getopts "$@"
 
 show_value
 
+check_version
+
 create_tag
 
 echo "= Update version to $VERSION ......"
 
 update_verion
 
-echo "√ Version updated to $VERSION successfully!"
+echo_success "Version updated to $VERSION successfully!"
 #echo "  Time: $DATE_TIME_UTC"
 echo ""
 
