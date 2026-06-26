@@ -13,34 +13,55 @@ jobs:
   build_android:
     strategy:
       matrix:
-        BUILD_TYPE: [Release]
-        qt_arch: [android_arm64_v8a, android_x86_64]
-        qt_version: [6.9.3]
         include:
           - qt_arch: android_arm64_v8a
             VCPKG_TARGET_TRIPLET: arm64-android
             ANDROID_ABI: arm64-v8a
+            arch: arm64
+            qt_version: 6.11.1
+            BUILD_TYPE: Release
 
-          - qt_arch: android_x86_64 
+          - qt_arch: android_x86_64
             VCPKG_TARGET_TRIPLET: x64-android
             ANDROID_ABI: x86_64
+            arch: x86_64
+            qt_version: 6.11.1
+            BUILD_TYPE: Release
 
-    # See: https://docs.github.com/zh/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
+          - qt_arch: android_arm64_v8a
+            VCPKG_TARGET_TRIPLET: arm64-android
+            ANDROID_ABI: arm64-v8a
+            arch: arm64
+            qt_version: 6.10.3
+            BUILD_TYPE: Release
+
+          - qt_arch: android_x86_64
+            VCPKG_TARGET_TRIPLET: x64-android
+            ANDROID_ABI: x86_64
+            arch: x86_64
+            qt_version: 6.10.3
+            BUILD_TYPE: Release
+
+    # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
+    # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
     # See: https://github.com/actions/runner-images/
     runs-on: ubuntu-24.04
 
     env:
-      artifact_name: build_android
-      BUILD_DIR:   ${{github.workspace}}/build
-      SOURCE_DIR:  ${{github.workspace}}/.cache/source
-      TOOLS_DIR:   ${{github.workspace}}/.cache/tools
-      INSTALL_DIR: ${{github.workspace}}/.cache/install
-      VCPKGGITCOMMITID: 4c5ae6b55f3e3e39d291679f89822f496cf190ee
+      VCPKGGITCOMMITID: 7213cf8135c329c37c7e2778e40774489a0583a8
       VCPKG_TARGET_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
+      VCPKG_DEFAULT_TRIPLET: ${{matrix.VCPKG_TARGET_TRIPLET}}
       VCPKG_DEFAULT_HOST_TRIPLET: x64-linux
+      VCPKG_MANIFEST_FEATURES: "freerdp;vnc;wol;filetransfer;${{matrix.VCPKG_MANIFEST_FEATURES}}"
+      BUILD_DIR:     ${{github.workspace}}/build
+      SOURCE_DIR:    ${{github.workspace}}/.cache/source
+      TOOLS_DIR:     ${{github.workspace}}/.cache/tools
+      INSTALL_DIR:   ${{github.workspace}}/.cache/install
+      artifact_name: build_android
+      #ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/26.3.11579264
+      ANDROID_PLATFORM: android-34
+      ANDROID_NATIVE_API_LEVEL: 34
       ANDROID_ABI: ${{matrix.ANDROID_ABI}}
-      ANDROID_PLATFORM: android-35
-      ANDROID_NATIVE_API_LEVEL: 35
       qt_modules: 'qtscxml qtserialport'
       SerialPortAssistant_VERSION: v0.5.34-dev
 
@@ -62,6 +83,12 @@ jobs:
           cmake -E make_directory ${{env.INSTALL_DIR}}
           cmake -E make_directory ${{env.BUILD_DIR}}
 
+      - name: Install apt packages
+        run: |
+          #sudo apt-get update -y
+          #sudo apt-get upgrade -y
+          sudo apt install -y -q ninja-build nasm
+
       - name: Cache installed
         #if: false
         uses: actions/cache@v4
@@ -71,23 +98,23 @@ jobs:
             ${{env.INSTALL_DIR}}
           key: installed-qt${{matrix.qt_version}}-${{matrix.qt_arch}}-${{matrix.VCPKG_TARGET_TRIPLET}}
 
-      - name: Install Qt of gcc_64
-        uses: jurplel/install-qt-action@v3
+      - name: Install Qt of linux_gcc_64
+        uses: jurplel/install-qt-action@v4
         with:
-          dir: '${{env.TOOLS_DIR}}' # optional
+          dir: '${{env.TOOLS_DIR}}/qt' # optional
           version: '${{matrix.qt_version}}'
-          host: 'linux'
+          #host: 'linux'
           target: 'desktop'
           arch: 'linux_gcc_64'
           set-env: false
           cache: true
-          cache-key-prefix: cached_qt
+          cache-key-prefix: cached-qt_${{matrix.qt_version}}_${{matrix.qt_arch}}
 
       - name: Install Qt of android
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           # Directory to install Qt
-          dir: '${{env.TOOLS_DIR}}' # optional
+          dir: '${{env.TOOLS_DIR}}/qt' # optional
           # Version of Qt to install
           version: '${{matrix.qt_version}}'
           # Host platform
@@ -98,9 +125,8 @@ jobs:
           arch: '${{matrix.qt_arch}}' # optional
           # Additional Qt modules to install
           modules: '${{env.qt_modules}}' # optional. See: https://ddalcino.github.io/aqt-list-server/
-          # Whether or not to actually download Qt
           cache: true
-          cache-key-prefix: cached_qt
+          cache-key-prefix: cached-qt_${{matrix.qt_version}}_${{matrix.qt_arch}}
 
       - name: chmod qt-cmake
         run: |
@@ -133,8 +159,8 @@ jobs:
           QT_ANDROID_KEYSTORE_ALIAS: rabbitcommon
           QT_ANDROID_KEYSTORE_STORE_PASS: ${{secrets.STOREPASS}}
         run: |
-          sudo chmod 777 ${Qt6_DIR}/bin/qt-cmake
-          ${Qt6_DIR}/bin/qt-cmake .. \
+          sudo chmod 777 ${QT_ROOT_DIR}/bin/qt-cmake
+          ${QT_ROOT_DIR}/bin/qt-cmake .. \
               -DCMARK_SHARED=OFF \
               -DCMARK_TESTS=OFF \
               -DCMARK_STATIC=ON \
@@ -146,10 +172,10 @@ jobs:
               -DVCPKG_APPLOCAL_DEPS=ON \
               -DRABBIT_ENABLE_INSTALL_QT=ON \
               -DRABBIT_ENABLE_INSTALL_TO_BUILD_PATH=ON \
-              -DQT_HOST_PATH=${Qt6_DIR}/../gcc_64 \
+              -DQT_HOST_PATH=${QT_ROOT_DIR}/../gcc_64 \
               -DQT_ANDROID_SIGN_APK=ON \
               -DQT_ENABLE_VERBOSE_DEPLOYMENT=ON \
-              -DQt6LinguistTools_DIR=${Qt6_DIR}/../gcc_64/lib/cmake/Qt6LinguistTools \
+              -DQt6LinguistTools_DIR=${QT_ROOT_DIR}/../gcc_64/lib/cmake/Qt6LinguistTools \
               -DCMAKE_INSTALL_PREFIX=`pwd`/install
           cmake --build . --verbose --config ${{matrix.BUILD_TYPE}} --target all
           APK_FILE=`find . -name "android-*.apk"`
