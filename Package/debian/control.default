@@ -1,0 +1,34 @@
+# https://www.debian.org/doc/manuals/maint-guide/dreq.zh-cn.html#control
+# https://www.debian.org/doc/debian-policy/ch-controlfields.html
+
+Source: serialportassistant
+Section: main
+Priority: optional
+Maintainer: Kang Lin <kl222@126.com>
+Build-Depends: cmake, debhelper (>=13~), debhelper-compat (=13), fakeroot,
+ libssl-dev, libcmark-dev,
+ qt6-tools-dev, qt6-tools-dev-tools, qt6-base-dev, qt6-base-dev-tools, qt6-qpa-plugins, qt6-svg-dev,
+ qt6-l10n-tools, qt6-translations-l10n, qt6-scxml-dev, libqt6serialport6-dev
+Standards-Version: 4.6.2
+Homepage: https://github.com/KangLin/SerialPortAssistant
+Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git
+Vcs-Browser: https://github.com/KangLin/SerialPortAssistant
+Rules-Requires-Root: no
+
+Package: serialportassistant
+Section: utils
+Architecture: any
+#Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Serial Port Assistant
+ Serial port assistant
+ .
+ Author: Kang Lin <kl222@126.com>
+ .
+ Donation:
+ .
+ https://github.com/KangLin/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+ .
+ https://gitee.com/kl222/RabbitCommon/raw/master/Src/Resource/image/Contribute.png
+ .
+ https://gitlab.com/kl222/RabbitCommon/-/raw/master/Src/Resource/image/Contribute.png
