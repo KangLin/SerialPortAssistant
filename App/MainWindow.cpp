@@ -160,7 +160,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
         ui->teSend->setFont(fixedFont);
     }
 
-#ifdef HAVE_RABBITCOMMON_GUI
+#if defined(HAVE_RABBITCOMMON_GUI) && !defined(Q_OS_ANDROID)
     RabbitCommon::CTools::RestoreWidget(this);
 #endif
 }
@@ -175,7 +175,7 @@ CMainWindow::~CMainWindow()
 
 void CMainWindow::closeEvent(QCloseEvent *event)
 {
-#ifdef HAVE_RABBITCOMMON_GUI
+#if defined(HAVE_RABBITCOMMON_GUI) && !defined(Q_OS_ANDROID)
     RabbitCommon::CTools::SaveWidget(this);
 #endif
     QMainWindow::closeEvent(event);
