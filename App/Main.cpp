@@ -99,16 +99,7 @@ int main(int argc, char *argv[])
     }
 #endif
 
-
-#if defined(BUILD_QUIWidget) && !defined(Q_OS_ANDROID)
-    QUIWidget* quiwidget = new QUIWidget(nullptr, true);
-    quiwidget->setMainWidget(w);
-    //quiwidget->setPixmap(QUIWidget::Lab_Ico, ":/icon/AppIcon");
-    //quiwidget.setTitle(a.applicationDisplayName());
-    quiwidget->show();
-#else
-    w->show();
-#endif
+    RC_SHOW_WINDOW(w);
 
     int nRet = a.exec();
 
