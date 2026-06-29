@@ -2,7 +2,9 @@
 
 ### Version: v0.5.34-dev
 - CI: add snap
-- Android: add menu to toolbar
+- Android:
+  - add menu to toolbar
+  - Fix language bug
 
 ### Version: v0.5.33
 - Modify status bar
