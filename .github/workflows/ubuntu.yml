@@ -76,7 +76,7 @@ jobs:
         env:
           RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
-          ./Script/build_debpackage.sh
+          ./Script/build_debpackage.sh --install ${{env.INSTALL_DIR}}
 
       - name: Update configure file
         working-directory: ${{github.workspace}}

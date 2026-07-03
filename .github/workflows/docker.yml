@@ -96,7 +96,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: true
           fetch-depth: 0
@@ -108,6 +108,16 @@ jobs:
           cmake -E make_directory ${{env.TOOLS_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
 
+      - name: Cache installed
+        uses: actions/cache@v5
+        id: cache-installed
+        with:
+          path: |
+            ${{env.INSTALL_DIR}}
+            ${{env.TOOLS_DIR}}/linuxdeploy-*
+            ${{env.TOOLS_DIR}}/qt_*
+          key: install_docker_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}${{matrix.variant.lable}}_${{matrix.variant.os}}
+
       - name: run docker
         run: |
           if [ -n "${{matrix.variant.lable}}" ]; then
@@ -115,10 +125,13 @@ jobs:
           else
             docker_image="${{matrix.variant.image}}"
           fi
-          ./Script/build_linux.sh --docker --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
+          ./Script/build_linux.sh --install=${{env.INSTALL_DIR}} \
+            --source=${{env.SOURCE_DIR}} \
+            --tools=${{env.TOOLS_DIR}} \
+            --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
           if [ "${{matrix.variant.PACKAGE}}" = "deb" ]; then
             echo "Copy deb package ......"
-            pushd ${{github.workspace}}/build_linux/
+            pushd ${{env.BUILD_DIR}}/build_linux/
             export ARCH=`dpkg --print-architecture`
             cp serialportassistant_*.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${ARCH}.deb
             popd
@@ -136,6 +149,6 @@ jobs:
         with:
           name: ${{ env.artifact_name }}_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${{matrix.variant.os}}
           path: |
-            ${{github.workspace}}/build_linux/serialportassistant*.rpm
-            ${{github.workspace}}/build_linux/serialportassistant*.deb
-            ${{github.workspace}}/build_linux/SerialPortAssistant_*.zip
+            ${{env.BUILD_DIR}}/build_linux/serialportassistant*.rpm
+            ${{env.BUILD_DIR}}/build_linux/serialportassistant*.deb
+            ${{env.BUILD_DIR}}/build_linux/SerialPortAssistant_*.zip
