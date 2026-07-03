@@ -25,10 +25,6 @@ RPM=0
 APPIMAGE=0
 LINT=0
 
-if [ -z "$QT_VERSION" ]; then
-    QT_VERSION=6.10.3
-fi
-
 # Display detailed usage information
 usage_long() {
     cat << EOF
@@ -394,7 +390,7 @@ if [ $DOCKER -eq 1 ]; then
                export SOURCE_CODE_DIR=/home
            fi
            \${SOURCE_CODE_DIR}/SerialPortAssistant/Script/build_linux.sh --deb --install=/home/install --tools=/home/tools --verbose=${BUILD_VERBOSE}
-           cp \${SOURCE_CODE_DIR}/serialportassistant*.deb /home/build/
+           cp \${SOURCE_CODE_DIR}/serialportassistant_*.deb /home/build/
            "
     fi
     if [ $APPIMAGE -eq 1 ]; then
@@ -481,13 +477,15 @@ fi
 
 if [ $APPIMAGE -eq 1 ]; then
     echo_status "build AppImage ......"
-    ./build_depend.sh --system_update --base --rabbitcommon\
+
+    ./build_depend.sh --system_update --base --rabbitcommon ${conf_para} \
         --install ${INSTALL_DIR} \
         --source ${SOURCE_DIR} \
         --tools ${TOOLS_DIR} \
-        --verbose ${BUILD_VERBOSE} \
-        --qt ${QT_VERSION}
-    
+        --verbose ${BUILD_VERBOSE}
+
+    install_debian_depend $REPO_ROOT
+
     # Disable ci warn
     if [ $CI ]; then
         git config --global --add safe.directory $REPO_ROOT

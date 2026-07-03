@@ -19,13 +19,13 @@ jobs:
         variant:
           - PACKAGE: deb
             image: ubuntu
-            lable: "25.04"
+            lable: "24.04"
             os: ubuntu-24.04
-          - PACKAGE: deb
+          - PACKAGE: appimage
             image: ubuntu
-            lable: "25.04"
+            lable: "24.04"
             os: ubuntu-24.04-arm
-          - PACKAGE: deb
+          - PACKAGE: appimage
             image: ubuntu
             lable: "26.04"
             os: ubuntu-24.04
@@ -116,11 +116,24 @@ jobs:
             docker_image="${{matrix.variant.image}}"
           fi
           ./Script/build_linux.sh --docker --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
+          if [ "${{matrix.variant.PACKAGE}}" = "deb" ]; then
+            pushd ${{github.workspace}}/build_linux/
+            export ARCH=`dpkg --print-architecture`
+            cp serialportassistant_*.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${ARCH}.deb
+            popd
+          fi
+          if [ "${{matrix.variant.PACKAGE}}" = "appimage" ]; then
+            pushd ${{env.BUILD_DIR}}/build_linux
+            mv install SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup
+            zip SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup.zip SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup/*
+          fi
 
       - name: Update artifact
         if: ${{matrix.variant.PACKAGE == 'rpm'}}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact_name }}_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}_${{matrix.variant.os}}
+          name: ${{ env.artifact_name }}_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${{matrix.variant.os}}
           path: |
             ${{github.workspace}}/build_linux/serialportassistant*.rpm
+            ${{github.workspace}}/build_linux/serialportassistant*.deb
+            ${{github.workspace}}/build_linux/SerialPortAssistant_*.zip

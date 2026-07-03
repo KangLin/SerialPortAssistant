@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
-        os: [ubuntu-24.04, ubuntu-24.04-arm]
+        os: [ubuntu-24.04, ubuntu-24.04-arm, ubuntu-22.04, ubuntu-22.04-arm]
 
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
@@ -57,9 +57,6 @@ jobs:
               --source ${{env.SOURCE_DIR}} \
               --tools ${{env.TOOLS_DIR}} \
               --build ${{env.BUILD_DIR}}
-          if [ "ubuntu-22.04-arm" != ${{matrix.os}} ]; then
-              sudo apt install -y -q qt6-5compat-dev
-          fi
 
       - name: Cache installed
         uses: actions/cache@v3
