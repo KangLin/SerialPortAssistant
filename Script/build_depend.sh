@@ -346,7 +346,14 @@ if [ $BASE_LIBS -eq 1 ]; then
         # RabbitCommon dependency
         apt install -y -q libcmark-dev cmark
         # AppImage
-        apt install -y -q libfuse-dev libfuse3-dev
+        case "$DISTRO_VERSION" in
+            26.*|25.*)
+                package_install fuse3
+                ;;
+            *)
+                package_install fuse
+                ;;
+        esac
     fi
     
     if [ "$PACKAGE_TOOL" = "dnf" ]; then
@@ -359,20 +366,8 @@ fi
 if [ $DEFAULT_LIBS -eq 1 ]; then
     echo "Install default dependency libraries ......"
     if [ "$PACKAGE_TOOL" = "apt" ]; then
-        if [ "${QT:-0}" -ne 1 ]; then
-            # Qt6
-            package_install qmake6 qt6-tools-dev qt6-tools-dev-tools \
-                qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins \
-                qt6-svg-dev qt6-l10n-tools qt6-translations-l10n \
-                qt6-scxml-dev
-            case "${DISTRO}:${DISTRO_VERSION}" in
-                ubuntu:26.*|ubuntu:25.*)
-                    package_install qt6-serialport-dev
-                    ;;
-                *)
-                    package_install libqt6serialport6-dev
-                    ;;
-            esac
+        if [ "${QT}" -ne 1 ]; then
+            install_debian_depend $REPO_ROOT
         fi
     fi
     if [ "$PACKAGE_TOOL" = "dnf" ]; then
@@ -382,7 +377,7 @@ if [ $DEFAULT_LIBS -eq 1 ]; then
     fi
 fi
 
-if [ "${QT:-0}" -eq 1 ]; then
+if [ "${QT}" -eq 1 ]; then
     echo_status "Install qt ${QT_VERSION} ......"
     pushd "$TOOLS_DIR"
     if [ ! -d qt_`uname -m` ]; then

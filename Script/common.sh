@@ -321,14 +321,17 @@ create_debian_folder() {
                     control_source="$repo_root/Package/debian/control.deepin.23"
                     ;;
                 *)
-                    control_source="$repo_root/Package/debian/control.default"
+                    echo_error "Don't support debian/control in ${DISTRO}:${DISTRO_VERSION}"
                     ;;
             esac
             if [ -f "$control_source" ]; then
-                ln -s $control_source $repo_root/debian/control
                 if [ "$BUILD_VERBOSE" = "ON" ]; then
                     echo "ln -s $control_source $repo_root/debian/control"
                 fi
+                if [ -f $repo_root/debian/control ]; then
+                    rm $repo_root/debian/control
+                fi
+                ln -s $control_source $repo_root/debian/control
             else
                 echo_error "Error: $control_source is not exist"
             fi

@@ -491,17 +491,10 @@ if [ $APPIMAGE -eq 1 ]; then
         git config --global --add safe.directory $REPO_ROOT
     fi
 
-    export QT_ROOT=${TOOLS_DIR}/qt_`uname -m`
-    export Qt6_DIR=$QT_ROOT
-    export QMAKE=$QT_ROOT/bin/qmake
-    export PATH=$QT_ROOT/libexec:$PATH
-    export PKG_CONFIG_PATH=$QT_ROOT/lib/pkgconfig:${INSTALL_DIR}/lib/pkgconfig:$PKG_CONFIG_PATH
-    export LD_LIBRARY_PATH=$QT_ROOT/lib:${INSTALL_DIR}/lib:$LD_LIBRARY_PATH
-    export QT_PLUGIN_PATH=$QT_ROOT/plugins
-    export CMAKE_PREFIX_PATH=$QT_ROOT:${INSTALL_DIR}:${CMAKE_PREFIX_PATH}
     export RabbitCommon_ROOT=${SOURCE_DIR}/RabbitCommon
-    export BUILD_FREERDP=ON
-    apt install -y -q fuse3
+    export PKG_CONFIG_PATH=${INSTALL_DIR}/${LIB_PATH}/pkgconfig:$PKG_CONFIG_PATH
+    export LD_LIBRARY_PATH=${INSTALL_DIR}/${LIB_PATH}:$LD_LIBRARY_PATH
+    export CMAKE_PREFIX_PATH=${INSTALL_DIR}:${CMAKE_PREFIX_PATH}
     ./build_appimage.sh --install ${INSTALL_DIR} --verbose ${BUILD_VERBOSE}
 fi
 

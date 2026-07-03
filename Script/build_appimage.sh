@@ -187,7 +187,7 @@ cmake "$REPO_ROOT" \
   -DCMARK_TESTS=OFF \
   -DCMARK_STATIC=ON \
   -DWITH_CMARK=OFF \
-  -DWITH_CMARK_GFM=ON \
+  -DWITH_CMARK_GFM=OFF \
   -DENABLE_UPDATE_TRANSLATIONS=ON \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_POLICY_VERSION_MINIMUM=3.5
@@ -219,9 +219,9 @@ if [ "${BUILD_VERBOSE}" = "ON" -a -n "$QMAKE" ]; then
     $QMAKE --version
 fi
 
-if [ -n "$QMAKE" ]; then
+if [ -z "$QMAKE" ]; then
     if command -v qmake >/dev/null 2>&1; then
-        command -v qmake
+        export QMAKE=`command -v qmake6`
     else
         echo_error "Please set 'QMAKE'"
     fi
