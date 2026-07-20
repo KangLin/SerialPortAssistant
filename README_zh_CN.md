@@ -28,6 +28,7 @@
   + 主库: https://github.com/KangLin/SerialPortAssistant
   + 镜像库:
     - 中国： https://gitee.com/kl222/SerialPortAssistant
+    - https://launchpad.net/serialportassistant
     - https://gitlab.com/kl222/SerialPortAssistant
     - https://sourceforge.net/projects/serialportassistant/
     - https://bitbucket.org/kl222/serialportassistant
@@ -137,6 +138,16 @@
 #### 测试
 
 - 在 Ubuntu 上
+  - 把当前用户加入串口所属的组
+    - 查看串口所属的组
+
+          $ ls -la /dev/ttyS*
+          crw-rw---- 1 root dialout 4, 65 Aug  4 16:04 /dev/ttyS1
+
+    - 把当前用户加入串口所属的组
+
+          sudo usermod -a -G dialout $USER
+
   - 安装 `socat`
 
         $ sudo apt update

@@ -35,6 +35,7 @@ override_dh_auto_configure:
 	    -DCMAKE_INSTALL_PREFIX=/opt/SerialPortAssistant \
 		-DRabbitCommon_ROOT=${RabbitCommon_ROOT} \
 		-DCMAKE_BUILD_TYPE=Release \
+		-DENABLE_UPDATE_TRANSLATIONS=ON \
 		-DCMARK_SHARED=OFF \
 		-DCMARK_TESTS=OFF \
 		-DCMARK_STATIC=ON \

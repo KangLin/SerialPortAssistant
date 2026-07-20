@@ -5,11 +5,35 @@
 set -e
 #set -x
 
+# 安全的 readlink 函数，兼容各种系统
+safe_readlink() {
+    local path="$1"
+    if [ -L "$path" ]; then
+        if command -v readlink >/dev/null 2>&1; then
+            if readlink -f "$path" >/dev/null 2>&1; then
+                readlink -f "$path"
+            else
+                readlink "$path"
+            fi
+        else
+            ls -l "$path" | awk '{print $NF}'
+        fi
+    elif [ -e "$path" ]; then
+        if command -v realpath >/dev/null 2>&1; then
+            realpath "$path"
+        else
+            echo "$(cd "$(dirname "$path")" && pwd)/$(basename "$path")"
+        fi
+    else
+        echo "$path"
+    fi
+}
+
 if [ -z "$BUILD_VERBOSE" ]; then
     BUILD_VERBOSE=OFF
 fi
 
-source $(dirname $(readlink -f $0))/common.sh
+source $(dirname $(safe_readlink $0))/common.sh
 
 install_gnu_getopt
 if [ "$OS" = "macOS" ]; then
@@ -67,7 +91,6 @@ Environment variables:
 EOF
     exit 0
 }
-
 
 parse_with_getopt() {
     # [如何使用 getopt 和 getopts 命令解析命令行选项和参数](https://zhuanlan.zhihu.com/p/673908518)
@@ -281,7 +304,7 @@ validate_parameters() {
     case "$DOCKER_IMAGE" in
         "")
             ;;
-        ubuntu*|debian*|kali*|*kylin*|*deepin*)
+        ubuntu*|debian*|kali*|*kylin*|*deepin*|linuxmint*)
             if [ $RPM -eq 1 ]; then
               echo_error "Error: Not recommended build rpm package in $DOCKER_IMAGE"
               exit 1
@@ -367,16 +390,19 @@ if [ $DOCKER -eq 1 ]; then
     chmod a+rw ${BUILD_LINUX_DIR}/SerialPortAssistant.tar.gz
     popd
 
+    DOCKER_PARA="$DOCKER_PARA -e CI=${CI}"
+    if [ -d "$RabbitCommon_ROOT" ]; then
+        DOCKER_PARA="$DOCKER_PARA --volume ${RabbitCommon_ROOT}:/home/RabbitCommon -e RabbitCommon_ROOT=/home/RabbitCommon"
+    fi
     if [ $DEB -eq 1 ]; then
-        if [[ "$DOCKER_IMAGE" =~ ^(ubuntu|debian) ]]; then
-            DOCKER_PARA="-e DEBIAN_FRONTEND=noninteractive -e TZ=UTC"
+        if [[ "$DOCKER_IMAGE" =~ ^(ubuntu|debian|linuxmint) ]]; then
+            DOCKER_PARA="$DOCKER_PARA -e DEBIAN_FRONTEND=noninteractive -e TZ=UTC"
         fi
         echo "DOCKER_PLATFORM: $DOCKER_PLATFORM"
         if [ -n "$DOCKER_PLATFORM" ]; then
             DOCKER_PARA="$DOCKER_PARA --platform $DOCKER_PLATFORM"
         fi
        docker run --privileged ${DOCKER_PARA} \
-           -e CI=${CI} \
            --volume ${REPO_ROOT}:/home/SerialPortAssistant \
            --volume ${BUILD_LINUX_DIR}:/home/build \
            --volume ${INSTALL_DIR}:/home/install \
@@ -394,12 +420,12 @@ if [ $DOCKER -eq 1 ]; then
            "
     fi
     if [ $APPIMAGE -eq 1 ]; then
-        #if [[ "$DOCKER_IMAGE" =~ ^(ubuntu|debian) ]]; then
+        #if [[ "$DOCKER_IMAGE" =~ ^(ubuntu|debian|linuxmint) ]]; then
         #    DOCKER_PARA="-e DEBIAN_FRONTEND=noninteractive -e TZ=UTC"
         #fi
         case "$DISTRO" in
-        ubuntu|debian)
-            DOCKER_PARA="-e DEBIAN_FRONTEND=noninteractive -e TZ=UTC"
+        ubuntu|debian|linuxmint)
+            DOCKER_PARA="$DOCKER_PARA -e DEBIAN_FRONTEND=noninteractive -e TZ=UTC"
             ;;
         fedora)
             # Install getopt
@@ -407,7 +433,6 @@ if [ $DOCKER -eq 1 ]; then
             ;;
         esac
         docker run --privileged ${DOCKER_PARA} \
-            -e CI=${CI} \
             --volume ${REPO_ROOT}:/home/SerialPortAssistant \
             --volume ${BUILD_LINUX_DIR}:/home/build \
             --volume ${INSTALL_DIR}:/home/install \
@@ -435,7 +460,7 @@ if [ $DOCKER -eq 1 ]; then
             "
     fi
     if [ $RPM -eq 1 ]; then
-        docker run --volume ${BUILD_LINUX_DIR}:/home/build \
+        docker run ${DOCKER_PARA} --volume ${BUILD_LINUX_DIR}:/home/build \
             --volume ${INSTALL_DIR}:/home/install \
             --volume ${TOOLS_DIR}:/home/tools \
             --privileged --interactive --rm ${DOCKER_IMAGE} \
@@ -457,7 +482,6 @@ pushd $REPO_ROOT/Script
 if [ $DEB -eq 1 ]; then
     echo_status "build deb package ......"
     ./build_depend.sh --system_update --base \
-        --rabbitcommon \
         --install ${INSTALL_DIR} \
         --source ${SOURCE_DIR} \
         --tools ${TOOLS_DIR} \
@@ -468,17 +492,20 @@ if [ $DEB -eq 1 ]; then
     # Disable ci warn
     if [ $CI ]; then
         git config --global --add safe.directory $REPO_ROOT
+        if [ -n "$RabbitCommon_ROOT" ]; then
+            git config --global --add safe.directory $RabbitCommon_ROOT
+        fi
     fi
 
+    export CMAKE_CONFIG_PARAS="$CMAKE_CONFIG_PARAS -DRABBIT_ENABLE_INSTALL_TARGETS=ON"
     ./build_debpackage.sh --install=${INSTALL_DIR} \
-        --rabbitcommon=${SOURCE_DIR}/RabbitCommon \
         --verbose=${BUILD_VERBOSE}
 fi
 
 if [ $APPIMAGE -eq 1 ]; then
     echo_status "build AppImage ......"
 
-    ./build_depend.sh --system_update --base --rabbitcommon ${conf_para} \
+    ./build_depend.sh --system_update --base ${conf_para} \
         --install ${INSTALL_DIR} \
         --source ${SOURCE_DIR} \
         --tools ${TOOLS_DIR} \
@@ -489,9 +516,11 @@ if [ $APPIMAGE -eq 1 ]; then
     # Disable ci warn
     if [ $CI ]; then
         git config --global --add safe.directory $REPO_ROOT
+        if [ -n "$RabbitCommon_ROOT" ]; then
+            git config --global --add safe.directory $RabbitCommon_ROOT
+        fi
     fi
 
-    export RabbitCommon_ROOT=${SOURCE_DIR}/RabbitCommon
     export PKG_CONFIG_PATH=${INSTALL_DIR}/${LIB_PATH}/pkgconfig:$PKG_CONFIG_PATH
     export LD_LIBRARY_PATH=${INSTALL_DIR}/${LIB_PATH}:$LD_LIBRARY_PATH
     export CMAKE_PREFIX_PATH=${INSTALL_DIR}:${CMAKE_PREFIX_PATH}
@@ -502,12 +531,19 @@ if [ $RPM -eq 1 ]; then
     echo_status "build rpm package ......"
     dnf builddep -y ${REPO_ROOT}/Package/rpm/serialportassistant.spec
     ./build_depend.sh --system_update --base --default --package-tool=dnf \
-        --rabbitcommon \
         --install ${INSTALL_DIR} \
         --source ${SOURCE_DIR} \
         --tools ${TOOLS_DIR} \
         --verbose ${BUILD_VERBOSE}
-    
+
+    # Disable ci warn
+    if [ $CI ]; then
+        git config --global --add safe.directory $REPO_ROOT
+        if [ -n "$RabbitCommon_ROOT" ]; then
+            git config --global --add safe.directory $RabbitCommon_ROOT
+        fi
+    fi
+
     ./build_rpm_package.sh \
         --install ${INSTALL_DIR} \
         --source ${SOURCE_DIR} \

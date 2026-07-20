@@ -2,16 +2,40 @@
 # Author: Kang Lin <kl222@126.com>
 
 #See: https://blog.csdn.net/alwaysbefine/article/details/114187380
+
 #set -x
 set -e
 #set -v
 
+# 安全的 readlink 函数，兼容各种系统
+safe_readlink() {
+    local path="$1"
+    if [ -L "$path" ]; then
+        if command -v readlink >/dev/null 2>&1; then
+            if readlink -f "$path" >/dev/null 2>&1; then
+                readlink -f "$path"
+            else
+                readlink "$path"
+            fi
+        else
+            ls -l "$path" | awk '{print $NF}'
+        fi
+    elif [ -e "$path" ]; then
+        if command -v realpath >/dev/null 2>&1; then
+            realpath "$path"
+        else
+            echo "$(cd "$(dirname "$path")" && pwd)/$(basename "$path")"
+        fi
+    else
+        echo "$path"
+    fi
+}
 
 if [ -z "$BUILD_VERBOSE" ]; then
     BUILD_VERBOSE=OFF
 fi
 
-source $(dirname $(readlink -f $0))/common.sh
+source $(dirname $(safe_readlink $0))/common.sh
 
 install_gnu_getopt
 if [ "$DISTRO" = "macOS" ]; then
@@ -307,6 +331,17 @@ echo "TOOLS_DIR: $TOOLS_DIR"
 echo "SOURCE_DIR: $SOURCE_DIR"
 echo "INSTALL_DIR: $INSTALL_DIR"
 
+# Set libraries install path
+case "$DISTRO" in
+ubuntu|debian|linuxmint)
+    LIB_PATH="lib"
+    ;;
+fedora)
+    LIB_PATH="lib64"
+    ;;
+esac
+
+
 if [ $SYSTEM_UPDATE -eq 1 ]; then
     echo_status "System update ......"
     case "$PACKAGE_TOOL" in
@@ -332,7 +367,7 @@ if [ -n "$PACKAGE" ]; then
 fi
 
 if [ $BASE_LIBS -eq 1 ]; then
-    echo "Install base libraries ......"
+    echo_status "Install base libraries ......"
     if [ "$PACKAGE_TOOL" = "apt" ]; then
         # Build tools
         package_install build-essential devscripts equivs debhelper \
@@ -346,12 +381,21 @@ if [ $BASE_LIBS -eq 1 ]; then
         # RabbitCommon dependency
         apt install -y -q libcmark-dev cmark
         # AppImage
-        case "$DISTRO_VERSION" in
-            26.*|25.*)
-                package_install fuse3
+        case "$DISTRO" in
+            ubuntu)
+                case "$DISTRO_VERSION" in
+                    24.*)
+                        package_install libfuse-dev fuse
+                        ;;
+                    26.*|25.*)
+                        package_install libfuse3-dev fuse3
+                        ;;
+                esac
                 ;;
-            *)
-                package_install fuse
+            linuxmint)
+                package_install libfuse3-dev fuse3
+                ;;
+            debian)
                 ;;
         esac
     fi
@@ -361,19 +405,25 @@ if [ $BASE_LIBS -eq 1 ]; then
             automake autoconf libtool gettext gettext-autopoint \
             cmake desktop-file-utils curl wget dnf-plugins-core
     fi
+
+    if [ $MACOS -eq 1 ]; then
+        package_install nasm autoconf automake libtool pkg-config doxygen zstd curl
+    fi
 fi
 
 if [ $DEFAULT_LIBS -eq 1 ]; then
-    echo "Install default dependency libraries ......"
-    if [ "$PACKAGE_TOOL" = "apt" ]; then
-        if [ "${QT}" -ne 1 ]; then
-            install_debian_depend $REPO_ROOT
-        fi
-    fi
-    if [ "$PACKAGE_TOOL" = "dnf" ]; then
-        package_install qt6-qttools-devel qt6-qtbase-devel \
-            qt6-qt5compat-devel qt6-qtscxml-devel \
-            qt6-qtserialport-devel qt6-qtsvg-devel
+    echo_status "Install default dependency libraries ......"
+    case "$DISTRO" in
+    ubuntu|debian|deepin|linuxmint)
+        install_debian_depend $REPO_ROOT
+        ;;
+    fedora)
+        dnf builddep -y ${REPO_ROOT}/Package/rpm/serialportassistant.spec
+        ;;
+    esac
+
+    if [ $MACOS -eq 1 ]; then
+        package_install qt freerdp libvncserver libssh pcapplusplus qtkeychain #libpcap
     fi
 fi
 
@@ -405,15 +455,21 @@ fi
 
 if [ $RabbitCommon -eq 1 ]; then
     echo_status "Install RabbitCommon ......"
-    pushd "$SOURCE_DIR"
-    if [ ! -d RabbitCommon ]; then
-        git clone https://github.com/KangLin/RabbitCommon.git
-    else
-        pushd RabbitCommon
+    if [ -d "$RabbitCommon_ROOT" ]; then
+        pushd $RabbitCommon_ROOT
         git pull
         popd
+    else
+        pushd "$SOURCE_DIR"
+        if [ ! -d RabbitCommon ]; then
+            git clone https://github.com/KangLin/RabbitCommon.git
+        else
+            pushd RabbitCommon
+            git pull
+            popd
+        fi
+        popd
     fi
-    popd
 fi
 
 popd

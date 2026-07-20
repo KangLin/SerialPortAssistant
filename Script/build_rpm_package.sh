@@ -6,10 +6,35 @@
 set -e
 #set -v
 
+# 安全的 readlink 函数，兼容各种系统
+safe_readlink() {
+    local path="$1"
+    if [ -L "$path" ]; then
+        if command -v readlink >/dev/null 2>&1; then
+            if readlink -f "$path" >/dev/null 2>&1; then
+                readlink -f "$path"
+            else
+                readlink "$path"
+            fi
+        else
+            ls -l "$path" | awk '{print $NF}'
+        fi
+    elif [ -e "$path" ]; then
+        if command -v realpath >/dev/null 2>&1; then
+            realpath "$path"
+        else
+            echo "$(cd "$(dirname "$path")" && pwd)/$(basename "$path")"
+        fi
+    else
+        echo "$path"
+    fi
+}
+
 if [ -z "$BUILD_VERBOSE" ]; then
     BUILD_VERBOSE=OFF
 fi
-SerialPortAssistant_VERSION=0.0.32
+
+source $(dirname $(safe_readlink $0))/common.sh
 
 usage_long() {
     echo "$0 [-h|--help] [-v|--verbose[=0|1]] [--install=<install directory>]"
@@ -24,17 +49,17 @@ usage_long() {
 # [如何使用getopt和getopts命令解析命令行选项和参数](https://zhuanlan.zhihu.com/p/673908518)
 # [【Linux】Shell命令 getopts/getopt用法详解](https://blog.csdn.net/arpospf/article/details/103381621)
 if command -V getopt >/dev/null; then
-    echo "getopt is exits"
+    #echo "getopt is exits"
     #echo "original parameters=[$@]"
     # -o 或 --options 选项后面是可接受的短选项，如 ab:c:: ，表示可接受的短选项为 -a -b -c ，
     # 其中 -a 选项不接参数，-b 选项后必须接参数，-c 选项的参数为可选的
     # 后面没有冒号表示没有参数。后跟有一个冒号表示有参数。跟两个冒号表示有可选参数。
     # -l 或 --long 选项后面是可接受的长选项，用逗号分开，冒号的意义同短选项。
     # -n 选项后接选项解析错误时提示的脚本名字
-    OPTS=help,verbose::,install:,source:,tools:
+    OPTS=help,verbose::,install:,source:,tools:,build:
     ARGS=`getopt -o h,v:: -l $OPTS -n $(basename $0) -- "$@"`
     if [ $? != 0 ]; then
-        echo "exec getopt fail: $?"
+        echo_error "exec getopt fail: $?"
         exit 1
     fi
     #echo "ARGS=[$ARGS]"
@@ -57,6 +82,10 @@ if command -V getopt >/dev/null; then
             ;;
         --tools)
             TOOLS_DIR=$2
+            shift 2
+            ;;
+        --build)
+            BUILD_RPM_DIR=$2
             shift 2
             ;;
         -v |--verbose)
@@ -85,9 +114,9 @@ if command -V getopt >/dev/null; then
 fi
 
 # store repo root as variable
-SCRIPT_DIR=$(dirname $(readlink -f $0))
-REPO_ROOT=$(readlink -f $(dirname $(dirname $(readlink -f $0))))
-OLD_CWD=$(readlink -f .)
+SCRIPT_DIR=$(dirname $(safe_readlink $0))
+REPO_ROOT=$(safe_readlink $(dirname $(dirname $(safe_readlink $0))))
+OLD_CWD=$(safe_readlink .)
 
 if [ -z "$BUILD_RPM_DIR" ]; then
     BUILD_RPM_DIR=${REPO_ROOT}/build_rpm
@@ -102,12 +131,12 @@ if [ -z "$INSTALL_DIR" ]; then
     INSTALL_DIR=${BUILD_RPM_DIR}/install
 fi
 
-mkdir -p $(readlink -f $BUILD_RPM_DIR)
-TOOLS_DIR=$(readlink -f ${TOOLS_DIR})
+mkdir -p $(safe_readlink $BUILD_RPM_DIR)
+TOOLS_DIR=$(safe_readlink ${TOOLS_DIR})
 mkdir -p $TOOLS_DIR
-SOURCE_DIR=$(readlink -f ${SOURCE_DIR})
+SOURCE_DIR=$(safe_readlink ${SOURCE_DIR})
 mkdir -p $SOURCE_DIR
-INSTALL_DIR=$(readlink -f ${INSTALL_DIR})
+INSTALL_DIR=$(safe_readlink ${INSTALL_DIR})
 mkdir -p $INSTALL_DIR
 
 echo "Repo folder: $REPO_ROOT"
@@ -127,8 +156,9 @@ if [ ! -f ~/rpmbuild/SOURCES/SerialPortAssistant.tar.gz ]; then
     fi
 fi
 
-export RabbitCommon_ROOT=${SOURCE_DIR}/RabbitCommon
+export CMAKE_PREFIX_PATH=${INSTALL_DIR}:${CMAKE_PREFIX_PATH}
+export INSTALL_DIR=${INSTALL_DIR}
 #dnf builddep -y ${REPO_ROOT}/Package/rpm/serialportassistant.spec
-rpmbuild --nodebuginfo -bb Package/rpm/serialportassistant.spec
+rpmbuild --nodebuginfo -bb Package/rpm/serialportassistant.spec --define "build_time $(date '+%a %b %d %Y')"
 
 popd

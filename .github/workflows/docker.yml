@@ -21,44 +21,53 @@ jobs:
             image: ubuntu
             lable: "24.04"
             os: ubuntu-24.04
+          - PACKAGE: deb
+            image: ubuntu
+            lable: "24.04"
+            os: ubuntu-24.04-arm
+          - PACKAGE: deb
+            image: ubuntu
+            lable: "26.04"
+            os: ubuntu-24.04
+          - PACKAGE: deb
+            image: ubuntu
+            lable: "26.04"
+            os: ubuntu-24.04-arm
+
+          - PACKAGE: appimage
+            image: ubuntu
+            lable: "24.04"
+            os: ubuntu-24.04
           - PACKAGE: appimage
             image: ubuntu
             lable: "24.04"
             os: ubuntu-24.04-arm
-          - PACKAGE: appimage
-            image: ubuntu
-            lable: "26.04"
-            os: ubuntu-24.04
-          - PACKAGE: deb
-            image: ubuntu
-            lable: "26.04"
-            os: ubuntu-24.04-arm
 
-          - PACKAGE: deb
-            image: debian
-            lable: "12"
-            os: ubuntu-24.04
-          - PACKAGE: deb
-            image: debian
-            lable: "12"
-            os: ubuntu-24.04-arm
-          - PACKAGE: deb
-            image: debian
-            lable: "13"
-            os: ubuntu-24.04
-          - PACKAGE: deb
-            image: debian
-            lable: "13"
-            os: ubuntu-24.04-arm
+          # - PACKAGE: deb
+          #   image: debian
+          #   lable: "12"
+          #   os: ubuntu-24.04
+          # - PACKAGE: deb
+          #   image: debian
+          #   lable: "12"
+          #   os: ubuntu-24.04-arm
+          # - PACKAGE: deb
+          #   image: debian
+          #   lable: "13"
+          #   os: ubuntu-24.04
+          # - PACKAGE: deb
+          #   image: debian
+          #   lable: "13"
+          #   os: ubuntu-24.04-arm
 
-          - PACKAGE: rpm
-            image: fedora
-            lable: "43"
-            os: ubuntu-24.04
-          - PACKAGE: rpm
-            image: fedora
-            lable: "43"
-            os: ubuntu-24.04-arm
+          # - PACKAGE: rpm
+          #   image: fedora
+          #   lable: "43"
+          #   os: ubuntu-24.04
+          # - PACKAGE: rpm
+          #   image: fedora
+          #   lable: "43"
+          #   os: ubuntu-24.04-arm
           - PACKAGE: rpm
             image: fedora
             lable: "42"
@@ -67,14 +76,14 @@ jobs:
             image: fedora
             lable: "42"
             os: ubuntu-24.04-arm
-          - PACKAGE: rpm
-            image: fedora
-            lable: "41"
-            os: ubuntu-24.04
-          - PACKAGE: rpm
-            image: fedora
-            lable: "41"
-            os: ubuntu-24.04-arm
+          # - PACKAGE: rpm
+          #   image: fedora
+          #   lable: "41"
+          #   os: ubuntu-24.04
+          # - PACKAGE: rpm
+          #   image: fedora
+          #   lable: "41"
+          #   os: ubuntu-24.04-arm
 
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
@@ -118,7 +127,14 @@ jobs:
             ${{env.TOOLS_DIR}}/qt_*
           key: install_docker_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}${{matrix.variant.lable}}_${{matrix.variant.os}}
 
+      - name: git clone RabbitCommon
+        working-directory: ${{env.SOURCE_DIR}}
+        run: |
+          git clone https://github.com/KangLin/RabbitCommon.git
+
       - name: run docker
+        env:
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
         run: |
           if [ -n "${{matrix.variant.lable}}" ]; then
             docker_image="${{matrix.variant.image}}:${{matrix.variant.lable}}"
@@ -129,11 +145,11 @@ jobs:
             --source=${{env.SOURCE_DIR}} \
             --tools=${{env.TOOLS_DIR}} \
             --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
+          export ARCH=`dpkg --print-architecture`
           if [ "${{matrix.variant.PACKAGE}}" = "deb" ]; then
             echo "Copy deb package ......"
             pushd ${{env.BUILD_DIR}}/build_linux/
-            export ARCH=`dpkg --print-architecture`
-            cp serialportassistant_*.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${ARCH}.deb
+            mv serialportassistant_*.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${ARCH}.deb
             popd
           fi
           if [ "${{matrix.variant.PACKAGE}}" = "appimage" ]; then
@@ -144,7 +160,6 @@ jobs:
           fi
 
       - name: Update artifact
-        if: ${{matrix.variant.PACKAGE == 'rpm'}}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.artifact_name }}_${{matrix.variant.PACKAGE}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_${{matrix.variant.os}}

@@ -2,7 +2,7 @@
 # How Snapcraft builds snaps: https://snapcraft.io/docs/how-snapcraft-builds
 # Snapcraft.yaml schema: https://documentation.ubuntu.com/snapcraft/stable/reference/project-file/snapcraft-yaml
 
-name: serialportassistant
+name: serial-port-assistant
 title: Serial Port Assistant
 version: '0.5.34-dev'
 type: app
@@ -74,9 +74,12 @@ parts:
     build-packages:
       - libssl-dev
       - libcrypt-dev
+      - libpulse-dev
     stage-packages:
       - libssl3
       - libcrypt1
+      # - libpulse0
+      # - libpulse-mainloop-glib0
     cmake-parameters:
       # See: https://snapcraft.io/docs/parts-environment-variables
       - -DRabbitCommon_ROOT=$CRAFT_STAGE/RabbitCommon/
@@ -127,4 +130,6 @@ apps:
      - network-bind
      - network-manager
      - serial-port
+     - hardware-observe
+     - raw-usb  # 用于访问USB设备信息
      - home

@@ -9,7 +9,7 @@ Build-Depends: cmake, debhelper (>=13~), debhelper-compat (=13), fakeroot,
  libssl-dev, libcmark-dev, qmake6,
  qt6-tools-dev, qt6-tools-dev-tools, qt6-base-dev, qt6-base-dev-tools,
  qt6-qpa-plugins, qt6-l10n-tools, qt6-translations-l10n, qt6-5compat-dev,
- qt6-svg-dev, qt6-scxml-dev, qt6-serialport-dev
+ qt6-svg-plugins, qt6-svg-dev, qt6-scxml-dev, qt6-serialport-dev
 Standards-Version: 4.6.2
 Homepage: https://github.com/KangLin/SerialPortAssistant
 Vcs-Git: https://github.com/KangLin/SerialPortAssistant.git

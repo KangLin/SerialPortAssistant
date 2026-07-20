@@ -1,7 +1,10 @@
 ## 修改日志
 
 ### 版本: v0.5.34-dev
-- CI: 增加 snap
+- CI:
+  - 增加 snap
+  - 增加 rpm
+  - 增加 flatpak
 - Android
   - 增加菜单到工具栏上
   - 修改多语言错误

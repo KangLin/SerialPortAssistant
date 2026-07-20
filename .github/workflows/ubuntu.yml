@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         BUILD_TYPE: [Release, Debug]
-        os: [ubuntu-24.04, ubuntu-24.04-arm, ubuntu-22.04, ubuntu-22.04-arm]
+        os: [ubuntu-24.04, ubuntu-24.04-arm] #, ubuntu-22.04, ubuntu-22.04-arm]
 
     # See: [About GitHub-hosted runners](https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners)
     # See: [Choosing the runner for a job](https://docs.github.com/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job)
@@ -50,14 +50,6 @@ jobs:
           cmake -E make_directory ${{env.TOOLS_DIR}}
           cmake -E make_directory ${{env.INSTALL_DIR}}
 
-      - name: Install dependency libraries
-        run: |
-          sudo ./Script/build_depend.sh --system_update --base --default \
-              --install ${{env.INSTALL_DIR}} \
-              --source ${{env.SOURCE_DIR}} \
-              --tools ${{env.TOOLS_DIR}} \
-              --build ${{env.BUILD_DIR}}
-
       - name: Cache installed
         uses: actions/cache@v3
         id: cache-installed
@@ -70,6 +62,16 @@ jobs:
         working-directory: ${{env.SOURCE_DIR}}
         run: |
           git clone https://github.com/KangLin/RabbitCommon.git
+
+      - name: Install dependency libraries
+        env:
+          RabbitCommon_ROOT: ${{env.SOURCE_DIR}}/RabbitCommon
+        run: |
+          sudo ./Script/build_depend.sh --system_update --base --default \
+              --install ${{env.INSTALL_DIR}} \
+              --source ${{env.SOURCE_DIR}} \
+              --tools ${{env.TOOLS_DIR}} \
+              --build ${{env.BUILD_DIR}}
 
       - name: build_debpackage.sh
         working-directory: ${{github.workspace}}

@@ -1,7 +1,7 @@
 # See: https://rpm-software-management.github.io/rpm/manual/spec.html
 
 Name:           serialportassistant
-Version:        0.5.31
+Version:        0.5.34_dev
 Release:        1%{?dist}
 Summary:        Serial port assistant
 
@@ -111,5 +111,5 @@ rm -f /usr/bin/serialportassistant
 
 # 修改历史
 %changelog
-* Fri Jan 01 2025 Kang Lin <kl222@126.com> - 0.0.32-1
+* %{build_time} Kang Lin <kl222@126.com> - %{version}
 - Initial RPM package

@@ -27,7 +27,7 @@ update_verion() {
     $SED_CMD "s/    SET(SerialPortAssistant_VERSION .*)/    SET(SerialPortAssistant_VERSION \"${DEBIAN_VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
     $SED_CMD "s/    SET(SerialPortAssistantTAG .*)/    SET(SerialPortAssistantTAG \"${DEBIAN_VERSION}\")/g" ${SOURCE_DIR}/App/CMakeLists.txt
     $SED_CMD "s/version:.*'${VERSION_PATTERN}'/version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/snap/snapcraft.yaml
-    $SED_CMD "s/Version:.*'[0-9]\+\.[0-9]\+\.[0-9]\+'/Version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/Package/rpm/serialportassistant.spec
+    $SED_CMD "s/Version:.*${VERSION_PATTERN}/Version:        ${RPM_VERSION}/g" ${SOURCE_DIR}/Package/rpm/serialportassistant.spec
     #$SED_CMD "s/serialportassistant_${VERSION_PATTERN}+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
     $SED_CMD "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml

@@ -20,6 +20,7 @@ jobs:
     secrets: inherit
 
   appimage:
+    if: false
     uses: ./.github/workflows/appimage.yml
 
   flatpak:
@@ -27,6 +28,7 @@ jobs:
     secrets: inherit
 
   snap:
+    if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
     uses: ./.github/workflows/snap.yml
     secrets: inherit
 
@@ -46,7 +48,7 @@ jobs:
   deploy:
     #if: ${{ startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
-    needs: [ubuntu, appimage, msvc, android, macos]
+    needs: [ubuntu, docker, msvc, android, macos, snap, flatpak]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -169,29 +171,32 @@ jobs:
           fi
           echo "## Download:" >> ${{github.workspace}}/Release.md
           echo "" >> ${{github.workspace}}/Release.md
-          echo "|       | x86-64 (64-bit) | x86-32 (32-bit) | AArch64 (ARM64) | ARMv7 (32-bit) |Remark|" >> ${{github.workspace}}/Release.md
-          echo "|:-     | :-------------- | :-------------- | :-------------- | :------------- |:-----|" >> ${{github.workspace}}/Release.md
-          echo "|Windows 7 SP1 or later|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_64_qt6.10.3_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win32_msvc2019_qt5.15.2_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_arm64_qt6.10.3_Setup.exe) | ||" >> ${{github.workspace}}/Release.md
-          echo "|Windows xp SP3| |[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_windows_xp_x86_Setup.exe)||||" >> ${{github.workspace}}/Release.md
-          echo "|Android|[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_x86_64_qt6.10.3_Release.apk) | |[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_arm64_v8a_qt6.10.3_Release.apk)| |Experiment|" >> ${{github.workspace}}/Release.md
-          echo "|macOS|[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-15-intel.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-15-intel.dmg)||[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.dmg)||Experiment|" >> ${{github.workspace}}/Release.md
-          echo "|Linux|[AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_x86_64.AppImage)| |[AppImage](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_aarch64.AppImage)| |chmod u+x SerialPortAssistant_*.AppImage; Run SerialPortAssistant_*.AppImage |" >> ${{github.workspace}}/Release.md
-          echo "|Ubuntu 24.04|[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-24.04_amd64.deb)| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-24.04_arm64.deb)| |sudo apt install \"deb file\" |" >> ${{github.workspace}}/Release.md
-          echo "|Ubuntu 22.04|| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu-22.04_arm64.deb)| |sudo apt install \"deb file\" |" >> ${{github.workspace}}/Release.md
-          echo "|Fedora 42|[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant-${{env.SerialPortAssistant_VERSION}}-1.fc42.x86_64.rpm)| |[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant-${{env.SerialPortAssistant_VERSION}}-1.fc42.aarch64.rpm)| |sudo dnf install \"rpm file\" |" >> ${{github.workspace}}/Release.md
+          echo "|       | x86-64 (64-bit) | x86-32 (32-bit) | AArch64 (ARM64) | ARMv7 (32-bit) |Remark|备注|" >> ${{github.workspace}}/Release.md
+          echo "|:-     | :-------------- | :-------------- | :-------------- | :------------- |:-----|:--|" >> ${{github.workspace}}/Release.md
+          echo "|Windows 7 SP1 or later|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_64_qt6.10.3_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win32_msvc2019_qt5.15.2_Setup.exe)|[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_win64_msvc2022_arm64_qt6.10.3_Setup.exe) | |||" >> ${{github.workspace}}/Release.md
+          echo "|Windows xp SP3| |[EXE](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_windows_xp_x86_Setup.exe)|||||" >> ${{github.workspace}}/Release.md
+          echo "|Android|[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_x86_64_qt6.10.3_Release.apk) | |[APK](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_android_arm64_v8a_qt6.10.3_Release.apk)| |||" >> ${{github.workspace}}/Release.md
+          echo "|macOS|[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-15-intel.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-15-intel.dmg)||[App zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.zip)  [dmg](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_macos-14.dmg)||Experiment|实验性的|" >> ${{github.workspace}}/Release.md
+          echo "|Linux|[AppImage zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_amd64_Setup.zip)| |[AppImage zip](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_arm64_Setup.zip)| |Unzip the zip file, then execute \`install.sh\` to install shortcuts for application, links, and directories in graphical user interfaces (GUIs), or execute \`SerialPortAssistant_*.AppImage\` to run program in the terminal.|解压 zip 文件，然后执行 \`install.sh\`， 安装用于图形界面的目录、桌面快捷方式；或者在终端中执行 \`SerialPortAssistant_*.AppImage\` 文件，运行程序。 |" >> ${{github.workspace}}/Release.md
+          echo "|Ubuntu 26.04|[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu_26.04_amd64.deb)| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu_26.04_arm64.deb)| |Debian 13 (trixie) and its derived Linux operating systems<br>\`sudo apt install \"deb file\"\` |Debian 13 (trixie) 以及其派生的 Linux 系统|" >> ${{github.workspace}}/Release.md
+          echo "|Ubuntu 24.04|[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu_24.04_amd64.deb)| |[DEB](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_ubuntu_24.04_arm64.deb)| |Debian 12 (Bookworm) and its derived Linux operating systems<br>\`sudo apt install \"deb file\"\` |Debian 12 (Bookworm) 以及其派生的 Linux 系统|" >> ${{github.workspace}}/Release.md
+          RPM_VERSION=${SerialPortAssistant_VERSION//-/\_}
+          echo "|Fedora 42|[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/serialportassistant-${RPM_VERSION}-1.fc42.x86_64.rpm)| |[RPM](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/serialportassistant-${RPM_VERSION}-1.fc42.aarch64.rpm)| |its derived Linux operating systems<br> \`sudo dnf install \"rpm file\"\` |以及其派生的 Linux 系统|" >> ${{github.workspace}}/Release.md
 
-      - name: Add download in test
+      - name: Add download for testing
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         run: |
           export BRANCH_NAME=${{ github.ref_name }}
           if [ "${{ github.ref_name }}" == "master" ]; then
             export BRANCH_NAME=test_${{ github.ref_name }}
           fi
+          echo "|Snap|[snap](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/serial-port-assistant_${{env.SerialPortAssistant_VERSION}}_amd64.snap)| |[SNAP](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/serial-port-assistant_${{env.SerialPortAssistant_VERSION}}_arm64.snap)| |sudo snap install \"snap file\" ||" >> ${{github.workspace}}/Release.md
           echo "|Flatpak|[flatpak](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_x86_64.flatpak)| |[flatpak](https://github.com/KangLin/SerialPortAssistant/releases/download/${BRANCH_NAME}/SerialPortAssistant_v${{env.SerialPortAssistant_VERSION}}_Linux_aarch64.flatpak)||flatpak install \"flatpak File\" [--user] |" >> ${{github.workspace}}/Release.md
 
-      - name: Add flathub download
+      - name: Add flathub and snap download
         run: |
           echo "" >> ${{github.workspace}}/Release.md
+          echo "[![serial-port-assistant](https://snapcraft.io/serial-port-assistant/badge.svg)](https://snapcraft.io/serial-port-assistant)" >> ${{github.workspace}}/Release.md
           echo "[![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)" >> ${{github.workspace}}/Release.md
 
       - name: Create github Release

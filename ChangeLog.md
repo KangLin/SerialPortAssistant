@@ -1,7 +1,10 @@
 ## Change log
 
 ### Version: v0.5.34-dev
-- CI: add snap
+- CI:
+  - add snap
+  - add rpm
+  - add flatpak
 - Android:
   - add menu to toolbar
   - Fix language bug

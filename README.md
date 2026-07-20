@@ -27,6 +27,7 @@ Author: Kang Lin (kl222@126.com)
 - Project position:
   + Main repository: https://github.com/KangLin/SerialPortAssistant
   + Mirrory repository:
+    - https://launchpad.net/serialportassistant
     - https://gitlab.com/kl222/SerialPortAssistant
     - https://sourceforge.net/projects/serialportassistant/
     - https://gitee.com/kl222/SerialPortAssistant
@@ -61,6 +62,7 @@ Author: Kang Lin (kl222@126.com)
 - [![Github release](https://img.shields.io/github/release/KangLin/SerialPortAssistant?label=Github%20release)](https://github.com/KangLin/SerialPortAssistant/releases/latest)
 - [![Download from SerialPortAssistant](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/serialportassistant/files/latest/download)
 - [![Download from Flathub](https://flathub.org/api/badge?locale=en)](https://flathub.org/apps/io.github.KangLin.SerialPortAssistant)
+- [![serial-port-assistant](https://snapcraft.io/serial-port-assistant/badge.svg)](https://snapcraft.io/serial-port-assistant)
 
 ## Donate
 
@@ -144,6 +146,16 @@ If it cannot be displayed, please open:
 #### Test
 
 - Ubuntu
+  - Add the current user to the group that owns the serial port
+    - Check which group the serial port belongs to
+
+          $ ls -la /dev/ttyS*
+          crw-rw---- 1 root dialout 4, 65 Aug  4 16:04 /dev/ttyS1
+
+    - Add the current user to the group that owns the serial port
+
+          sudo usermod -a -G dialout $USER
+
   - Install `socat`
 
         $ sudo apt update
