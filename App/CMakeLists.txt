@@ -144,12 +144,6 @@ if(ANDROID)
         QT_ANDROID_TARGET_SDK_VERSION 34
         )
     qt_add_android_permission(${PROJECT_NAME}
-        NAME android.permission.ACCESS_NETWORK_STATE
-    )
-    qt_add_android_permission(${PROJECT_NAME}
-        NAME android.permission.INTERNET
-    )
-    qt_add_android_permission(${PROJECT_NAME}
         NAME android.permission.WRITE_EXTERNAL_STORAGE
     )
     qt_add_android_permission(${PROJECT_NAME}

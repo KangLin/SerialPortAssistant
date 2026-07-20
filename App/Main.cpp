@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
     
 #ifdef RABBITCOMMON
     RabbitCommon::CTools::Instance()->Init();
+    QStringList lstPermissions;
+    lstPermissions << "android.permission.WRITE_EXTERNAL_STORAGE"
+                   << "android.permission.READ_EXTERNAL_STORAGE";
+    RabbitCommon::CTools::AndroidRequestPermission(lstPermissions);
     RabbitCommon::CTools::Instance()->InstallTranslator("SerialPortAssistant");
 #endif
     qInfo(log) << QObject::tr("SerialPortAssistant version: %1 ").arg(a.applicationVersion())
