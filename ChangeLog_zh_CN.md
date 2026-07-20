@@ -5,6 +5,7 @@
 - Android
   - 增加菜单到工具栏上
   - 修改多语言错误
+  - 使用 cmake 生成 AndroidManifest.xml， 移除 AndroidManifest.xml
 
 ### 版本: v0.5.33
 - 修复从　v0.5.32　导入的 flatpak 编译错误

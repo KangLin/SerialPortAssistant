@@ -18,7 +18,6 @@ update_verion() {
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/appimage.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/msvc.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
-    $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/macos.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/flatpak.yml
     #$SED_CMD "s/v${VERSION_PATTERN}/${VERSION}/g" ${SOURCE_DIR}/README*.md
@@ -40,8 +39,6 @@ update_verion() {
     fi
 
     MAJOR_VERSION=`echo ${DEBIAN_VERSION}|cut -d "." -f 1`
-    $SED_CMD "s/android:versionCode=\".*\"/android:versionCode=\"${MAJOR_VERSION}\"/g" ${SOURCE_DIR}/App/android/AndroidManifest.xml
-    $SED_CMD "s/android:versionName=.*>/android:versionName=\"${DEBIAN_VERSION}\" >/g"  ${SOURCE_DIR}/App/android/AndroidManifest.xml
 
     CHANGLOG_TMP=${SOURCE_DIR}/debian/changelog.tmp
     CHANGLOG_FILE=${SOURCE_DIR}/debian/changelog

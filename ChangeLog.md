@@ -5,6 +5,7 @@
 - Android:
   - add menu to toolbar
   - Fix language bug
+  - Use cmake to generate AndroidManifest.xml, remove AndroidManifest.xml
 
 ### Version: v0.5.33
 - Modify status bar
