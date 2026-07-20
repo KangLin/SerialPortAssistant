@@ -428,8 +428,8 @@ if [ $DOCKER -eq 1 ]; then
             cp \${SOURCE_CODE_DIR}/SerialPortAssistant/SerialPortAssistant_`uname -m`.AppImage .
             chmod a+rx SerialPortAssistant_`uname -m`.AppImage
             cp \${SOURCE_CODE_DIR}/SerialPortAssistant/build_appimage/AppDir/usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop .
-            cp \${SOURCE_CODE_DIR}/SerialPortAssistant/build_appimage/AppDir/usr/share/icons/hicolor/scalable/apps/io.github.KangLin.SerialPortAssistant.svg .
-            cp \${SOURCE_CODE_DIR}/SerialPortAssistant/Script/install.sh .
+            cp \${SOURCE_CODE_DIR}/SerialPortAssistant/build_appimage/AppDir/usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png .
+            cp \${SOURCE_CODE_DIR}/SerialPortAssistant/Script/install_appimage.sh install.sh
             chmod a+rx install.sh
             popd
             "

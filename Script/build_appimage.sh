@@ -242,8 +242,8 @@ ${TOOLS_DIR}/linuxdeploy-`uname -m`.AppImage --appdir=AppDir ${DEPLOY_PARA} \
     --output appimage
 
 chmod a+rx Serial_Port_Assistant-`uname -m`.AppImage
-cp Serial_Port_Assistant-`uname -m`.AppImage $REPO_ROOT/SerialPortAssistant_${SerialPortAssistant_VERSION}_`uname -m`.AppImage
-echo_status "Generated AppImage: $REPO_ROOT/SerialPortAssistant_${SerialPortAssistant_VERSION}_`uname -m`.AppImage"
+cp Serial_Port_Assistant-`uname -m`.AppImage $REPO_ROOT/SerialPortAssistant_`uname -m`.AppImage
+echo_status "Generated AppImage: $REPO_ROOT/SerialPortAssistant_`uname -m`.AppImage"
 
 popd
 popd
