@@ -1,6 +1,6 @@
 ## Change log
 
-### Version: v0.5.34-dev
+### Version: v0.5.34
 - CI:
   - add snap
   - add rpm

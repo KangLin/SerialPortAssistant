@@ -29,7 +29,7 @@ update_verion() {
     $SED_CMD "s/version:.*'${VERSION_PATTERN}'/version: '${DEBIAN_VERSION}'/g" ${SOURCE_DIR}/snap/snapcraft.yaml
     $SED_CMD "s/Version:.*${VERSION_PATTERN}/Version:        ${RPM_VERSION}/g" ${SOURCE_DIR}/Package/rpm/serialportassistant.spec
     #$SED_CMD "s/serialportassistant_${VERSION_PATTERN}+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
-    $SED_CMD "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/debian/changelog
+    $SED_CMD "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/Package/debian/changelog
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/docker.yml
@@ -40,8 +40,8 @@ update_verion() {
 
     MAJOR_VERSION=`echo ${DEBIAN_VERSION}|cut -d "." -f 1`
 
-    CHANGLOG_TMP=${SOURCE_DIR}/debian/changelog.tmp
-    CHANGLOG_FILE=${SOURCE_DIR}/debian/changelog
+    CHANGLOG_TMP=${SOURCE_DIR}/Package/debian/changelog.tmp
+    CHANGLOG_FILE=${SOURCE_DIR}/Package/debian/changelog
     echo "serialportassistant (${DEBIAN_VERSION}) stable; urgency=medium" > ${CHANGLOG_FILE}
     echo "" >> ${CHANGLOG_FILE}
     echo "`git log --pretty=format:'    * %s' ${PRE_TAG}..HEAD`" >> ${CHANGLOG_FILE}
