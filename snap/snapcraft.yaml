@@ -4,7 +4,7 @@
 
 name: serial-port-assistant
 title: Serial Port Assistant
-version: '0.5.34-dev'
+version: '0.5.34'
 type: app
 license: GPL-3.0+
 contact: kl222@126.com

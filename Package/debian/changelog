@@ -1,10 +1,37 @@
-serialportassistant (0.5.34-dev) stable; urgency=medium
+serialportassistant (0.5.34) stable; urgency=medium
 
+    * Modify deploy.sh
+    * CI: modify build.yml
+    * Script: modify $0 with ${BASH_SOURCE[0]}
+    * CI: fix typo
+    * Script: modify script
+    * Package: fix rules bug
+    * Script: modify build_appimage.sh
+    * Android: add permissions
+    * Android: Use cmake to generate AndroidManifest.xml, remove AndroidManifest.xml
+    * CI: modify docker.yml
+    * Debain: modify depend libraries
+    * Script: modify build appimage
+    * CI: modify docker.yml
+    * App: disable restore widget in android
+    * CI: update qt 6.9.3 to 6.10.3
+    * Modify change log
+    * App: modify show main windows
+    * CI: modify android.yml
+    * Script: modify script
+    * Script: modify deploy.sh
+    * CI: modify android.yml to remove resConfig
+    * Package: modify debian
+    * Update translations
+    * Android: add menu to toolbar
+    * Script: modify build_depend.sh
+    * Script: modify snap
+    * Update version to v0.5.34-dev
     * CI: add snap.yml
     * App: fix compile error
     * Modify deploy.sh
     * CI: update qt6.9.2 to 6.9.3
     * CMake: fix version bug
 
- -- Kang Lin <kl222@126.com>  Sat, 13 Jun 2026 06:17:36 +0800
+ -- Kang Lin <kl222@126.com>  Mon, 10 Aug 2026 16:55:52 +0800
 

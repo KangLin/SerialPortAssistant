@@ -1,7 +1,7 @@
 # See: https://rpm-software-management.github.io/rpm/manual/spec.html
 
 Name:           serialportassistant
-Version:        0.5.34_dev
+Version:        0.5.34
 Release:        1%{?dist}
 Summary:        Serial port assistant
 
