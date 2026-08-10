@@ -20,6 +20,7 @@ update_verion() {
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/mingw.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/macos.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/flatpak.yml
+    $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
     #$SED_CMD "s/v${VERSION_PATTERN}/${VERSION}/g" ${SOURCE_DIR}/README*.md
 
     DEBIAN_VERSION=${VERSION/#v/}
