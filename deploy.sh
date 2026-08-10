@@ -31,6 +31,7 @@ update_verion() {
     #$SED_CMD "s/serialportassistant_${VERSION_PATTERN}+/serialportassistant_${DEBIAN_VERSION}/g" ${SOURCE_DIR}/README*.md
     $SED_CMD "s/serialportassistant (.*)/serialportassistant (${DEBIAN_VERSION})/g" ${SOURCE_DIR}/Package/debian/changelog
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/build.yml
+    $SED_CMD "s/SerialPortAssistant_VERSION_PRE:.*/SerialPortAssistant_VERSION_PRE: ${PRE_TAG}/g" ${SOURCE_DIR}/.github/workflows/build.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/ubuntu.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${DEBIAN_VERSION}/g" ${SOURCE_DIR}/.github/workflows/docker.yml
 
