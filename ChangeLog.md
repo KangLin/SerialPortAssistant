@@ -1,5 +1,8 @@
 ## Change log
 
+### Version: v0.5.35-dev
+- Fix check version bug in deploy.sh
+
 ### Version: v0.5.34
 - CI:
   - add snap

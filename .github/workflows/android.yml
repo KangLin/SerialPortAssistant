@@ -63,7 +63,7 @@ jobs:
       ANDROID_NATIVE_API_LEVEL: 34
       ANDROID_ABI: ${{matrix.ANDROID_ABI}}
       qt_modules: 'qtscxml qtserialport'
-      SerialPortAssistant_VERSION: v0.5.34
+      SerialPortAssistant_VERSION: v0.5.35-dev
 
     # Map the job outputs to step outputs
     outputs:

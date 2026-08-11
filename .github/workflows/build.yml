@@ -5,8 +5,8 @@ name: build
 env:
   artifact_path: artifact_path
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SerialPortAssistant_VERSION: 0.5.34
-  SerialPortAssistant_VERSION_PRE: v0.5.33
+  SerialPortAssistant_VERSION: 0.5.35-dev
+  SerialPortAssistant_VERSION_PRE: v0.5.34
 
 on:
   push:
