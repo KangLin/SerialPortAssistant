@@ -5,7 +5,7 @@ set -e
 
 update_verion() {
 
-    $SED_CMD "s/          \"version\":[[:blank:]]*\"v\?${VERSION_PATTERN}\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
+    $SED_CMD "s/          \"version\":[[:blank:]]*\"${VERSION_PATTERN}\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
     $SED_CMD "s/^\!define PRODUCT_VERSION.*/\!define PRODUCT_VERSION \"${VERSION}\"/g" ${SOURCE_DIR}/Install/Install.nsi
 
     APPVERYOR_VERSION="version: '${VERSION}.{build}'"
@@ -21,7 +21,7 @@ update_verion() {
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/macos.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/flatpak.yml
     $SED_CMD "s/SerialPortAssistant_VERSION:.*/SerialPortAssistant_VERSION: ${VERSION}/g" ${SOURCE_DIR}/.github/workflows/android.yml
-    #$SED_CMD "s/v${VERSION_PATTERN}/${VERSION}/g" ${SOURCE_DIR}/README*.md
+    #$SED_CMD "s/${VERSION_PATTERN}/${VERSION}/g" ${SOURCE_DIR}/README*.md
 
     DEBIAN_VERSION=${VERSION/#v/}
 
