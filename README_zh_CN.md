@@ -137,49 +137,59 @@
 
 #### 测试
 
-- 在 Ubuntu 上
-  - 把当前用户加入串口所属的组
-    - 查看串口所属的组
+- 在 Linux 上
+  - 设置访问串口权限。
+    - 查看串口所属的组，以及访问权限
 
           $ ls -la /dev/ttyS*
           crw-rw---- 1 root dialout 4, 65 Aug  4 16:04 /dev/ttyS1
 
-    - 把当前用户加入串口所属的组
+    - 把当前用户加入串口所属的组（建议）
 
           sudo usermod -a -G dialout $USER
 
-  - 安装 `socat`
+    - 或者把需要访问的串口的权限授为当前用户（不建议）
 
-        $ sudo apt update
-        $ sudo apt install socat
+           $ sudo chown $USER:dialout /dev/ttyS1
 
-  - 创建一对虚拟串口
+  - 如果没有设置串口的访问权限，则需要使用 root 运行程序
 
-        $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
+        $ sudo serialportassistant
 
-    - 运行后会显示：
+  - 在本地使用虚拟串测试
+    - 安装 `socat`
 
-          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
-          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
-          2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
+          # 例如使用 Ubuntu
+          $ sudo apt update
+          $ sudo apt install socat
 
-    - 创建符号链接（可选，为了更好的命名）
+    - 创建一对虚拟串口
 
-          $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
-          $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
+          $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
+
+      运行后会显示：
+
+            2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
+            2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
+            2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
+
+      - 创建符号链接（可选，为了更好的命名）
+
+            $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
+            $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
 
     - 可以把上面两步合成以下一条命令
 
           $ sudo socat -d -d pty,link=/dev/ttyVCOM0,raw,echo=0 pty,link=/dev/ttyVCOM1,raw,echo=0 
 
-  - 现在可以用本程序打开串口　`/dev/pts/5`(/dev/ttyVCOM0) 和　`/dev/pts/6`(/dev/ttyVCOM1)。  
-　　因为这些串口命名为非标准串口命名，本程序可以找不到它。你可以在"串口"输入：　/dev/pts/5  
-　　因为虚拟串口建立时，是以 root 权限建立的，所以也需要使用　root 权限运行本程序。
+    - 现在可以用本程序打开串口　`/dev/pts/5`(/dev/ttyVCOM0) 和　`/dev/pts/6`(/dev/ttyVCOM1)。  
+      因为这些串口命名为非标准串口命名，本程序可能找不到它。你可以在"串口"输入：`/dev/pts/5`  
+      因为虚拟串口建立时，是以 `root` 权限建立的，所以也需要使用 `root` 权限运行本程序。
 
-        $ sudo serialportassistant
+          $ sudo serialportassistant
 
-    或者把串口授权为当前用户。
+      或者把需要访问的串口的权限授为当前用户
 
-        $ sudo chown $USER:tty /dev/pts/5
-        $ sudo chown $USER:tty /dev/pts/6
-        $ serialportassistant
+          $ sudo chown $USER:tty /dev/pts/5
+          $ sudo chown $USER:tty /dev/pts/6
+          $ serialportassistant

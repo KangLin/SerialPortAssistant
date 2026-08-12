@@ -145,50 +145,60 @@ If it cannot be displayed, please open:
 
 #### Test
 
-- Ubuntu
-  - Add the current user to the group that owns the serial port
-    - Check which group the serial port belongs to
-
+- On Linux
+  - Set access permissions for the serial port.
+    - Check which group the serial port belongs to and its access permissions
+    
           $ ls -la /dev/ttyS*
           crw-rw---- 1 root dialout 4, 65 Aug  4 16:04 /dev/ttyS1
 
-    - Add the current user to the group that owns the serial port
+    - Add the current user to the group that owns the serial port ( recommended)
 
           sudo usermod -a -G dialout $USER
 
-  - Install `socat`
+    - Or give the current user permission to access the needed serial port (not recommended)
 
-        $ sudo apt update
-        $ sudo apt install socat
+           $ sudo chown $USER:dialout /dev/ttyS1
 
-  - Create a pair of virtual serial ports
+    - If the serial port access permissions are not set, you need to run the program as root
+    
+          $ sudo serialportassistant
 
-        $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
+    - Test with a virtual serial port locally
+      - Install `socat`
 
-    - After running, it will display:
+            # eg: ubuntu
+            $ sudo apt update
+            $ sudo apt install socat
 
-          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
-          2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
-          2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
+      - Create a pair of virtual serial ports
 
-    - Create symbolic links (optional, for better naming).
+            $ sudo socat -d -d pty,raw,echo=0 pty,raw,echo=0
 
-          $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
-          $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
+        After running, it will display:
 
-    - The above two steps can be combined into the following command.
+            2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/5
+            2025/12/03 14:09:27 socat[31902] N PTY is /dev/pts/6
+            2025/12/03 14:09:27 socat[31902] N starting data transfer loop with FDs [5,5] and [7,7]
 
-          $ sudo socat -d -d pty,link=/dev/ttyVCOM0,raw,echo=0 pty,link=/dev/ttyVCOM1,raw,echo=0 
+        - Create symbolic links (optional, for better naming).
 
-  - You can now use this program to open the serial port. `/dev/pts/5`(/dev/ttyVCOM0) and　`/dev/pts/6`(/dev/ttyVCOM1).  
-    Because these serial port names are non-standard, this program cannot find them.
-    You can enter the following in the "Serial Port" field: `/dev/pts/5`  
-    Because the virtual serial port was created with root privileges, this program also needs to be run with root privileges.
+              $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
+              $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
 
-        $ sudo serialportassistant
+      - The above two steps can be combined into the following command.
 
-    Alternatively, authorize the serial port to the current user:
+            $ sudo socat -d -d pty,link=/dev/ttyVCOM0,raw,echo=0 pty,link=/dev/ttyVCOM1,raw,echo=0 
 
-        $ sudo chown $USER:tty /dev/pts/5
-        $ sudo chown $USER:tty /dev/pts/6
-        $ serialportassistant
+      - You can now use this program to open the serial port. `/dev/pts/5`(/dev/ttyVCOM0) and　`/dev/pts/6`(/dev/ttyVCOM1).  
+        Because these serial port names are non-standard, this program cannot find them.
+        You can enter the following in the "Serial Port" field: `/dev/pts/5`  
+        Because the virtual serial port was created with `root` privileges, this program also needs to be run with `root` privileges.
+
+            $ sudo serialportassistant
+
+        Alternatively, authorize the serial port to the current user:
+
+            $ sudo chown $USER:tty /dev/pts/5
+            $ sudo chown $USER:tty /dev/pts/6
+            $ serialportassistant
