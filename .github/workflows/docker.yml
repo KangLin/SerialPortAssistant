@@ -145,7 +145,7 @@ jobs:
             --source=${{env.SOURCE_DIR}} \
             --tools=${{env.TOOLS_DIR}} \
             --docker-image="${docker_image}" --docker-platform="${{matrix.variant.platform}}" --${{matrix.variant.PACKAGE}}
-          export ARCH=`dpkg --print-architecture`
+          ARCH=`uname -m`
           if [ "${{matrix.variant.PACKAGE}}" = "deb" ]; then
             echo "Copy deb package ......"
             pushd ${{env.BUILD_DIR}}/build_linux/
@@ -159,6 +159,33 @@ jobs:
             zip SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup.zip SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup/*
           fi
 
+      - name: update configure file
+        working-directory: ${{env.BUILD_DIR}}/build_linux
+        run: |
+          ARCH=`uname -m`
+          cd ${{env.BUILD_DIR}}/build_linux
+          case ${{matrix.variant.PACKAGE}} in
+            "deb")
+              FILE_NAME=serialportassistant_${{env.SerialPortAssistant_VERSION}}_${{matrix.variant.image}}_${{matrix.variant.lable}}_`uname -m`.deb
+              ;;
+            "rpm")
+              RPM_VERSION=${SerialPortAssistant_VERSION//-/\_}
+              FILE_NAME=rabbitremotecontrol-${RPM_VERSION}-1.fc${{matrix.variant.lable}}.${ARCH}.rpm
+              ;;
+            "appimage")
+              FILE_NAME=SerialPortAssistant_${{env.SerialPortAssistant_VERSION}}_Linux_${ARCH}_Setup.zip
+              ;;
+          esac
+          echo "Generate update configure file ......"
+          ${{env.SOURCE_DIR}}/RabbitCommon/Script/GenerateJsonFile.sh -v \
+            -f update_${{matrix.variant.image}}_${{matrix.variant.lable}}_${ARCH}.json \
+            -n serialportassistant \
+            -p ${FILE_NAME} \
+            -s ${{matrix.variant.image}} \
+            --system-version ${{matrix.variant.lable}} \
+            -a ${ARCH} \
+            -u "https://github.com/KangLin/RabbitRemoteControl/releases/download/v${{env.SerialPortAssistant_VERSION}}/${FILE_NAME},https://master.dl.sourceforge.net/project/rabbitremotecontrol/v${{env.SerialPortAssistant_VERSION}}/${FILE_NAME}?viasf=1"
+
       - name: Update artifact
         uses: actions/upload-artifact@v4
         with:
@@ -167,3 +194,4 @@ jobs:
             ${{env.BUILD_DIR}}/build_linux/serialportassistant*.rpm
             ${{env.BUILD_DIR}}/build_linux/serialportassistant*.deb
             ${{env.BUILD_DIR}}/build_linux/SerialPortAssistant_*.zip
+            ${{env.BUILD_DIR}}/build_linux/*.json

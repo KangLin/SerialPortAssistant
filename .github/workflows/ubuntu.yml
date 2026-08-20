@@ -86,9 +86,9 @@ jobs:
         run: |
           sudo Xvfb :97 -ac -screen 0 1200x900x24 &
           export DISPLAY=:97.0
-          export ARCH=`dpkg --print-architecture`
+          export ARCH=`uname -m`
           export OS_NAME="ubuntu-`lsb_release -s -r`"
-          cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_${ARCH}.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
+          cp ../serialportassistant_${{env.SerialPortAssistant_VERSION}}_*.deb serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
           sudo apt install ./serialportassistant_${{env.SerialPortAssistant_VERSION}}_${OS_NAME}_${ARCH}.deb
           echo "test ......"
           ./Script/test_linux.sh
