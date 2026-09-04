@@ -23,7 +23,7 @@ Abstract:
 
 #include "Global/Global.h"
 #ifdef BUILD_QUIWidget
-    #include "QUIWidget/QUIWidget.h"
+#include "QUIWidget/QUIWidget.h"
 #endif
 #ifdef RABBITCOMMON
 #include "RabbitCommonTools.h"
@@ -32,7 +32,7 @@ Abstract:
 #include "MainWindow.h"
 
 static Q_LOGGING_CATEGORY(log, "main")
-    
+
 int main(int argc, char *argv[])
 {
 #if defined (_DEBUG)
@@ -60,8 +60,8 @@ int main(int argc, char *argv[])
                       + "](http://github.com/KangLin/RabbitCommon/tree/"
                       + SerialPortAssistant_Revision + ")"
 #endif
-               + "); "
-               + QObject::tr("RabbitCommon") + RabbitCommon::CTools::Version();
+                      + "); "
+                      + QObject::tr("RabbitCommon") + RabbitCommon::CTools::Version();
 
     CMainWindow *w = new CMainWindow();
     if(!w)
@@ -86,17 +86,17 @@ int main(int argc, char *argv[])
         if(pUpdater) {
             pUpdater->setAttribute(Qt::WA_DeleteOnClose, false);
             pUpdater->SetTitle(QImage(":/icon/AppIcon"));
-            if(a.arguments().length() > 1) {
-                try {
-                    pUpdater->GenerateUpdateJson();
-                    pUpdater->GenerateUpdateXml();
-                } catch(...) {
-                    qCritical(log) << "Generate update fail";
-                }
-                qInfo(log) << a.applicationName() + " " + a.applicationVersion()
-                                  + " " + QObject::tr("Generate update json file End");
-                return 0;
+            CFrmUpdater::ErrCode err;
+            try {
+                err = pUpdater->GenerateUpdateJson();
+                pUpdater->GenerateUpdateXml();
+            } catch(...) {
+                qCritical(log) << "Generate update fail";
             }
+            qInfo(log) << a.applicationName() + " " + a.applicationVersion()
+                              + " " + QObject::tr("Generate update json file End");
+            if(CFrmUpdater::ErrCode::Arguments == err)
+                return 0;
         } else {
             qCritical(log) << "new CFrmUpdater() fail";
         }

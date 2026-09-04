@@ -91,16 +91,22 @@ fi
 if [ ! -f /usr/bin/serialportassistant ]; then
     ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant
 fi
+if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database
+fi
 
 # 卸载前需要做的任务 如：停止任务
 %preun
+
+# 卸载后需要做的任务 如：删除用户，删除/备份业务数据
+%postun
 INSTALL_ROOT=/opt/SerialPortAssistant
 rm -fr /usr/share/applications/io.github.KangLin.SerialPortAssistant.desktop
 rm -fr /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
 rm -f /usr/bin/serialportassistant
-
-# 卸载后需要做的任务 如：删除用户，删除/备份业务数据
-%postun
+if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database
+fi
 
 # 设置文件属性，包含编译文件需要生成的目录、文件以及分配所对应的权限
 %files

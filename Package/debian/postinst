@@ -36,6 +36,9 @@ function_config()
         ln -s $INSTALL_ROOT/bin/SerialPortAssistant /usr/bin/serialportassistant
     fi
 
+    if command -v update-desktop-database >/dev/null 2>&1; then
+        update-desktop-database
+    fi
     #echo "${INSTALL_ROOT}/lib" > /etc/ld.so.conf.d/SerialPortAssistant.conf
     #echo "${INSTALL_ROOT}/bin" >> /etc/ld.so.conf.d/SerialPortAssistant.conf
     #export QT_VERSION_DIR=
@@ -57,6 +60,9 @@ case "$1" in
         rm -fr /usr/share/pixmaps/io.github.KangLin.SerialPortAssistant.png
         rm -f /usr/bin/serialportassistant
         #rm -fr /etc/ld.so.conf.d/SerialPortAssistant.conf
+        if command -v update-desktop-database >/dev/null 2>&1; then
+            update-desktop-database
+        fi
     ;;
 
     *)

@@ -2,6 +2,7 @@
 
 ### Version: v0.5.35-dev
 - Fix check version bug in deploy.sh
+- Fxi updater and install package
 
 ### Version: v0.5.34
 - CI:
