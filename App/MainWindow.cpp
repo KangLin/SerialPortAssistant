@@ -609,7 +609,7 @@ void CMainWindow::slotRead()
             int nLen = d.size();
             for(int i = 0; i < nLen; i++)
             {
-                if(i)
+                if(i || m_Stats.GetTotalReceives())
                     szOut += " ";
                 char buff[16] = {0};
                 unsigned char c = d.at(i);
