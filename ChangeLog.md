@@ -3,6 +3,7 @@
 ### Version: v0.5.35-dev
 - Fix check version bug in deploy.sh
 - Fxi updater and install package
+- Fix HEX format bug. #28
 
 ### Version: v0.5.34
 - CI:
