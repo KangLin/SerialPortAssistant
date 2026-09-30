@@ -283,8 +283,14 @@ int CMainWindow::InitStatusBar()
 
 int CMainWindow::InitToolBar()
 {
+#if defined(Q_OS_ANDROID)
+    ui->actionToolBar_T->setChecked(true);
+    ui->mainToolBar->setVisible(true);
+    ui->actionToolBar_T->setEnabled(false);
+#else
     ui->actionToolBar_T->setChecked(CGlobal::Instance()->GetToolbarVisible());
     ui->mainToolBar->setVisible(CGlobal::Instance()->GetToolbarVisible());
+#endif
     return 0;
 }
 
