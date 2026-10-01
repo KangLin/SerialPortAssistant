@@ -1,9 +1,10 @@
 ## Change log
 
-### Version: v0.5.35-dev
+### Version: v0.5.35
 - Fix check version bug in deploy.sh
 - Fxi updater and install package
 - Fix HEX format bug. #28
+- Android: fix show tool bar bug
 
 ### Version: v0.5.34
 - CI:

@@ -1,10 +1,17 @@
-serialportassistant (0.5.35-dev) stable; urgency=medium
+serialportassistant (0.5.35) stable; urgency=medium
 
+    * Android: modify main windows size
+    * Android:  fix show tool bar bug
+    * CI: modify msvc.yml and mingw.yml
+    * Modify change log
+    * Fix HEX format bug. #28
+    * Modify updater and install
+    * CI: modify update configure file
+    * Modify README
+    * Modify deploy.sh
+    * Update to v0.5.35-dev
     * Fix check version in deploy.sh
     * CI: modify auth_token in appveyor.yml
-    * Release v0.5.34
-    * Modify deploy.sh
-    * CI: modify build.yml
 
- -- Kang Lin <kl222@126.com>  Tue, 11 Aug 2026 15:56:51 +0800
+ -- Kang Lin <kl222@126.com>  Thu, 01 Oct 2026 10:08:14 +0800
 
