@@ -4,8 +4,9 @@
 set -e
 
 update_verion() {
-
-    $SED_CMD "s/          \"version\":[[:blank:]]*\"${VERSION_PATTERN}\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
+    if [[ "$VERSION" =~ ^${TAG_RELEASE_PATTERN}$ ]]; then
+        $SED_CMD "s/          \"version\":[[:blank:]]*\"${VERSION_PATTERN}\"/          \"version\":\"${VERSION}\"/g" ${SOURCE_DIR}/Update/update.json
+    fi
     $SED_CMD "s/^\!define PRODUCT_VERSION.*/\!define PRODUCT_VERSION \"${VERSION}\"/g" ${SOURCE_DIR}/Install/Install.nsi
 
     APPVERYOR_VERSION="version: '${VERSION}.{build}'"
