@@ -183,8 +183,8 @@ If it cannot be displayed, please open:
 
         - Create symbolic links (optional, for better naming).
 
-              $ sudo ln -sf /dev/pts/2 /dev/ttyVCOM0
-              $ sudo ln -sf /dev/pts/3 /dev/ttyVCOM1
+              $ sudo ln -sf /dev/pts/5 /dev/ttyVCOM0
+              $ sudo ln -sf /dev/pts/6 /dev/ttyVCOM1
 
       - The above two steps can be combined into the following command.
 
